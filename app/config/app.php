@@ -121,6 +121,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+		'EA\TvdbServiceProvider',
 
 	),
 
@@ -189,6 +190,14 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
+	),
+
+	'tvdb' => array(
+		'key'				=> 'CE185B06BC7B86B8',
+		'lang'				=> 'en',
+		'url'				=> 'http://www.thetvdb.com/api/',
+		'posterpath'		=> 'http://thetvdb.com/banners/posters/',
+		'episodeimagepath'	=> 'http://thetvdb.com/banners/',
 	),
 
 );
