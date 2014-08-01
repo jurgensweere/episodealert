@@ -1,6 +1,7 @@
 <?php namespace EA;
 
 use App;
+use DB;
 use Log;
 use EA\models\Series;
 use EA\models\Episode;
@@ -38,9 +39,8 @@ class TvdbJob
             return;
         }
 
-        // Serie gegevens bijwerken
-        $series->tvdb_id = $tvdbid;
-        $series->name = $data['name']; // naam is nodig om een unique name te maken.
+        // Update Series data
+        $series->name = $data['name'];
         $series->description = $data['description'];
         $series->status = $data['status'];
         if ($data['imdb_id'] != '') {
@@ -58,22 +58,67 @@ class TvdbJob
         $series->save();
 
         //EA_Service_SeriesService::updateRating($serie);
-        
-        
 
         Log::info("TvdbJob.updateSingleSeries: {$series->name} Updated.");
 
-        //      EA_Service_SeriesService::updateEpisodeData($serie, $serie_data);
-
-        //      $count = is_array($serie_data['episodes']) ? count($serie_data['episodes']) : 0;
-        //      $this->log("$count episodes done.");
-  //                               //$this->log("Time passed: " . (microtime(true) - $starttime ));
-        //      // Serie is verwerkt, queue bijwerken
-        //      $this->markAsProcessed($tvdbid);
-  //                               $this->updateRetryQueue($tvdbid);
-        //  }
-        // }
+        $this->attachEpisodeData($series, $data);
 
         $job->delete();
+    }
+
+    private function attachEpisodeData(Series $series, $data)
+    {
+        $episodes = array();
+        if (!is_array($data['episodes'])) {
+            return;
+        }
+
+        $tvdbids = array();
+        $episodeids = array();
+
+        foreach ($data['episodes'] as $ep) {
+            $episode = Episode::whereTvdbId($ep['id'])->first();
+            if (null == $episode) {
+                $episode = new Episode;
+                $episode->tvdb_id = $ep['id'];
+            }
+            $episode->season = $ep['season'];
+            $episode->episode = $ep['episode'];
+            $episode->airdate = $ep['airdate'];
+            $episode->name = $ep['name'];
+            $episode->description = $ep['description'];
+            $episode->image = 'none';
+            
+            $series->episodes()->save($episode);
+
+            array_push($tvdbids, $episode->tvdb_id);
+            array_push($episodeids, $episode->id);
+
+            // Update season and episode column in seen table.
+            // TODO: try to get rid of those columns
+            DB::table('seen')
+                ->whereEpisodeId($episode->id)
+                ->update(array('season' => $episode->season, 'episode' => $episode->episode));
+        }
+
+        if (count($tvdbids) > 0) {
+            // we have loaded episodes, remove all those that are no longer there
+            DB::table('episode')
+                ->whereNotIn('tvdb_id', $tvdbids)
+                ->whereSeriesId($series->id)
+                ->delete();
+            DB::table('seen')
+                ->whereNotIn('episode_id', $episodeids)
+                ->whereSeriesId($series->id)
+                ->delete();
+        } else {
+            // We loaded a series, but it no longer has any episodes
+            DB::table('episode')
+                ->whereSeriesId($series->id)
+                ->delete();
+            DB::table('seen')
+                ->whereSeriesId($series->id)
+                ->delete();
+        }
     }
 }

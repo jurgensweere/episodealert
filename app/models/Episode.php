@@ -1,5 +1,7 @@
 <?php namespace EA\models;
 
+use Eloquent;
+
 class Episode extends Eloquent
 {
     /**
@@ -11,6 +13,6 @@ class Episode extends Eloquent
 
     public function series()
     {
-        return $this->belongsTo('Series');
+        return $this->belongsTo('EA\models\Series');
     }
 }

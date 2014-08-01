@@ -14,7 +14,7 @@ class Series extends Eloquent
 
     public function episodes()
     {
-        return $this->hasMany('Episode');
+        return $this->hasMany('EA\models\Episode');
     }
 
     /**
