@@ -11,4 +11,4 @@
 |
 */
 
-Artisan::add(new UpdateSeries);
+Artisan::add(new \EA\UpdateSeries);

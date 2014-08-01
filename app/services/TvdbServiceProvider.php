@@ -2,13 +2,15 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class TvdbServiceProvider extends ServiceProvider {
-
+class EaServiceProvider extends ServiceProvider
+{
     public function register()
     {
-        $this->app->bind('tvdb', function()
-        {
+        $this->app->bind('tvdb', function () {
             return new Tvdb;
+        });
+        $this->app->bind('series', function () {
+            return new SeriesService;
         });
     }
 }

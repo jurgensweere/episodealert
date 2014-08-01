@@ -1,26 +1,27 @@
-<?php
+<?php namespace EA\models;
 
+use Eloquent;
 
-class Settings extends Eloquent {
+class Settings extends Eloquent
+{
+    public $timestamps = false;
 
-	public $timestamps = false;
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'setting';
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'setting';
+    public static function store($key, $value)
+    {
+        $setting = self::whereKey($key)->first();
+        if ($setting == null) {
+            $setting = new Settings;
+            $setting->key = $key;
+        }
 
-	public static function store($key, $value) {
-		$setting = self::whereKey($key)->first();
-		if ($setting == null) {
-			$setting = new Settings;
-			$setting->key = $key;
-		}
-
-		$setting->value = $value;
-		$setting->save();
-	}
-
+        $setting->value = $value;
+        $setting->save();
+    }
 }
