@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'EA\controllers\HomeController@showWelcome');
+Route::get('/contact', 'EA\controllers\HomeController@showContact');
+Route::get('/privacy', 'EA\controllers\HomeController@showPrivacy');
+Route::get('/about', 'EA\controllers\HomeController@showAbout');
+Route::get('/login', 'EA\controllers\LoginController@showLogin');
