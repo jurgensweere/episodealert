@@ -69,7 +69,7 @@ class Series extends Eloquent
             } else {
                 $postfix = "_($year)";
             }
-            return $this->createUniqueName($postfix);
+            return $this->assignUniqueName($postfix);
         } else {
             $this->unique_name = $name;
             return $this;

@@ -13,7 +13,6 @@
         {{ HTML::style(asset('css/reset-fonts-grids.css')) }}
         {{ HTML::style(asset('css/global.css')) }}
         {{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js') }}
-        {{ HTML::script(asset('js/global.js')) }}
     </head>
     <body>
 		<div id="login">

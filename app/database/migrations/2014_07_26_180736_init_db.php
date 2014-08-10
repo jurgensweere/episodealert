@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class InitDb extends Migration {
+class InitDb extends Migration
+{
 
     /**
      * Run the migrations.
@@ -12,10 +13,8 @@ class InitDb extends Migration {
      */
     public function up()
     {
-        Schema::create('series', function($table)
-        {
-            $table->increments('id');
-            $table->integer('tvdb_id')->unsigned();
+        Schema::create('series', function ($table) {
+            $table->increments('id')->unsigned();
             $table->string('unique_name', 100);
             $table->string('name', 100);
             $table->text('description');
@@ -29,13 +28,11 @@ class InitDb extends Migration {
             $table->boolean('popular')->default(0);
             $table->timestamps();
 
-            $table->index(array('tvdb_id', 'imdb_id', 'status'), 'multi_index');
+            $table->index(array('imdb_id', 'status'), 'multi_index');
         });
 
-        Schema::create('episode', function($table)
-        {
-            $table->increments('id');
-            $table->integer('tvdb_id');
+        Schema::create('episode', function ($table) {
+            $table->increments('id')->unsigned();
             $table->integer('series_id')->unsigned();
             $table->integer('season');
             $table->integer('episode');
@@ -50,8 +47,7 @@ class InitDb extends Migration {
                 ->onDelete('cascade');
         });
 
-        Schema::create('user', function($table)
-        {
+        Schema::create('user', function ($table) {
             $table->increments('id');
             $table->string('accountname', 200);
             $table->string('password', 32)->nullable();
@@ -64,8 +60,7 @@ class InitDb extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('following', function($table)
-        {
+        Schema::create('following', function ($table) {
             $table->increments('id');
             $table->integer('series_id')->unsigned();
             $table->integer('user_id')->unsigned();
@@ -81,15 +76,13 @@ class InitDb extends Migration {
                 ->onDelete('cascade');
         });
 
-        Schema::create('setting', function($table)
-        {
+        Schema::create('setting', function ($table) {
             $table->increments('id');
             $table->string('key', 32);
             $table->string('value', 128);
         });
 
-        Schema::create('seen', function($table)
-        {
+        Schema::create('seen', function ($table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('series_id')->unsigned();
@@ -111,8 +104,7 @@ class InitDb extends Migration {
             $table->index('season', 'index_season_n');
         });
 
-        Schema::create('mail_log', function($table)
-        {
+        Schema::create('mail_log', function ($table) {
             $table->increments('id');
             $table->string('type', 45);
             $table->text('content');

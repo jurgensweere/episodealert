@@ -19,14 +19,14 @@ class TvdbJob
         Log::info("TvdbJob.updateSingleSeries: Processing TVDBId: $tvdbid");
 
         // Do we have this TVDB Id?
-        $series = Series::whereTvdbId($tvdbid)->first();
+        $series = Series::find($tvdbid);
         if ($series == null) {
             $series = new Series;
-            $series->tvdb_id = $tvdbid;
+            $series->id = $tvdbid;
         }
 
         // Fetch TVDB data
-        $data = App::make('tvdb')->getSerieData($series->tvdb_id, true);
+        $data = App::make('tvdb')->getSerieData($series->id, true);
         if (!is_array($data)) {
             Log::error("Something went wrong when downloading from TVDB");
             return;
@@ -73,14 +73,13 @@ class TvdbJob
             return;
         }
 
-        $tvdbids = array();
         $episodeids = array();
 
         foreach ($data['episodes'] as $ep) {
-            $episode = Episode::whereTvdbId($ep['id'])->first();
+            $episode = Episode::find($ep['id']);
             if (null == $episode) {
                 $episode = new Episode;
-                $episode->tvdb_id = $ep['id'];
+                $episode->id = $ep['id'];
             }
             $episode->season = $ep['season'];
             $episode->episode = $ep['episode'];
@@ -91,7 +90,6 @@ class TvdbJob
             
             $series->episodes()->save($episode);
 
-            array_push($tvdbids, $episode->tvdb_id);
             array_push($episodeids, $episode->id);
 
             // Update season and episode column in seen table.
@@ -101,10 +99,10 @@ class TvdbJob
                 ->update(array('season' => $episode->season, 'episode' => $episode->episode));
         }
 
-        if (count($tvdbids) > 0) {
+        if (count($episodeids) > 0) {
             // we have loaded episodes, remove all those that are no longer there
             DB::table('episode')
-                ->whereNotIn('tvdb_id', $tvdbids)
+                ->whereNotIn('id', $episodeids)
                 ->whereSeriesId($series->id)
                 ->delete();
             DB::table('seen')
