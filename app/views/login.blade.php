@@ -5,7 +5,31 @@
 
 <div class="local">
 	<h2>Login with your Episode-Alert account</h2>
-	{{--  echo $this->form --}}
+
+	{{ Form::open(array('url' => 'login')) }}
+		<dl class="zend_form">
+			<dt id="email-label">
+				{{ Form::label('email', 'Email:', array('class' => 'required'))}}
+			</dt>
+			<dd id="email-element">
+				{{ Form::email('email') }}
+			</dd>
+
+			<dt id="password-label">
+				{{ Form::label('password', 'Password:', array('class' => 'required'))}}
+			</dt>
+			<dd>
+				{{ Form::password('password') }}
+				<br />
+				{{ HTML::link('login/passwordreset', 'Forgot password') }}
+			</dd>
+
+			<dt id="login-label">&nbsp;</dt>
+			<dd id="login-element">
+				{{ Form::submit('Login') }}
+			</dd>
+		</dl>
+	{{ Form::close() }}
 	<p>{{ HTML::link("login/register", "Register") }} for an Episode-Alert.com account.</p>
 </div>
 
@@ -18,12 +42,11 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('div.federated a').each(
-	function(){ 
-		var href = $(this).attr('href'); 
+	function(){
+		var href = $(this).attr('href');
 		$(this).removeAttr('href');
 		$(this).click(function(){parent.window.location.href=href})
 	});
 });
 </script>
-
 @stop

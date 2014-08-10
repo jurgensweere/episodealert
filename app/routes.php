@@ -11,8 +11,18 @@
 |
 */
 
-Route::get('/', 'EA\controllers\HomeController@showWelcome');
-Route::get('/contact', 'EA\controllers\HomeController@showContact');
-Route::get('/privacy', 'EA\controllers\HomeController@showPrivacy');
-Route::get('/about', 'EA\controllers\HomeController@showAbout');
-Route::get('/login', 'EA\controllers\LoginController@showLogin');
+Route::group(
+    array('namespace' => 'EA\controllers'),
+    function () {
+        Route::get('/', 'HomeController@showWelcome');
+        Route::get('/contact', 'HomeController@showContact');
+        Route::get('/privacy', 'HomeController@showPrivacy');
+        Route::get('/about', 'HomeController@showAbout');
+
+        Route::get('/login', 'LoginController@showLogin');
+        Route::get('/login/passwordreset', 'LoginController@showPasswordReset');
+        Route::post('/login/passwordreset', 'LoginController@submitPasswordReset');
+        Route::get('/login/register', 'LoginController@showRegister');
+        Route::post('/login/register', 'LoginController@submitRegister');
+    }
+);
