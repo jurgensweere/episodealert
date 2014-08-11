@@ -1,0 +1,273 @@
+/*
+    Document   : global-mobile
+    Created on : 22-okt-2010, 10:27:43
+    Author     : Jurgen
+    Description:
+        Stylesheet for mobile devices
+*/
+html {
+    background-color: #ddd;
+}
+body{
+    font-family: Helvetica, Verdana, Tahoma, Georgia, Geneva, Arial;
+    font-size: 14px;
+    color: #000000;
+}
+#hd {
+    width: 100%;
+}
+
+/* hide img and ul for now, need a proper solution later */
+#about img, .step ul{
+	display:none;
+	}
+
+#hd .menu-bar {
+    background: #111;
+    height: 44px;
+    width: 100%;
+}
+#hd img {
+    width: 150px;
+    margin-top: 10px;
+    text-align: center;
+}
+ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 10px;
+}
+li {
+    background-color: #fff;
+    border: 1px solid #999;
+    color: #222;
+    display: block;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: -1px;
+    padding: 12px 10px;
+    text-decoration: none;
+    position: relative;
+}
+li p {
+    font-weight: normal;
+}
+ul li a {
+    text-decoration: none;
+    color: #222;
+    display: block;
+    width: 100%;
+}
+#bd ul, #bd ol { margin: 10px 0;}
+li.selected
+{
+    background-color: blue;
+    color: #fff;
+}
+li:first-child {
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
+    -moz-border-radius-topright: 8px;
+    -moz-border-radius-topleft: 8px;
+}
+li:last-child {
+    -webkit-border-bottom-left-radius: 8px;
+    -webkit-border-bottom-right-radius: 8px;
+    -moz-border-radius-bottomright: 8px;
+    -moz-border-radius-bottomleft: 8px;
+}
+#hd .leftButton {
+    position: absolute;
+    top: 7px;
+    left: 6px;
+    height: 30px;
+    font-weight: normal;
+    text-align: center;
+    color: white;
+    text-shadow: rgba(0,0,0,0.6) 0px -1px 0px;
+    line-height: 28px;
+    border-width: 0 8px 0 8px;
+    -webkit-border-image: url('/images/jqtouch/button.png') 0 8 0 8;
+    -moz-border-image: url('/images/jqtouch/button.png') 0 8 0 8;
+    border-image: url('/images/jqtouch/button.png') 0 8 0 8;
+}
+#hd .pressed {
+    -webkit-border-image: url('/images/jqtouch/button_clicked.png') 0 8 0 8;
+    -moz-border-image: url('/images/jqtouch/button_clicked.png') 0 8 0 8;
+    border-image: url('/images/jqtouch/button_clicked.png') 0 8 0 8;
+}
+#hd .navigation {
+    display: none;
+}
+#login-button {position: absolute;    top: 7px;    right: 6px;    height: 30px;    font-weight: normal;    text-align: center;    color: white;    text-shadow: rgba(0,0,0,0.6) 0px -1px 0px;    line-height: 28px;    border-width: 0 8px 0 8px;    -webkit-border-image: url('/images/jqtouch/button.png') 0 8 0 8;    -moz-border-image: url('/images/jqtouch/button.png') 0 8 0 8;    border-image: url('/images/jqtouch/button.png') 0 8 0 8;    text-decoration: none;}
+#login-bar span, #login-bar a.profile { display: none; }
+#login-bar a.logout {position: absolute;    top: 7px;    right: 6px;    height: 30px;    font-weight: normal;    text-align: center;    color: white;    text-shadow: rgba(0,0,0,0.6) 0px -1px 0px;    line-height: 28px;    border-width: 0 8px 0 8px;    -webkit-border-image: url('/images/jqtouch/button.png') 0 8 0 8;    -moz-border-image: url('/images/jqtouch/button.png') 0 8 0 8;    border-image: url('/images/jqtouch/button.png') 0 8 0 8;    text-decoration: none;}
+
+#bd {
+    margin: 10px;
+    text-align: left;
+}
+
+.tosubnavigation {
+    margin: -10px -10px 10px -10px;
+    padding: 10px;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 17px;
+    text-align: left;
+}
+h2 {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: left;
+}
+dl { margin: 0.77em 0 1em 0;}
+dt { margin: 0; float: left; clear: left; width: 85px; font-weight: bold; }
+dt:after { content: ":"; }
+dd {margin: 0 0 0 85px; padding: 0 0 0.5em 0;}
+
+ul.posters li {
+    display: inline-block;
+    border: 0;
+    background: transparent;
+    padding: 0;
+}
+ul.posters li img, img.poster {
+    height: 121px;
+    width: 83px;
+    padding: 3px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+#ft-copyright {
+    float: left;
+    margin: 10px;
+}
+#ft-navigation {
+    float: right;
+    margin: 10px;
+}
+#loading {display: none; border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; background-color: rgba(0,0,0,.7); color: white; height: 80px; width: 200px; margin: 0 auto; position: fixed; top: 120px; left: 60px; line-height: 80px; font-size: 18px; font-weight: bold;}
+.browse-navigation { display: none;}
+.browse-navigation form{ display: inline-block;}
+.browse-navigation form.paginate{ float: right;}
+.browse-paginator { display: none;}
+.grid-left .follow{
+    float: right;
+}
+.grid-right {
+    margin-top: 10px;
+}
+.wrapper {
+    clear: both;
+}
+
+.btn {
+    display: inline-block;
+    -moz-border-radius:8px;
+    -webkit-border-radius: 8px;
+    border: 1px solid #999;
+    background-color: #fff;
+    font-size: 17px;
+    padding: 12px 10px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.badge, .badgeGroot {
+    -webkit-box-shadow:rgba(0, 0, 0, 0.898438) 0 3px 5px;
+    -moz-box-shadow:rgba(0, 0, 0, 0.898438) 0 3px 5px;
+    background-image:-webkit-gradient(linear, 0 0%, 0 100%, from(#EB7076), to(#B50003));
+    background: -moz-linear-gradient(top, #EB7076, #B50003);
+    border: 2px solid #FFFFFF;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    color:#FFFFFF;
+    display:block;
+    font-family:Helvetica, Arial, sans-serif;
+    font-size:15px;
+    padding: 1px 6px 2px 6px;
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    overflow: visible;
+}
+span.seen, span.seenGroot {
+    background: transparent url('/images/sprites.png') no-repeat scroll -176px -82px;
+    border: 0; display: block; height: 30px; width: 40px; padding: 0;
+    -webkit-box-shadow: none;-moz-box-shadow: none;
+    right: 7px;
+}
+span.seen span, span.seenGroot span { display: none;}
+
+.episode-calendar li { border: 0; background: transparent; padding: 0;}
+.episode-calendar li li {background-color: #fff;
+    border: 1px solid #999;
+    color: #222;
+    display: block;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: -1px;
+    padding: 12px 10px;
+    text-decoration: none;
+    position: relative;}
+.episode-calendar li li h3, .episode-calendar li li p { font-weight: bold;}
+.episode-calendar li li:first-child {
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
+    -moz-border-radius-topright: 8px;
+    -moz-border-radius-topleft: 8px;
+}
+.episode-calendar li li:last-child {
+    -webkit-border-bottom-left-radius: 8px;
+    -webkit-border-bottom-right-radius: 8px;
+    -moz-border-radius-bottomright: 8px;
+    -moz-border-radius-bottomleft: 8px;
+}
+
+.follow a.following { background: -webkit-gradient(linear, 0 0%, 0 100%, from(#66CC00), to(#006600)); background: -moz-linear-gradient(top, #66CC00, #006600); color: white; }
+#episodes li.selected {background-color: #fff; color: inherit;}
+#episodes .header { height: 21px; background: #fff;}
+#episodes .header .airdate { display: none;}
+#episodes .header > div { float: left; }
+#episodes .header .episode-number { width: 9%;}
+#episodes .header .title { max-width: 91%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+#episodes div.seen-button {position: absolute; right: 10px; top: 10px; }
+#episodes div.seen-button a {
+    padding: 0; margin: 0; border: 0; text-indent: -1000px;
+    background: transparent url('/images/mobile-seen.png') no-repeat;
+    background-size: 94px 94px; -moz-background-size: 94px 94px; -webkit-background-size: 94px 94px;
+    border-radius: 0; -moz-border-radius: 0; -webkit-border-radius: 0;
+    width: 94px; height: 30px;}
+#episodes div.seen-button a.seen { background-position: 0 -47px;  }
+#episodes dt { display: none;}
+#episodes dd { font-weight: normal; margin: 0;}
+#episodes dd ul {display: none;}
+.accordion{ display: none; }
+.seencontext{ display: none;}
+
+.series-listing li { position: relative;}
+.series-listing li .follow {display: none;}
+.series-listing img { display: none;}
+.series-listing p { display: none;} /* we dont need description here*/
+.browse-paginator { margin-bottom: 30px;}
+.paginationControl {float: right;}
+
+/* Login styling*/
+#login-frame iframe{ border: 0; width: 300px; height: 300px;}
+#login h1 {display: none;}
+#login dt:after {content: "";}
+#login {text-align: left; margin: 0 10px; }
+#login .federated { border-top: 1px solid #ddd; margin-top: 15px; padding-top: 10px;}
+#login span.google { text-indent:-9999px; background: url(/images/sprites.png) no-repeat 0 -254px; display: block; width: 140px; height: 46px; }
+#login .federated-button {-moz-border-radius: 4px; -webkit-border-radius: 4px; border: 1px solid #ccc; margin: 10px 15px 0 0; }
+
+.tooltip { display: none; }
+.serie button{ display: none !important;}
+.serie img {display: none;}
+.serie span.title {overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 90%; display: inline-block;}
+#transferarchive, #transferseries { display: none;}
+#publicFollowLink { display: none;}
