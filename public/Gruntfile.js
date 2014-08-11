@@ -34,15 +34,28 @@ grunt.initConfig({
 			}
 		},
 
+		jshint: {
+		  // add all the mega files when we have them
+		  files: ['js/mobile.js'],
+		  options: {
+		    globals: {
+		      jQuery: true,
+		      console: true,
+		      module: true
+		    }
+		  }
+		},
+
 		watch: {
 			sass: {
 				files: ['scss/*.scss'],
 				tasks: ['sass'],
 			},
-			uglify: {
-				files: ['js/*.js'],
-				tasks: ['uglify']
-			},
+			// Can add this to some amazing build script for production
+			// uglify: {
+			// 	files: ['js/*.js'],
+			// 	tasks: ['uglify']
+			// },
 			livereload: {
 				options: {
 					livereload: true
@@ -52,16 +65,22 @@ grunt.initConfig({
 					'css/*.css',
 					'js/*.js'
 				]
+			},
+			jshint: {
+			  	// add all the mega files when we have them
+				files: ['js/mobile.js'],
+				tasks: ['jshint'],
 			}
 		}
 
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	//Default tasks to run when you type 'grunt'
-	grunt.registerTask('default', ['sass', 'uglify']);
+	grunt.registerTask('default', ['sass', 'uglify', 'jshint']);
 
 };

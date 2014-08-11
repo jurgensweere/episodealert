@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
   mobilePaginate();
   if( $('.browse-navigation').size() > 0) {$('.browse-navigation').show();}
   $('#transferarchive, #transferseries').remove();
-})
+});
 
 function toggleMenu() {
     $('#hd .navigation').toggle();
@@ -12,7 +12,7 @@ function toggleMenu() {
 }
 
 function mobileAZ() {
-    if( $('.browse-navigation').size() == 0) return;
+    if( $('.browse-navigation').size() === 0) return;
 
     $('.browse-navigation').append('<form class="browse"><label>Browse:</label><select></select></form>');
     $('.browse-navigation a').each( function(){
@@ -20,7 +20,7 @@ function mobileAZ() {
         opt.val($(this).attr('href'));
         if($(this).hasClass('active')) {
             opt.attr('selected', 'selected');
-        }
+        } 
         $(this).remove();
     });
     $('.browse-navigation form.browse select').change(function(){
@@ -28,7 +28,7 @@ function mobileAZ() {
     });
 }
 function mobilePaginate(){
-    if( $('.browse-navigation').size() == 0) return;
+    if( $('.browse-navigation').size() === 0) return;
     $('.browse-navigation').append('<form class="paginate"><label>Page:</label><select></select></form>');
     var pages = $('.paginationControl').first().find('span, a');
     pages.first().remove();
