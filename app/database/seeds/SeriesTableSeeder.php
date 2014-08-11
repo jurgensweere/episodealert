@@ -12,6 +12,7 @@ class SeriesTableSeeder extends Seeder
 
         $buffy = Series::create(
             array(
+                'id' => 70327,
                 'unique_name' => 'buffy_the_vampire_slayer',
                 'name' => 'Buffy the Vampire Slayer',
                 'description' => 'In every generation there is a Chosen One. She alone will stand against the vampires, the demons and the forces of darkness. She is the Slayer.
@@ -30,6 +31,7 @@ class SeriesTableSeeder extends Seeder
 
         $walkingDead = Series::create(
             array(
+                'id' => 153021,
                 'unique_name' => 'the_walking_dead',
                 'name' => 'The Walking Dead',
                 'description' => 'Based on the comic book series of the same name, The Walking Dead tells the story of a small group of survivors living in the aftermath of a zombie apocalypse.',
