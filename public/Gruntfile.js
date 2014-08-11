@@ -62,6 +62,6 @@ grunt.initConfig({
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	//Default tasks to run when you type 'grunt'
-	grunt.registerTask('default', ['watch']);
+	grunt.registerTask('default', ['sass', 'uglify']);
 
 };
