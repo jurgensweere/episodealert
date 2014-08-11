@@ -1,9 +1,130 @@
 @CHARSET "ISO-8859-1";
 
-/*html, body { height: 100%; }*/
+$dark-color: #212a3f;
+$light-color: #434f5b;
+$background-color: #f2f2f2;
+$highlight-color: #8ab839;
+$primary-color: #2e2e2e;
+$font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+
+body {
+    padding-top: 70px;
+    background-color: $background-color;
+    color: $primary-color;
+    font-family: $font-family;
+}
+
+.splash-fanart {
+    width: 100%;
+    height: 740px;
+    background-size: cover;
+    background: transparent url('../img/fanart/108611-8.jpg') no-repeat center center;
+    position: relative;
+    margin-top: 50px;
+}
+.splash-fanart-fade {
+    width: 100%;
+    height: 100%;
+    background: transparent url('../img/fanart-fade.png') repeat;
+    display: block;
+    position: absolute;
+}
+.splash-brand {
+    font-size: 52px;
+    text-align: center;
+}
+.marketing {
+    top: -50px;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+}
+.marketing h1 {
+    font-size: 30px;
+}
+.marketing p {
+    font-size: 18px;
+}
+.splash-posters {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+}
+.poster {
+    background-color: $background-color;
+    padding: 4px;
+    display: inline-block;
+}
+.splash-posters .series {
+    width: 20%;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    padding-bottom: 20px;
+}
+.splash-posters .series .inactive, .splash-posters .series .active {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: $dark-color;
+    height: 12px;
+    left: 0;
+}
+.splash-posters .series .active {
+    background-color: $highlight-color;
+}
+
+.navbar-default {
+	border: 0;
+	background-color: $primary-color;
+}
+.navbar-default .navbar-text {
+    color: $background-color;
+}
+.navbar-default .navbar-link {
+    color: $highlight-color;
+}
+.navbar-default .navbar-nav>li>a {
+    color: $background-color;
+}
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+    color: $highlight-color;
+    background-color: transparent;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+    color: $background-color;
+    background-color: $light-color;
+}
+.navbar-brand {
+    padding: 5px 5px;
+}
+.navbar-form {
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+.form-control {
+    height: 46px;
+    color: $primary-color;
+    background-color: $background-color;
+    background-image: none;
+    border: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.navbar-default .btn {
+    height: 46px;
+    background-color: $background-color;
+    background-image: none;
+    border: 0;
+    border-radius: 0;
+}
+
+/*/
+html, body { height: 100%; }
 body{ font-family: Verdana, Tahoma, Georgia, Geneva, Arial; font-size: 0.85em; color: #000000; background-color: #ffffff;}
 
-/* autocomplete */
 ul.ui-autocomplete li{ border-bottom: 1px solid #eee;}
 .ui-autocomplete .title{font-size: 1.2em;	font-weight: bold; font-style: italic; width:265px;	text-align:left; float:right;}
 .ui-autocomplete .image{height: 110px; vertical-align:middle; margin-right:4px; float:left;
@@ -24,7 +145,7 @@ ul.ui-autocomplete li span{}
 					border-color:#88EE22;}
 
 
-/** search container **/
+
 .users{
     width:640px;
     margin:0 auto;
@@ -213,12 +334,6 @@ height: 25px;}
 
 td { padding: 2px 5px;}
 
-
-
-#welcome{
-    /*float:top;*/
-}
-
 #publicFollow{
 	height:40px;
 	padding-left:5px;
@@ -308,9 +423,6 @@ input { vertical-align:middle; padding: 3px; }
 .browse-paginator .disabled{color: #ddd;}
 .browse-paginator .active{font-weight: bold; padding: 6px; background-color: #FFF; }
 
-
-/*.browse-paginator { text-align: right;} */
-
 .follow .btn {background: #dddddd url('/images/sprites.png') repeat-x scroll 0 0; min-width: 90px;}
 .follow a.following { background-position:0px -40px; color: #fff; text-shadow:1px 1px 0 #275a04; border-color: #377e06; padding-left: 20px; }
 .follow a.following:hover { background-position:0px -40px; border-color: #240 #240 #130; }
@@ -366,12 +478,6 @@ span.following i{ height: 13px; width: 13px; background: url('/images/sprite-ico
 .personal-episodes {}
 .personal-episodes p {margin-bottom: 1em;}
 .personal-episodes table {margin-left:14px; text-align: left;}
-
-
-
-/*#about h1 {font-size: 2.1em; border-bottom:1px solid #CCCCCC;margin-top:10px}*/
-/*#about { text-align: left; }*/
-/*#about li { margin: 10px 30px; list-style: decimal outside; display: list-item; }*/
 
 
 #about {height:275px;}
@@ -456,7 +562,6 @@ span.following i{ height: 13px; width: 13px; background: url('/images/sprite-ico
 #episodes .selected div.header { background-color: #D5E0EB; }
 #episodes div.header{ height: 17px;}
 
-/* PROFILE - MY SERIES */
 #profile #series {width:100%; overflow: auto; position:relative;}
 #profile #series img{height:170px; padding:5px; margin-top:24px; background-color: #eee; border: 1px solid #ddd;}
 #profile #series .serie {float:left; position:relative; margin: 0 8px; }
@@ -467,7 +572,6 @@ span.following i{ height: 13px; width: 13px; background: url('/images/sprite-ico
 #profile #series .archivelink:hover{ }
 #profile #series span.badgeGroot, #profile #archive span.seenGroot{margin-top:5px;}
 
-/* PROFILE - MY ARCHIVE */
 #profile #archive {width:100%; overflow: auto; position:relative;}
 #profile #archive img{ height:100px; padding:3px; margin-top:25px; background-color: #eee; border: 1px solid #ddd;}
 #profile #archive .serie{float:left; position:relative; margin: 0 8px;}
@@ -503,7 +607,6 @@ span.following i{ height: 13px; width: 13px; background: url('/images/sprite-ico
 
 .clear {clear: both;}
 
-/* ADMIN PAGES */
 #admin-popular ul li { width: 100%; display: block; clear: both;}
 #admin-popular ul.matches { margin-left: 300px; }
 #admin-popular ul.matches li { margin-left: 10px; float: left; position: relative; width: auto; clear: none; text-align: center;}
@@ -515,5 +618,4 @@ span.following i{ height: 13px; width: 13px; background: url('/images/sprite-ico
 #posterselection { width:1000px; }
 #posterselection h1 { font-size:2.1em; border-bottom:1px solid #ccc; margin-top:10px; text-align:left; }
 
-/* transfer animatie voor jquery UI */
 .ui-effects-transfer{ border: 1px dotted black;	background-color:black; opacity:0.4; width:160px; height:300px; }
