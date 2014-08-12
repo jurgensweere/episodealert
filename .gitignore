@@ -8,6 +8,6 @@ composer.lock
 Thumbs.db
 public/js/*.min.js
 public/node_modules/
-**/local/database.php
 *.scssc
 npm-debug.log
+public/css/*.css
