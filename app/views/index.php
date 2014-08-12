@@ -19,6 +19,9 @@
 </head>
 <!-- declare our angular app and controller -->
 <body>
+<?php if(App::environment() == 'local'){  ?>
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+<?php } ?>
 <div id="masterUI" ui-view="master">
     <!-- loaded by templates-->
     <div id="topbarUI" ui-view="topbar">
@@ -54,7 +57,7 @@
         </div>
         <div class="splash-fanart">
             <span class="splash-fanart-fade"></span>
-                
+
             <div class="row marketing">
                 <div class="col-lg-4">
                     <h1>Follow</h1>
