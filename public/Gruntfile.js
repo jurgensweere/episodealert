@@ -8,7 +8,7 @@ grunt.initConfig({
 		sass: {
 			dist: {
 				options: {
-					style: 'compressed'
+					style: 'uncompressed'
 				},
 
 				//TODO These files should be combined and minified etc.
