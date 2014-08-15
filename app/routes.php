@@ -15,6 +15,10 @@ Route::group(
     array('namespace' => 'EA\controllers'),
     function () {
         Route::get('/', 'HomeController@showWelcome');
+
+        Route::group(array('prefix' => 'api'), function () {
+            Route::get('series/top', 'SeriesController@top');
+        });
         // Route::get('/contact', 'HomeController@showContact');
         // Route::get('/privacy', 'HomeController@showPrivacy');
         // Route::get('/about', 'HomeController@showAbout');

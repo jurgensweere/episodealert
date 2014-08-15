@@ -1,0 +1,28 @@
+<div class="splash-brand">
+    <p>episode alert <img src="img/logo-71x50.png" alt="Episode Alert" /></p>
+</div>
+<div class="splash-fanart">
+    <span class="splash-fanart-fade"></span>
+
+    <div class="row marketing">
+        <div class="col-lg-4">
+            <h1>Follow</h1>
+            <p>Find your favorite<br/>TV Series</p>
+        </div>
+        <div class="col-lg-4">
+            <h1>Get Notified</h1>
+            <p>Receive email<br/>notifications</p>
+        </div>
+        <div class="col-lg-4">
+            <h1>Keep Track</h1>
+            <p>Remember episodes<br/>you've seen</p>
+        </div>
+    </div>
+
+    <div class="splash-posters">
+        <div class="series" ng-repeat="series in carousel.series">
+            <img class="poster" ng-src="img/poster/{{ series.poster_image }}" alt="{{ series.name }}"/>
+            <span class="inactive"></span>
+        </div>
+    </div>
+</div>

@@ -22,8 +22,67 @@ class SeriesTableSeeder extends Seeder
                 'rating' => '',
                 'rating_updated' => '0000-00-00 00:00:00',
                 'imdb_id' => 'tt0118276',
-                'image' => '',
-                'imageconverted' => 0,
+                'poster_image' => '70327.jpg',
+                'poster_image_converted' => 1,
+                'fanart_image' => '70327-28.jpg',
+                'fanart_image_converted' => 1,
+                'status' => 'Ended',
+                'popular' => 0,
+            )
+        );
+
+        $lost = Series::create(
+            array(
+                'id' => 73739,
+                'unique_name' => 'lost',
+                'name' => 'Lost',
+                'description' => '4 8 15 16 23 42',
+                'firstaired' => '1997-03-10',
+                'rating' => '',
+                'rating_updated' => '0000-00-00 00:00:00',
+                'imdb_id' => 'tt0411008',
+                'poster_image' => '73739.jpg',
+                'poster_image_converted' => 1,
+                'fanart_image' => '73739-4.jpg',
+                'fanart_image_converted' => 1,
+                'status' => 'Ended',
+                'popular' => 0,
+            )
+        );
+
+        $twentyfour = Series::create(
+            array(
+                'id' => 76290,
+                'unique_name' => '24',
+                'name' => '24',
+                'description' => 'Jack Bauer longest day of his life.',
+                'firstaired' => '1997-03-10',
+                'rating' => '',
+                'rating_updated' => '0000-00-00 00:00:00',
+                'imdb_id' => 'tt0285331',
+                'poster_image' => '76290.jpg',
+                'poster_image_converted' => 1,
+                'fanart_image' => '76290-1.jpg',
+                'fanart_image_converted' => 1,
+                'status' => 'Ended',
+                'popular' => 0,
+            )
+        );
+
+        $whitecollar = Series::create(
+            array(
+                'id' => 108611,
+                'unique_name' => 'white_collar',
+                'name' => 'White Collar',
+                'description' => 'Longcat is long.',
+                'firstaired' => '1997-03-10',
+                'rating' => '',
+                'rating_updated' => '0000-00-00 00:00:00',
+                'imdb_id' => 'tt1358522',
+                'poster_image' => '108611.jpg',
+                'poster_image_converted' => 1,
+                'fanart_image' => '108611-8.jpg',
+                'fanart_image_converted' => 1,
                 'status' => 'Ended',
                 'popular' => 0,
             )
@@ -39,8 +98,10 @@ class SeriesTableSeeder extends Seeder
                 'rating' => '',
                 'rating_updated' => '0000-00-00 00:00:00',
                 'imdb_id' => 'tt1520211',
-                'image' => '',
-                'imageconverted' => 0,
+                'poster_image' => '153021.jpg',
+                'poster_image_converted' => 1,
+                'fanart_image' => '153021-39.jpg',
+                'fanart_image_converted' => 1,
                 'status' => 'Continuing',
                 'popular' => 0,
             )
