@@ -1,7 +1,7 @@
 <div class="splash-brand">
     <p>episode alert <img src="img/logo-71x50.png" alt="Episode Alert" /></p>
 </div>
-<div class="splash-fanart">
+<div class="splash-fanart" ng-style="carousel.backgroundStyle">
     <span class="splash-fanart-fade"></span>
 
     <div class="row marketing">
@@ -21,8 +21,8 @@
 
     <div class="splash-posters">
         <div class="series" ng-repeat="series in carousel.series">
-            <img class="poster" ng-src="img/poster/{{ series.poster_image }}" alt="{{ series.name }}"/>
-            <span class="inactive"></span>
+            <img class="poster" ng-src="img/poster/{{ series.poster_image }}" alt="{{ series.name }}" ng-click="carousel.selectSeries(series.id)"/>
+            <span ng-class="{active: carousel.isSelected(series.id)}"></span>
         </div>
     </div>
 </div>

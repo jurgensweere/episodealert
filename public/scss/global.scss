@@ -18,7 +18,7 @@ body {
     width: 100%;
     height: 740px;
     background-size: cover;
-    background: transparent url('../img/fanart/108611-8.jpg') no-repeat center center;
+    background: transparent no-repeat top center;
     position: relative;
     margin-top: 50px;
 }
@@ -68,7 +68,7 @@ body {
         position: relative;
         padding-bottom: 20px;
 
-        .inactive, .active {
+        span {
             position: absolute;
             bottom: 0;
             width: 100%;
