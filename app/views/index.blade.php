@@ -12,6 +12,7 @@
 
     {{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js') }}
     {{ HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js') }}
+    {{ HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-route.min.js') }}
     {{ HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.min.js') }}
     {{ HTML::script('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js') }}
     {{ HTML::script(asset('js/app.js')) }}
@@ -35,7 +36,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.php"><img src="img/logo-56x41.png" alt="Episode Alert" /></a>
+                    <a class="navbar-brand" href="#/home"><img src="img/logo-56x41.png" alt="Episode Alert" /></a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <form class="navbar-form navbar-left" role="search">
@@ -44,7 +45,7 @@
                         </div><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                     </form>
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Browse</a></li>
+                        <li class="active"><a href="#/series">Browse</a></li>
                         <li><a href="#">Trending</a></li>
                     </ul>
                     <p class="navbar-text navbar-right">Welcome back, <a href="#" class="navbar-link">Jurgen</a></p>
@@ -52,8 +53,7 @@
             </div>
         </nav>
     </div>
-    <div id="contentUI" ui-view="content" class="container">
-        <carousel></carousel>
+    <div id="contentUI" ui-view="content" class="container" ng-view>
     </div>
 </div>
 
