@@ -15,7 +15,6 @@
     {{ HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-route.min.js') }}
     {{ HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.min.js') }}
     {{ HTML::script('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js') }}
-    {{ HTML::script(asset('js/app.js')) }}
 
 </head>
 <body>
@@ -56,6 +55,9 @@
     <div id="contentUI" ui-view="content" class="container" ng-view>
     </div>
 </div>
-
+{{ HTML::script(asset('dist/ea.js')) }}
+{{ HTML::script(asset('js/controllers/carouselController.js')) }}
+{{ HTML::script(asset('js/controllers/seriesDetailController.js')) }}
+{{ HTML::script(asset('js/controllers/seriesListController.js')) }}
 </body>
 </html>

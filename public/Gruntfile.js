@@ -23,20 +23,28 @@ grunt.initConfig({
         }
     },
 
+    concat: {
+        options: {
+            separator: ';',
+        },
+        dist: {
+            src: ['js/*.js', 'js/controllers/*.js'],
+            dest: 'dist/js/ea.js',
+        },
+    },
+
     uglify: {
         options: {
             banner: ''
         },
         target_1: {
-                    // Add files here when we implemented angular
-                    src: ['js/global.js'],
-                    dest: 'js/global.min.js'
-                }
-            },
+            src: ['dist/js/ea.js'],
+            dest: 'dist/js/ea.min.js'
+            }
+        },
 
         jshint: {
-          // add all the mega files when we have them
-          files: ['js/mobile.js'],
+          files: ['js/*.js', 'js/controllers/*.js'],
           options: {
             globals: {
                 jQuery: true,
@@ -51,36 +59,44 @@ grunt.initConfig({
             files: ['scss/*.scss'],
             tasks: ['sass'],
         },
-            // Can add this to some amazing build script for production
-            // uglify: {
-            //  files: ['js/*.js'],
-            //  tasks: ['uglify']
-            // },
-            livereload: {
-                options: {
-                    livereload: true
-                },
-                files: [
-                '../app/views/*.php',
-                'css/*.css',
-                'js/*.js'
-                ]
+        livereload: {
+            options: {
+                livereload: true
             },
-            jshint: {
-                // add all the mega files when we have them
-                files: ['js/mobile.js'],
-                tasks: ['jshint'],
-            }
+            files: [
+            '../app/views/*.php',
+            'css/*.css',
+            'js/*.js'
+            ]
+        },
+        jshint: {
+            // add all the mega files when we have them
+            files: ['js/mobile.js'],
+            tasks: ['jshint'],
         }
+    },
+
+    cssmin: {
+      minify: {
+        expand: true,
+        src: ['css/global.css'],
+        dest: 'dist/',
+        ext: '.min.css'
+      }
+    }
 
     });
 
-grunt.loadNpmTasks('grunt-contrib-sass');
-grunt.loadNpmTasks('grunt-contrib-jshint');
-grunt.loadNpmTasks('grunt-contrib-uglify');
-grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     //Default tasks to run when you type 'grunt'
-    grunt.registerTask('default', ['sass', 'uglify', 'jshint']);
+    grunt.registerTask('default', ['sass', 'jshint']);
 
+    //building for production/testing
+    grunt.registerTask('build', ['sass', 'cssmin', 'jshint', 'concat', 'uglify'])
 };
