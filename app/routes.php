@@ -19,6 +19,7 @@ Route::group(
         Route::group(array('prefix' => 'api'), function () {
             Route::get('series/top', 'SeriesController@top');
         });
+
         // Route::get('/contact', 'HomeController@showContact');
         // Route::get('/privacy', 'HomeController@showPrivacy');
         // Route::get('/about', 'HomeController@showAbout');
@@ -30,3 +31,13 @@ Route::group(
         // Route::post('/login/register', 'LoginController@submitRegister');
     }
 );
+
+// =============================================
+// CATCH ALL ROUTE =============================
+// =============================================
+// all routes that are not home or api will be redirected to the frontend
+// this allows angular to route them
+App::missing(function($exception)
+{
+    return View::make('index');
+});
