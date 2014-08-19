@@ -1,8 +1,8 @@
 (function(){
     var app = angular.module('eaApp', ['ngRoute','ngAnimate']);
-
-    app.config(['$routeProvider',
-        function($routeProvider) {
+    app.config(['$routeProvider', '$locationProvider',
+        function($routeProvider, $locationProvider) {
+            $locationProvider.html5Mode(true);
             $routeProvider.when('/home', {
                 templateUrl: 'templates/carousel.html',
                 controller: 'CarouselCtrl'
@@ -19,3 +19,4 @@
     );
 
 })();
+
