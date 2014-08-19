@@ -55,7 +55,7 @@
     <div id="contentUI" ui-view="content" class="container" ng-view>
     </div>
 </div>
-{{ HTML::script(asset('dist/ea.js')) }}
+{{ HTML::script(asset('js/app.js')) }}
 {{ HTML::script(asset('js/controllers/carouselController.js')) }}
 {{ HTML::script(asset('js/controllers/seriesDetailController.js')) }}
 {{ HTML::script(asset('js/controllers/seriesListController.js')) }}
