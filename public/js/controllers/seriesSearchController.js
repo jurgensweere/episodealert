@@ -2,7 +2,7 @@ angular.module('eaApp').controller('SeriesSearchCtrl', function($scope, seriesFa
 
   $scope.search = function(query){
     searchSeries($scope.query);
-  }
+  };
 
   function searchSeries(query) {
     console.log('search series');
