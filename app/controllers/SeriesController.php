@@ -11,4 +11,9 @@ class SeriesController extends BaseController
         // TODO: Make this select top series, instead of the first 5
         return Response::json(Series::take(5)->get());
     }
+
+    public function search($query)
+    {
+        return Response::json(Series::where('name', 'like', $query)->get());
+    }
 }

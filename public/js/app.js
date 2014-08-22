@@ -12,6 +12,9 @@
             }).when('/series/:seriesname', {
                 templateUrl: 'templates/series-detail.html',
                 controller: 'SeriesDetailCtrl'
+            }).when('/search/', {
+                templateUrl: 'templates/series-search.html',
+                controller: 'SeriesSearchCtrl'
             }).otherwise({
                 redirectTo: '/home'
             });

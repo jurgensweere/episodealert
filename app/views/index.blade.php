@@ -57,8 +57,12 @@
     </div>
 </div>
 {{ HTML::script(asset('js/app.js')) }}
+
 {{ HTML::script(asset('js/controllers/carouselController.js')) }}
 {{ HTML::script(asset('js/controllers/seriesDetailController.js')) }}
 {{ HTML::script(asset('js/controllers/seriesListController.js')) }}
+{{ HTML::script(asset('js/controllers/seriesSearchController.js')) }}
+
+{{ HTML::script(asset('js/factories/seriesFactory.js')) }}
 </body>
 </html>

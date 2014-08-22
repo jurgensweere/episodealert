@@ -1,7 +1,7 @@
 (function(){
 
-  angular.module('eaApp').controller('CarouselCtrl', ['$scope', '$http', '$interval',
-      function($scope, $http, $interval) {
+  angular.module('eaApp').controller('CarouselCtrl',
+      function($scope, $http, $interval, seriesFactory) {
           $scope.series = [];
           $scope.currentSeries = 0;
           $scope.backgroundStyle = {};
@@ -20,12 +20,16 @@
               }
           }, 5000);
 
-          $http.get('/api/series/top').success(function(data) {
-              $scope.series = data;
-              if (data[0] !== undefined) {
-                  $scope.selectSeries(data[0].id);
+          seriesFactory.getTopSeries()
+            .success(function (series) {
+              $scope.series = series;
+              if (series[0] !== undefined) {
+                  $scope.selectSeries(series[0].id);
               }
-          });
+            })
+            .error(function (error) {
+              //$scope.status = 'error error error beep beep;
+            });
 
           $scope.selectSeries = function(seriesId) {
               $scope.currentSeries = seriesId;
@@ -52,7 +56,7 @@
               // Make sure that the interval is destroyed too
               $scope.stopTimer();
           });
-      }]
+      }
   );
 
 })();

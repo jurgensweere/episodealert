@@ -1,0 +1,7 @@
+<input ng-model="query" ng-keyup="search()" type="text" placeholder="search series">
+
+<h2> The searched for: {{ query }} </h2>
+
+<ul>
+  <li ng-repeat="series in series">{{ series.name }}</li>
+</ul>
