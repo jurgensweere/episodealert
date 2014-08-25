@@ -14,6 +14,7 @@ class SeriesController extends BaseController
 
     public function search($query)
     {
-        return Response::json(Series::where('name', 'like', $query)->get());
+        return Response::json(Series::where('name', 'like', '%' . $query . '%')->get());
     }
+
 }

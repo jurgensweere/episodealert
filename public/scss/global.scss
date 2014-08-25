@@ -55,6 +55,39 @@ body {
     display: inline-block;
 }
 
+.series-search{
+    padding: 0px;
+    margin: 0px;
+
+    li{
+        text-align: center;
+        display: inline-block;
+        list-style: none;
+        padding: 10px 10px 10px 10px;
+    }
+
+    a{
+        img{
+            display: inline-block;
+            height: 130px;
+            padding: 5px;
+        }
+
+        img:hover{
+            background-color: $highlight-color;
+        }
+
+        h3{
+            display: block;
+            margin: 0px 0px 0px 0px;
+        }
+    }
+
+    a:hover{
+        text-decoration: none;
+    }
+}
+
 .splash-posters {
     position: absolute;
     bottom: 0;

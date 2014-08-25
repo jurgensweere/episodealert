@@ -1,19 +1,23 @@
-angular.module('eaApp').controller('SeriesSearchCtrl', function($scope, seriesFactory) {
+(function(){
+angular.module('eaApp').controller('SeriesSearchCtrl', function($scope, $location, seriesFactory) {
 
-  $scope.search = function(query){
-    searchSeries($scope.query);
-  };
+    $scope.mainPageSearch = function(){
+      $location.path("/search");
+      searchSeries(this.mainpageQuery);
+    };
 
-  function searchSeries(query) {
-    console.log('search series');
-    seriesFactory.searchSeries(query)
-      .success(function (series) {
-        $scope.series = series;
-      })
-      .error(function (error) {
-        //$scope.status = 'error error error beep beep;
-      });
+    $scope.search = function(){
+      searchSeries(this.query);
+    };
+
+    function searchSeries(query) {
+      seriesFactory.searchSeries(query)
+        .success(function (series) {
+          $scope.series = series;
+        })
+        .error(function (error) {
+          //$scope.status = 'error error error beep beep;
+        });
+    }
   }
-
-  }
-);
+)})();

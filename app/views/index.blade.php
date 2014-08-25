@@ -24,7 +24,7 @@
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 @endif
 
-<div id="masterUI" ui-view="master">
+<div id="masterUI" ui-view="master" ng-controller="SeriesSearchCtrl">
     <!-- loaded by templates-->
     <div id="topbarUI" ui-view="topbar">
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -41,7 +41,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input type="text" class="form-control" placeholder="Search" ng-keyup="mainPageSearch()" ng-model="mainpageQuery">
                         </div><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                     </form>
                     <ul class="nav navbar-nav">
