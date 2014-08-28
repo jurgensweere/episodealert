@@ -20,4 +20,4 @@ angular.module('eaApp').controller('SeriesSearchCtrl', function($scope, $locatio
         });
     }
   }
-)})();
+);})();

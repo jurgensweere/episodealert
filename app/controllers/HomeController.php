@@ -2,6 +2,8 @@
 
 use BaseController;
 use View;
+use EA\TvdbJob;
+use EA\models\Series;
 
 class HomeController extends BaseController
 {
@@ -23,4 +25,14 @@ class HomeController extends BaseController
     {
         return View::make('index');
     }
+
+    public function showTestPage(){
+        $TvdbJob = new TvdbJob;
+
+        $series = Series::where('poster_image', '=', null)->take(50)->get();
+
+        foreach ($series as $s) {
+            $TvdbJob->attachSeriesPoster($s);
+        }            
+    }    
 }

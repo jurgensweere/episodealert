@@ -16,6 +16,8 @@ Route::group(
     function () {
         Route::get('/', 'HomeController@showWelcome');
 
+        Route::get('/testpage', 'HomeController@showTestPage');
+
         Route::group(array('prefix' => 'api'), function () {
             Route::get('series/top', 'SeriesController@top');
             Route::get('series/search/{query}', 'SeriesController@search');

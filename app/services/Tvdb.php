@@ -28,7 +28,7 @@ class Tvdb
         }
         $this->lang = Config::get('app.tvdb.lang', 'en');
         $this->tvdbapiurl = Config::get('app.tvdb.url', 'http://www.thetvdb.com/api/');
-        $this->posterPath = Config::get('app.tvdb.posterpath', 'http://thetvdb.com/banners/posters/');
+        $this->posterPath = Config::get('app.tvdb.posterpath', 'http://thetvdb.com/banners/');
         $this->episodeImagePath = Config::get('app.tvdb.episodeimagepath', 'http://thetvdb.com/banners/');
     }
 
@@ -129,6 +129,36 @@ class Tvdb
         } else {
             return false;
         }
+    }
+
+    public function getPosterImage($series, $poster){
+        //create poster url
+
+        $posterUrl = $this->posterPath.$poster;
+
+        $posterSubDirectory = substr($series['unique_name'], 0,2);
+
+        //self::downloadUrl($posterUrl);
+        //download image
+        $ch = curl_init($posterUrl);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+        $rawdata=curl_exec($ch);
+        curl_close ($ch);
+
+        if (!file_exists("public/img/poster/".$posterSubDirectory."/")) {
+            mkdir("public/img/poster/".$posterSubDirectory."/", 0777, true);
+        }
+
+        $fp = fopen("public/img/poster/".$posterSubDirectory."/".$series['unique_name'].".jpg",'w');
+        fwrite($fp, $rawdata);
+        
+        return fclose($fp);
+
+        //resize image
+        //Save images in different locations for Lost example 
+        //goes to /poster/images/lo/lost
     }
 
     public function getEpisodeImage($serieid, $s, $e)

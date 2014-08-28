@@ -62,8 +62,24 @@ class TvdbJob
         Log::info("TvdbJob.updateSingleSeries: {$series->name} Updated.");
 
         $this->attachEpisodeData($series, $data);
+        $this->attachSeriesPoster($series);
 
         $job->delete();
+    }
+
+    public function attachSeriesPoster($series){
+        $data = App::make('tvdb')->getSerieData($series->id, false);
+
+        if($data['poster']!==""){
+            $poster = App::make('tvdb')->getPosterImage($series, $data['poster']);            
+        }else{
+            $poster = false;
+        }
+
+        if($poster){
+            $series->poster_image = $series->unique_name.".jpg";
+            $series->save();
+        }
     }
 
     private function attachEpisodeData(Series $series, $data)
