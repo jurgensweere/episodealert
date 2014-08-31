@@ -41,7 +41,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search" ng-keyup="mainPageSearch()" ng-model="mainpageQuery">
+                            <input type="text" class="form-control" placeholder="Search" ng-keyup="mainPageSearch()" ng-model="mainpageQuery" ng-model-options="{debounce: 1000}">
                         </div><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                     </form>
                     <ul class="nav navbar-nav">
@@ -61,6 +61,7 @@
 {{ HTML::script(asset('js/controllers/carouselController.js')) }}
 {{ HTML::script(asset('js/controllers/seriesDetailController.js')) }}
 {{ HTML::script(asset('js/controllers/seriesListController.js')) }}
+{{ HTML::script(asset('js/controllers/seriesController.js')) }}
 {{ HTML::script(asset('js/controllers/seriesSearchController.js')) }}
 
 {{ HTML::script(asset('js/factories/seriesFactory.js')) }}

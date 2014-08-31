@@ -60,6 +60,7 @@ body {
     margin: 0px;
 
     li{
+        width: 150px;
         text-align: center;
         display: inline-block;
         list-style: none;
@@ -73,12 +74,9 @@ body {
             padding: 5px;
         }
 
-        img:hover{
-            background-color: $highlight-color;
-        }
-
         h3{
             display: block;
+            font-size: 14px;
             margin: 0px 0px 0px 0px;
         }
     }
