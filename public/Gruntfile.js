@@ -17,7 +17,7 @@ grunt.initConfig({
             }
         }
     },
- 
+
     concat: {
         options: {
             separator: ';',
@@ -63,7 +63,8 @@ grunt.initConfig({
             'css/*.css',
             'js/*.js',
             'js/controllers/*.js',
-            'js/factories/*.js'
+            'js/factories/*.js',
+            'templates/*.html'
             ]
         },
         jshint: {

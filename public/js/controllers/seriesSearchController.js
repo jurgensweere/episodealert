@@ -1,28 +1,25 @@
 (function(){
 angular.module('eaApp').controller('SeriesSearchCtrl', function($scope, $location, seriesFactory) {
 
-    $scope.mainPageSearch = function(){
-      $location.path("/search");
-      searchSeries(this.mainpageQuery);
-    };
+    $scope.mainPageQuery = '';
 
-    $scope.search = function(){
-      searchSeries(this.query);
+    //There is some debouncing (500ms delay to wait for the user to stop typing) in the HTML, this will start to work with angular 1.3 it seems
+    $scope.$watch('mainPageQuery', function (newValue, oldValue)
+    {
+      if (newValue !== oldValue) {
+        $location.path("/search");
+        searchSeries(newValue);
+      }
+
+    });
+
+    $scope.followSeries = function(){
+      alert('follow me');
     };
 
     function searchSeries(query) {
       seriesFactory.searchSeries(query)
         .success(function (series) {
-
-          //TODO: how to write this into a helper? Or better yet have a model do it
-         for ( i = 0; i < series.length; i++){
-          if(series[i].poster_image){
-            series[i].posterurl = 'img/poster/' + series[i].unique_name.substring(0, 2) + '/' + series[i].poster_image;
-          }else{
-            series[i].posterurl = 'img/missing.png';
-          }
-
-         }
 
          $scope.series = series;
         })
