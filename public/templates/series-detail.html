@@ -1,1 +1,28 @@
-The clicked series was {{param}}
+<div class="series-detail">
+
+  <div class="row">
+    <div class="col-md-12 col-lg-12">
+      <h1>{{ series.name }}</h1>
+      <p class="hidden-xs">{{ series.description }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-4 col-sm-4 col-md-4">
+      <img class="img-responsive" ng-src="{{ series.poster_image | createImageUrl : series.unique_name }}">
+    </div>
+    <div class="col-xs-7 col-sm-7 col-md-7">
+      <dl class="dl-horizontal">
+        <dt> First aired </dt>
+        <dd> {{ series.firstaired }} </dd>
+        <dt> Rating </dt>
+        <dd> {{ series.rating }} </dd>
+        <dt> Imdb ID </dt>
+        <dd> {{ series.imdb_id }} </dd>
+        <dt> Status </dt>
+        <dd> {{ series.status }} </dd>
+      </dl>
+    </div>
+  </div>
+
+</div>

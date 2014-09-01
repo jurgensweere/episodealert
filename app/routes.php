@@ -21,6 +21,7 @@ Route::group(
         Route::group(array('prefix' => 'api'), function () {
             Route::get('series/top', 'SeriesController@top');
             Route::get('series/search/{query}', 'SeriesController@search');
+            Route::get('series/{uniqueName}', 'SeriesController@getSeries');
         });
 
         // Route::get('/contact', 'HomeController@showContact');

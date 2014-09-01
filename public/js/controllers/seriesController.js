@@ -1,13 +1,23 @@
 (function(){
 
-    angular.module('eaApp').controller('SeriesCtrl', ['$scope', '$routeParams',
-        function($scope, $routeParams) {
+    angular.module('eaApp').controller('SeriesCtrl',
+        function($scope, $routeParams, seriesFactory) {
 
-          $scope.followSeries = function(){
-            alert('follow me');
-          };
+          var unique_name = $routeParams.seriesname;
 
-        }]
+          getSeries(unique_name);
+
+          function getSeries(unique_name) {
+            seriesFactory.getSeries(unique_name)
+            .success(function (series) {
+              $scope.series = series;
+            })
+            .error(function (error) {
+              //$scope.status = 'error error error beep beep;
+            });
+          }
+
+        }
     );
 
 })();
