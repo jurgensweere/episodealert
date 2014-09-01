@@ -14,6 +14,7 @@ angular.module('eaApp').controller('SeriesSearchCtrl', function($scope, $locatio
       seriesFactory.searchSeries(query)
         .success(function (series) {
 
+          //TODO: how to write this into a helper? Or better yet have a model do it
          for ( i = 0; i < series.length; i++){
           if(series[i].poster_image){
             series[i].posterurl = 'img/poster/' + series[i].unique_name.substring(0, 2) + '/' + series[i].poster_image;
@@ -28,6 +29,6 @@ angular.module('eaApp').controller('SeriesSearchCtrl', function($scope, $locatio
         .error(function (error) {
           //$scope.status = 'error error error beep beep;
         });
-    };
+    }
   }
 );})();

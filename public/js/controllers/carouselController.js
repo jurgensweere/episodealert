@@ -22,7 +22,19 @@
 
           seriesFactory.getTopSeries()
             .success(function (series) {
+  
+              //TODO: how to write this into a helper? Or better yet have a model do it
+             for ( i = 0; i < series.length; i++){
+              if(series[i].poster_image){
+                series[i].posterurl = 'img/poster/' + series[i].unique_name.substring(0, 2) + '/' + series[i].poster_image;
+              }else{
+                series[i].posterurl = 'img/missing.png';
+              }
+
+             }
+
               $scope.series = series;
+
               if (series[0] !== undefined) {
                   $scope.selectSeries(series[0].id);
               }

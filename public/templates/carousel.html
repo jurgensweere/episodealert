@@ -22,7 +22,7 @@
     <div class="splash-posters">
         <div class="series" ng-repeat="series in series">
             <a href="#/series/{{series.unique_name}}">
-                <img class="poster" ng-src="img/poster/{{ series.poster_image }}" alt="{{ series.name }}" />
+                <img class="poster" ng-src="{{ series.posterurl }}" alt="{{ series.name }}" />
             </a>
             <span ng-class="{active: isSelected(series.id)}"></span>
         </div>
