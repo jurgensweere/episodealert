@@ -15,13 +15,22 @@ Route::group(
     array('namespace' => 'EA\controllers'),
     function () {
         Route::get('/', 'HomeController@showWelcome');
-
         Route::get('/testpage', 'HomeController@showTestPage');
 
         Route::group(array('prefix' => 'api'), function () {
+            //Auth
+            Route::post('auth/login', 'AuthController@login');
+            Route::get('auth/logout', 'AuthController@logout');
+
+            Route::get('auth/expiry', function(){
+                return Response::json(array('flash' => 'Session expired'), 401);        
+            });
+
+            //Series
             Route::get('series/top', 'SeriesController@top');
             Route::get('series/search/{query}', 'SeriesController@search');
             Route::get('series/{uniqueName}', 'SeriesController@getSeries');
+
         });
 
         // Route::get('/contact', 'HomeController@showContact');

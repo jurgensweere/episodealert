@@ -27,12 +27,8 @@ class HomeController extends BaseController
     }
 
     public function showTestPage(){
-        $TvdbJob = new TvdbJob;
 
-        $series = Series::where('poster_image', '=', null)->take(50)->get();
-
-        foreach ($series as $s) {
-            $TvdbJob->attachSeriesPoster($s);
-        }            
+        echo 'hai';
+          
     }    
 }

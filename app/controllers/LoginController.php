@@ -48,7 +48,7 @@ class LoginController extends BaseController
         // Seems good, create the user.
         $user = User::create(
             array(
-                'accountname' => Input::get('username'),
+                'accountname' => '',
                 'username' => Input::get('username'),
                 'email' => Input::get('email'),
                 'password' => md5(Input::get('password')),

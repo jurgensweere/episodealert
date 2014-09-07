@@ -47,6 +47,9 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#/series">Browse</a></li>
                         <li><a href="#">Trending</a></li>
+                        <li><a href="#/profile">Profile</a></li>
+                        <li><a href="#/login">Login</a></li>
+                        <li><a href="#" ng-controller="LoginCtrl" ng-click="logout()">Logout</button></li>
                     </ul>
                     <p class="navbar-text navbar-right">Welcome back, <a href="#" class="navbar-link">Jurgen</a></p>
                 </div>
