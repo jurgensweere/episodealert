@@ -50,9 +50,9 @@
             clear: function() {
                 $rootScope.flash = '';
             }
-        }
+        };
 
-    })
+    });
 
     app.run(function($rootScope, $location, AuthenticationService, FlashService){        
 
@@ -63,12 +63,11 @@
         //clear messages at scope change
         //FlashService.clear();
 
-        for(var i = 0, max = routesThatRequireAuth.length ; i < max ; i++){
-          if ( ($location.path() === routesThatRequireAuth[i]) && (!AuthenticationService.isLoggedIn() ) ) {
-            $location.path('/login');
-          }
-        }﻿
-
+            for(var i = 0, max = routesThatRequireAuth.length ; i < max ; i++){
+                if ( ($location.path() === routesThatRequireAuth[i]) && (!AuthenticationService.isLoggedIn() ) ) {
+                    $location.path('/login');
+                }
+            }
         });
 
     });
@@ -92,9 +91,9 @@
 
             return function(promise){
                 return promise.then(success, error);
-            }
+            };
 
-        }
+        };
 
     });
 
@@ -120,8 +119,8 @@
             unset: function(key){
                 return sessionStorage.removeItem(key);
             }
-        }
-    })
+        };
+    });
 
     app.factory("AuthenticationService", function($location, $http, SessionService, FlashService) {
 
@@ -141,7 +140,7 @@
             login: function(credentials) {
                 var login = $http.post('api/auth/login', credentials);
                 login.success(cacheSession);
-                login.success(FlashService.clear)
+                login.success(FlashService.clear);
                 login.error(loginError);
                 return login;
 
