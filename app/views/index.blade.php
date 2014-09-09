@@ -7,15 +7,15 @@
     <title>Episode Alert</title>
     <base href="/"/>
 
-    {{ HTML::style('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css') }}
-    {{ HTML::style('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css') }}
-    {{ HTML::style(asset('css/global.css')) }}
+    <% HTML::style('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css') %>
+    <% HTML::style('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css') %>
+    <% HTML::style(asset('css/global.css')) %>
 
-    {{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js') }}
-    {{ HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js') }}
-    {{ HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-route.min.js') }}
-    {{ HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.min.js') }}
-    {{ HTML::script('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js') }}
+    <% HTML::script('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js') %>
+    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js') %>
+    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-route.min.js') %>
+    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.min.js') %>
+    <% HTML::script('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js') %>
 
 </head>
 <body>
@@ -41,7 +41,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search" ng-model="mainPageQuery" ng-model-options="{debounce: 500}">
+                            <input type="text" class="form-control form-control-search" placeholder="Search" ng-model="mainPageQuery" ng-model-options="{debounce: 500}">
                         </div><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                     </form>
                     <ul class="nav navbar-nav">
@@ -56,17 +56,29 @@
             </div>
         </nav>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">    
+                <flash:messages class="flash-message-animation" />
+            </div>
+        </div>
+    </div>
     <div id="contentUI" ui-view="content" class="container" ng-view>
     </div>
 </div>
-{{ HTML::script(asset('js/app.js')) }}
 
-{{ HTML::script(asset('js/controllers/carouselController.js')) }}
-{{ HTML::script(asset('js/controllers/seriesDetailController.js')) }}
-{{ HTML::script(asset('js/controllers/seriesListController.js')) }}
-{{ HTML::script(asset('js/controllers/seriesController.js')) }}
-{{ HTML::script(asset('js/controllers/seriesSearchController.js')) }}
+<% HTML::script(asset('js/app.js')) %>
 
-{{ HTML::script(asset('js/factories/seriesFactory.js')) }}
+<% HTML::script(asset('js/controllers/carouselController.js')) %>
+<% HTML::script(asset('js/controllers/seriesDetailController.js')) %>
+<% HTML::script(asset('js/controllers/seriesListController.js')) %>
+<% HTML::script(asset('js/controllers/seriesController.js')) %>
+<% HTML::script(asset('js/controllers/seriesSearchController.js')) %>
+<% HTML::script(asset('js/controllers/profileController.js')) %>
+
+<% HTML::script(asset('js/factories/seriesFactory.js')) %>
+
+<% HTML::script(asset('js/modules/angular-flash.js')) %>
+
 </body>
 </html>

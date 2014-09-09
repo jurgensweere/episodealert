@@ -11,9 +11,15 @@
 |
 */
 
+//Changing the blade brackets so they dont conflict with angular
+Blade::setContentTags('<%', '%>');
+Blade::setEscapedContentTags('<%%', '%%>');
+
+
 Route::group(
     array('namespace' => 'EA\controllers'),
     function () {
+
         Route::get('/', 'HomeController@showWelcome');
         Route::get('/testpage', 'HomeController@showTestPage');
 
