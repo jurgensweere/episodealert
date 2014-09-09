@@ -49,6 +49,12 @@ class TvdbJob
         if ($data['firstaired'] != '') {
             $series->firstaired = $data['firstaired'];
         }
+        if ($data['rating'] != '') {
+            $series->rating = $data['rating'];
+        }
+        if ($data['category'] != '') {
+            $series->category = $data['category'];
+        }        
 
         // If the series doesn't have a unique name, assign one
         if (empty($series->unique_name)) {

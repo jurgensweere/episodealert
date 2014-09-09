@@ -10,6 +10,10 @@ class SeriesController extends BaseController
       return Response::json(Series::where('unique_name', $uniqueName)->first());
     }
 
+    public function getByGenre($genre){
+        return Response::json(Series::where('category', 'like', '%' . $genre . '%')->take(50)->get());
+    }
+
     public function top()
     {
         // TODO: Make this select top (followed or trending?) series, instead of the first 5

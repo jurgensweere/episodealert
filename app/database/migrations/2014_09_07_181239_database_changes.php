@@ -35,6 +35,7 @@ class DatabaseChanges extends Migration
             $table->boolean('poster_image_converted')->default(0);
             $table->string('fanart_image', 128)->nullable()->default(null);
             $table->boolean('fanart_image_converted')->default(0);
+            $table->string('category', 128);            
             $table->string('status', 25)->nullable();
             $table->boolean('popular')->default(0);
             $table->timestamps();

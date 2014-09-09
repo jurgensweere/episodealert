@@ -30,6 +30,8 @@ Route::group(
             Route::get('series/top', 'SeriesController@top');
             Route::get('series/search/{query}', 'SeriesController@search');
             Route::get('series/{uniqueName}', 'SeriesController@getSeries');
+            Route::get('series/genre/{genre}', 'SeriesController@getByGenre');
+            Route::get('series/browse', 'SeriesController@getAllCategories');
 
         });
 

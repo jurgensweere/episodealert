@@ -2,6 +2,7 @@
 
 use BaseController;
 use View;
+use EA\Tvdb;
 use EA\TvdbJob;
 use EA\models\Series;
 
@@ -27,8 +28,8 @@ class HomeController extends BaseController
     }
 
     public function showTestPage(){
-
-        echo 'hai';
-          
+        $tv = new Tvdb;
+        $test =  $tv->getSerieData(80348, false);
+        print_r($test);
     }    
 }

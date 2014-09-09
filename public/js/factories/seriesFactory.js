@@ -15,5 +15,9 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
         return $http.get(urlBase + 'search/' + query);
     };
 
+    seriesFactory.getByGenre = function (genre) {
+        return $http.get(urlBase + 'genre/' + genre);
+    };
+
     return seriesFactory;
 }]);

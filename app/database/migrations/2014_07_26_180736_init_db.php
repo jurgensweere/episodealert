@@ -27,7 +27,7 @@ class InitDb extends Migration
             $table->string('status', 25)->nullable();
             $table->boolean('popular')->default(0);
             $table->timestamps();
-
+            
             $table->index(array('imdb_id', 'status'), 'multi_index');
         });
 

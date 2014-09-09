@@ -207,6 +207,8 @@ class Tvdb
             $serie['lastupdated'] = (int) $xml->Series->lastupdated;
             $serie['poster'] = isset($xml->Series->poster) ? (string) $xml->Series->poster : null;
             $serie['status'] = isset($xml->Series->Status) ? (string) $xml->Series->Status : null;
+            $serie['rating'] = isset($xml->Series->Rating) ? (string) $xml->Series->Rating : null;
+            $serie['category'] = isset($xml->Series->Genre) ? (string) $xml->Series->Genre : null;
 
             if ($getepisodes === true) {
                 $episodes = array();
