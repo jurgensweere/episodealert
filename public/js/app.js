@@ -1,7 +1,8 @@
 (function(){
-    var app = angular.module('eaApp', ['ngRoute','ngAnimate']);
+    var app = angular.module('eaApp', ['ngRoute','ngAnimate', 'flash']);
     app.config(['$routeProvider', '$locationProvider',
         function($routeProvider, $locationProvider) {
+
             $locationProvider.html5Mode(true);
 
             $routeProvider.when('/home', {
@@ -39,34 +40,23 @@
                 controller: 'ProfileCtrl'
             })            
 
-
             .otherwise({
                 redirectTo: '/home'
             });
         }]
     );
 
+    //We can add some stuff to the rootscope here
+    app.run(function($rootScope, $location, AuthenticationService){
 
-    app.factory('FlashService', function($rootScope){
-        return{
-            show: function (message) {
-                $rootScope.flash = message;
-            },
-            clear: function() {
-                $rootScope.flash = '';
-            }
-        };
+        $rootScope.hello = function() {
+            //console.log('hello');
+            //you can use this in anywhere using $scope.hello();
+        };      
 
-    });
-
-    app.run(function($rootScope, $location, AuthenticationService, FlashService){        
-
-        var routesThatRequireAuth = ['/search', '/profile'];
+        var routesThatRequireAuth = ['/profile'];
 
         $rootScope.$on('$routeChangeStart', function(event, next, current){
-
-        //clear messages at scope change
-        //FlashService.clear();
 
             for(var i = 0, max = routesThatRequireAuth.length ; i < max ; i++){
                 if ( ($location.path() === routesThatRequireAuth[i]) && (!AuthenticationService.isLoggedIn() ) ) {
@@ -79,14 +69,13 @@
 
     app.config(function($httpProvider){
 
-        var logsOutUserOn401 = function($location, $q, SessionService, FlashService) { 
+        var logsOutUserOn401 = function($location, $q, SessionService) { 
             var success = function(response) {
                 return response;
             };
             var error = function(response) { 
                 if(response.status === 401){ // HTTP NotAuthorized
                     SessionService.unset('authenticated');
-                    FlashService.show(response.data.flash);
                     $location.path('/login');
                     return $q.reject(response);
                 }else{
@@ -127,7 +116,7 @@
         };
     });
 
-    app.factory("AuthenticationService", function($location, $http, SessionService, FlashService) {
+    app.factory("AuthenticationService", function($location, $http, SessionService, flash) {
 
         var cacheSession = function(){
             SessionService.set('authenticated', true);
@@ -138,20 +127,23 @@
         };
 
         var loginError = function(response) {
-            FlashService.show(response.flash);
+            flash('danger', 'Login error');
+        };
+
+        var loginMessage = function(){
+            flash('success', 'Login success');
         };
 
         return {
             login: function(credentials) {
                 var login = $http.post('api/auth/login', credentials);
                 login.success(cacheSession);
-                login.success(FlashService.clear);
+                login.success(loginMessage);
                 login.error(loginError);
                 return login;
 
             },
             logout: function() {
-                console.log('AuthenticationService -> logout');
                 var logout =  $http.get('api/auth/logout');
                 logout.success(uncacheSession);
                 return logout;
@@ -167,7 +159,7 @@
 
         $scope.login = function() {
             AuthenticationService.login($scope.credentials).success(function(){
-                $location.path('/home');
+                $location.path('/profile');
             });
         };
 
@@ -177,7 +169,8 @@
             });
         };
 
-    });    
+    });  
+
 
 })();
 
