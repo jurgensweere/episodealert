@@ -12,7 +12,7 @@
 
             .when('/series', {
                 templateUrl: 'templates/series-list.html',
-                controller: ''
+                controller: 'SeriesListCtrl'
             })
 
             .when('/series/genre/:genre', {

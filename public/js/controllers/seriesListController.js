@@ -2,9 +2,21 @@
 
     angular.module('eaApp').controller('SeriesListCtrl',
         function($scope, $routeParams, seriesFactory) {
-        	var genre = $routeParams.genre;
-        	$scope.genre = toTitleCase(genre);
-        	 getByGenre(genre);
+        	if($routeParams.genre) {
+        		var genre = $routeParams.genre;
+	        	$scope.selectedGenre = genre;
+	        	getByGenre(genre);         		
+        	} 
+
+        	$scope.allGenres = getAllGenres();
+        	
+        	$scope.getGenreInLowerCase = function (selectedGenre) {
+        		return selectedGenre.toLowerCase();
+        	};
+
+        	$scope.highlightGenre = function(selectedGenre, genre) {
+        		return selectedGenre.toLowerCase() == genre.toLowerCase();
+        	}
 
           function getByGenre(genre) {
             seriesFactory.getByGenre(genre)
@@ -16,8 +28,8 @@
             });
           }
 
-          function toTitleCase(str) {
-		    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+          function getAllGenres() {
+		  	return new Array("Action", "Adventure", "Animation", "Comedy", "Children", "Crime", "Drama", "Documentary", "Fantasy", "Game Show" , "Horror", "News", "Reality", "Science-Fiction", "Soap", "Sport", "Talk Show", "Western");
 		  }
         }
     );

@@ -1,5 +1,10 @@
 <div>
-	<h3>By Genre : {{genre}} </h3>
+	<ul class="series-genres">
+		<li ng-repeat="genre in allGenres">
+			<a ng-class="{highlight: highlightGenre(selectedGenre, genre)}" href="#/series/genre/{{getGenreInLowerCase(genre)}}">{{genre}}</a>
+		</li>	
+	</ul>
+	<h3>By Genre : {{selectedGenre}} </h3>
 	<ul class="series-search">
 	    <li ng-repeat="series in series">
 	        <a href="#/series/{{series.unique_name}}">

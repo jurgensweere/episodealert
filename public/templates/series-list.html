@@ -1,21 +1,6 @@
 <div>Browse by Genre</div>
 <ul>
-	<li><a href="#/series/genre/action">Action</a></li>
-	<li><a href="#/series/genre/adventure">Adventure</a></li>
-	<li><a href="#/series/genre/animation">Animation</a></li>
-	<li><a href="#/series/genre/comedy">Comedy</a></li>
-	<li><a href="#/series/genre/children">Children</a></li>
-	<li><a href="#/series/genre/crime">Crime</a></li>
-	<li><a href="#/series/genre/drama">Drama</a></li>
-	<li><a href="#/series/genre/documentary">Documentary</a></li>
-	<li><a href="#/series/genre/fantasy">Fantasy</a></li>
-	<li><a href="#/series/genre/game%20show">Game Show</a></li>
-	<li><a href="#/series/genre/horror">Horror</a></li>
-	<li><a href="#/series/genre/news">News</a></li>
-	<li><a href="#/series/genre/reality">Reality</a></li>
-	<li><a href="#/series/genre/science-fiction">Science-Fiction</a></li>
-	<li><a href="#/series/genre/soap">Soap</a></li>
-	<li><a href="#/series/genre/sport">Sport</a></li>
-	<li><a href="#/series/genre/talk%20show">Talk Show</a></li>
-	<li><a href="#/series/genre/western">Western</a></li>
+	<li ng-repeat="genre in allGenres">
+		<a href="#/series/genre/{{genre}}">{{genre}}</a>
+	</li>	
 </ul>

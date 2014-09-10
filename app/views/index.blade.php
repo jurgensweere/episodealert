@@ -45,7 +45,7 @@
                         </div><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                     </form>
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#/series">Browse</a></li>
+                        <li class="active"><a href="#/series/genre/action">Browse</a></li>
                         <li><a href="#">Trending</a></li>
                         <li><a href="#/profile">Profile</a></li>
                         <li><a href="#/login">Login</a></li>
