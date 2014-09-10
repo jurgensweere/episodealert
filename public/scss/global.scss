@@ -110,6 +110,19 @@ body {
     }
 }
 
+.series-genres {
+    li {
+      width: 105px;
+      text-align: center;
+      display: inline-block;
+      list-style: none;
+    }
+    
+    a.highlight {
+        color: orange; 
+    }
+}
+
 .splash-posters {
     position: absolute;
     bottom: 0;

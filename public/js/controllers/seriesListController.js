@@ -16,7 +16,7 @@
 
         	$scope.highlightGenre = function(selectedGenre, genre) {
         		return selectedGenre.toLowerCase() == genre.toLowerCase();
-        	}
+        	};
 
           function getByGenre(genre) {
             seriesFactory.getByGenre(genre)
