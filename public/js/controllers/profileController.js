@@ -1,6 +1,20 @@
  (function(){
     angular.module('eaApp').controller('ProfileCtrl',  
-        function($scope, flash) {
+        function($scope, seriesFactory ,flash) {
+
+
+    	  getFollowingSeries();
+
+          function getFollowingSeries() {
+            seriesFactory.getFollowingSeries()
+            .success(function (response) {
+              $scope.series = response;
+            })
+            .error(function (response) {
+              flash(response.flash);
+            });
+          }        	
+
         }
     );
 

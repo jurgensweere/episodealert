@@ -25,20 +25,31 @@ class FollowingController extends BaseController
 	    		if($following->save()){
 					return Response::json(array('follow' => 'success'));    			
 	    		}else{
-	    			return Response::json(array('follow' => 'fail'));
+	    			return Response::json(array('follow' => 'fail to save'));
 	    		}
 	    	}else{
 				return Response::json(array('follow' => 'allready following'));	    		
 	    	}
 	    	
 	    }else{
-	    	return Response::json(array('follow' => 'fail'));
+	    	return Response::json(array('follow' => 'fail unauthorized'));
 	    }
 
     }
 
     public function unfollow($series_id){
 
+    }
+
+    public function getFollowingSeries(){
+    	$user = Auth::user();
+    	if($user){
+    		//TODO make some amazing query that fetches the series with this info
+    		return Response::json(Following::where('user_id', $user->id)->get());
+    	}else{
+    		return Response::json(array('flash' => 'Unauthorized, please login'));
+    	}
+    	
     }
 
 }

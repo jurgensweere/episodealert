@@ -44,14 +44,19 @@
                             <input type="text" class="form-control form-control-search" placeholder="Search" ng-model="mainPageQuery" ng-model-options="{debounce: 500}">
                         </div><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                     </form>
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#/series/genre/action">Browse</a></li>
-                        <li><a href="#">Trending</a></li>
-                        <li><a href="#/profile">Profile</a></li>
-                        <li><a href="#/login">Login</a></li>
-                        <li><a href="#" ng-controller="LoginCtrl" ng-click="logout()">Logout</button></li>
+                    <ul class="nav navbar-nav" ng-controller="HeaderCtrl">
+                        <li ng-class="{ active: isActive('/series')}"><a href="#/series/genre/action">Browse</a></li>
+                        <li ng-class="{ active: isActive('/home')}"><a href="#">Trending</a></li>
+                        <li ng-class="{ active: isActive('/profile')}"><a href="#/profile">Profile</a></li>
+                        <li ng-show="credentials.auth">
+                            <a href="#" ng-controller="LoginCtrl" ng-click="logout()">Logout</a>
+                        </li>
+                        <li ng-show="!credentials.auth">
+                            <a ng-show="!credentials.auth" href="#/login">Login</a>
+                        </li>                                        
                     </ul>
-                    <p class="navbar-text navbar-right" ng-show="credentials.username">Welcome back, <a href="#" class="navbar-link">{{ credentials.username }}</a></p>
+
+                    <p class="navbar-text navbar-right" ng-show="credentials.auth">Welcome back, <a href="#" class="navbar-link">{{ credentials.username }}</a></p>
                 </div>
             </div>
         </nav>

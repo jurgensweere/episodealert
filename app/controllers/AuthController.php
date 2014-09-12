@@ -12,6 +12,29 @@ use Hash;
 
 class AuthController extends BaseController
 {
+	public function register() {
+
+		$usernameCheck  = User::where('username', Input::get('username'))->count();
+
+		if(!$usernameCheck){
+	        $user = User::create(
+	            array(
+	                'accountname' => '',
+	                'username' => Input::get('username'),
+	                'email' => Input::get('email'),
+	                'password' => Hash::make(Input::get('password')),
+	                'role' => User::ROLE_MEMBER,
+	                'publicfollow' => 0,
+	            )
+	        );
+
+
+	        return Response::json(array('flash' => 'Thanks for registering'));			
+		}else{
+			return Response::json(array('flash' => 'Username allready in use'), 500);
+		}
+
+	}
 
 	public function login() {
 		if(Auth::attempt(array('username' => Input::json('username'), 'password' => Input::json('password'))))

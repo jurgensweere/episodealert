@@ -24,5 +24,9 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
         return $http.get('/api/follow/' + id);
     };
 
+    seriesFactory.getFollowingSeries = function() {
+        return $http.get('/api/profile/following');
+    };    
+
     return seriesFactory;
 }]);

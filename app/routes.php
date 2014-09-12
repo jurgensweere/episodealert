@@ -24,9 +24,12 @@ Route::group(
         Route::get('/testpage', 'HomeController@showTestPage');
 
         Route::group(array('prefix' => 'api'), function () {
+
             //Auth
+            Route::post('auth/register', 'AuthController@register');
             Route::post('auth/login', 'AuthController@login');
             Route::get('auth/logout', 'AuthController@logout');
+            Route::get('profile/following', 'FollowingController@getFollowingSeries');
 
             Route::get('auth/expiry', function(){
                 return Response::json(array('flash' => 'Session expired'), 401);        

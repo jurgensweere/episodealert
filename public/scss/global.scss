@@ -111,12 +111,18 @@ body {
 }
 
 .series-genres {
+    text-align: center;
+    font-size: 150%;
+    
+
     li {
-      width: 105px;
-      text-align: center;
-      display: inline-block;
-      list-style: none;
+        margin:0px 0px 0px 50px;
+        text-align: center;
+        display: inline-block;
+        list-style: none;
     }
+
+
     
     a.highlight {
         color: orange; 
