@@ -32,6 +32,9 @@ Route::group(
                 return Response::json(array('flash' => 'Session expired'), 401);        
             });
 
+            //Following (has to go behind auth)
+            Route::get('follow/{series_id}', 'FollowingController@follow');
+
             //Series
             Route::get('series/top', 'SeriesController@top');
             Route::get('series/search/{query}', 'SeriesController@search');

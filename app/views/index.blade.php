@@ -51,7 +51,7 @@
                         <li><a href="#/login">Login</a></li>
                         <li><a href="#" ng-controller="LoginCtrl" ng-click="logout()">Logout</button></li>
                     </ul>
-                    <p class="navbar-text navbar-right">Welcome back, <a href="#" class="navbar-link">Jurgen</a></p>
+                    <p class="navbar-text navbar-right" ng-show="credentials.username">Welcome back, <a href="#" class="navbar-link">{{ credentials.username }}</a></p>
                 </div>
             </div>
         </nav>
@@ -75,6 +75,7 @@
 <% HTML::script(asset('js/controllers/seriesController.js')) %>
 <% HTML::script(asset('js/controllers/seriesSearchController.js')) %>
 <% HTML::script(asset('js/controllers/profileController.js')) %>
+<% HTML::script(asset('js/controllers/followingController.js')) %>
 
 <% HTML::script(asset('js/factories/seriesFactory.js')) %>
 

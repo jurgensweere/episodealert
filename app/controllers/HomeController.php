@@ -5,6 +5,7 @@ use View;
 use EA\Tvdb;
 use EA\TvdbJob;
 use EA\models\Series;
+use Auth;
 
 class HomeController extends BaseController
 {
@@ -28,8 +29,11 @@ class HomeController extends BaseController
     }
 
     public function showTestPage(){
-        $tv = new Tvdb;
-        $test =  $tv->getSerieData(80348, false);
-        print_r($test);
+        print_r(Auth::user());
+
+
+        // $tv = new Tvdb;
+        // $test =  $tv->getSerieData(80348, false);
+        // print_r($test);
     }    
 }

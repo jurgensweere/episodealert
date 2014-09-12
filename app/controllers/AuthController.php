@@ -13,18 +13,18 @@ use Hash;
 class AuthController extends BaseController
 {
 
- public function login()
-  {
-    if(Auth::attempt(array('username' => Input::json('username'), 'password' => Input::json('password'))))
-    {
-      return Response::json(Auth::user());
-    } else {
-      return Response::json(array('flash' => 'Invalid username or password'), 500);
-    }
-  }
+	public function login() {
+		if(Auth::attempt(array('username' => Input::json('username'), 'password' => Input::json('password'))))
+		{
+	  		return Response::json(array('id' => Auth::user()->id,
+					'username' => Auth::user()->username,
+					'email' => Auth::user()->email));
+		} else {
+ 			 return Response::json(array('flash' => 'Invalid username or password'), 500);
+		}
+	}
 
-	public function logout(){
-
+	public function logout() {
 		Auth::logout();
 		return Response::json(array('flash' => 'Loggout Out!'));
 	}

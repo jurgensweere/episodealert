@@ -19,5 +19,10 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
         return $http.get(urlBase + 'genre/' + genre);
     };
 
+    //TODO Add factory for following
+    seriesFactory.followSeries = function(id) {
+        return $http.get('/api/follow/' + id);
+    };
+
     return seriesFactory;
 }]);

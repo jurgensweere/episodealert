@@ -11,7 +11,7 @@ public/node_modules/
 *.scssc
 npm-debug.log
 public/css/*.css
-public/img/poster/*.*
+public/img/poster/*
 public/dist/js/*.js
 public/dist/css/*.css
 public/css/

@@ -38,7 +38,7 @@
             .when('/profile', {
                 templateUrl: 'templates/profile.html',
                 controller: 'ProfileCtrl'
-            })            
+            })          
 
             .otherwise({
                 redirectTo: '/home'
@@ -116,10 +116,21 @@
         };
     });
 
-    app.factory("AuthenticationService", function($location, $http, SessionService, flash) {
+    app.factory("AuthenticationService", function($rootScope, $location, $http, SessionService, flash) {
 
-        var cacheSession = function(){
+        var cacheSession = function(response){
             SessionService.set('authenticated', true);
+        };
+
+        var setUserInfo = function(response){
+            $rootScope.credentials = {};
+            $rootScope.credentials.username = response.username;
+            $rootScope.credentials.id = response.id;
+        };
+
+        var unSetUserInfo = function(){
+            $rootScope.credentials.username = null;
+            $rootScope.credentials.id = null;
         };
 
         var uncacheSession = function(){
@@ -127,10 +138,12 @@
         };
 
         var loginError = function(response) {
+            console.log(response);
             flash('danger', 'Login error');
         };
 
-        var loginMessage = function(){
+        var loginMessage = function(response){   
+            console.log(response);         
             flash('success', 'Login success');
         };
 
@@ -139,6 +152,7 @@
                 var login = $http.post('api/auth/login', credentials);
                 login.success(cacheSession);
                 login.success(loginMessage);
+                login.success(setUserInfo);
                 login.error(loginError);
                 return login;
 
@@ -146,6 +160,7 @@
             logout: function() {
                 var logout =  $http.get('api/auth/logout');
                 logout.success(uncacheSession);
+                logout.success(unSetUserInfo);
                 return logout;
             },
             isLoggedIn: function() {
