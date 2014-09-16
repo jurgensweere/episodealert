@@ -2,4 +2,5 @@
     <h3>{{ series.name }}</h3>
     <img class="img-responsive" ng-src="{{ series.poster_image | createImageUrl : series.unique_name }}" alt="{{ series.name }}" />
 </a>
-<button ng-controller="FollowingCtrl" class="btn btn-default" ng-click="followSeries(series.id, $event)">Follow</button>
+<button ng-show="followButton" ng-controller="FollowingCtrl" class="btn btn-default" ng-click="followSeries(series.id, $event)">Follow</button>
+

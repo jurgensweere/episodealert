@@ -44,8 +44,15 @@ class FollowingController extends BaseController
     public function getFollowingSeries(){
     	$user = Auth::user();
     	if($user){
-    		//TODO make some amazing query that fetches the series with this info
-    		return Response::json(Following::where('user_id', $user->id)->get());
+
+    		return Response::json(
+				Following::where('user_id', $user->id)
+				->select('following.archive', 'series.*')
+				->join('series', 'following.series_id', '=', 'series.id')
+				->get()					
+
+				);
+
     	}else{
     		return Response::json(array('flash' => 'Unauthorized, please login'));
     	}

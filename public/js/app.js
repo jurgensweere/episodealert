@@ -156,7 +156,7 @@
         };
 
         var registerMessage = function(response){
-            flash('success', response.flash)
+            flash('success', response.flash);
         };
 
         var registerError = function(response){
@@ -224,7 +224,6 @@
             return $location.path().indexOf(viewLocation) === 0;
         };
     });
-
 
 })();
 

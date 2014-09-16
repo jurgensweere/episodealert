@@ -84,7 +84,7 @@ body {
     margin: 0px;
 
     li{
-        width: 150px;
+        width: 200px;
         text-align: center;
         display: inline-block;
         list-style: none;
@@ -94,14 +94,17 @@ body {
     a{
         img{
             display: inline-block;
-            height: 130px;
+            height: 200px;
             padding: 5px;
+            background-color: #ddd;
+            border: 1px solid #D1D1D1;    
+            margin-bottom: 10px;        
         }
 
         h3{
             display: block;
             font-size: 14px;
-            margin: 0px 0px 0px 0px;
+            margin: 0px 0px 10px 0px;
         }
     }
 
