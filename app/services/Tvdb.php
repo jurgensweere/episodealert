@@ -131,12 +131,61 @@ class Tvdb
         }
     }
 
+    /*
+     * Get banner/fanart of series
+     */
+    public function getBannerImage($series){
+		$url = 'http://www.thetvdb.com/api/CE185B06BC7B86B8/series/' . $series['id'] .'/banners.xml';
+		$seriesSubDirectory = substr($series['unique_name'], 0,2);
+		
+        $feed = self::downloadUrl($url);
+        $xml = simplexml_load_string($feed);	
+
+        $fanArtUrl = 'http://www.thetvdb.com/banners/' . $xml->Banner->BannerPath;
+        $fanArtVignetteUrl = 'http://www.thetvdb.com/banners/' . $xml->Banner->VignettePath;
+        //print_r($xml);
+
+        if(!$xml->Banner or $xml->Banner->BannerType2 != '1920x1080'){
+        	return false;
+        }
+
+
+        //todo: before downloading we should probably check if the banner has a certain size. Some banners are just
+        //posters that wont fit in any design. 
+
+ 		//download image
+        $ch = curl_init($fanArtUrl);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+        $rawdata=curl_exec($ch);
+        curl_close ($ch);
+
+        if (!file_exists("public/img/fanart/".$seriesSubDirectory."/")) {
+            mkdir("public/img/fanart/".$seriesSubDirectory."/", 0777, true);
+        }
+
+        $fp = fopen("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg",'w');
+        $close = fwrite($fp, $rawdata);
+
+        if($close){
+        	self::compress_image("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg", 
+        		"public/img/fanart/".$seriesSubDirectory."/".$series['unique_name']."_compressed.jpg", 40);
+        }
+        
+        return $close; 
+    }
+
+
+    /*
+     * Downloads poster image of a series
+     */
     public function getPosterImage($series, $poster){
         //create poster url
 
         $posterUrl = $this->posterPath.$poster;
-
         $posterSubDirectory = substr($series['unique_name'], 0,2);
+        $seriesPosterFileName = $series['unique_name'].".jpg";
 
         //self::downloadUrl($posterUrl);
         //download image
@@ -151,15 +200,47 @@ class Tvdb
             mkdir("public/img/poster/".$posterSubDirectory."/", 0777, true);
         }
 
-        $fp = fopen("public/img/poster/".$posterSubDirectory."/".$series['unique_name'].".jpg",'w');
+        $fp = fopen("public/img/poster/".$posterSubDirectory."/".$seriesPosterFileName,'w');
         fwrite($fp, $rawdata);
-        
-        return fclose($fp);
 
-        //resize image
-        //Save images in different locations for Lost example 
-        //goes to /poster/images/lo/lost
+        $close = fclose($fp);
+
+        if($close){
+        	self::resize_image("public/img/poster/".$posterSubDirectory."/".$seriesPosterFileName, 
+        		"public/img/poster/".$posterSubDirectory."/".$series['unique_name']."_small.jpg", 60, 0.3);
+        	self::resize_image("public/img/poster/".$posterSubDirectory."/".$seriesPosterFileName, 
+        		"public/img/poster/".$posterSubDirectory."/".$series['unique_name']."_medium.jpg", 60, 0.5);
+        	self::resize_image("public/img/poster/".$posterSubDirectory."/".$seriesPosterFileName, 
+        		"public/img/poster/".$posterSubDirectory."/".$series['unique_name']."_large.jpg", 60, 1);
+        }
+        
+        return $close;
     }
+
+   	private function resize_image($source_url, $destination_url, $quality, $percentage){
+        list($width, $height) = getimagesize($source_url);
+        $newwidth = $width * $percentage;
+        $newheight = $height * $percentage;
+
+        $thumb = imagecreatetruecolor($newwidth, $newheight);
+        $source = imagecreatefromjpeg($source_url);
+
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+        imagejpeg($thumb, $destination_url, $quality);
+        imagedestroy($thumb);
+    }
+
+    private function compress_image($source_url, $destination_url, $quality) {
+        $info = getimagesize($source_url);
+     
+        if ($info['mime'] == 'image/jpeg') $image = imagecreatefromjpeg($source_url);
+        elseif ($info['mime'] == 'image/gif') $image = imagecreatefromgif($source_url);
+        elseif ($info['mime'] == 'image/png') $image = imagecreatefrompng($source_url);
+     
+        //save file
+        imagejpeg($image, $destination_url, $quality);
+    }    
 
     public function getEpisodeImage($serieid, $s, $e)
     {

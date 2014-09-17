@@ -25,4 +25,11 @@ class SeriesController extends BaseController
         return Response::json(Series::where('name', 'like', '%' . $query . '%')->take(50)->get());
     }
 
+	/*
+	 * Get episodes of series by series->id
+	 */
+    public function getEpisodes($id){
+		return Response::json(Series::find($id)->episodes);
+    }
+
 }

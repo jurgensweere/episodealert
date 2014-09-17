@@ -20,13 +20,17 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
     };
 
     //TODO Add factory for following
-    seriesFactory.followSeries = function(id) {
-        return $http.get('/api/follow/' + id);
+    seriesFactory.followSeries = function(user_id) {
+        return $http.get('/api/follow/' + user_id);
     };
 
     seriesFactory.getFollowingSeries = function() {
         return $http.get('/api/profile/following');
     };    
+
+    seriesFactory.getEpisodes = function(series_id) {
+    	return $http.get('/api/series/episodes/' + series_id);
+    }
 
     return seriesFactory;
 }]);

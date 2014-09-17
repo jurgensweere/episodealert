@@ -110,6 +110,15 @@
         };
     });
 
+    //Create fanart url
+    app.filter('createFanartUrl', function(){
+        return function(fanart, unique_name){
+        	if(fanart){
+        		return 'img/fanart/' + unique_name.substring(0, 2) + '/' + fanart;
+        	}
+        };
+    });    
+
     app.factory('SessionService', function() {
         return{
             get: function(key){

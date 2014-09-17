@@ -76,6 +76,14 @@ class TvdbJob
     public function attachSeriesPoster($series){
         $data = App::make('tvdb')->getSerieData($series->id, false);
 
+        //Try to get fanart for the series
+        $fanart = App::make('tvdb')->getBannerImage($series);
+
+        if($fanart){
+            $series->fanart_image = $series->unique_name.".jpg";
+            $series->save();        	
+        }
+
         if($data['poster']!==""){
             $poster = App::make('tvdb')->getPosterImage($series, $data['poster']);            
         }else{

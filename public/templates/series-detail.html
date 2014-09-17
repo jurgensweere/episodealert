@@ -27,4 +27,16 @@
     </div>
   </div>
 
+  <div class="row">
+  	<ul>
+  		<li ng-repeat="episode in episodes">
+  			{{ episode.season }} . {{ episode.episode }} - {{ episode.name }}
+  		</li>
+  	</ul>
+  </div>
+
+  	<div class="row">
+   		<img ng-show="series.fanart_image" class="img-responsive" ng-src="{{ series.fanart_image | createFanartUrl : series.unique_name }}">
+	</div>
+
 </div>

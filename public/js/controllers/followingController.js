@@ -4,7 +4,6 @@
         function($scope, seriesFactory, flash) {
 
           $scope.followSeries = function(series_id, event){
-            console.log(event.currentTarget);
             followServiceCall(series_id);
           };
 
