@@ -30,7 +30,7 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
 
     seriesFactory.getEpisodes = function(series_id) {
     	return $http.get('/api/series/episodes/' + series_id);
-    }
+    };
 
     return seriesFactory;
 }]);
