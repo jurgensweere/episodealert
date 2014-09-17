@@ -13,7 +13,8 @@ grunt.initConfig({
 
             //TODO These files should be combined and minified etc.
             files: {
-            'css/global.css': 'scss/global.scss'
+            'css/global.css': 'scss/global.scss',
+            'css/globalv2.css': 'scss/globalv2.scss'
             }
         }
     },
@@ -78,6 +79,7 @@ grunt.initConfig({
       minify: {
         expand: true,
         src: ['css/global.css'],
+        src: ['css/globalv2.css'],
         dest: 'dist/',
         ext: '.min.css'
       }

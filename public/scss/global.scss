@@ -1,17 +1,103 @@
 @CHARSET "ISO-8859-1";
 
+$bright-highlight : #00ff90;
 $dark-color: #212a3f;
 $light-color: #434f5b;
-$background-color: #f2f2f2;
+$background-color: #101010;
 $highlight-color: #8ab839;
-$primary-color: #2e2e2e;
-$font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+$primary-color: #252525;
+$secondary-color: #363636;
+$font-family: "Open Sans", sans-serif;
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
 body {
-    padding-top: 70px;
-    background-color: $background-color;
-    color: $primary-color;
+    background-color: $background-color; 
+    color: #fff;
     font-family: $font-family;
+}
+
+/* reset some stuff */
+
+a{
+    color: $bright-highlight;
+}
+
+a:hover, a:focus {
+    color: $bright-highlight;
+}
+
+p {
+    margin: 0 0 0px;
+}
+
+ul{
+    padding-left:  0px;
+}
+
+.container{
+    background-color: #252525;
+}
+
+.container--navbar{
+    padding: 12px 0px 12px 20px;
+}
+
+.profile{
+    h1{
+        font-size: 200%;
+        margin: 0px;
+        line-height: 150%;
+    }
+
+    .profile-welcome{
+        color: #e7e7e7;
+        padding: 3px 60px 15px 60px;
+        background-color: $background-color;
+
+        p{
+            line-height: 180%;
+        }
+    }   
+
+    .profile-filters{
+        height: 40px;
+        padding: 5px 0px 5px 20px;
+        background-color: $primary-color;
+
+        span{
+            padding-right:5px;
+        }
+
+        .btn{
+            margin-left: 10px;
+            font-size: 75%;
+            background-color: #1a1a1a;
+            border-radius: 0px;
+            text-transform: uppercase;
+        }
+
+        .btn:focus {
+          outline: none;
+        }
+
+        .active{
+            color: $bright-highlight;   
+        }
+
+        .btn:hover{
+            color: $bright-highlight;   
+        }
+    }
+
+    .profile-series{
+        background-color: $background-color;
+    }
+}
+
+
+.flash-container{
+    background-color: $background-color;
 }
 
 #flash-messages{
@@ -48,7 +134,6 @@ body {
 .splash-fanart-fade {
     width: 100%;
     height: 100%;
-    background: transparent url('../img/fanart-fade.png') repeat;
     display: block;
     position: absolute;
 }
@@ -79,6 +164,65 @@ body {
     height: 320px;
 }
 
+.series-profile{
+    text-align: center;
+    margin: auto;
+    padding-top: 15px;
+
+    a{
+        display: block;
+        position: relative;
+    }
+
+    .badge{
+        top: 90%;
+        left: 80%;
+        position: absolute;
+        background-color: rgba(0,0,0,0.8);
+        font-size: 120%;
+        border: 2px solid $bright-highlight;
+        border-radius: 15px;
+        padding: 3px 10px 4px 8px;
+    }
+
+    p{
+        font-size: 85%;
+        padding:  4px 0px 4px 0px;
+        text-shadow: 1px 1px #0F0F0F;   
+    }
+
+    .extra-info{
+        padding: 10px 0px 15px 10px;
+        text-align: left;
+        background-color: $primary-color;
+        height: 100px;
+
+        a{
+            font-size: 110%;
+        }
+    }
+
+    .extra-info-episodes{
+        padding: 5px 0px 15px 10px;
+        text-align: left;
+        background-color: $secondary-color;
+        height: 60px;
+        text-shadow: 1px 1px #0F0F0F;       
+    }
+
+    li{
+        padding: 0px 10px 0px 10px;
+        list-style: none;
+        width: 25%;
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+
+    img{
+    }
+
+}
+
 .series-search{
     padding: 0px;
     margin: 0px;
@@ -96,8 +240,6 @@ body {
             display: inline-block;
             height: 200px;
             padding: 5px;
-            background-color: #ddd;
-            border: 1px solid #D1D1D1;    
             margin-bottom: 10px;        
         }
 
@@ -113,20 +255,28 @@ body {
     }
 }
 
+.series-detail{
+    h1{
+        text-shadow: 2px 2px #0F0F0F;
+    }
+
+    p, dl{
+        text-shadow: 1px 1px #0F0F0F;   
+    }
+}
+
 .series-genres {
     text-align: center;
     font-size: 150%;
     
 
     li {
-        margin:0px 0px 0px 50px;
+        margin:0px 40px 0px 0px;
         text-align: center;
         display: inline-block;
         list-style: none;
     }
 
-
-    
     a.highlight {
         color: orange; 
     }
@@ -156,48 +306,70 @@ body {
         }
 
         .active {
+            color: $bright-highlight;
             background-color: $highlight-color;
         }
     }
 }
 
 .navbar-default {
-    border: 0;
-    background-color: $primary-color;
+    margin: auto;
+    border: none;
+    background-color: $background-color;
+
+    .navbar-form{
+        padding-top: 9px;
+    }
+
+    .navbar-brand {
+        text-transform: uppercase;
+        color: #C9C9C9;
+        padding-top: 15px;
+
+        a{
+            color: #C9C9C9;
+        }
+    }    
+
+    .navbar-brand:focus, .navbar-brand:hover{
+        color: #C9C9C9;
+    }
 
     .navbar-text {
-        color: $background-color;
+        color: #fff;
     }
 
     .navbar-link {
-        color: $highlight-color;
+        color: #fff;
     }
 
+    .navbar-text > a:hover{
+        color: $highlight-color;
+    }
     .navbar-nav>li>a {
-        color: $background-color;
+        color: #fff;
+        text-transform: uppercase;
+        top: 2px;
+        height: 46px;
     }
 
     .navbar-nav>li>a:hover, .navbar-nav>li>a:focus {
-        color: $highlight-color;
-        background-color: transparent;
+        color: $bright-highlight;
     }
 
     .navbar-nav>.active>a, .navbar-nav>.active>a:hover, .navbar-nav>.active>a:focus {
-        color: $background-color;
-        background-color: $light-color;
+        color: $bright-highlight;
+        background-color: #252525;
     }
 
     .btn {
-        height: 46px;
-        background-color: $background-color;
+        height: 32px;
+        color: #FFF;
+        background-color: #b7b7b7;
         background-image: none;
         border: 0;
         border-radius: 0;
     }
-}
-
-.navbar-brand {
-    padding: 5px 5px;
 }
 
 .navbar-form {
@@ -206,9 +378,8 @@ body {
 }
 
 .form-control-search {
-    height: 46px;
+    height: 32px;
     color: $primary-color;
-    background-color: $background-color;
     background-image: none;
     border: 0;
     border-radius: 0;

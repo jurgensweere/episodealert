@@ -27,8 +27,8 @@
 <div id="masterUI" ui-view="master" ng-controller="SeriesSearchCtrl">
     <!-- loaded by templates-->
     <div id="topbarUI" ui-view="topbar">
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container container--navbar">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
@@ -36,7 +36,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#/home"><img src="img/logo-56x41.png" alt="Episode Alert" /></a>
+                    <a class="navbar-brand" href="#/home">
+                        <!-- <img src="img/logo-56x41.png" alt="Episode Alert" /> -->
+                        Epiode Alert
+                    </a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <form class="navbar-form navbar-left" role="search">
@@ -62,7 +65,7 @@
         </nav>
     </div>
     <div class="container">
-        <div class="row">
+        <div class="row flash-container">
             <div class="col-md-12 col-lg-12">    
                 <flash:messages class="flash-message-animation" />
             </div>
