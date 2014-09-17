@@ -151,33 +151,34 @@ class Tvdb
                 if(!$xml->Banner or $xml->Banner->BannerType2 != '1920x1080'){
                 	return false;
                 }
+         
+
+
+                //todo: before downloading we should probably check if the banner has a certain size. Some banners are just
+                //posters that wont fit in any design. 
+
+         		//download image
+                $ch = curl_init($fanArtUrl);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+                $rawdata=curl_exec($ch);
+                curl_close ($ch);
+
+                if (!file_exists("public/img/fanart/".$seriesSubDirectory."/")) {
+                    mkdir("public/img/fanart/".$seriesSubDirectory."/", 0777, true);
+                }
+
+                $fp = fopen("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg",'w');
+                $close = fwrite($fp, $rawdata);
+
+                if($close){
+                	self::compress_image("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg", 
+                		"public/img/fanart/".$seriesSubDirectory."/".$series['unique_name']."_compressed.jpg", 40);
+                }
+                
+                return $close; 
             }
-
-
-            //todo: before downloading we should probably check if the banner has a certain size. Some banners are just
-            //posters that wont fit in any design. 
-
-     		//download image
-            $ch = curl_init($fanArtUrl);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
-            $rawdata=curl_exec($ch);
-            curl_close ($ch);
-
-            if (!file_exists("public/img/fanart/".$seriesSubDirectory."/")) {
-                mkdir("public/img/fanart/".$seriesSubDirectory."/", 0777, true);
-            }
-
-            $fp = fopen("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg",'w');
-            $close = fwrite($fp, $rawdata);
-
-            if($close){
-            	self::compress_image("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg", 
-            		"public/img/fanart/".$seriesSubDirectory."/".$series['unique_name']."_compressed.jpg", 40);
-            }
-            
-            return $close; 
         }
     }
 
@@ -245,7 +246,9 @@ class Tvdb
         elseif ($info['mime'] == 'image/png') $image = imagecreatefrompng($source_url);
      
         //save file
-        imagejpeg($image, $destination_url, $quality);
+        if($image){
+            imagejpeg($image, $destination_url, $quality);            
+        }
     }    
 
     public function getEpisodeImage($serieid, $s, $e)
