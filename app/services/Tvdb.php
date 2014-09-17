@@ -135,45 +135,50 @@ class Tvdb
      * Get banner/fanart of series
      */
     public function getBannerImage($series){
+
 		$url = 'http://www.thetvdb.com/api/CE185B06BC7B86B8/series/' . $series['id'] .'/banners.xml';
 		$seriesSubDirectory = substr($series['unique_name'], 0,2);
 		
         $feed = self::downloadUrl($url);
         $xml = simplexml_load_string($feed);	
 
-        $fanArtUrl = 'http://www.thetvdb.com/banners/' . $xml->Banner->BannerPath;
-        $fanArtVignetteUrl = 'http://www.thetvdb.com/banners/' . $xml->Banner->VignettePath;
-        //print_r($xml);
+         if($xml){   
+            if($xml->Banner){
+                $fanArtUrl = 'http://www.thetvdb.com/banners/' . $xml->Banner->BannerPath;
+                $fanArtVignetteUrl = 'http://www.thetvdb.com/banners/' . $xml->Banner->VignettePath;
+                //print_r($xml);
 
-        if(!$xml->Banner or $xml->Banner->BannerType2 != '1920x1080'){
-        	return false;
+                if(!$xml->Banner or $xml->Banner->BannerType2 != '1920x1080'){
+                	return false;
+                }
+            }
+
+
+            //todo: before downloading we should probably check if the banner has a certain size. Some banners are just
+            //posters that wont fit in any design. 
+
+     		//download image
+            $ch = curl_init($fanArtUrl);
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+            $rawdata=curl_exec($ch);
+            curl_close ($ch);
+
+            if (!file_exists("public/img/fanart/".$seriesSubDirectory."/")) {
+                mkdir("public/img/fanart/".$seriesSubDirectory."/", 0777, true);
+            }
+
+            $fp = fopen("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg",'w');
+            $close = fwrite($fp, $rawdata);
+
+            if($close){
+            	self::compress_image("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg", 
+            		"public/img/fanart/".$seriesSubDirectory."/".$series['unique_name']."_compressed.jpg", 40);
+            }
+            
+            return $close; 
         }
-
-
-        //todo: before downloading we should probably check if the banner has a certain size. Some banners are just
-        //posters that wont fit in any design. 
-
- 		//download image
-        $ch = curl_init($fanArtUrl);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
-        $rawdata=curl_exec($ch);
-        curl_close ($ch);
-
-        if (!file_exists("public/img/fanart/".$seriesSubDirectory."/")) {
-            mkdir("public/img/fanart/".$seriesSubDirectory."/", 0777, true);
-        }
-
-        $fp = fopen("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg",'w');
-        $close = fwrite($fp, $rawdata);
-
-        if($close){
-        	self::compress_image("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg", 
-        		"public/img/fanart/".$seriesSubDirectory."/".$series['unique_name']."_compressed.jpg", 40);
-        }
-        
-        return $close; 
     }
 
 
@@ -201,6 +206,7 @@ class Tvdb
         }
 
         $fp = fopen("public/img/poster/".$posterSubDirectory."/".$seriesPosterFileName,'w');
+        
         fwrite($fp, $rawdata);
 
         $close = fclose($fp);
@@ -277,8 +283,15 @@ class Tvdb
 
         $feed = self::downloadUrl($url);
 
+        //echo "download url: " . $url;
+        //echo "\n";
+
         if ($feed) {
             $xml = simplexml_load_string($feed);
+
+
+            //echo "downloaden series name: ". $xml->Series->SeriesName;
+            //echo "\n";
 
             $serie['id'] = $serieid;
             $serie['name'] = (string) $xml->Series->SeriesName;
