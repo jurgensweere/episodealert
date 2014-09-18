@@ -35,6 +35,10 @@ ul{
     padding-left:  0px;
 }
 
+.ea-content{
+	min-height: 600px;
+}
+
 .container{
     background-color: #252525;
 }
@@ -104,22 +108,29 @@ ul{
     list-style-type: none;
 }
 
-.flash-message-animation .ng-enter{
+.animation .ng-enter,
+.animation .ng-show{
   -webkit-transition:0.5s linear all;
   transition:0.5s linear all;
 }
 
-.flash-message-animation .ng-leave {
+.animation .ng-leave,
+.animation .ng-hide
+{
   -webkit-transition:0s linear all;
   transition:0s linear all;
 }
 
-.flash-message-animation .ng-enter,
-.flash-message-animation .ng-leave.ng-leave-active {
+.animation .ng-enter,
+.animation .ng-show,
+.animation .ng-leave.ng-leave-active,
+.animation .ng-hide.ng-hide-active {
   opacity:0;
 }
-.flash-message-animation .ng-leave,
-.flash-message-animation .ng-enter.ng-enter-active {
+.animation .ng-leave,
+.animation .ng-hide,
+.animation .ng-enter.ng-enter-active,
+.animation .ng-show.ng-show-active{
   opacity:1;
 }
 
@@ -310,6 +321,10 @@ ul{
             background-color: $highlight-color;
         }
     }
+}
+
+.btn--following{
+
 }
 
 .navbar-default {

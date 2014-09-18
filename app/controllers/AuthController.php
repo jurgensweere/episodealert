@@ -28,7 +28,6 @@ class AuthController extends BaseController
 	            )
 	        );
 
-
 	        return Response::json(array('flash' => 'Thanks for registering'));			
 		}else{
 			return Response::json(array('flash' => 'Username allready in use'), 500);
@@ -50,6 +49,20 @@ class AuthController extends BaseController
 	public function logout() {
 		Auth::logout();
 		return Response::json(array('flash' => 'Loggout Out!'));
+	}
+
+	/*
+	 * returns user if there is a session
+	 */
+
+	public function checkAuth() {
+		if(Auth::user()){
+			return Response::json(array('id' => Auth::user()->id,
+					'username' => Auth::user()->username,
+					'email' => Auth::user()->email));
+		}else{
+			return Response::json(array('flash' => 'Not authorized'), 500);
+		}
 	}
    
 }

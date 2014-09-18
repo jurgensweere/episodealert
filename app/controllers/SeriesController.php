@@ -12,7 +12,10 @@ use Log;
 class SeriesController extends BaseController
 {
     public function getSeries($uniqueName){
-      return Response::json(Series::where('unique_name', $uniqueName)->first());
+	  $series =Series::where('unique_name', $uniqueName)->first();
+	 // $series->following = $series->isFollowing();
+
+      return Response::json( $series );
     }
 
     public function getByGenre($genre){

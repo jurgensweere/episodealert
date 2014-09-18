@@ -24,6 +24,10 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
         return $http.get('/api/follow/' + user_id);
     };
 
+    seriesFactory.unfollowSeries = function(user_id) {
+        return $http.get('/api/unfollow/' + user_id);
+    };    
+
     seriesFactory.getFollowingSeries = function() {
         return $http.get('/api/profile/following');
     };    
