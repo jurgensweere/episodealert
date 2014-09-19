@@ -13,7 +13,6 @@ class DatabaseChanges extends Migration
      */
     public function up()
     {
-        Log::info("in up method changes db");
         Schema::drop('mail_log');
         Schema::drop('seen');
         Schema::drop('setting');
@@ -135,7 +134,6 @@ class DatabaseChanges extends Migration
      */
     public function down()
     {
-        Log::info("in down method changes db");
        
     }
 }

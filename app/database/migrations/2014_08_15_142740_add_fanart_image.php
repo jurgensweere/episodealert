@@ -13,7 +13,6 @@ class AddFanartImage extends Migration
      */
     public function up()
     {
-        Log::info("in up method fanart db");
         Schema::table('series', function ($table) {
             $table->string('poster_image', 64)->nullable()->default(null);
             $table->boolean('poster_image_converted')->default(0);
@@ -32,7 +31,6 @@ class AddFanartImage extends Migration
      */
     public function down()
     {
-        Log::info("in down method fanart db");
        
     }
 }

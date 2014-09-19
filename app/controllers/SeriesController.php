@@ -3,11 +3,19 @@
 use BaseController;
 use Response;
 use EA\models\Series;
+use EA\models\Episode;
+use EA\models\Following;
+use EA\models\User;
+use Auth;
+use Log;
 
 class SeriesController extends BaseController
 {
     public function getSeries($uniqueName){
-      return Response::json(Series::where('unique_name', $uniqueName)->first());
+	  $series =Series::where('unique_name', $uniqueName)->first();
+	 // $series->following = $series->isFollowing();
+
+      return Response::json( $series );
     }
 
     public function getByGenre($genre){
@@ -29,7 +37,34 @@ class SeriesController extends BaseController
 	 * Get episodes of series by series->id
 	 */
     public function getEpisodes($id){
-		return Response::json(Series::find($id)->episodes);
+        if(Auth::user()){
+            $user_id = Auth::user()->id;
+
+            $followingCheck = Following::where('series_id', $id)->where('user_id', $user_id)->count();
+            
+            if(!$followingCheck){
+		          return self::getEpisodesFromGivenSeason($id, 1);
+            } else {
+                return self::getEpisodesFromLatestSeason($id);
+            }
+        }
+        return self::getEpisodesFromGivenSeason($id, 1);
+    }
+
+
+    /*
+     * Get episodes of series by series->id and from the latest season
+     * Check if the serie is a following one, then find the season from the last seen episode and return all episodes from that season.
+     * Else return episodes from season 1 by default
+     */
+    private function getEpisodesFromLatestSeason($id){
+        Log::info("inside getEpisodesFromLatestSeason method ".$id);
+        $lastSeason = Episode::where('series_id', $id )->select('season')->orderBy('season', 'desc')->first()->season;           
+        return self::getEpisodesFromGivenSeason($id, $lastSeason);
+    }
+
+    private function getEpisodesFromGivenSeason($id, $season) {
+       return Response::json(Episode::where('series_id', $id)->where('season', $season)->get());
     }
 
 }

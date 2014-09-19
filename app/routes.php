@@ -29,6 +29,8 @@ Route::group(
             Route::post('auth/register', 'AuthController@register');
             Route::post('auth/login', 'AuthController@login');
 
+    		Route::get('auth/check', 'AuthController@checkAuth');
+
             Route::get('auth/logout', 'AuthController@logout');
             Route::get('profile/following', 'FollowingController@getFollowingSeries');
 
@@ -38,6 +40,7 @@ Route::group(
 
             //Following (has to go behind auth)
             Route::get('follow/{series_id}', 'FollowingController@follow');
+            Route::get('unfollow/{series_id}', 'FollowingController@unfollow');
 
             //Series
             Route::get('series/top', 'SeriesController@top');

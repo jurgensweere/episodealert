@@ -38,6 +38,19 @@ class FollowingController extends BaseController
     }
 
     public function unfollow($series_id){
+		if(Auth::user()){
+
+			$user_id = Auth::user()->id;
+			$unfollow = Following::where('series_id', $series_id)->where('user_id', $user_id)->delete();
+			
+			if($unfollow){
+				return Response::json(array('follow' => 'unfollow'));  
+			}
+		}else{
+
+	    	return Response::json(array('follow' => 'fail unauthorized'), 500);
+
+	    }
 
     }
 

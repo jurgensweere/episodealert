@@ -52,6 +52,9 @@ class TvdbJob
         if ($data['rating'] != '') {
             $series->rating = $data['rating'];
         }
+        if($data['episodes'] != ''){
+        	$series->episode_amount = count($data['episodes']);
+        }
         if ($data['category'] != '') {
             $series->category = $data['category'];
         }        
@@ -69,6 +72,18 @@ class TvdbJob
 
         $this->attachEpisodeData($series, $data);
         $this->attachSeriesPoster($series);
+
+        //Find out if there is a special season and save it in series table
+        $lastSeasonOfSeries = Episode::where('series_id', $series->id )->select('season')->orderBy('season', 'desc')->first()->season;
+        $series->season_amount = $lastSeasonOfSeries;
+
+        $firstSeasonOfSeries = Episode::where('series_id', $series->id )->select('season')->orderBy('season', 'asc')->first()->season;
+
+        if($firstSeasonOfSeries == 0){
+        	$series->has_specials = 1;
+        }
+
+        $series->save();
 
         $job->delete();
     }

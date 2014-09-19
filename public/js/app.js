@@ -54,6 +54,9 @@
     //We can add some stuff to the rootscope here
     app.run(function($rootScope, $location, AuthenticationService){
 
+    	//check if a user is logged in at the backend
+    	AuthenticationService.check();
+
         $rootScope.credentials = {};
 
         $rootScope.hello = function() {
@@ -61,6 +64,7 @@
             //you can use this in anywhere using $scope.hello();
         };      
 
+        //Add routes that required auth from the front-end
         var routesThatRequireAuth = ['/profile'];
 
         $rootScope.$on('$routeChangeStart', function(event, next, current){
@@ -101,9 +105,15 @@
 
     //Helper/filter to create image path from a series
     app.filter('createImageUrl', function(){
-        return function(poster, unique_name){
+        return function(poster, unique_name, size){
             if(poster){
-                return 'img/poster/' + unique_name.substring(0, 2) + '/' + poster;
+            	if(size){
+            		var returnPoster = poster.split('.');
+            		returnPoster = returnPoster[0] + '_' + size + '.jpg';
+            		return 'img/poster/' + unique_name.substring(0, 2) + '/' + returnPoster;
+            	}else{
+            		return 'img/poster/' + unique_name.substring(0, 2) + '/' + poster;
+            	}
             }else{
                 return 'img/missing.png';
             }
@@ -147,7 +157,7 @@
         };
 
         var unSetUserInfo = function(){
-            $rootScope.credentials.auth = false;
+            $rootScope.credentials.auth = null;
             $rootScope.credentials.username = null;
             $rootScope.credentials.id = null;
         };
@@ -196,6 +206,13 @@
             },
             isLoggedIn: function() {
                 return SessionService.get('authenticated');
+            },
+            check: function() {
+            	var check = $http.get('api/auth/check');
+				check.success(cacheSession);
+				check.success(setUserInfo);
+				check.error();
+				return check;
             }
       };
     });

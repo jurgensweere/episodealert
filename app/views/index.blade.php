@@ -67,11 +67,11 @@
     <div class="container">
         <div class="row flash-container">
             <div class="col-md-12 col-lg-12">    
-                <flash:messages class="flash-message-animation" />
+                <flash:messages class="animation" />
             </div>
         </div>
     </div>
-    <div id="contentUI" ui-view="content" class="container" ng-view>
+    <div id="contentUI" ui-view="content" class="container ea-content" ng-view>
     </div>
 </div>
 
