@@ -1,48 +1,67 @@
 <div class="series-detail">
 
   <div class="row info-text-top">
-    <h1>{{ series.name }}</h1>
+    <h1>{{ series.name }}</h1> 
+
+	<button ng-show="!series.following" ng-controller="FollowingCtrl" class="btn following-button" ng-click="followSeries(series, $event)">Follow</button>
+	<button ng-show="series.following" ng-controller="FollowingCtrl" class="btn following-button" ng-click="unfollowSeries(series, $event)">Following</button>
+
     <p>{{ series.description }}</p>
   </div>
 
   <div class="row">
     <div class="col-xs-4 col-sm-4 col-md-4">
-      <img class="img-responsive" ng-src="{{ series.poster_image | createImageUrl : series.unique_name }}">
-  		<button ng-show="!series.following" ng-controller="FollowingCtrl" class="btn btn-default" ng-click="followSeries(series, $event)">Follow</button>
-  		<button ng-show="series.following" ng-controller="FollowingCtrl" class="btn btn-default btn--following btn-success" ng-click="unfollowSeries(series, $event)">Following</button>
+
+		<img class="img-responsive" ng-src="{{ series.poster_image | createImageUrl : series.unique_name }}">
+
+		<div class="series-details-extra">
+			<dl>
+			    <dt> First aired </dt>
+			    <dd> {{ series.firstaired }} </dd>
+			    <dt> Rating </dt>
+			    <dd> {{ series.rating }} </dd>
+			    <dt> Imdb ID </dt>
+			    <dd> {{ series.imdb_id }} </dd>
+			    <dt> Status </dt>
+			    <dd> {{ series.status }} </dd>
+			    <dt> Genre </dt>
+			    <dd> {{ series.category }} </dd>        
+			</dl>
+
+		</div>
 
     </div>
 
+    <!-- some spacing added through the offset -->
     <div class="col-xs-offset-4 col-sm-offset-4 col-md-offset-4 seasons">
 
-    <ul class="nav nav-tabs" role="tablist">
-      <li ng-repeat="i in getTimes(series.season_amount) track by $index">
-        <a> Season {{ $index+1}} </a>
-      </li>
-    </ul>
+		<tabset>
+			<tab select="loadSeason(series.id, season.number)" ng-repeat="season in seasons" heading="{{season.title}}" active="tab.active" disabled="tab.disabled">
+			<table class="episode-list">
+				<tr ng-repeat="episode in season.content">
+					<td class="number">
+						{{ episode.episode }}
+					</td>
+					<td class="title">
+						{{ episode.name }}
+					</td>
+					<td class="airdate">
+						{{ episode.airdate | date:'yyyy-MM-dd HH:mm:ss Z'}}
+					</td>
+					<td class="seen">
+						<button class="btn btn-default">not seen</button>
+					</td>
+				</tr>
+			</table>
+			</tab>
+		</tabset>
 
-    <ul>
-      <li ng-repeat="episode in episodes">
-       {{ episode.season }} . {{ episode.episode }} - {{ episode.name }}
-      </li>
-    </ul>
    </div>
   </div>
 
   <div class="row">
     <div class="col-xs-7 col-sm-7 col-md-7">
-      <dl class="dl-horizontal">
-        <dt> First aired </dt>
-        <dd> {{ series.firstaired }} </dd>
-        <dt> Rating </dt>
-        <dd> {{ series.rating }} </dd>
-        <dt> Imdb ID </dt>
-        <dd> {{ series.imdb_id }} </dd>
-        <dt> Status </dt>
-        <dd> {{ series.status }} </dd>
-        <dt> Genre </dt>
-        <dd> {{ series.category }} </dd>        
-      </dl>
+
     </div>
   </div>
 

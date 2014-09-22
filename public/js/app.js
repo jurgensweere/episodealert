@@ -1,5 +1,5 @@
 (function(){
-    var app = angular.module('eaApp', ['ngRoute','ngAnimate', 'flash']);
+    var app = angular.module('eaApp', ['ngRoute','ngAnimate', 'flash', 'ui.bootstrap']);
     app.config(['$routeProvider', '$locationProvider',
         function($routeProvider, $locationProvider) {
 

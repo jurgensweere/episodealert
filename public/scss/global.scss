@@ -35,6 +35,8 @@ ul{
     padding-left:  0px;
 }
 
+/* overwrite for angular-ui-bootstrap */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 /* background image test for serie details */
 
@@ -305,9 +307,45 @@ h1{
     }
 }
 
+.following-button{
+	background-color: rgba(0,0,0,0.8);
+	font-size: 120%;
+	border: 2px solid $bright-highlight;
+	border-radius: 15px;
+	padding: 3px 10px 4px 8px;	
+}
+
+.episode-list{
+	font-size: 110%;
+	width: 100%;
+
+	td{
+		padding: 3px 10px 3px 10px;
+	}
+
+	.number{
+		width:5%;
+		padding-left:20px;
+	}
+
+	.title{
+		width: 55%;
+	}
+
+	.airdate{
+		width: 30%;
+		text-align: right;
+	}
+
+	.seen{
+		width: 10%;
+	}
+}
+
 .series-detail{
     h1{
         text-shadow: 2px 2px #0F0F0F;
+        display: inline-block;
     }
 
     li{
@@ -326,6 +364,58 @@ h1{
     .seasons{
         background-color: #252525        
     }
+
+    .nav-tabs{
+    	border: none;
+    	height: 60px;
+    	font-size: 130%;
+
+    	a{
+    		border-radius: 0px;
+    	}
+
+    	li>a{
+    		padding: 12px 20px 12px 20px;
+    		margin-right: 8px;
+    		border: none;
+    		color: #8A8A8A;
+    		background-color: #363636;
+    	}
+
+    	li>a:hover{
+    		color: #FFF;
+    		border: none;
+    	}
+
+    	.active>a{
+    		color: #FFF;
+    		border: none;
+    		background-color: #252525;
+    	}
+
+    	.active>a:hover{
+    		color: #FFF;
+    		border: none;
+    		cursor: pointer;
+    		background-color: #252525;
+    	}
+    }
+}
+
+.series-details-extra{
+	background-color: $primary-color;
+	margin: 30px 15px 0px -15px;
+	padding: 10px;
+
+	dt{
+		float:left;
+		clear:both;
+	}
+
+	dl{
+		margin-bottom: 0px;
+	}
+
 }
 
 .series-genres {
