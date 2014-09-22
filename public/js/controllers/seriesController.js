@@ -7,6 +7,10 @@
 
           getSeries(unique_name);
 
+          $scope.getTimes=function(n){
+               return new Array(n);
+          };
+
           function getSeries(unique_name) {
             seriesFactory.getSeries(unique_name)
             .success(function (series) {

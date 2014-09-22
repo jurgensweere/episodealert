@@ -1,20 +1,35 @@
 <div class="series-detail">
 
-  <div class="row">
-    <div class="col-md-12 col-lg-12">
-      <h1>{{ series.name }} {{ series.id }}</h1>
-      <p class="hidden-xs">{{ series.description }}</p>
-    </div>
+  <div class="row info-text-top">
+    <h1>{{ series.name }}</h1>
+    <p>{{ series.description }}</p>
   </div>
 
   <div class="row">
     <div class="col-xs-4 col-sm-4 col-md-4">
       <img class="img-responsive" ng-src="{{ series.poster_image | createImageUrl : series.unique_name }}">
-
-		<button ng-show="!series.following" ng-controller="FollowingCtrl" class="btn btn-default" ng-click="followSeries(series.id, $event)">Follow</button>
-		<button ng-show="series.following" ng-controller="FollowingCtrl" class="btn btn-default btn--following btn-success" ng-click="unfollowSeries(series.id, $event)">Following</button>
+  		<button ng-show="!series.following" ng-controller="FollowingCtrl" class="btn btn-default" ng-click="followSeries(series, $event)">Follow</button>
+  		<button ng-show="series.following" ng-controller="FollowingCtrl" class="btn btn-default btn--following btn-success" ng-click="unfollowSeries(series, $event)">Following</button>
 
     </div>
+
+    <div class="col-xs-offset-4 col-sm-offset-4 col-md-offset-4 seasons">
+
+    <ul class="nav nav-tabs" role="tablist">
+      <li ng-repeat="i in getTimes(series.season_amount) track by $index">
+        <a> Season {{ $index+1}} </a>
+      </li>
+    </ul>
+
+    <ul>
+      <li ng-repeat="episode in episodes">
+       {{ episode.season }} . {{ episode.episode }} - {{ episode.name }}
+      </li>
+    </ul>
+   </div>
+  </div>
+
+  <div class="row">
     <div class="col-xs-7 col-sm-7 col-md-7">
       <dl class="dl-horizontal">
         <dt> First aired </dt>
@@ -31,16 +46,12 @@
     </div>
   </div>
 
-  <div class="row">
-  	<ul>
-  		<li ng-repeat="episode in episodes">
-  			{{ episode.season }} . {{ episode.episode }} - {{ episode.name }}
-  		</li>
-  	</ul>
-  </div>
-
-  	<div class="row">
+  <!-- background image
+	<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
    		<img ng-show="series.fanart_image" class="img-responsive" ng-src="{{ series.fanart_image | createFanartUrl : series.unique_name }}">
+    </div>
 	</div>
+  -->
 
 </div>

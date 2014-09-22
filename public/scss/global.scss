@@ -35,35 +35,46 @@ ul{
     padding-left:  0px;
 }
 
+
+/* background image test for serie details */
+
+.background-container{
+/*    background: url(http://localhost/img/fanart/sm/smallville.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    opacity: 0.2;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: -9999;*/
+}
+
 .ea-content{
 	min-height: 600px;
 }
 
-.container{
-    background-color: #252525;
-}
-
 .container--navbar{
+    background-color: #252525;
     padding: 12px 0px 12px 20px;
 }
 
-.profile{
-    h1{
-        font-size: 200%;
-        margin: 0px;
-        line-height: 150%;
+// usage; description of series, profile welcome, other info
+h1{
+    font-size: 200%;
+    margin: 0px;
+    line-height: 150%;
+}
+
+.info-text-top{
+    color: #e7e7e7;
+    padding: 3px 60px 15px 60px;
+    background-color: $background-color;
+
+    p{
+        line-height: 180%;
     }
+}
 
-    .profile-welcome{
-        color: #e7e7e7;
-        padding: 3px 60px 15px 60px;
-        background-color: $background-color;
-
-        p{
-            line-height: 180%;
-        }
-    }   
-
+.profile{
     .profile-filters{
         height: 40px;
         padding: 5px 0px 5px 20px;
@@ -299,8 +310,21 @@ ul{
         text-shadow: 2px 2px #0F0F0F;
     }
 
+    li{
+        padding: 0px 0px 0px 0px;
+        list-style: none;
+    }    
+
+    img{
+        margin-left: -15px;
+    }
+
     p, dl{
         text-shadow: 1px 1px #0F0F0F;   
+    }
+
+    .seasons{
+        background-color: #252525        
     }
 }
 
@@ -308,7 +332,6 @@ ul{
     text-align: center;
     font-size: 150%;
     
-
     li {
         margin:0px 40px 0px 0px;
         text-align: center;
