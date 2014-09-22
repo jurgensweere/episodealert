@@ -36,5 +36,9 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
     	return $http.get('/api/series/episodes/' + series_id);
     };
 
+    seriesFactory.getEpisodesBySeason = function (series_id, season){
+    	return $http.get('/api/series/episodesbyseason/' + series_id + '/' + season);
+    };
+
     return seriesFactory;
 }]);

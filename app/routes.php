@@ -49,6 +49,7 @@ Route::group(
             Route::get('series/genre/{genre}', 'SeriesController@getByGenre');
             Route::get('series/browse', 'SeriesController@getAllCategories');
             Route::get('series/episodes/{uniqueName}', 'SeriesController@getEpisodes');
+            Route::get('series/episodesbyseason/{series}/{season}', 'SeriesController@getEpisodesBySeason');
 
         });
 
