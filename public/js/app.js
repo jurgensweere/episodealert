@@ -171,7 +171,7 @@
         };
 
         var loginMessage = function(response){   
-            flash('success', 'Login success');
+            //flash('success', 'Login success');
         };
 
         var registerMessage = function(response){
