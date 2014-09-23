@@ -14,7 +14,7 @@
           function unfollowServiceCall(series, event) {
             seriesFactory.unfollowSeries(series.id)
             .success(function (response) {
-              flash(response.follow);
+              //flash(response.follow);
               
               series.following = 0;
 
@@ -27,7 +27,7 @@
           function followServiceCall(series, event) {
             seriesFactory.followSeries(series.id)
             .success(function (response) {
-              flash(response.follow);
+              //flash(response.follow);
               
               series.following = 1;
 

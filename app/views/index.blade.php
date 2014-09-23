@@ -72,7 +72,7 @@
             </div>
         </div>
     </div>
-    <div id="contentUI" ui-view="content" class="container ea-content" ng-view>
+    <div id="contentUI" ui-view="content" class="container ea-content fade" ng-view>
     </div>
 </div>
 

@@ -3,8 +3,8 @@
   <div class="row info-text-top">
     <h1>{{ series.name }}</h1> 
 
-	<button ng-show="!series.following" ng-controller="FollowingCtrl" class="btn following-button" ng-click="followSeries(series, $event)">Follow</button>
-	<button ng-show="series.following" ng-controller="FollowingCtrl" class="btn following-button" ng-click="unfollowSeries(series, $event)">Following</button>
+	<button ng-show="!series.following" ng-controller="FollowingCtrl" class="btn following-button following-button--series-detail" ng-click="followSeries(series, $event)">Follow</button>
+	<button ng-show="series.following" ng-controller="FollowingCtrl" class="btn following-button following-button--series-detail" ng-click="unfollowSeries(series, $event)">Following</button>
 
     <p>{{ series.description }}</p>
   </div>
@@ -20,13 +20,10 @@
 			    <dd> {{ series.firstaired }} </dd>
 			    <dt> Rating </dt>
 			    <dd> {{ series.rating }} </dd>
-			    <dt> Imdb ID </dt>
-			    <dd> {{ series.imdb_id }} </dd>
 			    <dt> Status </dt>
 			    <dd> {{ series.status }} </dd>
-			    <dt> Genre </dt>
-			    <dd> {{ series.category }} </dd>        
 			</dl>
+      <a target="new" href="http://www.imdb.com/title/{{ series.imdb_id }}/">IMDB</a>
 
 		</div>
 
@@ -36,7 +33,7 @@
     <div class="col-xs-offset-4 col-sm-offset-4 col-md-offset-4 seasons">
 
 		<tabset>
-			<tab select="loadSeason(series.id, season.number)" ng-repeat="season in seasons" heading="{{season.title}}" active="tab.active" disabled="tab.disabled">
+			<tab select="loadSeason(series.id, season.number)" ng-repeat="season in seasons" heading="{{season.title}}" active="season.active" disabled="season.disabled">
 			<table class="episode-list">
 				<tr ng-repeat="episode in season.content">
 					<td class="number">
@@ -49,7 +46,7 @@
 						{{ episode.airdate | date:'yyyy-MM-dd HH:mm:ss Z'}}
 					</td>
 					<td class="seen">
-						<button class="btn btn-default">not seen</button>
+						<button class="btn seen-button">not seen</button>
 					</td>
 				</tr>
 			</table>

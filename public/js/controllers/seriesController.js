@@ -51,16 +51,19 @@
 				var seasons = [];
 
 				if(hasSpecials){
-					seasons.push({ number : 0, title : 'Specials', active : true});
+					seasons.push({ number : 0, title : 'Specials', active : false });
 				}
 
 				for (var i = 1; i <= numberOfSeasons; i++) {
-					seasons.push( { number : i, title : 'Season ' + i } );
+					seasons.push( { number : i, title : 'Season ' + i, active : false } );
 				}
 
-				return seasons;
-			}
-        }
-    );
+        seasons[seasons.length-1].active = true;
 
+				return seasons;
+			 }
+
+
+      }
+    );
 })();
