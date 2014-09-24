@@ -6,13 +6,15 @@ use EA\models\Series;
 use EA\models\Episode;
 use EA\models\Following;
 use EA\models\User;
+use EA\models\Seen;
 use Auth;
 use Log;
+use Input;
 
 class SeriesController extends BaseController
 {
     public function getSeries($uniqueName){
-	  $series =Series::where('unique_name', $uniqueName)->first();
+	  $series = Series::where('unique_name', $uniqueName)->first();
 	 // $series->following = $series->isFollowing();
 
       return Response::json( $series );
@@ -69,6 +71,70 @@ class SeriesController extends BaseController
 
     private function getEpisodesFromGivenSeason($id, $season) {
        return Response::json(Episode::where('series_id', $id)->where('season', $season)->get());
+    }
+
+    /*
+     * Seen code
+     */
+
+    public function setSeenEpisode(){
+        if(Auth::user()){
+
+            $user_id = Auth::user()->id;
+            $episode_id = Input::get('episode_id');
+            $episode_season = Input::get('episode_season');
+            $episode_number = Input::get('episode_number');
+            $series_id = Input::get('series_id');
+
+            $seenCheck = Seen::where('episode_id', $episode_id)->where('user_id', $user_id)->count();
+            if(!$seenCheck){
+
+                $seen = new Seen;
+                $seen->episode_id = $episode_id;
+                $seen->user_id = $user_id;
+                $seen->series_id = $series_id;
+                $seen->season = $episode_season;
+                $seen->episode = $episode_number;
+
+                $seen->save();
+
+                return Response::json(array('seen' => true));
+            }
+            return Response::json(array('seen' => 'Allready seen'), 500);
+
+        }else{
+            return Response::json(array('seen' => 'Unauthorized'), 500);
+        }
+        
+    }
+
+    public function unsetSeenEpisode(){
+        if(Auth::user()){
+
+            $episode_id = Input::get('episode_id');
+            $user_id = Auth::user()->id;
+            $unsee = Seen::where('episode_id', $episode_id)->where('user_id', $user_id)->delete();
+            
+            if($unsee){
+                return Response::json(array('seen' => 'unseen'));  
+            }
+        }else{
+
+            return Response::json(array('seen' => 'fail unauthorized'), 500);
+
+        }
+    }
+
+    public function setSeenSeason(){
+
+    }
+
+    public function unsetSeenSeason(){
+
+    }
+
+    public function setSeenUntilEpisodeNumber(){
+
     }
 
 }

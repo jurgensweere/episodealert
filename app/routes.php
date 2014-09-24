@@ -51,6 +51,10 @@ Route::group(
             Route::get('series/episodes/{uniqueName}', 'SeriesController@getEpisodes');
             Route::get('series/episodesbyseason/{series}/{season}', 'SeriesController@getEpisodesBySeason');
 
+            //Seen
+            Route::post('series/seen/', 'SeriesController@setSeenEpisode');
+            Route::post('series/unseen/', 'SeriesController@unsetSeenEpisode');
+
         });
 
         // Route::get('/contact', 'HomeController@showContact');

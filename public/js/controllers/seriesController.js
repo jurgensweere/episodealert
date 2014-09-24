@@ -55,7 +55,7 @@
 				}
 
 				for (var i = 1; i <= numberOfSeasons; i++) {
-					seasons.push( { number : i, title : 'Season ' + i, active : false } );
+					seasons.push( { number : i, title : i, active : false } );
 				}
 
         seasons[seasons.length-1].active = true;

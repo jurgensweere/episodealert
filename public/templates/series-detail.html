@@ -4,7 +4,9 @@
     <h1>{{ series.name }}</h1> 
 
 	<button ng-show="!series.following" ng-controller="FollowingCtrl" class="btn following-button following-button--series-detail" ng-click="followSeries(series, $event)">Follow</button>
-	<button ng-show="series.following" ng-controller="FollowingCtrl" class="btn following-button following-button--series-detail" ng-click="unfollowSeries(series, $event)">Following</button>
+
+  <!-- todo: make this one button so we can avoid the mouseover issue and just make a following toggle as done with seen -->
+	<button ng-mouseover="hoverFollowing($event)" ng-mouseout="hoverFollowingOut($event)" ng-show="series.following" ng-controller="FollowingCtrl" class="btn following-button following-button--series-detail" ng-click="unfollowSeries(series, $event)">Following</button>
 
     <p>{{ series.description }}</p>
   </div>
@@ -45,8 +47,8 @@
 					<td class="airdate">
 						{{ episode.airdate | date:'yyyy-MM-dd HH:mm:ss Z'}}
 					</td>
-					<td class="seen">
-						<button class="btn seen-button">not seen</button>
+					<td class="seen">            
+						<button ng-controller="SeenCtrl" class="btn seen-button" ng-click="toggleEpisode(episode, series)">{{ episode.seen ? 'Seen' : 'Not seen' }}</button>
 					</td>
 				</tr>
 			</table>

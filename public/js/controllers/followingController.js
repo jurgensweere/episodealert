@@ -3,6 +3,14 @@
     angular.module('eaApp').controller('FollowingCtrl',
         function($scope, seriesFactory, flash) {
 
+          $scope.hoverFollowing = function(event){
+            event.currentTarget.innerHTML = 'Unfollow';
+          };
+
+          $scope.hoverFollowingOut = function(event){
+            event.currentTarget.innerHTML = 'Following';
+          };
+
           $scope.followSeries = function(series, event){
             followServiceCall(series, event);
           };

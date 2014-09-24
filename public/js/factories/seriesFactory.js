@@ -40,5 +40,17 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
     	return $http.get('/api/series/episodesbyseason/' + series_id + '/' + season);
     };
 
+    // seen
+    seriesFactory.setSeenEpisode = function (episode_id, episode_season, episode_number, series_id){
+        return $http.post('/api/series/seen', data = { 'episode_id' : episode_id,
+         'episode_season' : episode_season, 
+         'episode_number' : episode_number, 
+         'series_id' : series_id });
+    };
+
+    seriesFactory.setUnseenEpisode = function (episode_id){
+        return $http.post('/api/series/unseen', data = { 'episode_id' : episode_id });
+    };    
+
     return seriesFactory;
 }]);

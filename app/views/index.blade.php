@@ -85,6 +85,7 @@
 <% HTML::script(asset('js/controllers/seriesSearchController.js')) %>
 <% HTML::script(asset('js/controllers/profileController.js')) %>
 <% HTML::script(asset('js/controllers/followingController.js')) %>
+<% HTML::script(asset('js/controllers/seenController.js')) %>
 
 <% HTML::script(asset('js/factories/seriesFactory.js')) %>
 
