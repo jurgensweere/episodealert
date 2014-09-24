@@ -317,8 +317,18 @@ h1{
 	background-color: rgba(0,0,0,0.8);
 	font-size: 120%;
 	border: 2px solid $bright-highlight;
+	color: $bright-highlight;
 	border-radius: 15px;
 	padding: 3px 10px 4px 8px;	
+}
+
+.following-button:hover{
+	color: $bright-highlight;
+}
+
+.following-button.not-following{
+	color: #33B37B;
+	border: 2px solid #33B37B;
 }
 
 .seen-button{

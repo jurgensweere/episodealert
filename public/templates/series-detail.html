@@ -3,7 +3,7 @@
   <div class="row info-text-top">
     <h1>{{ series.name }}</h1> 
 
-	<button ng-show="!series.following" ng-controller="FollowingCtrl" class="btn following-button following-button--series-detail" ng-click="followSeries(series, $event)">Follow</button>
+	<button ng-show="!series.following" ng-controller="FollowingCtrl" class="btn following-button following-button--series-detail not-following" ng-click="followSeries(series, $event)">Follow</button>
 
   <!-- todo: make this one button so we can avoid the mouseover issue and just make a following toggle as done with seen -->
 	<button ng-mouseover="hoverFollowing($event)" ng-mouseout="hoverFollowingOut($event)" ng-show="series.following" ng-controller="FollowingCtrl" class="btn following-button following-button--series-detail" ng-click="unfollowSeries(series, $event)">Following</button>
