@@ -3,10 +3,17 @@
   <div class="row info-text-top">
     <h1>{{ series.name }}</h1> 
 
-	<button ng-show="!series.following" ng-controller="FollowingCtrl" class="btn following-button following-button--series-detail not-following" ng-click="followSeries(series, $event)">Follow</button>
+<!-- 	<button ng-show="!series.following" ng-controller="FollowingCtrl" class="btn following-button following-button--series-detail not-following" ng-click="followSeries(series, $event)">Follow</button> -->
 
   <!-- todo: make this one button so we can avoid the mouseover issue and just make a following toggle as done with seen -->
-	<button ng-mouseover="hoverFollowing($event)" ng-mouseout="hoverFollowingOut($event)" ng-show="series.following" ng-controller="FollowingCtrl" class="btn following-button following-button--series-detail" ng-click="unfollowSeries(series, $event)">Following</button>
+	<button 
+          ng-controller="FollowingCtrl"
+          ng-show="series"
+          ng-mouseover="mouseOver(series)" 
+          ng-mouseout="mouseOut(series)" 
+          ng-click="toggleFollowing(series)"
+          ng-class="series.following ? 'following' : 'notfollowing'"
+          class="btn following-button following-button--series-detail" >{{ buttonLabel }}</button>
 
     <p>{{ series.description }}</p>
   </div>
@@ -37,7 +44,7 @@
 		<tabset>
 			<tab select="loadSeason(series.id, season.number)" ng-repeat="season in seasons" heading="{{season.title}}" active="season.active" disabled="season.disabled">
 			<table class="episode-list">
-				<tr ng-repeat="episode in season.content">
+				<tr ng-repeat="episode in season.content" ng-class="episode.seen ? 'seen' : 'unseen'">
 					<td class="number">
 						{{ episode.episode }}
 					</td>
@@ -45,9 +52,9 @@
 						{{ episode.name }}
 					</td>
 					<td class="airdate">
-						{{ episode.airdate | date:'yyyy-MM-dd HH:mm:ss Z'}}
+						{{ episode.airdate }}
 					</td>
-					<td class="seen">            
+					<td class="seen-column">            
 						<button ng-controller="SeenCtrl" class="btn seen-button" ng-click="toggleEpisode(episode, series)">{{ episode.seen ? 'Seen' : 'Not seen' }}</button>
 					</td>
 				</tr>

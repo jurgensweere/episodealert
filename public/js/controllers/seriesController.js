@@ -10,7 +10,7 @@
 			var loadProfileSeries = getSeries(unique_name);
 
 			loadProfileSeries.success(function(series){
-				
+
    				$scope.series = series;
    				$scope.seasons = buildSeasonObject(series.season_amount, series.has_specials);
 
@@ -18,23 +18,26 @@
 
 			/* scope */
 			$scope.loadSeason = function(series_id, seasonNumber){
+				
+        var episodes = getEpisodesBySeason(series_id, seasonNumber);
 
-				var episodes = getEpisodesBySeason(series_id, seasonNumber);
 				episodes.success(function(episodes){
 					$scope.seasons[seasonNumber].content = episodes;
 				});
 			};
           	
-          	/* service calls */
- 		  	function getSeries(unique_name) {
-	            var series = seriesFactory.getSeries(unique_name);
-	            return series;
-          	}
+    	/* service calls */
+	  	function getSeries(unique_name) {
+        var series = seriesFactory.getSeries(unique_name);
 
-          	function getEpisodesBySeason(series_id, seasonNumber){
-          		var episodesBySeason = seriesFactory.getEpisodesBySeason(series_id, seasonNumber);
-          		return episodesBySeason;
-          	}
+        return series;
+    	}
+
+    	function getEpisodesBySeason(series_id, seasonNumber){
+    		var episodesBySeason = seriesFactory.getEpisodesBySeason(series_id, seasonNumber);
+
+    		return episodesBySeason;
+    	}
 
 			function getEpisodes(id){
 				seriesFactory.getEpisodes(id)
@@ -48,6 +51,7 @@
 
 			/* functions */
 			function buildSeasonObject(numberOfSeasons, hasSpecials){
+        
 				var seasons = [];
 
 				if(hasSpecials){

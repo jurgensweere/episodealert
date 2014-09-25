@@ -313,35 +313,47 @@ h1{
     }
 }
 
+/* following button stuff */
+
 .following-button{
-	background-color: rgba(0,0,0,0.8);
+	background-color: rgba(0,0,0,0.5);
 	font-size: 120%;
 	border: 2px solid $bright-highlight;
 	color: $bright-highlight;
 	border-radius: 15px;
-	padding: 3px 10px 4px 8px;	
+	padding: 3px 10px 4px 8px;
 }
 
-.following-button:hover{
+.notfollowing{
+  border: 2px solid #33B37B !important;
+  color: #33B37B !important;
+}   
+
+.notfollowing:hover{
+  border: 2px solid #00ff90 !important;
+  color: #00ff90 !important;
+}
+
+.following-button:hover,
+.following-button:focus{
 	color: $bright-highlight;
 }
 
-.following-button.not-following{
-	color: #33B37B;
-	border: 2px solid #33B37B;
+.following-button--series-detail{
+    color: $bright-highlight;
+    margin-top: -10px;
+    margin-left: 10px; 
 }
+
+/* seen button */
 
 .seen-button{
+    color: $bright-highlight;
     background-color: rgba(0, 0, 0, 0.8);
-    font-size: 80%;
-    border: 2px solid #00ff90;
+    font-size: 90%;
+    border: none;
     border-radius: 15px;
-    padding: 3px 10px 4px 8px;    
-}
-
-.following-button--series-detail{
-    margin-top: -10px;
-    margin-left: 10px;    
+    padding: 3px 8px 4px 8px;    
 }
 
 .episode-list{
@@ -351,6 +363,10 @@ h1{
 	td{
 		padding: 3px 10px 3px 10px;
 	}
+
+    tr.seen{
+        color: #666;
+    }
 
 	.number{
 		width:5%;
@@ -366,7 +382,8 @@ h1{
 		text-align: right;
 	}
 
-	.seen{
+	.seen-column{
+        text-align: right;
 		width: 10%;
 	}
 }

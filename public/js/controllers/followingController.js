@@ -3,23 +3,43 @@
     angular.module('eaApp').controller('FollowingCtrl',
         function($scope, seriesFactory, flash) {
 
-          $scope.hoverFollowing = function(event){
-            event.currentTarget.innerHTML = 'Unfollow';
+          /* watch for any series.following */
+          $scope.$watch('series.following', function(following) {
+           if (typeof following !== 'undefined') {
+              if(following){
+                $scope.buttonLabel = 'Following';
+              }else{
+                $scope.buttonLabel = 'Follow';
+              }
+            }
+          });          
+
+          $scope.mouseOver = function(series){
+            if(series.following){
+              $scope.buttonLabel = 'Unfollow';
+            }
           };
 
-          $scope.hoverFollowingOut = function(event){
-            event.currentTarget.innerHTML = 'Following';
+          $scope.mouseOut = function(series){
+            if(series.following){
+              $scope.buttonLabel = 'Following';
+            }           
           };
 
-          $scope.followSeries = function(series, event){
-            followServiceCall(series, event);
+          $scope.toggleFollowing = function(series){
+            if(series.following){
+              unfollowServiceCall(series);              
+            }else{
+              followServiceCall(series);
+            }
           };
 
-          $scope.unfollowSeries = function(series, event){
-          	unfollowServiceCall(series, event);
+          $scope.followSeries = function(){
+            console.log('test');
           };
 
-          function unfollowServiceCall(series, event) {
+          /* service calls */
+          function unfollowServiceCall(series) {
             seriesFactory.unfollowSeries(series.id)
             .success(function (response) {
               //flash(response.follow);
@@ -32,7 +52,7 @@
             });
           }
 
-          function followServiceCall(series, event) {
+          function followServiceCall(series) {
             seriesFactory.followSeries(series.id)
             .success(function (response) {
               //flash(response.follow);
