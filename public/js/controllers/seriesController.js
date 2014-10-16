@@ -19,25 +19,26 @@
 			/* scope */
 			$scope.loadSeason = function(series_id, seasonNumber){
 				
-        var episodes = getEpisodesBySeason(series_id, seasonNumber);
+        	var episodes = getEpisodesBySeason(series_id, seasonNumber);
 
 				episodes.success(function(episodes){
 					$scope.seasons[seasonNumber].content = episodes;
 				});
 			};
+
           	
-    	/* service calls */
-	  	function getSeries(unique_name) {
-        var series = seriesFactory.getSeries(unique_name);
+	    	/* service calls */
+		  	function getSeries(unique_name) {
+	        var series = seriesFactory.getSeries(unique_name);
 
-        return series;
-    	}
+	        	return series;
+	    	}
 
-    	function getEpisodesBySeason(series_id, seasonNumber){
-    		var episodesBySeason = seriesFactory.getEpisodesBySeason(series_id, seasonNumber);
+	    	function getEpisodesBySeason(series_id, seasonNumber){
+	    		var episodesBySeason = seriesFactory.getEpisodesBySeason(series_id, seasonNumber);
 
-    		return episodesBySeason;
-    	}
+	    		return episodesBySeason;
+	    	}
 
 			function getEpisodes(id){
 				seriesFactory.getEpisodes(id)
@@ -62,11 +63,10 @@
 					seasons.push( { number : i, title : i, active : false } );
 				}
 
-        seasons[seasons.length-1].active = true;
+        		seasons[seasons.length-1].active = true;
 
 				return seasons;
 			 }
-
 
       }
     );

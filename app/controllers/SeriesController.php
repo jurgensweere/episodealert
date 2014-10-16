@@ -27,7 +27,7 @@ class SeriesController extends BaseController
     public function top()
     {
         // TODO: Make this select top (followed or trending?) series, instead of the first 5
-        return Response::json(Series::take(5)->get());
+        return Response::json(Series::whereNotNull('fanart_image')->take(5)->get());
     }
 
     public function search($query)
@@ -123,6 +123,31 @@ class SeriesController extends BaseController
             return Response::json(array('seen' => 'fail unauthorized'), 500);
 
         }
+    }
+
+    /*
+     *
+     * Find the number of unseen episodes per season for a series
+     * path: /api/series/unseenamountbyseason/{series_id}/{season_number}
+     *
+     */
+
+    public function getUnseenEpisodesPerSeason($series_id, $season_number){
+        if(Auth::user()){
+
+            $user_id = Auth::user()->id;
+            $totalAmountofEpisodes = Episode::where('series_id', $series_id)->where('season', $season_number)->count();
+            $seenAmount = Seen::where('series_id', $series_id)->where('user_id', $user_id)->where('season', $season_number)->count();
+
+            $unseenAmountOfEpisodes = $totalAmountofEpisodes - $seenAmount;
+            
+            return Response::json(array('unseenepisodes' => $unseenAmountOfEpisodes));  
+
+        }else{
+
+            return Response::json(array('error' => 'fail unauthorized'), 500);
+
+        }        
     }
 
     public function setSeenSeason(){

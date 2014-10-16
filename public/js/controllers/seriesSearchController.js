@@ -21,7 +21,7 @@ angular.module('eaApp').controller('SeriesSearchCtrl', function($scope, $locatio
       seriesFactory.searchSeries(query)
         .success(function (series) {
 
-         $scope.series = series;
+         $scope.seriesSearchResults = series;
         })
         .error(function (error) {
           //$scope.status = 'error error error beep beep;
