@@ -50,7 +50,11 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
 
     seriesFactory.setUnseenEpisode = function (episode_id){
         return $http.post('/api/series/unseen', data = { 'episode_id' : episode_id });
-    };    
+    };
+
+    seriesFactory.getUnseenAmountBySeason = function (series_id, season_number){
+        return $http.get(urlBase + 'unseenamountbyseason/' + series_id + '/' + season_number);
+    };
 
     return seriesFactory;
 }]);

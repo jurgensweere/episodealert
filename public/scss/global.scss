@@ -58,7 +58,6 @@ ul{
 .splash-fanart {
     height: 740px;
     background-size: cover;
-    background: transparent url('../img/fanart/108611-8.jpg') no-repeat center center;
     position: relative;
     margin-top: 50px;
 }
@@ -295,7 +294,7 @@ h1{
 
 .series-search-adjust{
     .extra-info{
-        padding: 10px 0px 15px 10px;
+        padding: 10px 0px 15px 0px;
         text-align: center;
         background-color: $primary-color;
         height: 60px;
