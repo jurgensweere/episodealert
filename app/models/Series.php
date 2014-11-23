@@ -2,8 +2,6 @@
 
 use Eloquent;
 use Log;
-use EA\models\Following;
-use Auth;
 
 class Series extends Eloquent
 {
@@ -14,23 +12,9 @@ class Series extends Eloquent
      */
     protected $table = 'series';
 
-    // appends following to the model when its created, very fancy
-    protected $appends = array('following');
-
     public function episodes()
     {
         return $this->hasMany('EA\models\Episode');
-    }
-
-    /*
-     * If user is authorized check if the series is followed, otherwise return 0
-     */
-    public function getFollowingAttribute(){
-    	if(Auth::user()){
-    		return count(Following::where('series_id' , $this->id)->where('user_id', Auth::user()->id)->get());
-    	}else{
-    		return false;
-    	}
     }
 
     /**

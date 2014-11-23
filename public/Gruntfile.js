@@ -13,7 +13,12 @@ grunt.initConfig({
 
             //TODO These files should be combined and minified etc.
             files: {
-            'css/global.css': 'scss/global.scss'
+            'css/global.css': 'scss/global.scss',
+            'css/admin_global.css': 'scss/admin_global.scss',
+            'css/facebox.css': 'scss/facebox.scss',
+            'css/global-mobile.css': 'scss/global-mobile.scss',
+            'css/jquery.autocomplete.css': 'scss/jquery.autocomplete.scss',
+            'css/reset-fonts-grids.css': 'scss/reset-fonts-grids.scss',
             }
         }
     },
@@ -23,7 +28,7 @@ grunt.initConfig({
             separator: ';',
         },
         dist: {
-            src: ['js/*.js', 'js/controllers/*.js', 'js/factories/*.js'],
+            src: ['js/*.js', 'js/controllers/*.js'],
             dest: 'dist/js/ea.js',
         },
     },
@@ -35,11 +40,11 @@ grunt.initConfig({
         target_1: {
             src: ['dist/js/ea.js'],
             dest: 'dist/js/ea.min.js'
-        }
-    },
+            }
+        },
 
-    jshint: {
-      files: ['js/app.js', 'js/controllers/*.js', 'js/factories/*.js'],
+        jshint: {
+          files: ['js/*.js', 'js/controllers/*.js'],
           options: {
             globals: {
                 jQuery: true,
@@ -61,15 +66,12 @@ grunt.initConfig({
             files: [
             '../app/views/*.php',
             'css/*.css',
-            'js/*.js',
-            'js/controllers/*.js',
-            'js/factories/*.js',
-            'templates/*.html'
+            'js/*.js'
             ]
         },
         jshint: {
             // add all the mega files when we have them
-            files: ['js/*.js', 'js/controllers/*.js', 'js/factories/*.js'],
+            files: ['js/mobile.js'],
             tasks: ['jshint'],
         }
     },

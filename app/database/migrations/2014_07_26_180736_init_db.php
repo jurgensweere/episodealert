@@ -3,7 +3,6 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
 class InitDb extends Migration
 {
 
@@ -14,7 +13,6 @@ class InitDb extends Migration
      */
     public function up()
     {
-        Log::info("in up method init db");
         Schema::create('series', function ($table) {
             $table->increments('id')->unsigned();
             $table->string('unique_name', 100);
@@ -29,7 +27,7 @@ class InitDb extends Migration
             $table->string('status', 25)->nullable();
             $table->boolean('popular')->default(0);
             $table->timestamps();
-            
+
             $table->index(array('imdb_id', 'status'), 'multi_index');
         });
 
@@ -123,7 +121,6 @@ class InitDb extends Migration
      */
     public function down()
     {
-        Log::info("in down method init db");
         Schema::drop('mail_log');
         Schema::drop('seen');
         Schema::drop('setting');

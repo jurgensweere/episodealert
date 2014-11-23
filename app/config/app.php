@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => true,
+	'debug' => false,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 's1jRGDeTyRgCXqQohJPT1IP34vrIvfar',
+	'key' => 'h1tx0Q6Ud2xPCnRNPBtxefBDXWq3ZsKx',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -196,7 +196,7 @@ return array(
 		'key'				=> 'CE185B06BC7B86B8',
 		'lang'				=> 'en',
 		'url'				=> 'http://www.thetvdb.com/api/',
-		'posterpath'		=> 'http://thetvdb.com/banners/',
+		'posterpath'		=> 'http://thetvdb.com/banners/posters/',
 		'episodeimagepath'	=> 'http://thetvdb.com/banners/',
 	),
 
