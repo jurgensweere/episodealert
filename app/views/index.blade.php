@@ -12,9 +12,9 @@
     <% HTML::style(asset('css/global.css')) %>
 
     <% HTML::script('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js') %>
-    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js') %>
-    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-route.min.js') %>
-    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.min.js') %>
+    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js') %>
+    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-route.min.js') %>
+    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-animate.min.js') %>
     <% HTML::script('/js/vendor/ui-bootstrap-tpls-0.11.0.min.js') %>
     <% HTML::script('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js') %>
 
@@ -37,7 +37,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#/home">
+                    <a class="navbar-brand" href="/home">
                         <!-- <img src="img/logo-56x41.png" alt="Episode Alert" /> -->
                         Epiode Alert
                     </a>
@@ -45,18 +45,18 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-search" placeholder="Search" ng-model="mainPageQuery" ng-model-options="{debounce: 500}">
+                            <input type="text" class="form-control form-control-search" placeholder="Search" ng-model="mainPageQuery" ng-model-options="{ debounce: 300 }">
                         </div><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                     </form>
                     <ul class="nav navbar-nav" ng-controller="HeaderCtrl">
-                        <li ng-class="{ active: isActive('/series')}"><a href="#/series/genre/action">Browse</a></li>
-                        <li ng-class="{ active: isActive('/home')}"><a href="#">Trending</a></li>
-                        <li ng-class="{ active: isActive('/profile')}"><a href="#/profile">Profile</a></li>
+                        <li ng-class="{ active: isActive('/series')}"><a href="/series/genre/action">Browse</a></li>
+                        <li ng-class="{ active: isActive('/home')}"><a href="/home">Trending</a></li>
+                        <li ng-class="{ active: isActive('/profile')}"><a href="/profile">Profile</a></li>
                         <li ng-show="credentials.auth">
                             <a href="#" ng-controller="LoginCtrl" ng-click="logout()">Logout</a>
                         </li>
                         <li ng-show="!credentials.auth">
-                            <a ng-show="!credentials.auth" href="#/login">Login</a>
+                            <a ng-show="!credentials.auth" href="/login">Login</a>
                         </li>                                        
                     </ul>
 

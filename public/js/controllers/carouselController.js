@@ -1,7 +1,7 @@
 (function(){
 
   angular.module('eaApp').controller('CarouselCtrl',
-      function($scope, $http, $interval, seriesFactory) {
+      function($scope, $http, $interval, $filter, seriesFactory) {
           $scope.series = [];
           $scope.currentSeries = 0;
           $scope.backgroundStyle = {};
@@ -38,7 +38,9 @@
 
               for (var i = $scope.series.length - 1; i >= 0; i--) {
                   if ($scope.series[i].id == $scope.currentSeries) {
-                      $scope.backgroundStyle = {'background-image': 'url(../img/fanart/' + $scope.series[i].fanart_image +')'};
+
+                      var fanArtUrl = $filter('createFanartUrl')($scope.series[i].poster_image, $scope.series[i].unique_name);
+                      $scope.backgroundStyle = {'background-image': 'url(' + fanArtUrl +')'};
                       break;
                   }
               }
