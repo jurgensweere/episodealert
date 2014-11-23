@@ -1,8 +1,6 @@
 <?php namespace EA\models;
 
 use Eloquent;
-use EA\models\Seen;
-use Auth;
 
 class Following extends Eloquent
 {

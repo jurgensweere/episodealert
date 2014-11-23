@@ -55,21 +55,6 @@ ul{
     z-index: -9999;*/
 }
 
-.splash-fanart {
-    height: 740px;
-    background-size: cover;
-    position: relative;
-    margin-top: 50px;
-}
-
-.splash-fanart-fade {
-    width: 100%;
-    height: 100%;
-    background: transparent url('../img/fanart-fade.png') repeat;
-    display: block;
-    position: absolute;
-}
-
 .ea-content{
 	min-height: 600px;
 }
@@ -77,11 +62,6 @@ ul{
 .container--navbar{
     background-color: #252525;
     padding: 12px 0px 12px 20px;
-}
-
-//remove padding from the container
-.container{
-    
 }
 
 // usage; description of series, profile welcome, other info
@@ -201,6 +181,20 @@ h1{
   opacity:1;
 }
 
+.splash-fanart {
+    width: 100%;
+    height: 740px;
+    background-size: cover;
+    background: transparent no-repeat top center;
+    position: relative;
+    margin-top: 50px;
+}
+.splash-fanart-fade {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+}
 .splash-brand {
     font-size: 52px;
     text-align: center;
@@ -228,9 +222,8 @@ h1{
     height: 320px;
 }
 
-.series-profile,
-.series-search{
-    text-align: left;
+.series-profile{
+    text-align: center;
     margin: auto;
     padding-top: 15px;
 
@@ -281,10 +274,6 @@ h1{
         width: 25%;
         display: inline-block;
         margin-bottom: 15px;
-
-        div{
-            text-align: center;
-        }
     }
 
     img{
@@ -292,29 +281,35 @@ h1{
 
 }
 
-.series-search-adjust{
-    .extra-info{
-        padding: 10px 0px 15px 0px;
-        text-align: center;
-        background-color: $primary-color;
-        height: 60px;
+.series-search{
+    padding: 0px;
+    margin: 0px;
 
-        a{
-            font-size: 110%;
+    li{
+        width: 200px;
+        text-align: center;
+        display: inline-block;
+        list-style: none;
+        padding: 10px 10px 10px 10px;
+    }
+
+    a{
+        img{
+            display: inline-block;
+            height: 200px;
+            padding: 5px;
+            margin-bottom: 10px;        
+        }
+
+        h3{
+            display: block;
+            font-size: 14px;
+            margin: 0px 0px 10px 0px;
         }
     }
 
-    .extra-info-episodes{
-        padding: 5px 0px 15px 10px;
-        text-align: left;
-        background-color: $secondary-color;
-        height: 30px;
-        text-shadow: 1px 1px #0F0F0F;       
-    }
-
-    li{
-        margin-top: 30px;
-        width: 20%;
+    a:hover{
+        text-decoration: none;
     }
 }
 
@@ -348,10 +343,6 @@ h1{
     color: $bright-highlight;
     margin-top: -10px;
     margin-left: 10px; 
-}
-
-.following-button--search-results{
-    margin-top: 10px;
 }
 
 /* seen button */
@@ -430,8 +421,8 @@ h1{
     	}
 
     	li>a{
-    		padding: 12px 16px 12px 16px;
-    		margin-right: 1px;
+    		padding: 12px 20px 12px 20px;
+    		margin-right: 8px;
     		border: none;
     		color: #8A8A8A;
     		background-color: #363636;
@@ -515,7 +506,7 @@ h1{
 
         .active {
             color: $bright-highlight;
-            background-color: $bright-highlight;
+            background-color: $highlight-color;
         }
     }
 }

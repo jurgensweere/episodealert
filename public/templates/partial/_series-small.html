@@ -1,18 +1,8 @@
-<a href="/series/{{series.unique_name}}">
-	<span class="badge">{{ series.unseen_epsiodes }}</span>
-	<img class="img-responsive" ng-src="{{ series.poster_image | createImageUrl : series.unique_name : 'medium' }}" alt="{{ series.name }}" />
+<a href="#/series/{{series.unique_name}}">
+    <h3>{{ series.name }}</h3>
+    <img class="img-responsive" ng-src="{{ series.poster_image | createImageUrl : series.unique_name : 'small' }}" alt="{{ series.name }}" />
 </a>
-<div class="extra-info">
-	<a href="/series/{{series.unique_name}}">{{ series.name }}</a>
-</div> 
-
-<button 
-  ng-controller="FollowingCtrl"
-  ng-show="series"
-  ng-mouseover="mouseOver(series)" 
-  ng-mouseout="mouseOut(series)" 
-  ng-click="toggleFollowing(series)"
-  ng-class="series.following ? 'following' : 'notfollowing'"
-  class="btn following-button following-button--search-results" >{{ buttonLabel }}</button>
-
-
+<div ng-show="followButton">
+	<button ng-show="!series.following" ng-controller="FollowingCtrl" class="btn btn-default" ng-click="followSeries(series, $event)">Follow</button>
+	<button ng-show="series.following" ng-controller="FollowingCtrl" class="btn btn-default btn--following btn-success" ng-click="unfollowSeries(series, $event)">Following</button>
+</div>

@@ -5,7 +5,6 @@ use Response;
 use EA\models\Series;
 use EA\models\Following;
 use EA\models\User;
-use EA\models\Seen;
 use Auth;
 
 class FollowingController extends BaseController
@@ -55,40 +54,22 @@ class FollowingController extends BaseController
 
     }
 
-	/*
-	 * Get all the series that the user is following for the profile page
- 	 */
     public function getFollowingSeries(){
     	$user = Auth::user();
     	if($user){
 
-    		$series = Following::where('user_id', $user->id)
+    		return Response::json(
+				Following::where('user_id', $user->id)
 				->select('following.archive', 'series.*')
 				->join('series', 'following.series_id', '=', 'series.id')
-				->get();
+				->get()					
 
-
-    		$series = self::addSeenEpisodesToSeries($series, $user->id);
-
-    		return Response::json($series);
+				);
 
     	}else{
     		return Response::json(array('flash' => 'Unauthorized, please login'));
     	}
     	
-    }
-
-	/*
-	 * add the total of seen_episodes and unseen_episodes to the series
-	 */
-    private function addSeenEpisodesToSeries($series, $userid){
-
-    	foreach ($series as $s) {
-    		$s->seen_episodes = Seen::where('series_id', $s->id)->where('user_id', $userid)->count();
-    		$s->unseen_epsiodes = $s->episode_amount - $s->seen_episodes;
-    	}
-
-    	return $series;
     }
 
 }
