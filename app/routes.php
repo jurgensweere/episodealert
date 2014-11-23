@@ -11,13 +11,51 @@
 |
 */
 
+//Changing the blade brackets so they dont conflict with angular
+Blade::setContentTags('<%', '%>');
+Blade::setEscapedContentTags('<%%', '%%>');
+
+
 Route::group(
     array('namespace' => 'EA\controllers'),
     function () {
+
         Route::get('/', 'HomeController@showWelcome');
+        Route::get('/testpage', 'HomeController@showTestPage');
 
         Route::group(array('prefix' => 'api'), function () {
+
+            //Auth
+            Route::post('auth/register', 'AuthController@register');
+            Route::post('auth/login', 'AuthController@login');
+
+    		Route::get('auth/check', 'AuthController@checkAuth');
+
+            Route::get('auth/logout', 'AuthController@logout');
+            Route::get('profile/following', 'FollowingController@getFollowingSeries');
+
+            Route::get('auth/expiry', function(){
+                return Response::json(array('flash' => 'Session expired'), 401);        
+            });
+
+            //Following (has to go behind auth)
+            Route::get('follow/{series_id}', 'FollowingController@follow');
+            Route::get('unfollow/{series_id}', 'FollowingController@unfollow');
+
+            //Series
             Route::get('series/top', 'SeriesController@top');
+            Route::get('series/search/{query}', 'SeriesController@search');
+            Route::get('series/{uniqueName}', 'SeriesController@getSeries');
+            Route::get('series/genre/{genre}', 'SeriesController@getByGenre');
+            Route::get('series/browse', 'SeriesController@getAllCategories');
+            Route::get('series/episodes/{uniqueName}', 'SeriesController@getEpisodes');
+            Route::get('series/episodesbyseason/{series}/{season}', 'SeriesController@getEpisodesBySeason');
+            Route::get('series/unseenamountbyseason/{series_id}/{season}', 'SeriesController@getUnseenEpisodesPerSeason');
+
+            //Seen
+            Route::post('series/seen/', 'SeriesController@setSeenEpisode');
+            Route::post('series/unseen/', 'SeriesController@unsetSeenEpisode');
+
         });
 
         // Route::get('/contact', 'HomeController@showContact');

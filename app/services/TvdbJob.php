@@ -49,6 +49,15 @@ class TvdbJob
         if ($data['firstaired'] != '') {
             $series->firstaired = $data['firstaired'];
         }
+        if ($data['rating'] != '') {
+            $series->rating = $data['rating'];
+        }
+        if($data['episodes'] != ''){
+        	$series->episode_amount = count($data['episodes']);
+        }
+        if ($data['category'] != '') {
+            $series->category = $data['category'];
+        }        
 
         // If the series doesn't have a unique name, assign one
         if (empty($series->unique_name)) {
@@ -62,8 +71,50 @@ class TvdbJob
         Log::info("TvdbJob.updateSingleSeries: {$series->name} Updated.");
 
         $this->attachEpisodeData($series, $data);
+        $this->attachSeriesPoster($series);
+
+        //Find out if there is a special season and save it in series table
+        $lastSeasonOfSeries = Episode::where('series_id', $series->id )->select('season')->orderBy('season', 'desc')->first()->season;
+        $series->season_amount = $lastSeasonOfSeries;
+
+        $firstSeasonOfSeries = Episode::where('series_id', $series->id )->select('season')->orderBy('season', 'asc')->first()->season;
+
+        if($firstSeasonOfSeries == 0){
+        	$series->has_specials = 1;
+        }
+
+        $series->save();
 
         $job->delete();
+    }
+
+    public function attachSeriesPoster($series){
+        //echo "trying to getSeriesData: " . $series->id;
+        //echo "\n";
+
+        $data = App::make('tvdb')->getSerieData($series->id, false);
+
+        //echo $data['id'];
+        //echo "\n";
+
+        //Try to get fanart for the series
+        $fanart = App::make('tvdb')->getBannerImage($series);
+
+        if($fanart){
+            $series->fanart_image = $series->unique_name.".jpg";
+            $series->save();        	
+        }
+
+        if($data['poster']!=""){
+            $poster = App::make('tvdb')->getPosterImage($series, $data['poster']);            
+        }else{
+            $poster = false;
+        }
+
+        if($poster){
+            $series->poster_image = $series->unique_name.".jpg";
+            $series->save();
+        }
     }
 
     private function attachEpisodeData(Series $series, $data)

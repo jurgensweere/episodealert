@@ -1,7 +1,7 @@
 (function(){
 
-  angular.module('eaApp').controller('CarouselCtrl', ['$scope', '$http', '$interval',
-      function($scope, $http, $interval) {
+  angular.module('eaApp').controller('CarouselCtrl',
+      function($scope, $http, $interval, $filter, seriesFactory) {
           $scope.series = [];
           $scope.currentSeries = 0;
           $scope.backgroundStyle = {};
@@ -20,19 +20,27 @@
               }
           }, 5000);
 
-          $http.get('/api/series/top').success(function(data) {
-              $scope.series = data;
-              if (data[0] !== undefined) {
-                  $scope.selectSeries(data[0].id);
+          seriesFactory.getTopSeries()
+            .success(function (series) {
+
+              $scope.series = series;
+
+              if (series[0] !== undefined) {
+                  $scope.selectSeries(series[0].id);
               }
-          });
+            })
+            .error(function (error) {
+              //$scope.status = 'error error error beep beep;
+            });
 
           $scope.selectSeries = function(seriesId) {
               $scope.currentSeries = seriesId;
 
               for (var i = $scope.series.length - 1; i >= 0; i--) {
                   if ($scope.series[i].id == $scope.currentSeries) {
-                      $scope.backgroundStyle = {'background-image': 'url(../img/fanart/' + $scope.series[i].fanart_image +')'};
+
+                      var fanArtUrl = $filter('createFanartUrl')($scope.series[i].poster_image, $scope.series[i].unique_name);
+                      $scope.backgroundStyle = {'background-image': 'url(' + fanArtUrl +')'};
                       break;
                   }
               }
@@ -52,7 +60,7 @@
               // Make sure that the interval is destroyed too
               $scope.stopTimer();
           });
-      }]
+      }
   );
 
 })();

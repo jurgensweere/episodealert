@@ -1,0 +1,21 @@
+<h1>Register an account</h1>
+<div id="register" class="row">
+  <div class="col-xs-6 col-sm-6 col-md-6">
+    <form ng-submit="login()">
+      <fieldset class="radius">
+        <div class="form-group">
+            <input type="text" class="form-control" name="username" placeholder="username" ng-model="credentials.username" required/>
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" name="email" placeholder="email" ng-model="credentials.email" required/>
+        </div>        
+        <div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="password" ng-model="credentials.password" required/>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">Register</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

@@ -3,8 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
-class InitDb extends Migration
+class DatabaseChanges extends Migration
 {
 
     /**
@@ -14,7 +13,15 @@ class InitDb extends Migration
      */
     public function up()
     {
-        Log::info("in up method init db");
+        Schema::drop('mail_log');
+        Schema::drop('seen');
+        Schema::drop('setting');
+        Schema::drop('following');
+        Schema::drop('user');
+        Schema::drop('episode');
+        Schema::drop('series');
+        
+
         Schema::create('series', function ($table) {
             $table->increments('id')->unsigned();
             $table->string('unique_name', 100);
@@ -24,12 +31,15 @@ class InitDb extends Migration
             $table->string('rating', 10);
             $table->datetime('rating_updated');
             $table->string('imdb_id', 10);
-            $table->string('image', 10);
-            $table->boolean('imageconverted')->default(0);
+            $table->string('poster_image', 128)->nullable()->default(null);
+            $table->boolean('poster_image_converted')->default(0);
+            $table->string('fanart_image', 128)->nullable()->default(null);
+            $table->boolean('fanart_image_converted')->default(0);
+            $table->string('category', 128);            
             $table->string('status', 25)->nullable();
             $table->boolean('popular')->default(0);
             $table->timestamps();
-            
+
             $table->index(array('imdb_id', 'status'), 'multi_index');
         });
 
@@ -52,7 +62,7 @@ class InitDb extends Migration
         Schema::create('user', function ($table) {
             $table->increments('id');
             $table->string('accountname', 200);
-            $table->string('password', 32)->nullable();
+            $table->string('password', 256)->nullable();
             $table->string('username', 100);
             $table->string('email', 150);
             $table->boolean('registered')->default(0);
@@ -60,6 +70,7 @@ class InitDb extends Migration
             $table->boolean('showonlyrunning')->default(0);
             $table->string('role', 10)->default('member');
             $table->timestamps();
+            $table->rememberToken();
         });
 
         Schema::create('following', function ($table) {
@@ -123,13 +134,6 @@ class InitDb extends Migration
      */
     public function down()
     {
-        Log::info("in down method init db");
-        Schema::drop('mail_log');
-        Schema::drop('seen');
-        Schema::drop('setting');
-        Schema::drop('following');
-        Schema::drop('user');
-        Schema::drop('episode');
-        Schema::drop('series');
+       
     }
 }

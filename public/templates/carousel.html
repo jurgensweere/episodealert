@@ -1,10 +1,10 @@
-<div class="splash-brand">
+<div class="row splash-brand">
     <p>episode alert <img src="img/logo-71x50.png" alt="Episode Alert" /></p>
 </div>
-<div class="splash-fanart" ng-style="backgroundStyle">
+<div class="row splash-fanart" ng-style="backgroundStyle">
     <span class="splash-fanart-fade"></span>
 
-    <div class="row marketing">
+    <div class="marketing">
         <div class="col-lg-4">
             <h1>Follow</h1>
             <p>Find your favorite<br/>TV Series</p>
@@ -21,8 +21,8 @@
 
     <div class="splash-posters">
         <div class="series" ng-repeat="series in series">
-            <a href="#/series/{{series.unique_name}}">
-                <img class="poster" ng-src="img/poster/{{ series.poster_image }}" alt="{{ series.name }}" />
+            <a href="/series/{{series.unique_name}}">
+                <img class="img-responsive poster" ng-src="{{ series.poster_image | createImageUrl : series.unique_name }}" alt="{{ series.name }}" />
             </a>
             <span ng-class="{active: isSelected(series.id)}"></span>
         </div>
