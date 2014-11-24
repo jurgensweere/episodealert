@@ -1,5 +1,7 @@
 (function(){
     var app = angular.module('eaApp', ['ngRoute','ngAnimate', 'flash', 'ui.bootstrap']);
+
+    // Configure All routing
     app.config(['$routeProvider', '$locationProvider',
         function($routeProvider, $locationProvider) {
 
@@ -51,20 +53,20 @@
         }]
     );
 
-    //We can add some stuff to the rootscope here
+    // We can add some stuff to the rootscope here
     app.run(function($rootScope, $location, AuthenticationService){
 
-    	//check if a user is logged in at the backend
+    	// check if a user is logged in at the backend
     	AuthenticationService.check();
 
         $rootScope.credentials = {};
 
         $rootScope.hello = function() {
             //console.log('hello');
-            //you can use this in anywhere using $scope.hello();
+            // you can use this in anywhere using $scope.hello();
         };      
 
-        //Add routes that required auth from the front-end
+        // Add routes that required auth from the front-end
         var routesThatRequireAuth = ['/profile'];
 
         $rootScope.$on('$routeChangeStart', function(event, next, current){

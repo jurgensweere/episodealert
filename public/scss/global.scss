@@ -17,14 +17,14 @@ body {
     font-family: $font-family;
 }
 
-/* reset some stuff */
+/* reset some defaults */
 
 button:focus,
-button:active{
+button:active {
     outline: none !important;
 }
 
-a{
+a {
     color: $bright-highlight;
 }
 
@@ -36,7 +36,7 @@ p {
     margin: 0 0 0px;
 }
 
-ul{
+ul {
     padding-left:  0px;
 }
 
@@ -45,7 +45,7 @@ ul{
 
 /* background image test for serie details */
 
-.background-container{
+.background-container {
 /*    background: url(http://localhost/img/fanart/ch/chuck.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     opacity: 0.1;
@@ -70,49 +70,49 @@ ul{
     position: absolute;
 }
 
-.ea-content{
+.ea-content {
 	min-height: 600px;
 }
 
-.container--navbar{
+.container--navbar {
     background-color: #252525;
     padding: 12px 0px 12px 20px;
 }
 
 //remove padding from the container
-.container{
+.container {
     
 }
 
 // usage; description of series, profile welcome, other info
-h1{
+h1 {
     font-size: 200%;
     margin: 0px;
     line-height: 150%;
 }
 
-.info-text-top{
+.info-text-top {
 
     color: #e7e7e7;
     padding: 3px 60px 15px 60px;
     background-color: $background-color;
 
-    p{
+    p {
         line-height: 180%;
     }
 }
 
-.profile{
-    .profile-filters{
+.profile {
+    .profile-filters {
         height: 40px;
         padding: 5px 0px 5px 20px;
         background-color: $primary-color;
 
-        span{
+        span {
             padding-right:5px;
         }
 
-        .btn{
+        .btn {
             margin-left: 10px;
             font-size: 75%;
             background-color: #1a1a1a;
@@ -124,21 +124,21 @@ h1{
           outline: none;
         }
 
-        .active{
+        .active {
             color: $bright-highlight;   
         }
 
-        .btn:hover{
+        .btn:hover {
             color: $bright-highlight;   
         }
     }
 
-    .profile-series{
+    .profile-series {
         background-color: $background-color;
     }
 }
 
-/* ng animation stuff */
+/* ng animation */
 
 .fade {
     top: 0;
@@ -167,23 +167,22 @@ h1{
     opacity: 0;
 }
 
-.flash-container{
+.flash-container {
     background-color: $background-color;
 }
 
-#flash-messages{
+#flash-messages {
     list-style-type: none;
 }
 
 .animation .ng-enter,
-.animation .ng-show{
+.animation .ng-show {
   -webkit-transition:0.5s linear all;
   transition:0.5s linear all;
 }
 
 .animation .ng-leave,
-.animation .ng-hide
-{
+.animation .ng-hide {
   -webkit-transition:0s linear all;
   transition:0s linear all;
 }
@@ -197,7 +196,7 @@ h1{
 .animation .ng-leave,
 .animation .ng-hide,
 .animation .ng-enter.ng-enter-active,
-.animation .ng-show.ng-show-active{
+.animation .ng-show.ng-show-active {
   opacity:1;
 }
 
@@ -229,17 +228,17 @@ h1{
 }
 
 .series-profile,
-.series-search{
+.series-search {
     text-align: left;
     margin: auto;
     padding-top: 15px;
 
-    a{
+    a {
         display: block;
         position: relative;
     }
 
-    .badge{
+    .badge {
         top: 90%;
         left: 80%;
         position: absolute;
@@ -250,24 +249,24 @@ h1{
         padding: 3px 10px 4px 8px;
     }
 
-    p{
+    p {
         font-size: 85%;
         padding:  4px 0px 4px 0px;
         text-shadow: 1px 1px #0F0F0F;   
     }
 
-    .extra-info{
+    .extra-info {
         padding: 10px 0px 15px 10px;
         text-align: left;
         background-color: $primary-color;
         height: 100px;
 
-        a{
+        a {
             font-size: 110%;
         }
     }
 
-    .extra-info-episodes{
+    .extra-info-episodes {
         padding: 5px 0px 15px 10px;
         text-align: left;
         background-color: $secondary-color;
@@ -275,36 +274,36 @@ h1{
         text-shadow: 1px 1px #0F0F0F;       
     }
 
-    li{
+    li {
         padding: 0px 10px 0px 10px;
         list-style: none;
         width: 25%;
         display: inline-block;
         margin-bottom: 15px;
 
-        div{
+        div {
             text-align: center;
         }
     }
 
-    img{
+    img {
     }
 
 }
 
-.series-search-adjust{
-    .extra-info{
+.series-search-adjust {
+    .extra-info {
         padding: 10px 0px 15px 0px;
         text-align: center;
         background-color: $primary-color;
         height: 60px;
 
-        a{
+        a {
             font-size: 110%;
         }
     }
 
-    .extra-info-episodes{
+    .extra-info-episodes {
         padding: 5px 0px 15px 10px;
         text-align: left;
         background-color: $secondary-color;
@@ -312,15 +311,15 @@ h1{
         text-shadow: 1px 1px #0F0F0F;       
     }
 
-    li{
+    li {
         margin-top: 30px;
         width: 20%;
     }
 }
 
-/* following button stuff */
+/* following button */
 
-.following-button{
+.following-button {
 	background-color: rgba(0,0,0,0.5);
 	font-size: 120%;
 	border: 2px solid $bright-highlight;
@@ -329,34 +328,34 @@ h1{
 	padding: 3px 10px 4px 8px;
 }
 
-.notfollowing{
+.notfollowing {
   border: 2px solid #33B37B !important;
   color: #33B37B !important;
 }   
 
-.notfollowing:hover{
+.notfollowing:hover {
   border: 2px solid #00ff90 !important;
   color: #00ff90 !important;
 }
 
 .following-button:hover,
-.following-button:focus{
+.following-button:focus {
 	color: $bright-highlight;
 }
 
-.following-button--series-detail{
+.following-button--series-detail {
     color: $bright-highlight;
     margin-top: -10px;
     margin-left: 10px; 
 }
 
-.following-button--search-results{
+.following-button--search-results {
     margin-top: 10px;
 }
 
 /* seen button */
 
-.seen-button{
+.seen-button {
     color: $bright-highlight;
     background-color: rgba(0, 0, 0, 0.8);
     font-size: 90%;
@@ -365,71 +364,71 @@ h1{
     padding: 3px 8px 4px 8px;    
 }
 
-.episode-list{
+.episode-list {
 	font-size: 110%;
 	width: 100%;
 
-	td{
+	td {
 		padding: 3px 10px 3px 10px;
 	}
 
-    tr.seen{
+    tr.seen {
         color: #666;
     }
 
-	.number{
+	.number {
 		width:5%;
 		padding-left:20px;
 	}
 
-	.title{
+	.title {
 		width: 55%;
 	}
 
-	.airdate{
+	.airdate {
 		width: 30%;
 		text-align: right;
 	}
 
-	.seen-column{
+	.seen-column {
         text-align: right;
 		width: 10%;
 	}
 }
 
-.series-detail{
-    h1{
+.series-detail {
+    h1 {
         text-shadow: 2px 2px #0F0F0F;
         display: inline-block;
     }
 
-    li{
+    li {
         padding: 0px 0px 0px 0px;
         list-style: none;
     }    
 
-    img{
+    img {
         margin-left: -15px;
     }
 
-    p, dl{
+    p, dl {
         text-shadow: 1px 1px #0F0F0F;   
     }
 
-    .seasons{
+    .seasons {
         background-color: #252525        
     }
 
-    .nav-tabs{
+    .nav-tabs {
     	border: none;
     	height: 60px;
     	font-size: 130%;
 
-    	a{
+    	a {
     		border-radius: 0px;
     	}
 
-    	li>a{
+    	li > a {
     		padding: 12px 16px 12px 16px;
     		margin-right: 1px;
     		border: none;
@@ -437,18 +436,18 @@ h1{
     		background-color: #363636;
     	}
 
-    	li>a:hover{
+    	li > a:hover {
     		color: #FFF;
     		border: none;
     	}
 
-    	.active>a{
+    	.active > a {
     		color: #FFF;
     		border: none;
     		background-color: #252525;
     	}
 
-    	.active>a:hover{
+    	.active > a:hover {
     		color: #FFF;
     		border: none;
     		cursor: pointer;
@@ -457,18 +456,18 @@ h1{
     }
 }
 
-.series-details-extra{
+.series-details-extra {
 	background-color: $primary-color;
 	margin: 30px 15px 0px -15px;
 	padding: 10px;
 
-	dt{
+	dt {
 		float: left;
 		clear: both;
         margin-right: 10px;
 	}
 
-	dl{
+	dl {
 		margin-bottom: 0px;
 	}
 
@@ -520,7 +519,7 @@ h1{
     }
 }
 
-.btn--following{
+.btn--following {
 
 }
 
@@ -529,7 +528,7 @@ h1{
     border: none;
     background-color: $background-color;
 
-    .navbar-form{
+    .navbar-form {
         padding-top: 9px;
     }
 
@@ -538,12 +537,12 @@ h1{
         color: #C9C9C9;
         padding-top: 15px;
 
-        a{
+        a {
             color: #C9C9C9;
         }
     }    
 
-    .navbar-brand:focus, .navbar-brand:hover{
+    .navbar-brand:focus, .navbar-brand:hover {
         color: #C9C9C9;
     }
 
@@ -558,18 +557,21 @@ h1{
     .navbar-text > a:hover{
         color: $highlight-color;
     }
-    .navbar-nav>li>a {
+    .navbar-nav > li > a {
         color: #fff;
         text-transform: uppercase;
         top: 2px;
         height: 46px;
     }
 
-    .navbar-nav>li>a:hover, .navbar-nav>li>a:focus {
+    .navbar-nav > li > a:hover,
+    .navbar-nav > li > a:focus {
         color: $bright-highlight;
     }
 
-    .navbar-nav>.active>a, .navbar-nav>.active>a:hover, .navbar-nav>.active>a:focus {
+    .navbar-nav > .active > a,
+    .navbar-nav > .active > a:hover,
+    .navbar-nav > .active > a:focus {
         color: $bright-highlight;
         background-color: #252525;
     }

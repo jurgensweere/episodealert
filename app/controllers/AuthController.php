@@ -16,7 +16,7 @@ class AuthController extends BaseController
 
 		$usernameCheck  = User::where('username', Input::get('username'))->count();
 
-		if(!$usernameCheck){
+		if (!$usernameCheck) {
 	        $user = User::create(
 	            array(
 	                'accountname' => '',
@@ -29,14 +29,14 @@ class AuthController extends BaseController
 	        );
 
 	        return Response::json(array('flash' => 'Thanks for registering'));			
-		}else{
+		} else {
 			return Response::json(array('flash' => 'Username allready in use'), 500);
 		}
 
 	}
 
 	public function login() {
-		if(Auth::attempt(array('username' => Input::json('username'), 'password' => Input::json('password'))))
+		if (Auth::attempt(array('username' => Input::json('username'), 'password' => Input::json('password'))))
 		{
 	  		return Response::json(array('id' => Auth::user()->id,
 					'username' => Auth::user()->username,
@@ -56,11 +56,11 @@ class AuthController extends BaseController
 	 */
 
 	public function checkAuth() {
-		if(Auth::user()){
+		if (Auth::user()) {
 			return Response::json(array('id' => Auth::user()->id,
 					'username' => Auth::user()->username,
 					'email' => Auth::user()->email));
-		}else{
+		} else {
 			return Response::json(array('flash' => 'Not authorized'), 500);
 		}
 	}

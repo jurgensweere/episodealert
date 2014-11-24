@@ -1,4 +1,4 @@
-//service example, at the moment i like the factory way better
+//service example, unused -- Use factory instead
 
 angular.module('eaApp').service('seriesService', function($http) {
    return {
