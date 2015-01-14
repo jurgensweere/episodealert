@@ -31,7 +31,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var bool
 	 */
-	public $timestamps = false;
+	public $timestamps = true;
 
 	/**
 	 * The attributes that aren't mass assignable.

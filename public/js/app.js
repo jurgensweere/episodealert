@@ -125,9 +125,10 @@
     //Create fanart url
     app.filter('createFanartUrl', function(){
         return function(fanart, unique_name){
-        	if(fanart){
+        	if(fanart !== undefined){
         		return 'img/fanart/' + unique_name.substring(0, 2) + '/' + fanart;
         	}
+            return 'img/fanart/nofanart.jpg';
         };
     });    
 

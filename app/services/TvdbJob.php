@@ -74,12 +74,11 @@ class TvdbJob
         $this->attachSeriesPoster($series);
 
         //Find out if there is a special season and save it in series table
-        $lastSeasonOfSeries = Episode::where('series_id', $series->id )->select('season')->orderBy('season', 'desc')->first()->season;
-        $series->season_amount = $lastSeasonOfSeries;
+        $firstEpisode = Episode::where('series_id', $series->id )->select('season')->orderBy('season', 'asc')->first();
+        $lastEpisode = Episode::where('series_id', $series->id )->select('season')->orderBy('season', 'desc')->first();
+        $series->season_amount = $lastEpisode ? $lastEpisode->season : 0;
 
-        $firstSeasonOfSeries = Episode::where('series_id', $series->id )->select('season')->orderBy('season', 'asc')->first()->season;
-
-        if($firstSeasonOfSeries == 0){
+        if($firstEpisode && $firstEpisode->season == 0){
         	$series->has_specials = 1;
         }
 
