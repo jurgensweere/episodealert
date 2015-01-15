@@ -121,6 +121,16 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
     };
 
     /**
+     * Get total amount of unseen episodes
+     *
+     * @return {int}                Amount of episodes not seen by user
+     */
+    seriesFactory.getUnseenAmount = function (){
+        return $http.get(urlBase + 'unseenamount');
+    };
+
+
+    /**
      * Get amount of unseen episodes by series and season
      *
      * @param {int} series_id       ID of series

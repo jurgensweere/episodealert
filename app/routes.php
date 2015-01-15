@@ -45,12 +45,13 @@ Route::group(
             //Series
             Route::get('series/top', 'SeriesController@top');
             Route::get('series/search/{query}', 'SeriesController@search');
-            Route::get('series/{uniqueName}', 'SeriesController@getSeries');
             Route::get('series/genre/{genre}', 'SeriesController@getByGenre');
             Route::get('series/browse', 'SeriesController@getAllCategories');
             Route::get('series/episodes/{uniqueName}', 'SeriesController@getEpisodes');
             Route::get('series/episodesbyseason/{series}/{season}', 'SeriesController@getEpisodesBySeason');
+            Route::get('series/unseenamount', 'SeriesController@getUnseenEpisodes');
             Route::get('series/unseenamountbyseason/{series_id}/{season}', 'SeriesController@getUnseenEpisodesPerSeason');
+            Route::get('series/{uniqueName}', 'SeriesController@getSeries');
 
             //Seen
             Route::post('series/seen/', 'SeriesController@setSeenEpisode');

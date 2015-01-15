@@ -64,7 +64,8 @@ grunt.initConfig({
             'js/*.js',
             'js/controllers/*.js',
             'js/factories/*.js',
-            'templates/*.html'
+            'templates/*.html',
+            'templates/partial/*.html'
             ]
         },
         jshint: {

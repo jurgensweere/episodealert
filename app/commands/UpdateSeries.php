@@ -47,6 +47,10 @@ class UpdateSeries extends Command
             $lastUpdateTime = time() - 1 * 24 * 60 * 60;
         }
 
+        // Debug
+        //Queue::push('EA\TvdbJob@updateSingleSeries', array('tvdbid' => 258743));
+        //exit;
+
         $data = App::make('tvdb')->getSeriesUpdates($lastUpdateTime);
         
         if ($data) {

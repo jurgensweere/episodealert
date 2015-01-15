@@ -10,6 +10,7 @@ use EA\models\Seen;
 use Auth;
 use Log;
 use Input;
+use DB;
 
 class SeriesController extends BaseController
 {
@@ -125,13 +126,34 @@ class SeriesController extends BaseController
         }
     }
 
+    /**
+     * Get the total number of unseen episodes
+     * path: /api/series/unseenamount
+     */
+    public function getUnseenEpisodes() {
+        if (Auth::user()) {
+            $totalEpisodes = DB::table('following')
+                ->join('series', 'series.id', '=', 'following.series_id')
+                ->where('following.user_id', '=', Auth::user()->id)
+                ->sum('series.episode_amount');
+            $totalSeen = Seen::where('user_id', Auth::user()->id)->count();
+
+            return Response::json(array('unseenepisodes' => $totalEpisodes - $totalSeen)); 
+        }
+        return Response::json(
+            array(
+                'error' => 'fail unauthorized'
+            ),
+            500
+        );
+    }
+
     /*
      *
      * Find the number of unseen episodes per season for a series
      * path: /api/series/unseenamountbyseason/{series_id}/{season_number}
      *
      */
-
     public function getUnseenEpisodesPerSeason($series_id, $season_number){
         if(Auth::user()){
 
