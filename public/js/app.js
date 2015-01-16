@@ -1,6 +1,6 @@
 /*jshint loopfunc: true */
 (function(){
-    var app = angular.module('eaApp', ['ngRoute','ngAnimate', 'flash', 'ui.bootstrap']);
+    var app = angular.module('eaApp', ['ngRoute','ngAnimate', 'flash', 'ui.bootstrap', 'infinite-scroll']);
 
     // Configure All routing
     app.config(['$routeProvider', '$locationProvider',

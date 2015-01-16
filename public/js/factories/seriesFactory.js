@@ -38,8 +38,9 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
      * @param {string} genre    Genre
      * @return {array}          List of series
      */
-    seriesFactory.getByGenre = function (genre) {
-        return $http.get(urlBase + 'genre/' + genre);
+    seriesFactory.getByGenre = function (genre, skip) {
+        skip = typeof skip !== 'undefined' ? skip : 0;
+        return $http.get(urlBase + 'genre/' + genre + '/' + skip);
     };
 
     //TODO Add factory for following

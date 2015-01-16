@@ -82,6 +82,21 @@ grunt.initConfig({
         dest: 'dist/',
         ext: '.min.css'
       }
+    },
+
+    bower_concat: {
+        all: {
+            dest: 'js/vendor/_bower.js',
+            cssDest: 'css/vendor/_bower.css',
+            exclude: [
+            ],
+            dependencies: {
+
+            },
+            bowerOptions: {
+              relative: false
+            }
+        }
     }
 
     });
@@ -92,10 +107,11 @@ grunt.initConfig({
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-bower-concat');
 
     //Default tasks to run when you type 'grunt'
     grunt.registerTask('default', ['sass', 'jshint']);
 
     //building for production/testing
-    grunt.registerTask('build', ['sass', 'cssmin', 'jshint', 'concat', 'uglify'])
+    grunt.registerTask('build', ['sass', 'cssmin', 'jshint', 'concat', 'uglify', 'bower_concat'])
 };

@@ -21,8 +21,8 @@ class SeriesController extends BaseController
       return Response::json( $series );
     }
 
-    public function getByGenre($genre){
-        return Response::json(Series::where('category', 'like', '%' . $genre . '%')->take(50)->get());
+    public function getByGenre($genre, $skip = 0){
+        return Response::json(Series::where('category', 'like', '%' . $genre . '%')->skip($skip)->take(12)->get());
     }
 
     public function top()

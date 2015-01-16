@@ -244,6 +244,7 @@ class Tvdb
     private function compress_image($source_url, $destination_url, $quality) {
         $info = getimagesize($source_url);
      
+        $image = null;
         if ($info['mime'] == 'image/jpeg') $image = @imagecreatefromjpeg($source_url);
         elseif ($info['mime'] == 'image/gif') $image = @imagecreatefromgif($source_url);
         elseif ($info['mime'] == 'image/png') $image = @imagecreatefrompng($source_url);
