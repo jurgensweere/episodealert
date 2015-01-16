@@ -1,0 +1,20 @@
+{
+  "name": "Episode-Alert",
+  "version": "0.1.0",
+  "homepage": "https://github.com/castor385/episodealert",
+  "authors": [
+    "Jurgen Sweere <jurgen.sweere@gmail.com>",
+    "Arno Bats"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ngInfiniteScroll": "1.0.0"
+  }
+}
