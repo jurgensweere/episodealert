@@ -45,9 +45,12 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control form-control-search" placeholder="Search" ng-model="mainPageQuery" ng-model-options="{ debounce: 300 }">
-                        </div><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-search" placeholder="Search" ng-model="mainPageQuery" ng-model-options="{ debounce: 300 }" />
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
+                        </div>
                     </form>
                     <ul class="nav navbar-nav" ng-controller="HeaderCtrl">
                         <li ng-class="{ active: isActive('/series')}"><a href="/series/genre/action">Browse</a></li>

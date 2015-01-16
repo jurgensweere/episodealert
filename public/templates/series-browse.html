@@ -5,7 +5,7 @@
 		</li>	
 	</ul>
 	<h3>By Genre : {{selectedGenre}} </h3>
-	<ul class="series-search" infinite-scroll="getByGenre()" infinite-scroll-disabled='loadingGenre' infinite-scroll-distance='1'>
+	<ul class="series-search list-inline" infinite-scroll="getByGenre()" infinite-scroll-disabled='loadingGenre' infinite-scroll-distance='1'>
 	    <li ng-repeat="series in series">
 			<div onLoad="followButton='true'" ng-include src="'templates/partial/_series-small.html'" >
 	    </li>

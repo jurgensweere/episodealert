@@ -62,8 +62,13 @@ ul {
 }
 
 .splash-fanart {
-    height: 740px;
+    @media(max-width:767px){ height: 405px; }
+    @media(min-width:768px){ height: 740px; }
+    @media(min-width:992px){ height: 740px; }
+    @media(min-width:1200px){ height: 740px; }
+    
     background-size: cover;
+    background-position: center bottom;
     position: relative;
     margin-top: 50px;
 }
@@ -82,7 +87,7 @@ ul {
 
 .container--navbar {
     background-color: #252525;
-    padding: 12px 0px 12px 20px;
+    @media(min-width:768px){ padding: 12px 0px 12px 20px; }
 }
 
 //remove padding from the container
@@ -229,6 +234,10 @@ h1 {
 }
 
 .splash-brand {
+    @media(max-width:767px){ font-size: 34px; }
+    @media(min-width:768px){ font-size: 42px; }
+    @media(min-width:992px){ font-size: 52px; }
+    @media(min-width:1200px){ font-size: 52px; }
     font-size: 52px;
     text-align: center;
 }
@@ -240,11 +249,13 @@ h1 {
     width: 100%;
 
     h1 {
-        font-size: 30px;
+        @media(max-width:767px){ font-size: 24px; }
+        @media(min-width:768px){ font-size: 30px; }
     }
 
     p {
-        font-size: 18px;
+        @media(max-width:767px){ font-size: 12px; }
+        @media(min-width:768px){ font-size: 18px; }
     }
 }
 
@@ -254,9 +265,9 @@ li.disabled{
 
 .poster {
     background-color: $background-color;
-    padding: 4px;
     display: inline-block;
-    height: 320px;
+    @media(max-width:767px){ height: 100px; padding: 1px; }
+    @media(min-width:768px){ height: 320px; padding: 4px; }
 }
 
 .series-profile,
@@ -307,11 +318,20 @@ li.disabled{
     }
 
     li {
+        @media(max-width:767px){ width: 50%; }
+        @media(min-width:768px){ width: 33%; }
+        @media(min-width:992px){ width: 25%; }
+        @media(min-width:1200px){ width: 25%; }
         padding: 0px 10px 0px 10px;
-        list-style: none;
-        width: 25%;
-        display: inline-block;
+        // list-style: none;
+        // width: 25%;
+        // display: inline-block;
         margin-bottom: 15px;
+        // TODO: Maybe we should use the SASS version of bootstrap?
+        //@media(max-width: $screen-xs-max){}
+        //@media(min-width: $screen-sm-min){}  /* deprecated: @screen-tablet, or @screen-sm */
+        //@media(min-width: $screen-md-min){}  /* deprecated: @screen-desktop, or @screen-md */
+        //@media(min-width: $screen-lg-min){}  /* deprecated: @screen-lg-desktop, or @screen-lg */
 
         div {
             text-align: center;
