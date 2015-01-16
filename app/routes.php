@@ -52,7 +52,8 @@ Route::group(
             Route::get('series/unseenamount', 'SeriesController@getUnseenEpisodes');
             Route::get('series/unseenamountbyseason/{series_id}/{season}', 'SeriesController@getUnseenEpisodesPerSeason');
             Route::get('series/unseenamountbyseries/{series_id}/{seasons}', 'SeriesController@getUnseenEpisodesPerSeries');
-
+            Route::get('series/{uniqueName}', 'SeriesController@getSeries');
+            
             //Seen
             Route::post('series/seen/', 'SeriesController@setSeenEpisode');
             Route::post('series/unseen/', 'SeriesController@unsetSeenEpisode');
