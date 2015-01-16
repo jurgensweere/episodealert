@@ -71,7 +71,9 @@
 
             for(var i = 0, max = routesThatRequireAuth.length ; i < max ; i++){
                 if ( ($location.path() === routesThatRequireAuth[i]) && (!AuthenticationService.isLoggedIn() ) ) {
-                    $location.path('/login');
+                    $rootScope.$evalAsync(function () { 
+                        $location.path('/login');
+                    });
                 }
             }
         });

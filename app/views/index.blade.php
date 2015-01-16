@@ -15,7 +15,7 @@
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js') %>
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-route.min.js') %>
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-animate.min.js') %>
-    <% HTML::script('/js/vendor/ui-bootstrap-tpls-0.11.0.min.js') %>
+    <% HTML::script('/js/vendor/ui-bootstrap-0.11.2.js') %>
     <% HTML::script('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js') %>
 
 </head>

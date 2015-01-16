@@ -141,12 +141,40 @@ class SeriesController extends BaseController
 
             $unseenAmountOfEpisodes = $totalAmountofEpisodes - $seenAmount;
             
-            return Response::json(array('unseenepisodes' => $unseenAmountOfEpisodes));  
+            return Response::json(array('unseenepisodes' => $unseenAmountOfEpisodes, 'season' => $season_number));  
 
         }else{
 
             return Response::json(array('error' => 'fail unauthorized'), 500);
 
+        }        
+    }
+
+    /*
+     * Get unseen episodes per series
+     */
+
+    public function getUnseenEpisodesPerSeries($series_id, $seasons_amount){
+        if(Auth::user()){
+
+            $seasonObject = array();
+            $user_id = Auth::user()->id;
+
+
+            for ($i=0; $i <= $seasons_amount; $i++) { 
+                $totalAmountofEpisodes = Episode::where('series_id', $series_id)->where('season', $i)->count();
+                $seenAmount = Seen::where('series_id', $series_id)->where('user_id', $user_id)->where('season', $i)->count();
+
+                $unseenAmountOfEpisodes = $totalAmountofEpisodes - $seenAmount;
+                array_push($seasonObject, $unseenAmountOfEpisodes);
+            }
+
+            return Response::json($seasonObject);  
+
+        }else{
+
+            return Response::json(array('error' => 'fail unauthorized'), 500);
+            
         }        
     }
 

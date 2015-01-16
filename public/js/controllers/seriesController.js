@@ -14,35 +14,32 @@
    				$scope.series = series;
    				$scope.seasons = buildSeasonObject(series.season_amount, series.has_specials);
 
-   				// add unseen episodes to the tabs
-   				// var loadUnseen = getUnseenAmountBySeason(series.id, 8);
-   				// loadUnseen.success(function(unseen){
-   				// 	console.log(unseen);
-   				// });
+			});
 
+			//watcher to check if the initial episodes have been loaded
+			$scope.$watch('episodesDoneLoading',function() {
+			    if($scope.series){
+
+					var loadUnseen = getUnseenAmountBySeries($scope.series.id, $scope.series.season_amount);
+	   				loadUnseen.success(function(unseen){
+	   					for( var i = 0; i < unseen.length; i++){
+	   						$scope.seasons[i].unseen = unseen[i];
+	   					}
+	   				});			    	
+
+			    }
 			});
 
 			/* scope */
 			$scope.loadSeason = function(series_id, seasonNumber){
         		var episodes = getEpisodesBySeason(series_id, seasonNumber);
 
-				episodes.success(function(episodes){
+  				episodes.success(function(episodes){
 					$scope.seasons[seasonNumber].content = episodes;
+					$scope.episodesDoneLoading = true;
 				});
 			};
 
-			$scope.loadUnseenForSeason = function(series_id, seasonNumber){
-				// why is this killing the login session?? ? ? ? ? too many requests??
-
-				// var unseen = getUnseenAmountBySeason(series_id, seasonNumber);
-
-				// //TODO: best would be to add/update the data to the season object
-				// unseen.success(function(unseen){
-   	// 				console.log(unseen);
-   	// 			});
-			};
-
-          	
 	    	/* service calls */
 		  	function getSeries(unique_name) {
 	        	var series = seriesFactory.getSeries(unique_name);
@@ -53,6 +50,11 @@
 	    		var unseenBySeries = seriesFactory.getUnseenAmountBySeason(series_id, seasonNumber);
 	    		return unseenBySeries;
 	    	}
+
+	    	function getUnseenAmountBySeries(series_id, seasonsAmount){
+	    		var unseenBySeries = seriesFactory.getUnseenSeasonsBySeries(series_id, seasonsAmount);
+	    		return unseenBySeries;
+	    	}	    	
 
 	    	function getEpisodesBySeason(series_id, seasonNumber){
 	    		var episodesBySeason = seriesFactory.getEpisodesBySeason(series_id, seasonNumber);
@@ -77,11 +79,13 @@
 				var seasons = [];
 
 				if(hasSpecials){
-					seasons.push({ number : 0, title : 'Specials', active : false });
+					seasons.push({ number : 0, title : 'Specials', active : false, unseen : null });
+				}else{
+					seasons.push({ number : 0, title : 'Specials', active : false, unseen : null, disabled: true });
 				}
 
 				for (var i = 1; i <= numberOfSeasons; i++) {
-					seasons.push( { number : i, title : i, active : false } );
+					seasons.push( { number : i, title : i, active : false, unseen : null } );
 				}
 
         		seasons[seasons.length-1].active = true;

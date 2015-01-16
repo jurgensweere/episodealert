@@ -55,6 +55,12 @@ ul{
     z-index: -9999;*/
 }
 
+.unseen-badge{
+    position: absolute;
+    top: -10px;
+    right: 0px;    
+}
+
 .splash-fanart {
     height: 740px;
     background-size: cover;
@@ -140,6 +146,28 @@ h1{
 
 /* ng animation stuff */
 
+/* After the transition this will be the only class remaining */
+.fadein {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  opacity: 1; /* Default value but added for clarity */
+}
+
+/* Initial state when showing */
+.fadein.ng-hide-remove {
+    transform: scale(0,0);
+    opacity: 0;
+    display: block !important;
+}
+
+/* Will transition towards this state */
+.fadein.ng-hide-remove.ng-hide-remove-active {
+    transform: scale(1,1);
+    opacity: 1;
+}
+
 .fade {
     top: 0;
     left: 0;
@@ -148,7 +176,7 @@ h1{
     opacity: 1;
 }
 .fade.ng-enter,
-.fade.ng-leave {
+.fade.ng-leave{
     -webkit-transition: all 0.25s ease;
     -moz-transition: all 0.25s ease;
     -o-transition: all 0.25s ease;
@@ -219,6 +247,10 @@ h1{
     p {
         font-size: 18px;
     }
+}
+
+li.disabled{
+    display: none;
 }
 
 .poster {
@@ -415,6 +447,17 @@ h1{
     p, dl{
         text-shadow: 1px 1px #0F0F0F;   
     }
+
+    .badge{
+        top: -12px;
+        right: -10px;
+        position: absolute;
+        background-color: rgba(0,0,0,0.8);
+        font-size: 80%;
+        border: 2px solid $bright-highlight;
+        border-radius: 15px;
+        z-index: 1;
+    }    
 
     .seasons{
         background-color: #252525        

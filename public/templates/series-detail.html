@@ -39,7 +39,7 @@
     <div class="col-xs-offset-4 col-sm-offset-4 col-md-offset-4 seasons">
 
 		<tabset>
-			<tab select="loadSeason(series.id, season.number)" ng-repeat="season in seasons" heading="{{ ::season.title}}" active="season.active" disabled="season.disabled" ng-init="loadUnseenForSeason(series.id, season.number)">
+			<tab select="loadSeason(series.id, season.number)" ng-repeat="season in seasons" unseen="{{season.unseen}}" heading="{{ ::season.title}}" active="season.active" disabled="season.disabled">
 				<table class="episode-list">
 					<tr ng-repeat="episode in season.content" ng-class="episode.seen ? 'seen' : 'unseen'">
 						<td class="number">

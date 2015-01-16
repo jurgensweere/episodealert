@@ -56,5 +56,9 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
         return $http.get(urlBase + 'unseenamountbyseason/' + series_id + '/' + season_number);
     };
 
+    seriesFactory.getUnseenSeasonsBySeries = function (series_id, seasons_amount){
+        return $http.get(urlBase + 'unseenamountbyseries/' + series_id + '/' + seasons_amount);
+    };
+
     return seriesFactory;
 }]);
