@@ -447,6 +447,7 @@ li.disabled{
         text-shadow: 1px 1px #0F0F0F;   
     }
 
+<<<<<<< HEAD
     .badge{
         top: -12px;
         right: -10px;
@@ -457,6 +458,13 @@ li.disabled{
         border-radius: 15px;
         z-index: 1;
     }    
+
+    .seasons{
+=======
+    .seasons {
+>>>>>>> 6fc7204357a60c0cf7fc07d4cdb8519f365446bc
+        background-color: #252525        
+    }
 
     .nav-tabs {
     	border: none;

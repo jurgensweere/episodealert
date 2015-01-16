@@ -229,21 +229,24 @@ class Tvdb
         $newwidth = $width * $percentage;
         $newheight = $height * $percentage;
 
-        $thumb = imagecreatetruecolor($newwidth, $newheight);
-        $source = imagecreatefromjpeg($source_url);
+        $source = @imagecreatefromjpeg($source_url);
 
-        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+        if ($source) {
+            $thumb = imagecreatetruecolor($newwidth, $newheight);
+            imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 
-        imagejpeg($thumb, $destination_url, $quality);
-        imagedestroy($thumb);
+            imagejpeg($thumb, $destination_url, $quality);
+            
+            imagedestroy($thumb);
+        }
     }
 
     private function compress_image($source_url, $destination_url, $quality) {
         $info = getimagesize($source_url);
      
-        if ($info['mime'] == 'image/jpeg') $image = imagecreatefromjpeg($source_url);
-        elseif ($info['mime'] == 'image/gif') $image = imagecreatefromgif($source_url);
-        elseif ($info['mime'] == 'image/png') $image = imagecreatefrompng($source_url);
+        if ($info['mime'] == 'image/jpeg') $image = @imagecreatefromjpeg($source_url);
+        elseif ($info['mime'] == 'image/gif') $image = @imagecreatefromgif($source_url);
+        elseif ($info['mime'] == 'image/png') $image = @imagecreatefrompng($source_url);
      
         //save file
         if($image){

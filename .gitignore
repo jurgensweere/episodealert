@@ -17,3 +17,6 @@ public/dist/js/*.js
 public/dist/css/*.css
 public/css/
 app/storage/tmp/
+app/config/local/database.php
+
+app/config/local/database.php

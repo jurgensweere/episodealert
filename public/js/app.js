@@ -1,70 +1,73 @@
+/*jshint loopfunc: true */
 (function(){
     var app = angular.module('eaApp', ['ngRoute','ngAnimate', 'flash', 'ui.bootstrap']);
+
+    // Configure All routing
     app.config(['$routeProvider', '$locationProvider',
-        function($routeProvider, $locationProvider) {
+                function($routeProvider, $locationProvider) {
 
-            $locationProvider.html5Mode(true);
+                    $locationProvider.html5Mode(true);
 
-            $routeProvider.when('/home', {
-                templateUrl: 'templates/carousel.html',
-                controller: 'CarouselCtrl'
-            })
+                    $routeProvider.when('/home', {
+                        templateUrl: 'templates/carousel.html',
+                        controller: 'CarouselCtrl'
+                    })
 
-            .when('/series', {
-                templateUrl: 'templates/series-list.html',
-                controller: 'SeriesListCtrl'
-            })
+                    .when('/series', {
+                        templateUrl: 'templates/series-list.html',
+                        controller: 'SeriesListCtrl'
+                    })
 
-            .when('/series/genre/:genre', {
-                templateUrl: 'templates/series-browse.html',
-                controller: 'SeriesListCtrl'
-            })
+                    .when('/series/genre/:genre', {
+                        templateUrl: 'templates/series-browse.html',
+                        controller: 'SeriesListCtrl'
+                    })
 
-            .when('/series/:seriesname', {
-                templateUrl: 'templates/series-detail.html',
-                controller: 'SeriesCtrl'
-            })
+                    .when('/series/:seriesname', {
+                        templateUrl: 'templates/series-detail.html',
+                        controller: 'SeriesCtrl'
+                    })
 
-            .when('/search/', {
-                templateUrl: 'templates/series-search.html',
-                controller: 'SeriesSearchCtrl'
-            })
+                    .when('/search/', {
+                        templateUrl: 'templates/series-search.html',
+                        controller: 'SeriesSearchCtrl'
+                    })
 
-            .when('/login', {
-                templateUrl: 'templates/auth/login.html',
-                controller: 'LoginCtrl'
-            })
+                    .when('/login', {
+                        templateUrl: 'templates/auth/login.html',
+                        controller: 'LoginCtrl'
+                    })
 
-            .when('/register', {
-                templateUrl: 'templates/auth/register.html',
-                controller: 'RegisterCtrl'
-            })            
+                    .when('/register', {
+                        templateUrl: 'templates/auth/register.html',
+                        controller: 'RegisterCtrl'
+                    })            
 
-            .when('/profile', {
-                templateUrl: 'templates/profile.html',
-                controller: 'ProfileCtrl'
-            })          
+                    .when('/profile', {
+                        templateUrl: 'templates/profile.html',
+                        controller: 'ProfileCtrl'
+                    })          
 
-            .otherwise({
-                redirectTo: '/home'
-            });
-        }]
-    );
+                    .otherwise({
+                        redirectTo: '/home'
+                    });
+                }]
+              );
 
-    //We can add some stuff to the rootscope here
+    // We can add some stuff to the rootscope here
     app.run(function($rootScope, $location, AuthenticationService){
 
-    	//check if a user is logged in at the backend
-    	AuthenticationService.check();
+        // check if a user is logged in at the backend
+        AuthenticationService.check();
 
         $rootScope.credentials = {};
 
         $rootScope.hello = function() {
             //console.log('hello');
-            //you can use this in anywhere using $scope.hello();
+            // you can use this in anywhere using $scope.hello();
         };      
 
-        //Add routes that required auth from the front-end
+        // Add routes that required auth from the front-end
         var routesThatRequireAuth = ['/profile'];
 
         $rootScope.$on('$routeChangeStart', function(event, next, current){
@@ -109,13 +112,13 @@
     app.filter('createImageUrl', function(){
         return function(poster, unique_name, size){
             if(poster){
-            	if(size){
-            		var returnPoster = poster.split('.');
-            		returnPoster = returnPoster[0] + '_' + size + '.jpg';
-            		return 'img/poster/' + unique_name.substring(0, 2) + '/' + returnPoster;
-            	}else{
-            		return 'img/poster/' + unique_name.substring(0, 2) + '/' + poster;
-            	}
+                if(size){
+                    var returnPoster = poster.split('.');
+                    returnPoster = returnPoster[0] + '_' + size + '.jpg';
+                    return 'img/poster/' + unique_name.substring(0, 2) + '/' + returnPoster;
+                }else{
+                    return 'img/poster/' + unique_name.substring(0, 2) + '/' + poster;
+                }
             }else{
                 return 'img/missing.png';
             }
@@ -125,11 +128,27 @@
     //Create fanart url
     app.filter('createFanartUrl', function(){
         return function(fanart, unique_name){
-        	if(fanart){
-        		return 'img/fanart/' + unique_name.substring(0, 2) + '/' + fanart;
-        	}
+            if(fanart !== undefined){
+                return 'img/fanart/' + unique_name.substring(0, 2) + '/' + fanart;
+            }
+            return 'img/fanart/nofanart.jpg';
         };
-    });    
+    });
+    
+    app.filter('greet', function(dateFilter) {
+        return function(date, name) {
+            input = dateFilter(date, "H");
+            if (input < 12) {
+                return 'Good Morning, ' + name;
+            } else if (input >= 12 && input <= 17) {
+                return 'Good Afternoon, ' + name;
+            } else if (input > 17 && input <= 24) {
+                return 'Good Evening, ' + name;
+            } else {
+                return 'Hello, ' + name;
+            }
+        };
+    });
 
     app.factory('SessionService', function() {
         return{
@@ -210,13 +229,13 @@
                 return SessionService.get('authenticated');
             },
             check: function() {
-            	var check = $http.get('api/auth/check');
-				check.success(cacheSession);
-				check.success(setUserInfo);
-				check.error();
-				return check;
+                var check = $http.get('api/auth/check');
+                check.success(cacheSession);
+                check.success(setUserInfo);
+                check.error();
+                return check;
             }
-      };
+        };
     });
 
     app.controller("LoginCtrl", function($route, $scope, $location, AuthenticationService) {

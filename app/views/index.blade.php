@@ -39,7 +39,7 @@
                     </button>
                     <a class="navbar-brand" href="/home">
                         <!-- <img src="img/logo-56x41.png" alt="Episode Alert" /> -->
-                        Epiode Alert
+                        Episode Alert
                     </a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
