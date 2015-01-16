@@ -52,7 +52,6 @@
 	    	}
 
 	    	function getUnseenAmountBySeries(series_id, seasonsAmount){
-	    		console.log('getUnseenAmountBySeries');
 	    		var unseenBySeries = seriesFactory.getUnseenSeasonsBySeries(series_id, seasonsAmount);
 	    		return unseenBySeries;
 	    	}	    	
@@ -76,8 +75,6 @@
 
 			/* functions */
 			function buildSeasonObject(numberOfSeasons, hasSpecials){
-
-				console.log(' build season object ');
         
 				var seasons = [];
 
