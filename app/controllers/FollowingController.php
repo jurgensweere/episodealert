@@ -70,7 +70,6 @@ class FollowingController extends BaseController
                 ->join('series', 'following.series_id', '=', 'series.id')
                 ->get();
 
-
             self::addSeenEpisodesToSeries($series, $user->id);
             self::addCurrentEpisode($series, $user->id);
             self::addLatestEpisodes($series);
@@ -113,10 +112,12 @@ class FollowingController extends BaseController
 
             $currentEpisode = Episode::where('series_id', '=', $s->id)
                 ->where(function ($query) use ($season, $episode) {
-                    $query->where('season', '=', $season)
-                        ->where('episode', '>', $episode);
+                    $query->where(function ($query2) use ($season, $episode) {
+                        $query2->where('season', '=', $season)
+                            ->where('episode', '>', $episode);
+                    })->orWhere('season', '>', $season);
                 })
-                ->orWhere('season', '>', $season)
+
                 ->orderBy('season', 'asc')
                 ->orderBy('episode', 'asc')
                 ->take(1)
