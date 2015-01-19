@@ -323,9 +323,8 @@ li.disabled{
         @media(min-width:992px){ width: 25%; }
         @media(min-width:1200px){ width: 25%; }
         padding: 0px 10px 0px 10px;
-        // list-style: none;
-        // width: 25%;
-        // display: inline-block;
+        list-style: none;
+        display: inline-block;
         margin-bottom: 15px;
         // TODO: Maybe we should use the SASS version of bootstrap?
         //@media(max-width: $screen-xs-max){}
