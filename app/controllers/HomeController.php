@@ -6,6 +6,8 @@ use EA\Tvdb;
 use EA\TvdbJob;
 use EA\models\Series;
 use Auth;
+use Session;
+use File;
 
 class HomeController extends BaseController
 {
@@ -25,7 +27,20 @@ class HomeController extends BaseController
 
     public function showWelcome()
     {
-        return View::make('index');
+        $state = md5(rand());
+        Session::put('state', $state);
+        $config = json_decode(File::get(app_path().'/config/client_secret.json'));
+        $key = isset($config->installed) ? 'installed' : 'web';
+
+        // Set the client ID, token state, and application name in the HTML while
+        // serving it.
+        return View::make('index',
+            array(
+                'clientId' => $config->$key->client_id,
+                'state' => $state,
+                'app_name' => 'Episode-Alert',
+            )
+        );
     }
 
     public function showTestPage(){

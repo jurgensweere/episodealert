@@ -1,6 +1,6 @@
 /*jshint loopfunc: true */
 (function(){
-    var app = angular.module('eaApp', ['ngRoute','ngAnimate', 'flash', 'ui.bootstrap', 'infinite-scroll']);
+    var app = angular.module('eaApp', ['ngRoute','ngAnimate', 'flash', 'ui.bootstrap', 'infinite-scroll', 'directive.g+signin']);
 
     // Configure All routing
     app.config(['$routeProvider', '$locationProvider',
@@ -165,7 +165,7 @@
         };
     });
 
-    app.factory("AuthenticationService", function($rootScope, $location, $http, SessionService, flash) {
+    app.factory("AuthenticationService", function($rootScope, $location, $http, SessionService, flash, $window) {
 
         var cacheSession = function(response){
             SessionService.set('authenticated', true);
@@ -234,6 +234,14 @@
                 check.success(setUserInfo);
                 check.error();
                 return check;
+            },
+            googleSignIn: function (authResult) {
+                var googleSignIn = $http.post('api/auth/oauth/google', {state: $window.state, authResult: authResult});
+                googleSignIn.success(registerMessage);
+                googleSignIn.success(cacheSession);
+                googleSignIn.success(setUserInfo);
+                googleSignIn.error(registerError);
+                return googleSignIn;
             }
         };
     });
@@ -252,6 +260,17 @@
                 $location.path('/login');   
             });
         };
+
+        $scope.$on('event:google-plus-signin-success', function (event, authResult) {
+            // User successfully authorized the G+ App!
+            AuthenticationService.googleSignIn(authResult).success(function(){
+                $location.path('/profile');
+            });
+        });
+        $scope.$on('event:google-plus-signin-failure', function (event, authResult) {
+            // User has not authorized the G+ App!
+            console.log('Not signed into Google Plus.');
+        });
 
     });  
 

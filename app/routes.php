@@ -32,6 +32,8 @@ Route::group(
     		Route::get('auth/check', 'AuthController@checkAuth');
 
             Route::get('auth/logout', 'AuthController@logout');
+            Route::post('auth/oauth/google', 'AuthController@callbackGoogleOAuth');
+            Route::post('auth/oauth/google/logout', 'AuthController@logoutGoogleOAuth');
             Route::get('profile/following', 'FollowingController@getFollowingSeries');
 
             Route::get('auth/expiry', function(){
@@ -79,5 +81,5 @@ Route::group(
 // this allows angular to route them
 App::missing(function($exception)
 {
-    return View::make('index');
+    return Redirect::to('/');
 });

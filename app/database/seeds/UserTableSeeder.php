@@ -9,7 +9,7 @@ class UserTableSeeder extends Seeder
         DB::table('user')->delete();
 
         User::create(array(
-            'accountname' => '',
+            'accountname' => 'episodealert',
             'password' => Hash::make('kaas123'),
             'username' => 'episodealert',
             'email' => 'episodealert@gmail.com',
@@ -21,7 +21,7 @@ class UserTableSeeder extends Seeder
 
 
         User::create(array(
-            'accountname' => '',
+            'accountname' => 'admin',
             'password' => Hash::make('admin'),
             'username' => 'admin',
             'email' => '',
