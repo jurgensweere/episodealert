@@ -1,6 +1,6 @@
 /*jshint loopfunc: true */
 (function(){
-    var app = angular.module('eaApp', ['ngRoute','ngAnimate', 'flash', 'ui.bootstrap', 'infinite-scroll', 'directive.g+signin']);
+    var app = angular.module('eaApp', ['ngRoute','ngAnimate', 'flash', 'ui.bootstrap', 'infinite-scroll']);
 
     // Configure All routing
     app.config(['$routeProvider', '$locationProvider',
@@ -179,18 +179,6 @@
                 $location.path('/login');   
             });
         };
-
-        $scope.$on('event:google-plus-signin-success', function (event, authResult) {
-            // User successfully authorized the G+ App!
-            AuthenticationService.googleSignIn(authResult).success(function(){
-                $location.path('/profile');
-            });
-        });
-        $scope.$on('event:google-plus-signin-failure', function (event, authResult) {
-            // User has not authorized the G+ App!
-            console.log('Not signed into Google Plus.');
-        });
-
     });  
 
     app.controller('RegisterCtrl', function($route, $scope, $location, AuthenticationService){

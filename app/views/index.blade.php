@@ -18,7 +18,6 @@
     <% HTML::script('/js/vendor/ui-bootstrap-0.11.2.js') %>
     <% HTML::script('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js') %>
     <% HTML::script('/js/vendor/_bower.js') %>
-    <% HTML::script('/js/vendor/google-plus-signin.js') %>
 
 </head>
 <body>
