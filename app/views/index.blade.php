@@ -64,7 +64,7 @@
                         </li>                                        
                     </ul>
 
-                    <p class="navbar-text navbar-right" ng-show="credentials.auth">Welcome back, <a href="#" class="navbar-link">{{ credentials.username }}</a></p>
+                    <p class="navbar-text navbar-right" ng-show="credentials.auth">Welcome back, <a href="/profile" class="navbar-link">{{ credentials.username }}</a></p>
                 </div>
             </div>
         </nav>

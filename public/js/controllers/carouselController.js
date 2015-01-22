@@ -40,15 +40,6 @@
              */
             $scope.selectSeries = function(seriesId) {
                 $scope.currentSeries = seriesId;
-
-                for (var i = $scope.series.length - 1; i >= 0; i--) {
-                    if ($scope.series[i].id == $scope.currentSeries) {
-
-                        var fanArtUrl = $filter('createFanartUrl')($scope.series[i].poster_image, $scope.series[i].unique_name);
-                        $scope.backgroundStyle = {'background-image': 'url(' + fanArtUrl +')'};
-                        break;
-                    }
-                }
             };
 
             /**

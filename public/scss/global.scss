@@ -67,11 +67,35 @@ ul {
     @media(min-width:992px){ height: 740px; }
     @media(min-width:1200px){ height: 740px; }
     
-    background-size: cover;
-    background-position: center bottom;
     position: relative;
     margin-top: 50px;
+    .fanart-background {
+        position: absolute;
+        background-size: cover;
+        background-position: center bottom;
+        width: 100%;
+        @media(max-width:767px){ height: 405px; }
+        @media(min-width:768px){ height: 740px; }
+        @media(min-width:992px){ height: 740px; }
+        @media(min-width:1200px){ height: 740px; }
+    }
 }
+.fanart-background.ng-hide-add, .fanart-background.ng-hide-remove {
+  /* this is required as of 1.3x to properly
+     apply all styling in a show/hide animation */
+  transition: 0s linear all;
+}
+
+.fanart-background.ng-hide-add-active,
+.fanart-background.ng-hide-remove-active {
+  /* the transition is defined in the active class */
+  transition: 1s linear all;
+}
+
+.fanart-background.ng-hide-add { opacity: 1; }
+.fanart-background.ng-hide-add.ng-hide-add-active { opacity: 0; }
+.fanart-background.ng-hide-remove { opacity: 0; }
+.fanart-background.ng-hide-remove.ng-hide-remove-active { opacity: 1; }
 
 .splash-fanart-fade {
     width: 100%;
