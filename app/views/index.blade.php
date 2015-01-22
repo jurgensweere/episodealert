@@ -77,6 +77,7 @@
             </div>
         </div>
     </div>
+    <div id="fb-root"></div>
     <div id="contentUI" ui-view="content" class="container ea-content fade" ng-view>
     </div>
 </div>
@@ -84,6 +85,7 @@
 <script>
     var clientId = '<% $clientId %>';
     var state = '<% $state %>';
+    var fbAppId = '<% $fbAppId %>';
 </script>
 
 <% HTML::script(asset('js/app.js')) %>
@@ -97,7 +99,9 @@
 <% HTML::script(asset('js/controllers/followingController.js')) %>
 <% HTML::script(asset('js/controllers/seenController.js')) %>
 
+<% HTML::script(asset('js/factories/authenticationFactory.js')) %>
 <% HTML::script(asset('js/factories/seriesFactory.js')) %>
+<% HTML::script(asset('js/factories/oauthFactory.js')) %>
 
 <% HTML::script(asset('js/modules/angular-flash.js')) %>
 

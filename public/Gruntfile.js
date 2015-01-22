@@ -39,7 +39,7 @@ grunt.initConfig({
     },
 
     jshint: {
-      files: ['js/app.js', 'js/controllers/*.js', 'js/factories/*.js'],
+      files: ['js/app.js', 'js/controllers/*.js', 'js/factories/*.js', 'js/modules/*.js'],
           options: {
             globals: {
                 jQuery: true,
@@ -64,13 +64,14 @@ grunt.initConfig({
             'js/*.js',
             'js/controllers/*.js',
             'js/factories/*.js',
+            'js/modules/*.js',
             'templates/*.html',
             'templates/partial/*.html'
             ]
         },
         jshint: {
             // add all the mega files when we have them
-            files: ['js/*.js', 'js/controllers/*.js', 'js/factories/*.js'],
+            files: ['js/*.js', 'js/controllers/*.js', 'js/factories/*.js', 'js/modules/*.js'],
             tasks: ['jshint'],
         }
     },

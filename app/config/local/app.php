@@ -15,4 +15,9 @@ return array(
 
 	'debug' => true,
 
+	
+	'facebook' => array (
+		'appid'				=> '1518254765105090',
+		'appsecret'			=> 'INSERTSECRET',
+	)
 );

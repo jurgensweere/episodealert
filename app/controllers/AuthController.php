@@ -9,9 +9,13 @@ use Validator;
 use View;
 use Response;
 use Hash;
+use Config;
 use Google_Client;
 use Google_Service_Oauth2;
 use Google_Http_Request;
+use Facebook\FacebookSession;
+use Facebook\FacebookRequest;
+use Facebook\GraphUser;
 use Session;
 
 class AuthController extends BaseController
@@ -118,5 +122,45 @@ class AuthController extends BaseController
                     'username' => Auth::user()->accountname,
                     'email' => Auth::user()->email));
     }
-   
+
+    public function callbackFacebookOAuth()
+    {
+        if (Input::get('state') != (Session::get('state'))) {
+            return Response::json(array('flash' => 'Invalid state'), 401);
+        }
+
+        FacebookSession::setDefaultApplication(Config::get('app.facebook.appid'), Config::get('app.facebook.appsecret'));
+
+        $authResult = Input::get('authResult');
+        $session = new FacebookSession($authResult['accessToken']);
+        $me = (new FacebookRequest(
+            $session, 'GET', '/me'
+        ))->execute()->getGraphObject(GraphUser::className());
+
+        // check if this user exists, otherwise create
+        $user = User::where('oauthprovider', '=', 'facebook')
+            ->where('oauthid', '=', $me->getId())
+            ->first();
+        if (!$user) {
+            // Create User
+            $user = User::create(
+                array(
+                    'accountname' => $me->getName(),
+                    'oauthprovider' => 'google',
+                    'oauthid' => $me->getId(),
+                    'username' => '',
+                    'email' => $me->getEmail(),
+                    'password' => '',
+                    'role' => User::ROLE_MEMBER,
+                    'publicfollow' => 0,
+                )
+            );
+        }
+        
+        Auth::login($user);
+
+        return Response::json(array('id' => Auth::user()->id,
+                    'username' => Auth::user()->accountname,
+                    'email' => Auth::user()->email));
+    }
 }

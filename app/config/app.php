@@ -200,4 +200,9 @@ return array(
 		'episodeimagepath'	=> 'http://thetvdb.com/banners/',
 	),
 
+	'facebook' => array (
+		'appid'				=> '1518239795106587',
+		'appsecret'			=> 'INSERTSECRET',
+	)
+
 );

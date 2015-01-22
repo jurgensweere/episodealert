@@ -8,6 +8,7 @@ use EA\models\Series;
 use Auth;
 use Session;
 use File;
+use Config;
 
 class HomeController extends BaseController
 {
@@ -39,6 +40,7 @@ class HomeController extends BaseController
                 'clientId' => $config->$key->client_id,
                 'state' => $state,
                 'app_name' => 'Episode-Alert',
+                'fbAppId' => Config::get('app.facebook.appid'),
             )
         );
     }
