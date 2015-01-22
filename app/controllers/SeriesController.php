@@ -28,7 +28,15 @@ class SeriesController extends BaseController
     public function top()
     {
         // TODO: Make this select top (followed or trending?) series, instead of the first 5
-        return Response::json(Series::whereNotNull('fanart_image')->take(5)->get());
+        return Response::json(
+            Series::join('following', 'following.series_id', '=', 'series.id')
+                ->whereNotNull('fanart_image')
+                ->groupBy('following.series_id')
+                ->orderBy(DB::raw('count(following.id)'), 'desc')
+                ->orderBy(DB::raw('rand()'))
+                ->take(5)
+                ->get()
+        );
     }
 
     public function search($query)
