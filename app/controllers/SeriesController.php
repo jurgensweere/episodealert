@@ -22,7 +22,12 @@ class SeriesController extends BaseController
     }
 
     public function getByGenre($genre, $skip = 0){
-        return Response::json(Series::where('category', 'like', '%' . $genre . '%')->skip($skip)->take(12)->get());
+        return Response::json(
+            Series::where('category', 'like', '%' . $genre . '%')
+                ->orderBy('updated_at', 'desc')
+                ->skip($skip)
+                ->take(12)
+                ->get());
     }
 
     public function top()
