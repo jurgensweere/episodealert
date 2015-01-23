@@ -12,3 +12,4 @@
 */
 
 Artisan::add(new \EA\UpdateSeries);
+Artisan::add(new \EA\Mailer);

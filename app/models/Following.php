@@ -13,4 +13,13 @@ class Following extends Eloquent
      */
     protected $table = 'following';
 
+    public function user()
+    {
+        return $this->belongsTo('EA\models\User');
+    }
+
+    public function series()
+    {
+        return $this->belongsTo('EA\models\Series');
+    }
 }
