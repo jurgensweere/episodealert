@@ -175,6 +175,30 @@ h1 {
 
 /* ng animation */
 
+/* if animation */
+.animate-if {
+
+}
+
+.animate-if.ng-enter, .animate-if.ng-leave {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+    transform: scale(0,0);
+    opacity: 0;
+    display: block !important;
+}
+
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+    transform: scale(1,1);
+    opacity: 1;
+}
+/* end if animation */
+
 /* After the transition this will be the only class remaining */
 .fadein {
   -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
@@ -496,10 +520,15 @@ li.disabled{
         position: absolute;
         background-color: rgba(0,0,0,0.8);
         font-size: 80%;
-        border: 2px solid $bright-highlight;
+        border: 2px solid orange;
         border-radius: 15px;
         z-index: 1;
-    }    
+    }
+
+    .seen-badge{
+        border: 2px solid $bright-highlight;
+       
+    }
 
     .nav-tabs {
     	border: none;

@@ -120,6 +120,6 @@ angular.module('eaApp').factory('oauthFactory', ['AuthenticationService', '$loca
 
     $window.signInCallback = function (authResult) {
         oauthFactory.onGoogleAuthResult(authResult);
-    }
+    };
 }]);
         

@@ -79,13 +79,13 @@
 				var seasons = [];
 
 				if(hasSpecials){
-					seasons.push({ number : 0, title : 'Specials', active : false, unseen : null });
+					seasons.push({ number : 0, title : 'Specials', active : false, unseen : 999 });
 				}else{
-					seasons.push({ number : 0, title : 'Specials', active : false, unseen : null, disabled: true });
+					seasons.push({ number : 0, title : 'Specials', active : false, unseen : 999, disabled: true });
 				}
 
 				for (var i = 1; i <= numberOfSeasons; i++) {
-					seasons.push( { number : i, title : i, active : false, unseen : null } );
+					seasons.push( { number : i, title : i, active : false, unseen : 999 } );
 				}
 
         		seasons[seasons.length-1].active = true;
