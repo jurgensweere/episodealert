@@ -137,8 +137,8 @@ h1 {
     }
 }
 
-.profile {
-    .profile-filters {
+.profile, .guide {
+    .profile-filters, .guide-filters {
         height: 40px;
         padding: 5px 0px 5px 20px;
         background-color: $primary-color;
@@ -170,6 +170,34 @@ h1 {
 
     .profile-series {
         background-color: $background-color;
+    }
+}
+
+.guide {
+    li {
+        list-style: none;
+        h2 {
+            color: #14B6CC;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 10px 0;
+            padding: 8px;
+        }
+        .unseen-episode, .unaired-episode, .unseen-episodes p, .unaired-episodes p {
+            padding: 3px;
+        }
+        .unseen-episode, .unseen-episodes, .unaired-episodes {
+            color: #e7e7e7;
+        }
+        .unaired-episode {
+            color: #666;
+        }
+        .unseen-episodes, .unaired-episodes {
+            border-top: 1px solid #333;
+        }
+        .unaired-episodes {
+            margin-bottom: 30px;
+        }
     }
 }
 

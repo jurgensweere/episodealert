@@ -97,6 +97,7 @@
 <% HTML::script(asset('js/controllers/profileController.js')) %>
 <% HTML::script(asset('js/controllers/followingController.js')) %>
 <% HTML::script(asset('js/controllers/seenController.js')) %>
+<% HTML::script(asset('js/controllers/guideController.js')) %>
 
 <% HTML::script(asset('js/factories/authenticationFactory.js')) %>
 <% HTML::script(asset('js/factories/seriesFactory.js')) %>

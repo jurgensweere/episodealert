@@ -46,6 +46,11 @@
                     .when('/profile', {
                         templateUrl: 'templates/profile.html',
                         controller: 'ProfileCtrl'
+                    })
+                    
+                    .when('/guide', {
+                        templateUrl: 'templates/guide.html',
+                        controller: 'GuideCtrl'
                     })          
 
                     .otherwise({

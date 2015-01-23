@@ -43,6 +43,14 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
         return $http.get(urlBase + 'genre/' + genre + '/' + skip);
     };
 
+    /**
+     * Get the episode guide
+     * @return {array}          List of series
+     */
+    seriesFactory.getGuide = function() {
+        return $http.get(urlBase + 'guide');
+    };
+
     //TODO Add factory for following
     /**
      * Start following a series

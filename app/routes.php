@@ -47,6 +47,7 @@ Route::group(
 
             //Series
             Route::get('series/top', 'SeriesController@top');
+            Route::get('series/guide', 'SeriesController@getEpisodeGuide');
             Route::get('series/search/{query}', 'SeriesController@search');
             Route::get('series/genre/{genre}/{skip?}', 'SeriesController@getByGenre');
             Route::get('series/browse', 'SeriesController@getAllCategories');

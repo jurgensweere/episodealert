@@ -11,6 +11,7 @@ use Auth;
 use Log;
 use Input;
 use DB;
+use DateTime;
 
 class SeriesController extends BaseController
 {
@@ -69,6 +70,51 @@ class SeriesController extends BaseController
             }
         }
         return self::getEpisodesFromGivenSeason($id, 1);
+    }
+
+    /**
+     * Get unseen episodes for series you follow, as well as upcoming episodes
+     */
+    public function getEpisodeGuide()
+    {
+        if (!Auth::user()) {
+            return Response::json(array('flash' => 'You need to log in to view your personal guide'), 403);
+        }
+
+        $seriesFollowed = Series::join('following', 'following.series_id', '=', 'series.id')
+            ->where('following.user_id', '=', auth::user()->id)
+            ->orderBy('following.updated_at', 'desc')
+            ->get(array('series.*'));
+
+        $seriesFollowed->each(function($series)
+        {
+            // Fetch last three unseen episodes
+            $series->unseen = Episode::leftJoin('seen', function($join) {
+                    $join->on('seen.episode_id', '=', 'episode.id')
+                        ->where('seen.user_id', '=', Auth::user()->id);
+                })
+                ->where('episode.series_id', '=', $series->id)
+                ->whereNull('seen.id')
+                ->where('episode.airdate', '>', '0000-00-00')
+                ->where('episode.season', '>', 0)
+                ->orderBy('episode.airdate', 'asc')
+                ->orderBy('episode.season', 'asc')
+                ->orderBy('episode.episode', 'asc')
+                ->take(3)
+                ->get(array('episode.*'));
+
+            // Fetch the first 3 unaired episodes
+            $series->unaired = Episode::where('series_id', '=', $series->id)
+                ->where('airdate', '>', new DateTime)
+                ->where('episode.season', '>', 0)
+                ->orderBy('airdate', 'asc')
+                ->orderBy('episode.season', 'asc')
+                ->orderBy('episode.episode', 'asc')
+                ->take(3)
+                ->get();
+        });
+
+        return Response::json($seriesFollowed);
     }
 
 
