@@ -69,7 +69,11 @@ class TvdbJob
         Log::info("TvdbJob.updateSingleSeries: {$series->name} Updated.");
 
         $this->attachEpisodeData($series, $data);
-        $this->attachSeriesPoster($series);
+
+
+        if($series->poster_image_converted == 0){
+            $this->attachSeriesPoster($series);    
+        }
 
         //Find out if there is a special season and save it in series table
         $firstEpisode = Episode::where('series_id', $series->id )->select('season')->orderBy('season', 'asc')->first();
@@ -110,6 +114,7 @@ class TvdbJob
 
         if($poster){
             $series->poster_image = $series->unique_name.".jpg";
+            $series->poster_image_converted = 1;
             $series->save();
         }
     }
