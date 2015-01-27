@@ -83,5 +83,5 @@ Route::group(
 // this allows angular to route them
 App::missing(function($exception)
 {
-    return Redirect::to('/');
+    return App::make('EA\controllers\HomeController')->showWelcome();
 });
