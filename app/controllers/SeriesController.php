@@ -213,9 +213,11 @@ class SeriesController extends BaseController
     public function getUnseenEpisodes() {
         if (Auth::user()) {
             $totalEpisodes = DB::table('following')
-                ->join('series', 'series.id', '=', 'following.series_id')
+                ->join('episode', 'episode.series_id', '=', 'following.series_id')
                 ->where('following.user_id', '=', Auth::user()->id)
-                ->sum('series.episode_amount');
+                ->where('episode.season', '>', 0)
+                ->where('episode.airdate', '<', new DateTime)
+                ->count();
             $totalSeen = Seen::where('user_id', Auth::user()->id)->count();
 
             return Response::json(array('unseenepisodes' => $totalEpisodes - $totalSeen)); 
