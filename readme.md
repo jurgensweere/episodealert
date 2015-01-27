@@ -34,6 +34,7 @@ The old website: [Episode-Alert](http://www.episode-alert.com).
 ### Work
 
 ```
-  grunt watch to watch for changes
+  'grunt watch' to watch for changes
+  'php artisan serve' to start a webserver in root of the project (or you can install apache)
   
 ```
