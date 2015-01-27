@@ -21,11 +21,20 @@
                     .success(function (response) {
                         //flash(response.follow);
                         episode.seen = 1;
+
+                        //After the episode is succesfully set to seen, we should request an update on the unseen object
+                        var loadUnseen = getUnseenAmountBySeries($scope.series.id, $scope.series.season_amount);
+                        loadUnseen.success(function(unseen){
+                            for( var i = 0; i < unseen.length; i++){
+                                $scope.seasons[i].unseen = unseen[i];
+                            }
+                        }); 
+
                     })
                     .error(function (error) {
                         flash(error.seen);
                     });
-            }
+            }      
 
             /**
              * Set an episode to 'unseen'
@@ -43,6 +52,18 @@
                         flash(response.seen);
                     });
             }
+
+            /**
+             * Update unseenamount of the series
+             * @param series_id
+             * @param seasonsAmount
+             */
+
+            function getUnseenAmountBySeries(series_id, seasonsAmount){
+                var unseenBySeries = seriesFactory.getUnseenSeasonsBySeries(series_id, seasonsAmount);
+                return unseenBySeries;
+            }    
+
         }
     );
 })();
