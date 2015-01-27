@@ -47,8 +47,13 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
      * Get the episode guide
      * @return {array}          List of series
      */
-    seriesFactory.getGuide = function() {
-        return $http.get(urlBase + 'guide');
+    seriesFactory.getGuide = function(includeUnseen, includeUpcoming) {
+        includeUnseen = typeof includeUnseen !== 'undefined' ? includeUnseen : true;
+        includeUpcoming = typeof includeUpcoming !== 'undefined' ? includeUpcoming : true;
+        return $http.get(urlBase + 'guide', { params: {
+            unseen: includeUnseen,
+            upcoming: includeUpcoming
+        }});
     };
 
     //TODO Add factory for following

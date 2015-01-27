@@ -130,7 +130,7 @@ h1 {
 
     color: #e7e7e7;
     padding: 3px 60px 15px 60px;
-    background-color: $background-color;
+    //background-color: $background-color;
 
     p {
         line-height: 180%;
@@ -174,6 +174,25 @@ h1 {
 }
 
 .guide {
+    .info-top {
+        position: relative;
+        background-size: cover;
+        background-position: 50% 15%;
+        height: 200px;
+        .fanart-fade {
+            width: 100%;
+            height: 100%;
+            background: transparent url('../img/fanart-fade.png') repeat 50% -500px;
+            display: block;
+        }
+    }
+    .info-text-top {
+        position: absolute;
+        bottom: 0;
+        p {
+            color: #A09F9F;
+        }
+    }
     li {
         list-style: none;
         h2 {

@@ -88,30 +88,34 @@ class SeriesController extends BaseController
 
         $seriesFollowed->each(function($series)
         {
-            // Fetch last three unseen episodes
-            $series->unseen = Episode::leftJoin('seen', function($join) {
-                    $join->on('seen.episode_id', '=', 'episode.id')
-                        ->where('seen.user_id', '=', Auth::user()->id);
-                })
-                ->where('episode.series_id', '=', $series->id)
-                ->whereNull('seen.id')
-                ->where('episode.airdate', '>', '0000-00-00')
-                ->where('episode.season', '>', 0)
-                ->orderBy('episode.airdate', 'asc')
-                ->orderBy('episode.season', 'asc')
-                ->orderBy('episode.episode', 'asc')
-                ->take(3)
-                ->get(array('episode.*'));
+            // Fetch last three unseen episodes, if needed
+            if (filter_var(Input::get('unseen', 'true'), FILTER_VALIDATE_BOOLEAN)) {
+                $series->unseen = Episode::leftJoin('seen', function($join) {
+                        $join->on('seen.episode_id', '=', 'episode.id')
+                            ->where('seen.user_id', '=', Auth::user()->id);
+                    })
+                    ->where('episode.series_id', '=', $series->id)
+                    ->whereNull('seen.id')
+                    ->where('episode.airdate', '>', '0000-00-00')
+                    ->where('episode.season', '>', 0)
+                    ->orderBy('episode.airdate', 'asc')
+                    ->orderBy('episode.season', 'asc')
+                    ->orderBy('episode.episode', 'asc')
+                    ->take(3)
+                    ->get(array('episode.*'));
+            }
 
-            // Fetch the first 3 unaired episodes
-            $series->unaired = Episode::where('series_id', '=', $series->id)
-                ->where('airdate', '>', new DateTime)
-                ->where('episode.season', '>', 0)
-                ->orderBy('airdate', 'asc')
-                ->orderBy('episode.season', 'asc')
-                ->orderBy('episode.episode', 'asc')
-                ->take(3)
-                ->get();
+            if (filter_var(Input::get('upcoming', 'true'), FILTER_VALIDATE_BOOLEAN)) {
+                // Fetch the first 3 unaired episodes
+                $series->unaired = Episode::where('series_id', '=', $series->id)
+                    ->where('airdate', '>', new DateTime)
+                    ->where('episode.season', '>', 0)
+                    ->orderBy('airdate', 'asc')
+                    ->orderBy('episode.season', 'asc')
+                    ->orderBy('episode.episode', 'asc')
+                    ->take(3)
+                    ->get();
+            }
         });
 
         return Response::json($seriesFollowed);

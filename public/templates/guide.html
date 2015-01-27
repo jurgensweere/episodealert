@@ -1,22 +1,28 @@
 <div class="guide">
-    <div class="row info-text-top">
-        <h1>Episode Guide</h1>
-        <p class="hidden-xs hidden-sm">{{ seriesDescription }}</p>
+    <div class="row info-top" style="background-image: url('{{ series.poster_image | createFanartUrl : series.unique_name }}');">
+        <div class="fanart-fade">
+            <div class="info-text-top">
+                <h1>Episode Guide</h1>
+                <p class="hidden-xs hidden-sm">{{ series.description }}</p>
+            </div>
+        </div>
     </div>
     <div class="row guide-filters">
         Filters 
-        <button class="btn btn--guide-filter active"><span class="glyphicon glyphicon-ok" />unseen</button>
-        <button class="btn btn--guide-filter active"><span class="glyphicon glyphicon-ok" />upcoming</button>
+        <button class="btn btn--guide-filter" ng-class="{active: unseen}" ng-click="toggleUnseen()"><span class="glyphicon glyphicon-ok" />unseen</button>
+        <button class="btn btn--guide-filter" ng-class="{active: upcoming}" ng-click="toggleUpcoming()"><span class="glyphicon glyphicon-ok" />upcoming</button>
+        <!-- I Have no idea yet, what these filters should do.
         <button class="btn btn--guide-filter"><span class="glyphicon glyphicon-ok" />this week</button>
         <button class="btn btn--guide-filter active"><span class="glyphicon glyphicon-ok" />this month</button>
         <button class="btn btn--guide-filter"><span class="glyphicon glyphicon-plus" />next season</button>
+        -->
     </div>
     <div class="row guide-series">
         <ul class="series-guide">
             <li ng-repeat="series in guide">
                 <h2>{{ series.name }}</h2>
                 <div class="unseen-episodes row" ng-show="series.unseen">
-                    <div class="col-md-3 col-xs-12"><p>Unseen episodes</p><p class="hidden-xs hidden-sm">3 episodes available</p></div>
+                    <div class="col-md-3 col-xs-12"><p><strong>Unseen episodes</strong></p><p class="hidden-xs hidden-sm">3 episodes available</p></div>
                     <div class="col-md-9 col-xs-12">
                         <div class="unseen-episode row" ng-repeat="episode in series.unseen">
                             <div class="col-md-2 col-xs-2">S{{ episode.season }}E{{ episode.episode }}</div>
@@ -28,7 +34,7 @@
                     </div>
                 </div>
                 <div class="unaired-episodes row" ng-show="series.unaired.length">
-                    <div class="col-md-3 col-xs-12"><p>Upcoming episodes</p></div>
+                    <div class="col-md-3 col-xs-12"><p><strong>Upcoming episodes</strong></p></div>
                     <div class="col-md-9 col-xs-12">
                         <div class="unaired-episode row" ng-repeat="episode in series.unaired">
                             <div class="col-md-2 col-xs-2">S{{ episode.season }}E{{ episode.episode }}</div>
