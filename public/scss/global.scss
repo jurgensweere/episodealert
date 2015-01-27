@@ -510,6 +510,23 @@ li.disabled{
     padding: 3px 8px 4px 8px;    
 }
 
+.seen-column:hover .seen-button--season,
+.seen-column:hover .seen-button--untill{
+    display: inline-block;
+}
+
+.seen-button--episode{
+
+} 
+
+.seen-button--season{
+    display: none;
+}
+
+.seen-button--untill{
+    display: none;    
+}
+
 .episode-list {
 	font-size: 110%;
 	width: 100%;
@@ -538,7 +555,7 @@ li.disabled{
 
 	.seen-column {
         text-align: right;
-		width: 25%;
+		width: 30%;
 	}
 }
 
