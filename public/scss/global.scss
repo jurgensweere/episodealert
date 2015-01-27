@@ -510,21 +510,30 @@ li.disabled{
     padding: 3px 8px 4px 8px;    
 }
 
+.ea-seen-button{
+    position: relative;
+    float:right;
+}
+
 .seen-column:hover .seen-button--season,
 .seen-column:hover .seen-button--untill{
     display: inline-block;
 }
 
 .seen-button--episode{
-
+    position: relative;
 } 
 
 .seen-button--season{
     display: none;
+    position: absolute;
+    left: -190px;
 }
 
 .seen-button--untill{
     display: none;    
+    position: absolute;    
+    left: -85px;
 }
 
 .episode-list {
@@ -545,7 +554,7 @@ li.disabled{
 	}
 
 	.title {
-		width: 50%;
+		width: 67%;
 	}
 
 	.airdate {
@@ -555,7 +564,7 @@ li.disabled{
 
 	.seen-column {
         text-align: right;
-		width: 30%;
+		width: 13%;
 	}
 }
 
@@ -596,6 +605,18 @@ li.disabled{
 
     .seasons{
         background-color: $primary-color;
+    }
+
+    .btn{
+        border-radius: 2px;
+    }
+
+    .btn:hover{
+        color: #FFF;
+    }
+
+    .btn:focus{
+        color: $bright-highlight;
     }
 
     .nav-tabs {
