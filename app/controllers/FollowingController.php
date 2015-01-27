@@ -10,6 +10,7 @@ use EA\models\Seen;
 use Auth;
 use DB;
 use DateTime;
+use Input;
 
 class FollowingController extends BaseController
 {
@@ -65,12 +66,29 @@ class FollowingController extends BaseController
         $user = Auth::user();
         if($user){
 
-            $series = Following::where('user_id', $user->id)
+            $query = Following::where('user_id', $user->id)
                 ->select('following.archive', 'series.*')
-                ->join('series', 'following.series_id', '=', 'series.id')
-                ->get();
+                ->join('series', 'following.series_id', '=', 'series.id');
+
+            if (!filter_var(Input::get('archive', 'true'), FILTER_VALIDATE_BOOLEAN)) {
+                $query->where('following.archive', '=', 0);
+            }
+            if (!filter_var(Input::get('ended', 'true'), FILTER_VALIDATE_BOOLEAN)) {
+                $query->where('series.status', '!=', 'Ended');
+            }
+
+            $series = $query->get();
 
             self::addSeenEpisodesToSeries($series, $user->id);
+
+            if (filter_var(Input::get('seen', 'false'), FILTER_VALIDATE_BOOLEAN)) {
+                $series = $series->filter(function($series) {
+                    if ($series->unseen_episodes > 0) {
+                        return true;
+                    }
+                });
+            }
+
             self::addCurrentEpisode($series, $user->id);
             self::addLatestEpisodes($series);
 
@@ -88,7 +106,7 @@ class FollowingController extends BaseController
 
         foreach ($series as $s) {
             $s->seen_episodes = Seen::where('series_id', $s->id)->where('user_id', $userid)->count();
-            $s->unseen_epsiodes = $s->episode_amount - $s->seen_episodes;
+            $s->unseen_episodes = $s->episode_amount - $s->seen_episodes;
         }
     }
 

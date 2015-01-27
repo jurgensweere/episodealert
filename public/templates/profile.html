@@ -5,12 +5,14 @@
 	</div>
 	<div class="row profile-filters">
 		Filters 
-		<button class="btn btn--profile-filter active"><span class="glyphicon glyphicon-ok" />unseen</button>
-		<button class="btn btn--profile-filter active"><span class="glyphicon glyphicon-ok" />continueing</button>
+		<button class="btn btn--profile-filter" ng-class="{active: seen}" ng-click="toggleUnseen()"><span class="glyphicon glyphicon-ok" />unseen</button>
+		<button class="btn btn--profile-filter" ng-class="{active: !ended}" ng-click="toggleEnded()"><span class="glyphicon glyphicon-ok" />continueing</button>
+		<button class="btn btn--profile-filter" ng-class="{active: archive}" ng-click="toggleArchive()"><span class="glyphicon glyphicon-ok" />archived</button>
+		<!-- Dunno how to implement these filters: 
 		<button class="btn btn--profile-filter"><span class="glyphicon glyphicon-plus" />favorite</button>
-		<button class="btn btn--profile-filter active"><span class="glyphicon glyphicon-ok" />archived</button>
 		<button class="btn btn--profile-filter"><span class="glyphicon glyphicon-plus" />2014</button>
 		<button class="btn btn--profile-filter"><span class="glyphicon glyphicon-plus" />nudity</button>
+		-->
 	</div>
 	<div class="row profile-series">
 		<ul class="series-profile">

@@ -82,8 +82,15 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
      *
      * @return {array}  List of series followed, including amount of (un)seen episodes
      */
-    seriesFactory.getFollowingSeries = function() {
-        return $http.get('/api/profile/following');
+    seriesFactory.getFollowingSeries = function(excludeSeen, includeEnded, includeArchive) {
+        excludeSeen = typeof excludeSeen !== 'undefined' ? excludeSeen : false;
+        includeEnded = typeof includeEnded !== 'undefined' ? includeEnded : true;
+        includeArchive = typeof includeArchive !== 'undefined' ? includeArchive : true;
+        return $http.get('/api/profile/following', {params: {
+            seen: excludeSeen,
+            ended: includeEnded,
+            archive: includeArchive
+        }});
     };    
 
     /**
