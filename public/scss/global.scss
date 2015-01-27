@@ -577,6 +577,10 @@ li.disabled{
        
     }
 
+    .seasons{
+        background-color: $primary-color;
+    }
+
     .nav-tabs {
     	border: none;
     	height: 60px;
@@ -584,7 +588,7 @@ li.disabled{
 
     	a {
     		border-radius: 0px;
-    	}
+    	} 
 
     	li > a {
     		padding: 12px 16px 12px 16px;

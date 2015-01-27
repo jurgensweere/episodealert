@@ -47,6 +47,14 @@
                     .success(function (response) {
                         //flash(response.follow);
                         episode.seen = 0;
+
+                        //After the episode is succesfully set to unseen, we should request an update on the unseen object
+                        var loadUnseen = getUnseenAmountBySeries($scope.series.id, $scope.series.season_amount);
+                        loadUnseen.success(function(unseen){
+                            for( var i = 0; i < unseen.length; i++){
+                                $scope.seasons[i].unseen = unseen[i];
+                            }
+                        });                         
                     })
                     .error(function (error) {
                         flash(response.seen);
