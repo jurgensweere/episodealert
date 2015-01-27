@@ -22,7 +22,7 @@
             <li ng-repeat="series in guide">
                 <h2>{{ series.name }}</h2>
                 <div class="unseen-episodes row" ng-show="series.unseen">
-                    <div class="col-md-3 col-xs-12"><p><strong>Unseen episodes</strong></p><p class="hidden-xs hidden-sm">3 episodes available</p></div>
+                    <div class="col-md-3 col-xs-12"><p ng-show="series.unseen_total"><strong>Unseen episodes</strong></p><p class="hidden-xs hidden-sm" ng-show="series.unseen_total">{{ series.unseen_total }} episodes available</p></div>
                     <div class="col-md-9 col-xs-12">
                         <div class="unseen-episode row" ng-repeat="episode in series.unseen">
                             <div class="col-md-2 col-xs-2">S{{ episode.season }}E{{ episode.episode }}</div>

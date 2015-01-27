@@ -138,7 +138,7 @@ class TvdbJob
             }
             $episode->season = $ep['season'];
             $episode->episode = $ep['episode'];
-            $episode->airdate = $ep['airdate'];
+            $episode->airdate = strlen($ep['airdate']) ? $ep['airdate'] : null;
             $episode->name = $ep['name'];
             $episode->description = $ep['description'];
             $episode->image = 'none';

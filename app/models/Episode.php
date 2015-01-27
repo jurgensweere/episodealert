@@ -17,7 +17,7 @@ class Episode extends Eloquent
     protected $appends = array('seen');
 
     public function getAirdateAttribute($value){
-    	return Carbon::parse($value)->format('d-m-Y');
+    	return $value ? Carbon::parse($value)->format('d-m-Y') : null;
     }
 
     /*

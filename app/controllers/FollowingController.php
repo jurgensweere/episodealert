@@ -106,7 +106,10 @@ class FollowingController extends BaseController
 
         foreach ($series as $s) {
             $s->seen_episodes = Seen::where('series_id', $s->id)->where('user_id', $userid)->count();
-            $s->unseen_episodes = $s->episode_amount - $s->seen_episodes;
+            $s->unseen_episodes = Episode::where('series_id', '=', $s->id)
+                ->where('season', '>', 0)
+                ->where('airdate', '<', new DateTime)
+                ->count() - $s->seen_episodes;
         }
     }
 

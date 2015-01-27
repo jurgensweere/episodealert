@@ -23,7 +23,8 @@
 					var loadUnseen = getUnseenAmountBySeries($scope.series.id, $scope.series.season_amount);
 	   				loadUnseen.success(function(unseen){
 	   					for( var i = 0; i < unseen.length; i++){
-	   						$scope.seasons[i].unseen = unseen[i];
+	   						var index = i + 1; //$scope.series.has_specials ? i + 1 : i;
+	   						$scope.seasons[index].unseen = unseen[i];
 	   					}
 	   				});			    	
 
