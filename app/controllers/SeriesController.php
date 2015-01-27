@@ -53,6 +53,8 @@ class SeriesController extends BaseController
     public function getEpisodesBySeason($series_id, $season){
         $episodes = Episode::where('series_id', $series_id)
             ->where('season', $season)
+            ->orderBy('season', 'asc')
+            ->orderBy('episode', 'asc')
             ->select(array('episode.*', DB::raw(sprintf("case when airdate < '%s' then 1 else 0 end as aired", date('Y-m-d')))))
             ->get();
 
@@ -67,7 +69,7 @@ class SeriesController extends BaseController
             $user_id = Auth::user()->id;
 
             $followingCheck = Following::where('series_id', $id)->where('user_id', $user_id)->count();
-            
+
             if(!$followingCheck){
 		          return self::getEpisodesFromGivenSeason($id, 1);
             } else {
@@ -146,12 +148,12 @@ class SeriesController extends BaseController
      */
     private function getEpisodesFromLatestSeason($id){
         Log::info("inside getEpisodesFromLatestSeason method ".$id);
-        $lastSeason = Episode::where('series_id', $id )->select('season')->orderBy('season', 'desc')->first()->season;           
+        $lastSeason = Episode::where('series_id', $id )->select('season')->orderBy('season', 'desc')->first()->season;
         return self::getEpisodesFromGivenSeason($id, $lastSeason);
     }
 
     private function getEpisodesFromGivenSeason($id, $season) {
-       return Response::json(Episode::where('series_id', $id)->where('season', $season)->get());
+       return Response::json(Episode::where('series_id', $id)->where('season', $season)->orderBy('episode', 'asc')->get());
     }
 
     /*
@@ -186,7 +188,7 @@ class SeriesController extends BaseController
         }else{
             return Response::json(array('seen' => 'Unauthorized'), 500);
         }
-        
+
     }
 
     public function unsetSeenEpisode(){
@@ -195,9 +197,9 @@ class SeriesController extends BaseController
             $episode_id = Input::get('episode_id');
             $user_id = Auth::user()->id;
             $unsee = Seen::where('episode_id', $episode_id)->where('user_id', $user_id)->delete();
-            
+
             if($unsee){
-                return Response::json(array('seen' => 'unseen'));  
+                return Response::json(array('seen' => 'unseen'));
             }
         }else{
 
@@ -220,7 +222,7 @@ class SeriesController extends BaseController
                 ->count();
             $totalSeen = Seen::where('user_id', Auth::user()->id)->count();
 
-            return Response::json(array('unseenepisodes' => $totalEpisodes - $totalSeen)); 
+            return Response::json(array('unseenepisodes' => $totalEpisodes - $totalSeen));
         }
         return Response::json(
             array(
@@ -244,14 +246,14 @@ class SeriesController extends BaseController
             $seenAmount = Seen::where('series_id', $series_id)->where('user_id', $user_id)->where('season', $season_number)->count();
 
             $unseenAmountOfEpisodes = $totalAmountofEpisodes - $seenAmount;
-            
-            return Response::json(array('unseenepisodes' => $unseenAmountOfEpisodes, 'season' => $season_number));  
+
+            return Response::json(array('unseenepisodes' => $unseenAmountOfEpisodes, 'season' => $season_number));
 
         }else{
 
             return Response::json(array('error' => 'fail unauthorized'), 500);
 
-        }        
+        }
     }
 
     /*
@@ -265,7 +267,7 @@ class SeriesController extends BaseController
             $user_id = Auth::user()->id;
 
 
-            for ($i=1; $i <= $seasons_amount; $i++) { 
+            for ($i=1; $i <= $seasons_amount; $i++) {
                 $totalAmountofEpisodes = Episode::where('series_id', $series_id)->where('season', $i)->whereNotNull('airdate')->where('airdate', '<', new DateTime)->count();
                 $seenAmount = Seen::where('series_id', $series_id)->where('user_id', $user_id)->where('season', $i)->count();
 
@@ -273,13 +275,13 @@ class SeriesController extends BaseController
                 array_push($seasonObject, $unseenAmountOfEpisodes);
             }
 
-            return Response::json($seasonObject);  
+            return Response::json($seasonObject);
 
         }else{
 
             return Response::json(array('error' => 'fail unauthorized'), 500);
-            
-        }        
+
+        }
     }
 
     public function setSeenSeason(){
