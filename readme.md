@@ -19,7 +19,7 @@ The old website: [Episode-Alert](http://www.episode-alert.com).
 
 ### Installation for backend laravel ( execute in / )
 ``` 
-  compuser update 
+  composer update 
 ``` 
 ### Installation for frontend ( execute in /public )
 
