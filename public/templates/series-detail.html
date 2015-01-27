@@ -50,7 +50,7 @@
                                 {{ ::episode.airdate }}
                             </td>
                             <td class="seen-column">
-                                <button ng-controller="SeenCtrl" class="btn seen-button" ng-click="toggleEpisode(episode, series)">{{ episode.seen ? 'Seen' : 'Not seen' }}</button>
+                                <button ng-controller="SeenCtrl" class="btn seen-button" ng-show="episode.aired" ng-click="toggleEpisode(episode, series)">{{ episode.seen ? 'Seen' : 'Not seen' }}</button>
                             </td>
                         </tr>
                     </table>

@@ -51,7 +51,12 @@ class SeriesController extends BaseController
     }
 
     public function getEpisodesBySeason($series_id, $season){
-    	return Response::json(Episode::where('series_id', $series_id)->where('season', $season)->get());
+        $episodes = Episode::where('series_id', $series_id)
+            ->where('season', $season)
+            ->select(array('episode.*', DB::raw(sprintf("case when airdate < '%s' then 1 else 0 end as aired", date('Y-m-d')))))
+            ->get();
+
+    	return Response::json($episodes);
     }
 
 	/*
@@ -96,13 +101,25 @@ class SeriesController extends BaseController
                     })
                     ->where('episode.series_id', '=', $series->id)
                     ->whereNull('seen.id')
-                    ->where('episode.airdate', '>', '0000-00-00')
+                    ->where('episode.airdate', '<', new DateTime)
                     ->where('episode.season', '>', 0)
                     ->orderBy('episode.airdate', 'asc')
                     ->orderBy('episode.season', 'asc')
                     ->orderBy('episode.episode', 'asc')
                     ->take(3)
                     ->get(array('episode.*'));
+
+                // And the total:
+                // TODO: make sure we use the same count query everywhere, instead of having different counts.
+                $series->unseen_total = Episode::leftJoin('seen', function($join) {
+                        $join->on('seen.episode_id', '=', 'episode.id')
+                            ->where('seen.user_id', '=', Auth::user()->id);
+                    })
+                    ->where('episode.series_id', '=', $series->id)
+                    ->whereNull('seen.id')
+                    ->where('episode.airdate', '>', '0000-00-00')
+                    ->where('episode.season', '>', 0)
+                    ->count();
             }
 
             if (filter_var(Input::get('upcoming', 'true'), FILTER_VALIDATE_BOOLEAN)) {
@@ -246,8 +263,8 @@ class SeriesController extends BaseController
             $user_id = Auth::user()->id;
 
 
-            for ($i=0; $i <= $seasons_amount; $i++) { 
-                $totalAmountofEpisodes = Episode::where('series_id', $series_id)->where('season', $i)->count();
+            for ($i=1; $i <= $seasons_amount; $i++) { 
+                $totalAmountofEpisodes = Episode::where('series_id', $series_id)->where('season', $i)->whereNotNull('airdate')->where('airdate', '<', new DateTime)->count();
                 $seenAmount = Seen::where('series_id', $series_id)->where('user_id', $user_id)->where('season', $i)->count();
 
                 $unseenAmountOfEpisodes = $totalAmountofEpisodes - $seenAmount;
