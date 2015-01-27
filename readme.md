@@ -14,12 +14,13 @@ The old website: [Episode-Alert](http://www.episode-alert.com).
 
 ### Prerequisites backend: 
 * [PHP]
-* [MySQL]
+* [MySQL] and create a database and configure it in laravel
 * [Composer](https://getcomposer.org/)
 
 ### Installation for backend laravel ( execute in / )
 ``` 
   composer update 
+  php artisan migrate
 ``` 
 ### Installation for frontend ( execute in /public )
 
@@ -34,7 +35,9 @@ The old website: [Episode-Alert](http://www.episode-alert.com).
 ### Work
 
 ```
+  
   'grunt watch' to watch for changes
   'php artisan serve' to start a webserver in root of the project (or you can install apache)
+  'php artisan series:update'  to start fetching series
   
 ```
