@@ -1,11 +1,10 @@
 ## Episode Alert source
 
-The website: [Episode-Alert](http://www.episode-alert.com).
+The old website: [Episode-Alert](http://www.episode-alert.com).
 
 ## Installation
 
-### Prerequisites
-
+### Prerequisites fronttend
 * [Node](http://nodejs.org/)
 * [Git](http://git-scm.com/downloads)
 * [Bower](http://bower.io/)
@@ -13,12 +12,28 @@ The website: [Episode-Alert](http://www.episode-alert.com).
 * [Grunt](http://gruntjs.com/)
 * [Compass](http://compass-style.org/)
 
-### Install
+### Prerequisites backend: 
+* [PHP]
+* [MySQL]
+* [Composer](https://getcomposer.org/)
+
+### Installation for backend laravel ( execute in / )
+``` 
+  compuser update 
+``` 
+### Installation for frontend ( execute in /public )
 
 ```
   npm install -g grunt-cli
   gem install sass compass
   bower install
-  nmp install (Or 'npm install --no-bin-links' if it doenst work)
+  nmp install (Or 'npm install --no-bin-links' if it doenst work on vagrant)
+  grunt build
 ```
 
+### Work
+
+```
+  grunt watch to watch for changes
+  
+```
