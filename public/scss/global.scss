@@ -1,5 +1,6 @@
 @CHARSET "ISO-8859-1";
 
+$light-text: #C9C9C9;
 $bright-highlight : #00ff90;
 $dark-color: #212a3f;
 $light-color: #434f5b;
@@ -53,6 +54,12 @@ ul {
     height: 100%;
     width: 100%;
     z-index: -9999;*/
+}
+
+.popover{
+    background-color: $background-color;
+    border: 1px solid $bright-highlight;
+    width: 40%;
 }
 
 .unseen-badge{
@@ -555,6 +562,7 @@ li.disabled{
 
 	td {
 		padding: 3px 10px 3px 10px;
+        vertical-align: top;
 	}
 
     tr.seen {
@@ -567,8 +575,23 @@ li.disabled{
 	}
 
 	.title {
+        cursor: pointer;
 		width: 67%;
 	}
+
+    .description{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        color: $light-text;
+    }
+
+    .title-row:hover .description-info{
+        display: inline-block;
+    }
+
+    .description-info{
+        display: none;        
+    }
 
 	.airdate {
         color: #666;
@@ -737,16 +760,16 @@ li.disabled{
 
     .navbar-brand {
         text-transform: uppercase;
-        color: #C9C9C9;
+        color: $light-text;
         padding-top: 15px;
 
         a {
-            color: #C9C9C9;
+            color: $light-text;
         }
     }    
 
     .navbar-brand:focus, .navbar-brand:hover {
-        color: #C9C9C9;
+        color: $light-text;
     }
 
     .navbar-text {
