@@ -223,7 +223,7 @@ class SeriesController extends BaseController
                 ->where('episode.season', '>', 0)
                 ->where('episode.airdate', '<', new DateTime)
                 ->count();
-            $totalSeen = Seen::where('user_id', Auth::user()->id)->count();
+            $totalSeen = Seen::where('user_id', Auth::user()->id)->where('season', '>', 0)->count();
 
             return Response::json(array('unseenepisodes' => $totalEpisodes - $totalSeen));
         }

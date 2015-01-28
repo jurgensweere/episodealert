@@ -105,7 +105,7 @@ class FollowingController extends BaseController
     private function addSeenEpisodesToSeries($series, $userid){
 
         foreach ($series as $s) {
-            $s->seen_episodes = Seen::where('series_id', $s->id)->where('user_id', $userid)->count();
+            $s->seen_episodes = Seen::where('series_id', $s->id)->where('user_id', $userid)->where('season', '>', 0)->count();
             $s->unseen_episodes = Episode::where('series_id', '=', $s->id)
                 ->where('season', '>', 0)
                 ->where('airdate', '<', new DateTime)
