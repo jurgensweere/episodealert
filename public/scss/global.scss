@@ -130,7 +130,8 @@ h1 {
 
     color: #e7e7e7;
     padding: 3px 60px 15px 60px;
-    //background-color: $background-color;
+    @media(max-width:767px){ padding: 3px 20px 15px 20px; }
+    background-color: $background-color;
 
     p {
         line-height: 180%;
@@ -569,8 +570,9 @@ li.disabled{
 	}
 
 	.airdate {
-		width: 15%;
-		text-align: right;
+        color: #666;
+        font-size: 70%;
+        @media(min-width:992px){ text-align: right; font-size: 100%; color: inherit;}
 	}
 
 	.seen-column {
@@ -602,6 +604,7 @@ li.disabled{
     }
 
     .seasons{
+        padding-left: 0;
         background-color: $primary-color;
     }
 
@@ -656,7 +659,8 @@ li.disabled{
 
 .series-details-extra {
 	background-color: $primary-color;
-	margin: 30px 15px 0px -15px;
+	margin: 0 -30px 40px 0px;
+    @media(min-width:768px){ margin: 0px 15px 40px -15px;}
 	padding: 10px;
 
 	dt {
