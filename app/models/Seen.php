@@ -12,5 +12,7 @@ class Seen extends Eloquent
     protected $table = 'seen';
 
 
-
+    const MODE_SINGLE = 'single';
+    const MODE_UNTIL = 'until';
+    const MODE_SEASON = 'season';
 }

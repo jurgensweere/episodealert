@@ -12,6 +12,7 @@ use Log;
 use Input;
 use DB;
 use DateTime;
+use App;
 
 class SeriesController extends BaseController
 {
@@ -160,51 +161,53 @@ class SeriesController extends BaseController
      * Seen code
      */
 
-    public function setSeenEpisode(){
-        if(Auth::user()){
+    public function setSeenEpisode(Episode $episode)
+    {
+        if (Auth::user()) {
+            $mode = Input::get('mode', Seen::MODE_SINGLE); // which mode to use?
 
-            $user_id = Auth::user()->id;
-            $episode_id = Input::get('episode_id');
-            $episode_season = Input::get('episode_season');
-            $episode_number = Input::get('episode_number');
-            $series_id = Input::get('series_id');
+            $service = App::make('series');
 
-            $seenCheck = Seen::where('episode_id', $episode_id)->where('user_id', $user_id)->count();
-            if(!$seenCheck){
-
-                $seen = new Seen;
-                $seen->episode_id = $episode_id;
-                $seen->user_id = $user_id;
-                $seen->series_id = $series_id;
-                $seen->season = $episode_season;
-                $seen->episode = $episode_number;
-
-                $seen->save();
-
-                return Response::json(array('seen' => true));
+            switch ($mode) {
+                case Seen::MODE_SINGLE:
+                    $seen = $service->setSeenSingleEpisode($episode, Auth::user());
+                    return Response::json(array('seen' => $seen->lists('episode_id')));
+                case Seen::MODE_UNTIL:
+                    $seen = $service->setSeenUntilEpisode($episode, Auth::user());
+                    return Response::json(array('seen' => $seen->lists('episode_id')));
+                case Seen::MODE_SEASON:
+                    $seen = $service->setSeenSeason($episode, Auth::user());
+                    return Response::json(array('seen' => $seen->lists('episode_id')));
             }
-            return Response::json(array('seen' => 'Allready seen'), 500);
+            return Response::json(array('seen' => 'Unknown operation'), 500);
 
-        }else{
+        } else {
             return Response::json(array('seen' => 'Unauthorized'), 500);
         }
 
     }
 
-    public function unsetSeenEpisode(){
-        if(Auth::user()){
+    public function unsetSeenEpisode(Episode $episode)
+    {
+        if (Auth::user()) {
 
-            $episode_id = Input::get('episode_id');
-            $user_id = Auth::user()->id;
-            $unsee = Seen::where('episode_id', $episode_id)->where('user_id', $user_id)->delete();
+            $mode = Input::get('mode', Seen::MODE_SINGLE); // which mode to use?
+            $service = App::make('series');
 
-            if($unsee){
-                return Response::json(array('seen' => 'unseen'));
+            switch ($mode) {
+                case Seen::MODE_SINGLE:
+                    $episodeIds = $service->setUnseenSingleEpisode($episode, Auth::user());
+                    return Response::json(array('unseen' => $episodeIds));
+                case Seen::MODE_UNTIL:
+                    $episodeIds = $service->setUnseenUntilEpisode($episode, Auth::user());
+                    return Response::json(array('unseen' => $episodeIds));
+                case Seen::MODE_SEASON:
+                    $episodeIds = $service->setUnseenSeason($episode, Auth::user());
+                    return Response::json(array('unseen' => $episodeIds));
             }
-        }else{
-
-            return Response::json(array('seen' => 'fail unauthorized'), 500);
-
+            return Response::json(array('unseen' => 'Unknown operation'), 500);
+        } else {
+            return Response::json(array('unseen' => 'fail unauthorized'), 500);
         }
     }
 

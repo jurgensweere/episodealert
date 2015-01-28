@@ -15,6 +15,7 @@
 Blade::setContentTags('<%', '%>');
 Blade::setEscapedContentTags('<%%', '%%>');
 
+Route::model('episode', 'EA\models\Episode');
 
 Route::group(
     array('namespace' => 'EA\controllers'),
@@ -59,8 +60,8 @@ Route::group(
             Route::get('series/{uniqueName}', 'SeriesController@getSeries');
             
             //Seen
-            Route::post('series/seen/', 'SeriesController@setSeenEpisode');
-            Route::post('series/unseen/', 'SeriesController@unsetSeenEpisode');
+            Route::post('series/seen/{episode}', 'SeriesController@setSeenEpisode');
+            Route::post('series/unseen/{episode}', 'SeriesController@unsetSeenEpisode');
 
         });
 

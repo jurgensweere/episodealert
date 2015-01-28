@@ -2,25 +2,47 @@
     angular.module('eaApp').controller('SeenCtrl',
         function($scope, seriesFactory, flash) {
             /** Toggle an episode (un)seen */
-            $scope.toggleEpisode = function(episode, series) {
+            $scope.toggleEpisode = function(episode) {
                 if (episode.seen) {
-                    unseenServiceCall(episode);
+                    unseenServiceCall(episode, 'single');
                 } else {
-                    seenServiceCall(episode, series);
+                    seenServiceCall(episode, 'single');
                 }            
+            };
+
+            /** Toggle a episodes (un)seen until here */
+            $scope.toggleUntil = function (episode) {
+                if (episode.seen) {
+                    unseenServiceCall(episode, 'until');
+                } else {
+                    seenServiceCall(episode, 'until');
+                }  
+            };
+
+            /** Toggle a season (un)seen */
+            $scope.toggleSeason = function (episode) {
+                if (episode.seen) {
+                    unseenServiceCall(episode, 'season');
+                } else {
+                    seenServiceCall(episode, 'season');
+                }  
             };
 
             /**
              * Set an episode to 'seen'
              *
              * @param episode
-             * @param series
+             * @param mode
              */
-            function seenServiceCall(episode, series) {
-                seriesFactory.setSeenEpisode(episode.id, episode.season, episode.episode, series.id)
+            function seenServiceCall(episode, mode) {
+                seriesFactory.setSeenEpisode(episode.id, mode)
                     .success(function (response) {
-                        //flash(response.follow);
-                        episode.seen = 1;
+                        // Mark episodes as seen from response
+                        angular.forEach($scope.seasons[episode.season].content, function(episode, key) {
+                            if (response.seen.indexOf(episode.id) > -1) {
+                                episode.seen = 1;
+                            }
+                        });
 
                         //After the episode is succesfully set to seen, we should request an update on the unseen object
                         var loadUnseen = getUnseenAmountBySeries($scope.series.id, $scope.series.season_amount);
@@ -43,11 +65,15 @@
              * @param episode
              * @param series
              */
-            function unseenServiceCall(episode) {
-                seriesFactory.setUnseenEpisode(episode.id)
+            function unseenServiceCall(episode, mode) {
+                seriesFactory.setUnseenEpisode(episode.id, mode)
                     .success(function (response) {
                         //flash(response.follow);
-                        episode.seen = 0;
+                        angular.forEach($scope.seasons[episode.season].content, function(episode, key) {
+                            if (response.unseen.indexOf(episode.id) > -1) {
+                                episode.seen = 0;
+                            }
+                        });
 
                         //After the episode is succesfully set to unseen, we should request an update on the unseen object
                         var loadUnseen = getUnseenAmountBySeries($scope.series.id, $scope.series.season_amount);
@@ -59,7 +85,7 @@
                         });                         
                     })
                     .error(function (error) {
-                        flash(response.seen);
+                        flash(response.unseen);
                     });
             }
 

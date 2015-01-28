@@ -119,26 +119,24 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
      * Mark an episode as seen
      *
      * @param {int} episode_id      ID of episode to mark as seen
-     * @param {int} episode_season  Season number
-     * @param {int} episode_number  Episode number
-     * @param {int} series_id       ID of series this episode belongs to
+     * @param {string} mode         Mode to use (single, until, season)
      * @return {string}             Response message
      */
-    seriesFactory.setSeenEpisode = function (episode_id, episode_season, episode_number, series_id){
-        return $http.post('/api/series/seen', data = { 'episode_id' : episode_id,
-         'episode_season' : episode_season, 
-         'episode_number' : episode_number, 
-         'series_id' : series_id });
+    seriesFactory.setSeenEpisode = function (episode_id, mode){
+        mode = typeof mode !== 'undefined' ? mode : 'single';
+        return $http.post('/api/series/seen/' + episode_id, data = {mode: mode});
     };
 
     /**
      * Mark an episode as unseen
      *
      * @param {int} episode_id  ID of episode to mark as unseen
+     * @param {string} mode     Mode to use (single, until, season)
      * @return {string}         Response message
      */
-    seriesFactory.setUnseenEpisode = function (episode_id){
-        return $http.post('/api/series/unseen', data = { 'episode_id' : episode_id });
+    seriesFactory.setUnseenEpisode = function (episode_id, mode){
+        mode = typeof mode !== 'undefined' ? mode : 'single';
+        return $http.post('/api/series/unseen/' + episode_id, data = {mode: mode});
     };
 
     /**
