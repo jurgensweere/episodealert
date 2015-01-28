@@ -365,6 +365,20 @@ li.disabled{
     @media(min-width:768px){ height: 320px; padding: 4px; }
 }
 
+.badge {
+    top: -12px;
+    right: -10px;
+    position: absolute;
+    background-color: rgba(0,0,0,0.8);
+    font-size: 80%;
+    border: 2px solid orange;
+    border-radius: 15px;
+    z-index: 1;
+}
+.seen-badge{
+    border: 2px solid $bright-highlight;
+}
+
 .series-profile,
 .series-search {
     text-align: left;
@@ -379,11 +393,8 @@ li.disabled{
     .badge {
         top: 90%;
         left: 80%;
-        position: absolute;
-        background-color: rgba(0,0,0,0.8);
+        right: auto;
         font-size: 120%;
-        border: 2px solid $bright-highlight;
-        border-radius: 15px;
         padding: 3px 10px 4px 8px;
     }
 
@@ -587,20 +598,7 @@ li.disabled{
         text-shadow: 1px 1px #0F0F0F;   
     }
 
-    .badge{
-        top: -12px;
-        right: -10px;
-        position: absolute;
-        background-color: rgba(0,0,0,0.8);
-        font-size: 80%;
-        border: 2px solid orange;
-        border-radius: 15px;
-        z-index: 1;
-    }
-
-    .seen-badge{
-        border: 2px solid $bright-highlight;
-       
+    .badge {
     }
 
     .seasons{
