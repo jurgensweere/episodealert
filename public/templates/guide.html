@@ -9,8 +9,16 @@
     </div>
     <div class="row guide-filters">
         Filters 
-        <button class="btn btn--guide-filter" ng-class="{active: unseen}" ng-click="toggleUnseen()"><span class="glyphicon glyphicon-ok" />unseen</button>
-        <button class="btn btn--guide-filter" ng-class="{active: upcoming}" ng-click="toggleUpcoming()"><span class="glyphicon glyphicon-ok" />upcoming</button>
+        <button class="btn btn--guide-filter" ng-class="{active: unseen}" ng-click="toggleUnseen()">
+            <span ng-show="unseen == true" class="glyphicon glyphicon-ok" />
+            <span ng-show="unseen == false" class="glyphicon glyphicon-plus" />
+            unseen
+        </button>
+        <button class="btn btn--guide-filter" ng-class="{active: upcoming}" ng-click="toggleUpcoming()">
+            <span ng-show="upcoming == true" class="glyphicon glyphicon-ok" />
+            <span ng-show="upcoming == false" class="glyphicon glyphicon-plus" />
+            upcoming
+        </button>
         <!-- I Have no idea yet, what these filters should do.
         <button class="btn btn--guide-filter"><span class="glyphicon glyphicon-ok" />this week</button>
         <button class="btn btn--guide-filter active"><span class="glyphicon glyphicon-ok" />this month</button>
