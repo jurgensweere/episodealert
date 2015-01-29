@@ -88,7 +88,7 @@
 
     });
 
-    app.config(function($httpProvider){
+    app.config(function($provide, $httpProvider){
 
         var logsOutUserOn401 = function($location, $q, SessionService) { 
             var success = function(response) {
@@ -109,6 +109,35 @@
             };
 
         };
+
+        $provide.factory("xhrResponseInterceptor", ['$q', function($q) {
+            return {
+                'request': function (config) {
+                    $('#spinner').show();
+                    return config;
+                },
+                'requestError': function(rejection) {
+                    $('#spinner').hide();
+                    if (canRecover(rejection)) {
+                        return responseOrNewPromise;
+                    }
+                    return $q.reject(rejection);
+                },
+                'response': function(response) {
+                    $('#spinner').hide();
+                    return response;
+                },
+                'responseError': function(rejection) {
+                    $('#spinner').hide();
+                    if (canRecover(rejection)) {
+                        return responseOrNewPromise;
+                    }
+                    return $q.reject(rejection);
+                }
+            };
+        }]);
+
+        $httpProvider.interceptors.push('xhrResponseInterceptor');
 
     });
 
