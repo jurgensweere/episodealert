@@ -134,13 +134,13 @@ class Tvdb
     /*
      * Get banner/fanart of series
      */
-    public function getBannerImage($series){
+    public function getFanartImage($series){
 
-		$url = 'http://www.thetvdb.com/api/CE185B06BC7B86B8/series/' . $series['id'] .'/banners.xml';
-		$seriesSubDirectory = substr($series['unique_name'], 0,2);
-		
+        $url = 'http://www.thetvdb.com/api/CE185B06BC7B86B8/series/' . $series['id'] .'/banners.xml';
+        $seriesSubDirectory = substr($series['unique_name'], 0,2);
+        
         $feed = self::downloadUrl($url);
-        $xml = simplexml_load_string($feed);	
+        $xml = simplexml_load_string($feed);    
 
          if($xml){   
             if($xml->Banner){
@@ -149,7 +149,7 @@ class Tvdb
                 //print_r($xml);
 
                 if(!$xml->Banner or $xml->Banner->BannerType2 != '1920x1080'){
-                	return false;
+                    return false;
                 }
          
 
@@ -157,7 +157,7 @@ class Tvdb
                 //todo: before downloading we should probably check if the banner has a certain size. Some banners are just
                 //posters that wont fit in any design. 
 
-         		//download image
+                //download image
                 $ch = curl_init($fanArtUrl);
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -173,12 +173,58 @@ class Tvdb
                 $close = fwrite($fp, $rawdata);
 
                 if($close){
-                	self::compress_image("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg", 
-                		"public/img/fanart/".$seriesSubDirectory."/".$series['unique_name']."_compressed.jpg", 40);
+                    self::compress_image("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg", 
+                        "public/img/fanart/".$seriesSubDirectory."/".$series['unique_name']."_compressed.jpg", 40);
                 }
                 
                 return $close; 
             }
+        }
+    }
+
+    public function getBannerImage($series) {
+        $url = 'http://www.thetvdb.com/api/CE185B06BC7B86B8/series/' . $series['id'] .'/banners.xml';
+        $seriesSubDirectory = substr($series['unique_name'], 0,2);
+        
+        $feed = self::downloadUrl($url);
+        $xml = simplexml_load_string($feed);    
+
+        if ($xml) {
+            if (!$xml->Banner) {
+                return false;
+            }
+
+            // check all possible banners for a banner lol
+            foreach ($xml->Banner as $b) {
+                if ($b->BannerType == 'series' && $b->BannerType2 == 'graphical') {
+                    $fanArtUrl = 'http://www.thetvdb.com/banners/' . $b->BannerPath;
+                    $fanArtVignetteUrl = 'http://www.thetvdb.com/banners/' . $b->VignettePath;
+
+                    //download image
+                    $ch = curl_init($fanArtUrl);
+                    curl_setopt($ch, CURLOPT_HEADER, 0);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+                    $rawdata=curl_exec($ch);
+                    curl_close ($ch);
+
+                    if (!file_exists("public/img/banner/".$seriesSubDirectory."/")) {
+                        mkdir("public/img/banner/".$seriesSubDirectory."/", 0777, true);
+                    }
+
+                    $fp = fopen("public/img/banner/".$seriesSubDirectory."/".$series['unique_name'].".jpg",'w');
+                    $close = fwrite($fp, $rawdata);
+
+                    if ($close) {
+                        self::compress_image("public/img/banner/".$seriesSubDirectory."/".$series['unique_name'].".jpg", 
+                            "public/img/banner/".$seriesSubDirectory."/".$series['unique_name']."_compressed.jpg", 40);
+                    }
+                    
+                    return $close; 
+                }
+            }
+            // no banners found
+            return false;
         }
     }
 
@@ -213,18 +259,18 @@ class Tvdb
         $close = fclose($fp);
 
         if($close){
-        	self::resize_image("public/img/poster/".$posterSubDirectory."/".$seriesPosterFileName, 
-        		"public/img/poster/".$posterSubDirectory."/".$series['unique_name']."_small.jpg", 60, 0.3);
-        	self::resize_image("public/img/poster/".$posterSubDirectory."/".$seriesPosterFileName, 
-        		"public/img/poster/".$posterSubDirectory."/".$series['unique_name']."_medium.jpg", 60, 0.5);
-        	self::resize_image("public/img/poster/".$posterSubDirectory."/".$seriesPosterFileName, 
-        		"public/img/poster/".$posterSubDirectory."/".$series['unique_name']."_large.jpg", 60, 1);
+            self::resize_image("public/img/poster/".$posterSubDirectory."/".$seriesPosterFileName, 
+                "public/img/poster/".$posterSubDirectory."/".$series['unique_name']."_small.jpg", 60, 0.3);
+            self::resize_image("public/img/poster/".$posterSubDirectory."/".$seriesPosterFileName, 
+                "public/img/poster/".$posterSubDirectory."/".$series['unique_name']."_medium.jpg", 60, 0.5);
+            self::resize_image("public/img/poster/".$posterSubDirectory."/".$seriesPosterFileName, 
+                "public/img/poster/".$posterSubDirectory."/".$series['unique_name']."_large.jpg", 60, 1);
         }
         
         return $close;
     }
 
-   	private function resize_image($source_url, $destination_url, $quality, $percentage){
+    private function resize_image($source_url, $destination_url, $quality, $percentage){
         list($width, $height) = getimagesize($source_url);
         $newwidth = $width * $percentage;
         $newheight = $height * $percentage;

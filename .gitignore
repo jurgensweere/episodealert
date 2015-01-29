@@ -11,6 +11,7 @@ public/node_modules/
 *.scssc
 npm-debug.log
 public/css/*.css
+public/img/banner/*
 public/img/fanart/*
 public/img/poster/*
 public/dist/js/*.js

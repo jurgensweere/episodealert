@@ -70,9 +70,11 @@ class TvdbJob
 
         $this->attachEpisodeData($series, $data);
 
-
-        if($series->poster_image_converted == 0){
+        if ($series->poster_image_converted == 0) {
             $this->attachSeriesPoster($series);    
+        }
+        if ($series->banner_image_converted == 0) {
+            $this->attachSeriesBanner($series, $data);    
         }
 
         //Find out if there is a special season and save it in series table
@@ -99,7 +101,7 @@ class TvdbJob
         //echo "\n";
 
         //Try to get fanart for the series
-        $fanart = App::make('tvdb')->getBannerImage($series);
+        $fanart = App::make('tvdb')->getFanartImage($series);
 
         if($fanart){
             $series->fanart_image = $series->unique_name.".jpg";
@@ -116,6 +118,17 @@ class TvdbJob
             $series->poster_image = $series->unique_name.".jpg";
             $series->poster_image_converted = 1;
             $series->save();
+        }
+    }
+
+    public function attachSeriesBanner(Series $series, $data)
+    {
+        $banner = App::make('tvdb')->getBannerImage($series);
+        
+        if ($banner) {
+            $series->banner_image = $series->unique_name.".jpg";
+            $series->banner_image_converted = 1;
+            $series->save();            
         }
     }
 
