@@ -17,5 +17,6 @@
 </div>  
 <div ng-if="series.status != 'Ended'" class="extra-info-episodes">
 	<p ng-if="series.latest_episodes[0]">Latest: Season {{ ::series.latest_episodes[0].season }} - Episode {{ ::series.latest_episodes[0].episode }}</p>
-    <p ng-if="series.latest_episodes[1]">Next episode: {{ ::series.latest_episodes[1].airdate }}</p>
+    <p>Next episode: {{ ::series.latest_episodes[1].airdate || 'unknown' }}</p>
 </div>  
+ 
