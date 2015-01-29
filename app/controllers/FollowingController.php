@@ -156,21 +156,37 @@ class FollowingController extends BaseController
     private function addLatestEpisodes($series)
     {
         foreach ($series as $s) {
-            // TODO: Fix this query, to select the last broadcasted episode, and the one that follows it.
             // figure out the last aired episode, and the next
-            $s->latest_episodes = DB::table('episode')
-                ->where('series_id', '=', $s->id)
-                ->where('airdate', '>=', function($query) use ($s) {
-                    $query->select('airdate')
-                        ->from('episode')
-                        ->where('series_id', '=', $s->id)
-                        ->where('airdate', '<', new DateTime)
-                        ->orderBy('airdate', 'desc')
-                        ->take(1);
-                })
-                ->orderBy('airdate', 'asc')
+            $airdate = date('Y-m-d');
+            $latest = Episode::where('series_id', '=', $s->id)
+                ->where('airdate', '<=', DB::raw(
+                    sprintf("IFNULL(
+                        (SELECT airdate
+                        FROM episode
+                        WHERE series_id = %s
+                        AND airdate > '%s'
+                        ORDER BY season asc, episode asc
+                        LIMIT 1), '%s')", 
+                        $s->id, $airdate, $airdate)
+                    ))
+                ->orderBy('season', 'desc')
+                ->orderBy('episode', 'desc')
                 ->take(2)
                 ->get();
+
+            // We get an array of 2 or less items:
+            // [0] == next episode to air
+            // [1] == last aired episode
+            // if [0] is null or before $airdate, the show has no episode planned in the future
+
+            // we will reverse the order and make sure that [1] is a future episode, otherwise we will remove it
+            if ($latest != null) {
+                $latest = $latest->reverse();
+                if ($latest->count() == 2 && strtotime($airdate) >= strtotime($latest->get(1)->airdate)) {
+                    $latest->pop();
+                }
+            }
+            $s->latest_episodes = $latest;
         }
     }
 

@@ -7,7 +7,7 @@
 	<a href="/series/{{ ::series.unique_name}}">{{ ::series.name }}</a>
     <span ng-if="series.current_episode != null">
 	   <p>Your current episode:</p>
-	   <p>Season {{ ::series.current_episode.season }} - Episode {{ ::series.current_episode.episode }} - <a href="#">Find</a></p>
+	   <p>Season {{ ::series.current_episode.season }} - Episode {{ ::series.current_episode.episode }}</p>
     </span>
 </div> 
 <div ng-if="series.status == 'Ended'" class="extra-info-episodes">
@@ -15,6 +15,6 @@
     <p>&nbsp;</p>
 </div>  
 <div ng-if="series.status != 'Ended'" class="extra-info-episodes">
-	<p>Latest: Season 4 - Episode 5</p>
-    <p>Next episode: 18-9-2014</p>
+	<p ng-if="series.latest_episodes[0]">Latest: Season {{ ::series.latest_episodes[0].season }} - Episode {{ ::series.latest_episodes[0].episode }}</p>
+    <p ng-if="series.latest_episodes[1]">Next episode: {{ ::series.latest_episodes[1].airdate }}</p>
 </div>  
