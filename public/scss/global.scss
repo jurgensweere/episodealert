@@ -56,12 +56,6 @@ ul {
     z-index: -9999;*/
 }
 
-.popover{
-    background-color: $background-color;
-    border: 1px solid $bright-highlight;
-    width: 40%;
-}
-
 .unseen-badge{
     position: absolute;
     top: -10px;
@@ -131,6 +125,7 @@ h1 {
     font-size: 200%;
     margin: 0px;
     line-height: 150%;
+    display: inline-block;
 }
 
 .info-text-top {
@@ -147,6 +142,27 @@ h1 {
     h1 {
         @media(max-width:767px) { font-size: 100%; }
     }
+}
+
+.profile-settings{
+    display: inline-block;
+    font-size:150%;
+    top: 2px;
+    margin: 0px 10px 0px 10px;
+    @media(max-width:767px) 
+    { 
+        font-size: 100%; 
+    }
+
+    .setting{
+        color: $bright-highlight;
+        cursor: pointer;        
+    }
+
+    .setting:hover{
+        color: $highlight-color;
+    }
+
 }
 
 .profile, .guide {
