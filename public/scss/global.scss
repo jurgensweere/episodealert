@@ -484,7 +484,10 @@ li.disabled{
 
     li {
         margin-top: 30px;
-        width: 20%;
+        @media(max-width:767px){ width: 100%; }
+        @media(min-width:768px){ width: 50%; }
+        @media(min-width:992px){ width: 33%; }
+        @media(min-width:1200px){ width: 20%; }
     }
 }
 
@@ -622,7 +625,7 @@ li.disabled{
     }    
 
     img {
-        margin-left: -15px;
+        @media(min-width:992px){ margin-left: -15px;}
     }
 
     p, dl {
@@ -688,8 +691,8 @@ li.disabled{
 
 .series-details-extra {
 	background-color: $primary-color;
-	margin: 0 -30px 40px 0px;
-    @media(min-width:768px){ margin: 0px 15px 40px -15px;}
+	margin: 0 0px 40px 0px;
+    @media(min-width:992px){ margin: 0px 15px 40px -15px;}
 	padding: 10px;
 
 	dt {
