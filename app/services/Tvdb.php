@@ -142,44 +142,47 @@ class Tvdb
         $feed = self::downloadUrl($url);
         $xml = simplexml_load_string($feed);    
 
-         if($xml){   
+        if($xml){   
             if($xml->Banner){
-                $fanArtUrl = 'http://www.thetvdb.com/banners/' . $xml->Banner->BannerPath;
-                $fanArtVignetteUrl = 'http://www.thetvdb.com/banners/' . $xml->Banner->VignettePath;
+                
                 //print_r($xml);
 
-                if(!$xml->Banner or $xml->Banner->BannerType2 != '1920x1080'){
-                    return false;
+                foreach ($xml->Banner as $b) {
+                    if ($b->BannerType == 'fanart' && $b->BannerType2 == '1920x1080') {
+                        $fanArtUrl = 'http://www.thetvdb.com/banners/' . $b->BannerPath;
+                        $fanArtVignetteUrl = 'http://www.thetvdb.com/banners/' . $b->VignettePath;
+
+                        //todo: before downloading we should probably check if the banner has a certain size. Some banners are just
+                        //posters that wont fit in any design. 
+
+                        //download image
+                        $ch = curl_init($fanArtUrl);
+                        curl_setopt($ch, CURLOPT_HEADER, 0);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                        curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+                        $rawdata=curl_exec($ch);
+                        curl_close ($ch);
+
+                        if (!file_exists("public/img/fanart/".$seriesSubDirectory."/")) {
+                            mkdir("public/img/fanart/".$seriesSubDirectory."/", 0777, true);
+                        }
+
+                        $fp = fopen("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg",'w');
+                        $close = fwrite($fp, $rawdata);
+
+                        if($close){
+                            self::compress_image("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg", 
+                                "public/img/fanart/".$seriesSubDirectory."/".$series['unique_name']."_compressed.jpg", 40);
+                            // delete original file
+                            //unlink("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg");
+                        }
+                        
+                        return $close;
+                    }
                 }
-         
-
-
-                //todo: before downloading we should probably check if the banner has a certain size. Some banners are just
-                //posters that wont fit in any design. 
-
-                //download image
-                $ch = curl_init($fanArtUrl);
-                curl_setopt($ch, CURLOPT_HEADER, 0);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
-                $rawdata=curl_exec($ch);
-                curl_close ($ch);
-
-                if (!file_exists("public/img/fanart/".$seriesSubDirectory."/")) {
-                    mkdir("public/img/fanart/".$seriesSubDirectory."/", 0777, true);
-                }
-
-                $fp = fopen("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg",'w');
-                $close = fwrite($fp, $rawdata);
-
-                if($close){
-                    self::compress_image("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg", 
-                        "public/img/fanart/".$seriesSubDirectory."/".$series['unique_name']."_compressed.jpg", 40);
-                }
-                
-                return $close; 
             }
         }
+        return false;
     }
 
     public function getBannerImage($series) {
@@ -218,14 +221,17 @@ class Tvdb
                     if ($close) {
                         self::compress_image("public/img/banner/".$seriesSubDirectory."/".$series['unique_name'].".jpg", 
                             "public/img/banner/".$seriesSubDirectory."/".$series['unique_name']."_compressed.jpg", 40);
+                        // delete original file
+                        //unlink("public/img/banner/".$seriesSubDirectory."/".$series['unique_name'].".jpg");
                     }
                     
                     return $close; 
                 }
             }
-            // no banners found
-            return false;
         }
+
+        // no banners found
+        return false;
     }
 
 
