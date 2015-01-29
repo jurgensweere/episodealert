@@ -129,6 +129,15 @@
             }
         };
     });
+    app.filter('createBannerUrl', function(){
+        return function(banner, unique_name){
+            if(banner){
+                return 'img/banner/' + unique_name.substring(0, 2) + '/' + banner;
+            }else{
+                return 'img/missing-banner.png';
+            }
+        };
+    });
 
     //Create fanart url
     app.filter('createFanartUrl', function(){

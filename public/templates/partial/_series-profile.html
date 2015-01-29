@@ -1,7 +1,8 @@
 <a href="/series/{{ ::series.unique_name}}">
 	<span ng-if="series.unseen_episodes > 0" class="badge">{{ series.unseen_episodes }}</span>
 	<span ng-if="series.unseen_episodes == 0" class="seen-badge badge"><span class="glyphicon glyphicon-ok"></span></span> 
-	<img class="img-responsive" ng-src="{{ series.poster_image | createImageUrl : series.unique_name : 'medium' }}" alt="{{ series.name }}" />
+	<img class="img-responsive hidden-xs" ng-src="{{ series.poster_image | createImageUrl : series.unique_name : 'medium' }}" alt="{{ series.name }}" />
+	<img class="img-responsive visible-xs" ng-src="{{ series.banner_image | createBannerUrl : series.unique_name }}" alt="{{ series.name }}" />
 </a>
 <div class="extra-info">
 	<a href="/series/{{ ::series.unique_name}}">{{ ::series.name }}</a>

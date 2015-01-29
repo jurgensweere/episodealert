@@ -143,12 +143,17 @@ h1 {
     p {
         line-height: 180%;
     }
+
+    h1 {
+        @media(max-width:767px) { font-size: 100%; }
+    }
 }
 
 .profile, .guide {
     .profile-filters, .guide-filters {
         height: 40px;
         padding: 5px 0px 5px 20px;
+        @media(max-width:767px){ padding: 5px 0px 5px 0px; }
         background-color: $primary-color;
 
         span {
@@ -433,7 +438,7 @@ li.disabled{
     }
 
     li {
-        @media(max-width:767px){ width: 50%; }
+        @media(max-width:767px){ width: 100%; }
         @media(min-width:768px){ width: 33%; }
         @media(min-width:992px){ width: 25%; }
         @media(min-width:1200px){ width: 25%; }
