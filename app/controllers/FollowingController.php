@@ -28,14 +28,14 @@ class FollowingController extends BaseController
                 $following->user_id = $user_id;
 
                 if($following->save()){
-                    return Response::json(array('follow' => 'success'));                
+                    return Response::json(array('follow' => 'success'));
                 }else{
                     return Response::json(array('follow' => 'fail to save'));
                 }
             }else{
-                return Response::json(array('follow' => 'allready following'));             
+                return Response::json(array('follow' => 'allready following'));
             }
-            
+
         }else{
             return Response::json(array('follow' => 'fail unauthorized'));
         }
@@ -47,9 +47,9 @@ class FollowingController extends BaseController
 
             $user_id = Auth::user()->id;
             $unfollow = Following::where('series_id', $series_id)->where('user_id', $user_id)->delete();
-            
+
             if($unfollow){
-                return Response::json(array('follow' => 'unfollow'));  
+                return Response::json(array('follow' => 'unfollow'));
             }
         }else{
 
@@ -129,7 +129,7 @@ class FollowingController extends BaseController
 
             $s->current_episode = null;
             $season = $lastSeen ? $lastSeen->season : 1;
-            $episode = $lastSeen ? $lastSeen->episode : 1;
+            $episode = $lastSeen ? $lastSeen->episode : 0;
 
             $currentEpisode = Episode::where('series_id', '=', $s->id)
                 ->where(function ($query) use ($season, $episode) {
@@ -166,7 +166,7 @@ class FollowingController extends BaseController
                         WHERE series_id = %s
                         AND airdate > '%s'
                         ORDER BY season asc, episode asc
-                        LIMIT 1), '%s')", 
+                        LIMIT 1), '%s')",
                         $s->id, $airdate, $airdate)
                     ))
                 ->orderBy('season', 'desc')
