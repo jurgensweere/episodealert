@@ -94,7 +94,7 @@ class SeriesController extends BaseController
             ->orderBy('following.updated_at', 'desc')
             ->get(array('series.*'));
 
-        $seriesFollowed->each(function($series)
+        foreach ($seriesFollowed as $key => $series)
         {
             // Fetch last three unseen episodes, if needed
             if (filter_var(Input::get('unseen', 'true'), FILTER_VALIDATE_BOOLEAN)) {
@@ -121,6 +121,7 @@ class SeriesController extends BaseController
                     ->where('episode.series_id', '=', $series->id)
                     ->whereNull('seen.id')
                     ->where('episode.airdate', '>', '0000-00-00')
+                    ->where('episode.airdate', '<', new DateTime)
                     ->where('episode.season', '>', 0)
                     ->count();
             }
@@ -136,7 +137,12 @@ class SeriesController extends BaseController
                     ->take(3)
                     ->get();
             }
-        });
+
+            if (($series->unaired == null || $series->unaired->count() == 0) &&
+                ($series->unseen == null || $series->unseen->count() == 0)) {
+                $seriesFollowed->forget($key);
+            }
+        };
 
         return Response::json($seriesFollowed);
     }
