@@ -109,6 +109,7 @@
 <% HTML::script(asset('js/factories/authenticationFactory.js')) %>
 <% HTML::script(asset('js/factories/seriesFactory.js')) %>
 <% HTML::script(asset('js/factories/oauthFactory.js')) %>
+<% HTML::script(asset('js/factories/userSettingsFactory.js')) %>
 
 <% HTML::script(asset('js/modules/angular-flash.js')) %>
 

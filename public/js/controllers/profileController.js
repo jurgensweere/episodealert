@@ -1,25 +1,29 @@
 (function(){
     angular.module('eaApp').controller('ProfileCtrl',  
-        function($scope, seriesFactory ,flash) {
+        function($scope, seriesFactory ,flash, userSettingService) {
+
     	    getFollowingSeries();
             getUnseenAmount();
 
             $scope.date = new Date();
-            $scope.archive = true;
-            $scope.ended = true;
-            $scope.seen = false; // exclude seen?
+            $scope.archive = userSettingService.model.userProfileSettings.archive;
+            $scope.ended = userSettingService.model.userProfileSettings.ended;
+            $scope.seen = userSettingService.model.userProfileSettings.seen; // exclude seen?
 
             $scope.toggleArchive = function () {
+                userSettingService.setProfileArchive(!$scope.archive);
                 $scope.archive = !$scope.archive;
                 getFollowingSeries();
             };
 
             $scope.toggleEnded = function () {
+                userSettingService.setProfileEnded(!$scope.ended);
                 $scope.ended = !$scope.ended;
                 getFollowingSeries();
             };
 
             $scope.toggleUnseen = function () {
+                userSettingService.setProfileSeen(!$scope.seen);                
                 $scope.seen = !$scope.seen;
                 getFollowingSeries();
             };
