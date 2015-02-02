@@ -19,6 +19,7 @@ The old website: [Episode-Alert](http://www.episode-alert.com).
 
 ### Installation for backend laravel ( execute in / )
 ``` 
+  config /app/config/local/app.php
   composer update 
   php artisan migrate
 ``` 
