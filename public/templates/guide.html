@@ -1,4 +1,10 @@
 <div class="guide">
+
+    <div class="row info-text-top">
+        <div ng-controller="ProfileHeaderCtrl" ng-include src="'templates/partial/_profile-header.html'" />
+    </div>
+
+    <!-- 
     <div class="row info-top" style="background-image: url('{{ series.poster_image | createFanartUrl : series.unique_name }}');">
         <div class="fanart-fade">
             <div class="info-text-top">
@@ -6,7 +12,8 @@
                 <p class="hidden-xs hidden-sm">{{ series.description }}</p>
             </div>
         </div>
-    </div>
+    </div> -->
+
     <div class="row guide-filters">
         Filters 
         <button class="btn btn--guide-filter" ng-class="{active: unseen}" ng-click="toggleUnseen()">

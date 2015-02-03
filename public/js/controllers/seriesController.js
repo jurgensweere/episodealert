@@ -1,5 +1,5 @@
-(function(){
-
+	(function () {
+    
     angular.module('eaApp').controller('SeriesCtrl',
         function($scope, $routeParams, seriesFactory) {
 

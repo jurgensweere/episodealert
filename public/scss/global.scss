@@ -8,6 +8,8 @@ $background-color: #101010;
 $highlight-color: #8ab839;
 $primary-color: #252525;
 $secondary-color: #363636;
+$lighter-text-shadow: #0F0F0F;
+$lighter-text: #e7e7e7;
 $font-family: "Open Sans", sans-serif;
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
@@ -130,7 +132,6 @@ h1 {
 
 .info-text-top {
 
-    color: #e7e7e7;
     padding: 3px 60px 15px 60px;
     @media(max-width:767px){ padding: 3px 20px 15px 20px; }
     //background-color: $background-color;
@@ -154,13 +155,33 @@ h1 {
         font-size: 100%; 
     }
 
+
+
     .setting{
         color: $bright-highlight;
-        cursor: pointer;        
+        cursor: pointer;   
+
+    }
+
+    .setting.active{
+        color: $highlight-color;;
     }
 
     .setting:hover{
         color: $highlight-color;
+    }
+
+}
+
+.footer{
+    font-size: 80%;
+    div{
+        color: $lighter-text;
+        text-align: right;
+    }
+
+    div:first-child {
+        text-align: left;
     }
 
 }
@@ -204,7 +225,7 @@ h1 {
 }
 
 .guide {
-    .info-top {
+/*    .info-top {
         position: relative;
         background-size: cover;
         background-position: 50% 15%;
@@ -215,14 +236,14 @@ h1 {
             background: transparent url('../img/fanart-fade.png') repeat 50% -500px;
             display: block;
         }
-    }
-    .info-text-top {
-        position: absolute;
+    }*/
+/*    .info-text-top {
+        //position: absolute;
         bottom: 0;
         p {
             color: #A09F9F;
         }
-    }
+    }*/
     li {
         list-style: none;
         h2 {
@@ -236,7 +257,7 @@ h1 {
             padding: 3px;
         }
         .unseen-episode, .unseen-episodes, .unaired-episodes {
-            color: #e7e7e7;
+            color: $lighter-text;
         }
         .unaired-episode {
             color: #666;
@@ -477,7 +498,7 @@ li.disabled{
     p {
         font-size: 85%;
         padding:  4px 0px 4px 0px;
-        text-shadow: 1px 1px #0F0F0F;   
+        text-shadow: 1px 1px $lighter-text-shadow;   
     }
 
     .extra-info {
@@ -496,7 +517,7 @@ li.disabled{
         text-align: left;
         background-color: $secondary-color;
         height: 60px;
-        text-shadow: 1px 1px #0F0F0F;       
+        text-shadow: 1px 1px $lighter-text-shadow;       
     }
 
     li {
@@ -541,7 +562,7 @@ li.disabled{
         text-align: left;
         background-color: $secondary-color;
         height: 30px;
-        text-shadow: 1px 1px #0F0F0F;       
+        text-shadow: 1px 1px $lighter-text-shadow;       
     }
 
     li {
@@ -677,7 +698,7 @@ li.disabled{
 
 .series-detail {
     h1 {
-        text-shadow: 2px 2px #0F0F0F;
+        text-shadow: 2px 2px $lighter-text-shadow;
         display: inline-block;
     }
 
@@ -691,7 +712,7 @@ li.disabled{
     }
 
     p, dl {
-        text-shadow: 1px 1px #0F0F0F;   
+        text-shadow: 1px 1px $lighter-text-shadow;   
     }
 
     .badge {

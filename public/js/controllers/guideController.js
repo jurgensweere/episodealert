@@ -5,6 +5,8 @@
             $scope.guide = [];
             $scope.series = {};
 
+            $scope.activePage = 'guide';
+
             $scope.unseen = true;
             $scope.upcoming = true;
 

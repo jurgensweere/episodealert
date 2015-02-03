@@ -1,11 +1,12 @@
 (function(){
     angular.module('eaApp').controller('ProfileCtrl',  
-        function($scope, seriesFactory ,flash, userSettingService) {
+        function($scope, seriesFactory , flash, userSettingService) {
 
     	    getFollowingSeries();
             getUnseenAmount();
 
-            $scope.date = new Date();
+            $scope.activePage = 'profile';
+
             $scope.archive = userSettingService.model.userProfileSettings.archive;
             $scope.ended = userSettingService.model.userProfileSettings.ended;
             $scope.seen = userSettingService.model.userProfileSettings.seen; // exclude seen?

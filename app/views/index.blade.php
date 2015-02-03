@@ -81,6 +81,16 @@
     <div id="fb-root"></div>
     <div id="contentUI" ui-view="content" class="container ea-content fade" ng-view>
     </div>
+    <div class="container" id="footer">
+        <div class="footer row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">    
+                Copyright 2015
+            </div>        
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">    
+                Contact :: Privacy
+            </div>
+        </div>    
+    </div>
     <div id="spinner">
         <div class="bounce1"></div>
         <div class="bounce2"></div>
@@ -105,6 +115,7 @@
 <% HTML::script(asset('js/controllers/followingController.js')) %>
 <% HTML::script(asset('js/controllers/seenController.js')) %>
 <% HTML::script(asset('js/controllers/guideController.js')) %>
+<% HTML::script(asset('js/controllers/profileHeaderController.js')) %>
 
 <% HTML::script(asset('js/factories/authenticationFactory.js')) %>
 <% HTML::script(asset('js/factories/seriesFactory.js')) %>
