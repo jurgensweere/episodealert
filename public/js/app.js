@@ -47,6 +47,11 @@
                         templateUrl: 'templates/profile.html',
                         controller: 'ProfileCtrl'
                     })
+
+                    .when('/profile/settings', {
+                        templateUrl: 'templates/profile/configuration.html',
+                        controller: 'ProfileConfigurationCtrl'
+                    })
                     
                     .when('/guide', {
                         templateUrl: 'templates/guide.html',

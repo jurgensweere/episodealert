@@ -116,6 +116,7 @@
 <% HTML::script(asset('js/controllers/seenController.js')) %>
 <% HTML::script(asset('js/controllers/guideController.js')) %>
 <% HTML::script(asset('js/controllers/profileHeaderController.js')) %>
+<% HTML::script(asset('js/controllers/profileConfigurationController.js')) %>
 
 <% HTML::script(asset('js/factories/authenticationFactory.js')) %>
 <% HTML::script(asset('js/factories/seriesFactory.js')) %>
