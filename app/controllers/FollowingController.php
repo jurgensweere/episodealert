@@ -48,6 +48,9 @@ class FollowingController extends BaseController
             $user_id = Auth::user()->id;
             $unfollow = Following::where('series_id', $series_id)->where('user_id', $user_id)->delete();
 
+            //Delete seen information on unfollow 
+            Seen::where('user_id', Auth::user()->id)->where('series_id', '=', $series_id)->delete();
+
             if($unfollow){
                 return Response::json(array('follow' => 'unfollow'));
             }

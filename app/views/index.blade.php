@@ -40,7 +40,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/home">
+                    <a class="navbar-brand" href="/">
                         <!-- <img src="img/logo-56x41.png" alt="Episode Alert" /> -->
                         Episode Alert
                     </a>
@@ -56,7 +56,7 @@
                     </form>
                     <ul class="nav navbar-nav" ng-controller="HeaderCtrl">
                         <li ng-class="{ active: isActive('/series')}"><a href="/series/genre/action">Browse</a></li>
-                        <li ng-class="{ active: isActive('/home')}"><a href="/home">Trending</a></li>
+                        <li ng-class="{ active: isActive('/trending')}"><a href="/trending">Trending</a></li>
                         <li ng-class="{ active: isActive('/profile')}"><a href="/profile">Profile</a></li>
                         <li ng-show="credentials.auth">
                             <a href="#" ng-controller="LoginCtrl" ng-click="logout()">Logout</a>

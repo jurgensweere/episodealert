@@ -696,6 +696,17 @@ li.disabled{
 	}
 }
 
+.series-browse{
+   .series{
+    position: relative;
+
+    span{
+        position: absolute;
+    }
+
+   }
+}
+
 .series-detail {
     h1 {
         text-shadow: 2px 2px $lighter-text-shadow;
@@ -792,12 +803,13 @@ li.disabled{
 
 .series-genres {
     text-align: center;
-    font-size: 150%;
+    margin-top : 18px;
+    text-transform: uppercase;
     
     li {
         margin:0px 40px 0px 0px;
-        text-align: center;
-        display: inline-block;
+        text-align: left;
+        display: block;
         list-style: none;
     }
 

@@ -8,7 +8,7 @@
 
                     $locationProvider.html5Mode(true);
 
-                    $routeProvider.when('/home', {
+                    $routeProvider.when('/trending', {
                         templateUrl: 'templates/carousel.html',
                         controller: 'CarouselCtrl'
                     })
@@ -59,7 +59,7 @@
                     })          
 
                     .otherwise({
-                        redirectTo: '/home'
+                        redirectTo: '/trending'
                     });
                 }]
               );
@@ -78,7 +78,7 @@
         };      
 
         // Add routes that required auth from the front-end
-        var routesThatRequireAuth = ['/profile'];
+        var routesThatRequireAuth = ['/profile', '/profile/settings'];
 
         $rootScope.$on('$routeChangeStart', function(event, next, current){
 
@@ -89,6 +89,7 @@
                     });
                 }
             }
+
         });
 
     });
