@@ -1,7 +1,7 @@
 /*jshint loopfunc: true */
 (function(){
     var app = angular.module('eaApp', ['ngRoute', 'ngTouch', 'ngAnimate', 'flash', 'ui.bootstrap', 'infinite-scroll']);
-
+        
     // Configure All routing
     app.config(['$routeProvider', '$locationProvider',
                 function($routeProvider, $locationProvider) {
@@ -49,8 +49,8 @@
                     })
 
                     .when('/profile/settings', {
-                        templateUrl: 'templates/profile/configuration.html',
-                        controller: 'ProfileConfigurationCtrl'
+                        templateUrl: 'templates/profile/settings.html',
+                        controller: 'ProfileSettingsCtrl'
                     })
                     
                     .when('/guide', {

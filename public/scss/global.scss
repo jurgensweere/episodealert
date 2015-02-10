@@ -83,6 +83,7 @@ ul {
         @media(min-width:1200px){ height: 740px; }
     }
 }
+
 .fanart-background.ng-hide-add, .fanart-background.ng-hide-remove {
   /* this is required as of 1.3x to properly
      apply all styling in a show/hide animation */
@@ -154,8 +155,6 @@ h1 {
     { 
         font-size: 100%; 
     }
-
-
 
     .setting{
         color: $bright-highlight;
@@ -853,6 +852,15 @@ li.disabled{
 }
 
 .navbar-default {
+    
+    @media(min-width:768px){
+        .nav>li>a {
+            position: relative;
+            display: block;
+            padding: 10px 10px;
+        }
+    }
+    
     margin: auto;
     border: none;
     background-color: $background-color;
