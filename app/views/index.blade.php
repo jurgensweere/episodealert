@@ -66,7 +66,7 @@
                         </li>                                        
                     </ul>
 
-                    <p class="navbar-text navbar-right" ng-show="credentials.auth">Welcome back, <a href="/profile" class="navbar-link">{{ credentials.username }}</a></p>
+                    <p class="navbar-text navbar-right hide-xs hidden-sm" ng-show="credentials.auth">Welcome back, <a href="/profile" class="navbar-link">{{ credentials.username }}</a></p>
                 </div>
             </div>
         </nav>
@@ -102,6 +102,16 @@
     var clientId = '<% $clientId %>';
     var state = '<% $state %>';
     var fbAppId = '<% $fbAppId %>';
+    
+    /**
+      * dirty hack because twitter bootstrap mobile first responsive
+      * framework does not support closing the mobile menu on click for SPA's
+    */    
+    $(document).on('click','.navbar-collapse.in',function(e) {
+        if( $(e.target).is('a') ) {
+            $(this).collapse('hide');
+        }
+    });    
 </script>
 
 <% HTML::script(asset('js/app.js')) %>
@@ -116,7 +126,7 @@
 <% HTML::script(asset('js/controllers/seenController.js')) %>
 <% HTML::script(asset('js/controllers/guideController.js')) %>
 <% HTML::script(asset('js/controllers/profileHeaderController.js')) %>
-<% HTML::script(asset('js/controllers/profileConfigurationController.js')) %>
+<% HTML::script(asset('js/controllers/profileSettingsController.js')) %>
 
 <% HTML::script(asset('js/factories/authenticationFactory.js')) %>
 <% HTML::script(asset('js/factories/seriesFactory.js')) %>
