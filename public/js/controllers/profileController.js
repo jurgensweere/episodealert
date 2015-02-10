@@ -2,11 +2,8 @@
     angular.module('eaApp').controller('ProfileCtrl',  
         function($scope, seriesFactory , flash, userSettingService) {
 
-    	    getFollowingSeries();
-            getUnseenAmount();
-
+            /** scope **/
             $scope.activePage = 'profile';
-
             $scope.archive = userSettingService.model.userProfileSettings.archive;
             $scope.ended = userSettingService.model.userProfileSettings.ended;
             $scope.seen = userSettingService.model.userProfileSettings.seen; // exclude seen?
@@ -29,6 +26,11 @@
                 getFollowingSeries();
             };
         
+
+            /** init **/
+            getFollowingSeries();
+            getUnseenAmount();                
+                
             /** Load the series that this user is following */
             function getFollowingSeries() {
                 seriesFactory.getFollowingSeries($scope.seen, $scope.ended, $scope.archive)

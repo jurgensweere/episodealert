@@ -22,19 +22,16 @@ angular.module('eaApp').factory('userSettingService', ['$rootScope', function ($
         setProfileArchive : function ( archive ) {
             service.model.userProfileSettings.archive = archive;
             service.saveState();
-            console.log(service.model.userProfileSettings);
         },
 
         setProfileSeen : function ( seen ) {
             service.model.userProfileSettings.seen = seen;
             service.saveState();
-            console.log(service.model.userProfileSettings);
         },
 
         setProfileEnded: function ( ended ) {
             service.model.userProfileSettings.ended = ended;
             service.saveState();
-            console.log(service.model.userProfileSettings);
         },
 
         saveState: function () {
