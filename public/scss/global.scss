@@ -64,6 +64,34 @@ ul {
     right: 0px;    
 }
 
+.settings{
+    .settings-block{
+
+        h3{
+            margin-top: 0px;
+        }
+
+        div:first-child{
+            background-color: $primary-color;
+            padding: 15px;
+
+            div{
+                padding: 5px 0px 5px 0px;
+            }
+        }
+
+        button{
+            margin-top: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            font-size: 120%;
+            border: 2px solid #00ff90;
+            color: #00ff90;
+            border-radius: 15px;
+            padding: 3px 10px 4px 8px;
+        }
+    }
+}
+
 .splash-fanart {
     @media(max-width:767px){ height: 405px; }
     @media(min-width:768px){ height: 740px; }
@@ -83,7 +111,6 @@ ul {
         @media(min-width:1200px){ height: 740px; }
     }
 }
-
 .fanart-background.ng-hide-add, .fanart-background.ng-hide-remove {
   /* this is required as of 1.3x to properly
      apply all styling in a show/hide animation */
@@ -155,6 +182,8 @@ h1 {
     { 
         font-size: 100%; 
     }
+
+
 
     .setting{
         color: $bright-highlight;
@@ -852,15 +881,6 @@ li.disabled{
 }
 
 .navbar-default {
-    
-    @media(min-width:768px){
-        .nav>li>a {
-            position: relative;
-            display: block;
-            padding: 10px 10px;
-        }
-    }
-    
     margin: auto;
     border: none;
     background-color: $background-color;
@@ -937,3 +957,4 @@ li.disabled{
     -webkit-box-shadow: none;
     box-shadow: none;
 } 
+
