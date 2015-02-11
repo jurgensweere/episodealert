@@ -25,7 +25,7 @@
                 .error(function (error) {
                 //error = 'error error error beep beep;
             });
-        }        
+        };   
 
     });
 })();
