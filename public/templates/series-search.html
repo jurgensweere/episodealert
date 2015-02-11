@@ -4,6 +4,7 @@
 
 <div ng-controller="SeriesSearchCtrl">
   <h1> Search results</h1>
+  <p ng-show="!results">Nothing found, try these instead:</p>
   
   <ul class="series-search series-search-adjust">
     <li ng-repeat="series in seriesSearchResults" class="animation">
