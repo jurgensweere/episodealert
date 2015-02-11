@@ -7,7 +7,6 @@
     <title>Episode Alert</title>
     <base href="/"/>
 
-    <% HTML::style('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css') %>
     <% HTML::style('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css') %>
     <% HTML::style(asset('css/global.css')) %>
 

@@ -15,7 +15,8 @@
     "tests"
   ],
   "dependencies": {
-    "ngInfiniteScroll": "1.0.0"
+    "ngInfiniteScroll": "1.0.0",
+    "bootstrap-sass": "~3.3.3"
   },
   "devDependencies": {}
 }

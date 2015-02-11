@@ -8,7 +8,8 @@ grunt.initConfig({
     sass: {
         dist: {
             options: {
-                style: 'uncompressed'
+                style: 'uncompressed',
+                precision: 8,
             },
 
             //TODO These files should be combined and minified etc.
@@ -98,7 +99,15 @@ grunt.initConfig({
               relative: false
             }
         }
-    }
+    },
+
+    copy: {
+        main: {
+            files: [
+                {expand: true, cwd: 'bower_components/bootstrap-sass/assets/fonts', src: ['**'], dest: 'fonts/'},
+            ],
+        },
+    },
 
     });
 
@@ -108,11 +117,12 @@ grunt.initConfig({
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-bower-concat');
 
     //Default tasks to run when you type 'grunt'
     grunt.registerTask('default', ['sass', 'jshint']);
 
     //building for production/testing
-    grunt.registerTask('build', ['sass', 'cssmin', 'jshint', 'concat', 'uglify', 'bower_concat'])
+    grunt.registerTask('build', ['sass', 'cssmin', 'jshint', 'concat', 'uglify', 'bower_concat', 'copy'])
 };

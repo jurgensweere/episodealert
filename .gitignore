@@ -17,6 +17,7 @@ public/img/poster/*
 public/dist/js/*.js
 public/dist/css/*.css
 public/css/
+public/fonts/
 app/storage/tmp/
 app/config/local/database.php
 

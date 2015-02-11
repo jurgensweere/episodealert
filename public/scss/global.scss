@@ -1,3 +1,5 @@
+@import 'bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
+
 @CHARSET "ISO-8859-1";
 
 $light-text: #C9C9C9;
@@ -93,10 +95,10 @@ ul {
 }
 
 .splash-fanart {
-    @media(max-width:767px){ height: 405px; }
-    @media(min-width:768px){ height: 740px; }
-    @media(min-width:992px){ height: 740px; }
-    @media(min-width:1200px){ height: 740px; }
+    @media(max-width: $screen-xs-max){ height: 405px; }
+    @media(min-width: $screen-sm-min){ height: 740px; }
+    @media(min-width: $screen-md-min){ height: 740px; }
+    @media(min-width: $screen-lg-min){ height: 740px; }
     
     position: relative;
     margin-top: 50px;
@@ -105,10 +107,10 @@ ul {
         background-size: cover;
         background-position: center bottom;
         width: 100%;
-        @media(max-width:767px){ height: 405px; }
-        @media(min-width:768px){ height: 740px; }
-        @media(min-width:992px){ height: 740px; }
-        @media(min-width:1200px){ height: 740px; }
+        @media(max-width: $screen-xs-max){ height: 405px; }
+        @media(min-width: $screen-sm-min){ height: 740px; }
+        @media(min-width: $screen-md-min){ height: 740px; }
+        @media(min-width: $screen-lg-min){ height: 740px; }
     }
 }
 .fanart-background.ng-hide-add, .fanart-background.ng-hide-remove {
@@ -142,7 +144,7 @@ ul {
 
 .container--navbar {
     background-color: #252525;
-    @media(min-width:768px){ padding: 12px 0px 12px 20px; }
+    @media(min-width: $screen-sm-min){ padding: 12px 0px 12px 20px; }
 }
 
 //remove padding from the container
@@ -161,7 +163,7 @@ h1 {
 .info-text-top {
 
     padding: 3px 60px 15px 60px;
-    @media(max-width:767px){ padding: 3px 20px 15px 20px; }
+    @media(max-width: $screen-xs-max){ padding: 3px 20px 15px 20px; }
     //background-color: $background-color;
 
     p {
@@ -169,7 +171,7 @@ h1 {
     }
 
     h1 {
-        @media(max-width:767px) { font-size: 100%; }
+        @media(max-width: $screen-xs-max) { font-size: 100%; }
     }
 }
 
@@ -178,7 +180,7 @@ h1 {
     font-size:150%;
     top: 2px;
     margin: 0px 10px 0px 10px;
-    @media(max-width:767px) 
+    @media(max-width: $screen-xs-max) 
     { 
         font-size: 100%; 
     }
@@ -218,7 +220,7 @@ h1 {
     .profile-filters, .guide-filters {
         height: 40px;
         padding: 5px 0px 5px 20px;
-        @media(max-width:767px){ padding: 5px 0px 5px 0px; }
+        @media(max-width: $screen-xs-max){ padding: 5px 0px 5px 0px; }
         background-color: $primary-color;
 
         span {
@@ -435,10 +437,10 @@ h1 {
 }
 
 .splash-brand {
-    @media(max-width:767px){ font-size: 34px; }
-    @media(min-width:768px){ font-size: 42px; }
-    @media(min-width:992px){ font-size: 52px; }
-    @media(min-width:1200px){ font-size: 52px; }
+    @media(max-width: $screen-xs-max){ font-size: 34px; }
+    @media(min-width: $screen-sm-min){ font-size: 42px; }
+    @media(min-width: $screen-md-min){ font-size: 52px; }
+    @media(min-width: $screen-lg-min){ font-size: 52px; }
     font-size: 52px;
     text-align: center;
 }
@@ -450,13 +452,13 @@ h1 {
     width: 100%;
 
     h1 {
-        @media(max-width:767px){ font-size: 24px; }
-        @media(min-width:768px){ font-size: 30px; }
+        @media(max-width: $screen-xs-max){ font-size: 24px; }
+        @media(min-width: $screen-sm-min){ font-size: 30px; }
     }
 
     p {
-        @media(max-width:767px){ font-size: 12px; }
-        @media(min-width:768px){ font-size: 18px; }
+        @media(max-width: $screen-xs-max){ font-size: 12px; }
+        @media(min-width: $screen-sm-min){ font-size: 18px; }
     }
 }
 
@@ -467,8 +469,8 @@ li.disabled{
 .poster {
     background-color: $background-color;
     display: inline-block;
-    @media(max-width:767px){ height: 100px; padding: 1px; }
-    @media(min-width:768px){ height: 320px; padding: 4px; }
+    @media(max-width: $screen-xs-max){ height: 100px; padding: 1px; }
+    @media(min-width: $screen-sm-min){ height: 320px; padding: 4px; }
 }
 
 .badge {
@@ -530,10 +532,10 @@ li.disabled{
     }
 
     li {
-        @media(max-width:767px){ width: 100%; }
-        @media(min-width:768px){ width: 33%; }
-        @media(min-width:992px){ width: 25%; }
-        @media(min-width:1200px){ width: 25%; }
+        @media(max-width: $screen-xs-max){ width: 100%; }
+        @media(min-width: $screen-sm-min){ width: 33%; }
+        @media(min-width: $screen-md-min){ width: 25%; }
+        @media(min-width: $screen-lg-min){ width: 25%; }
         padding: 0px 10px 0px 10px;
         list-style: none;
         display: inline-block;
@@ -576,10 +578,10 @@ li.disabled{
 
     li {
         margin-top: 30px;
-        @media(max-width:767px){ width: 100%; }
-        @media(min-width:768px){ width: 50%; }
-        @media(min-width:992px){ width: 33%; }
-        @media(min-width:1200px){ width: 20%; }
+        @media(max-width: $screen-xs-max){ width: 100%; }
+        @media(min-width: $screen-sm-min){ width: 50%; }
+        @media(min-width: $screen-md-min){ width: 33%; }
+        @media(min-width: $screen-lg-min){ width: 20%; }
     }
 }
 
@@ -696,7 +698,7 @@ li.disabled{
 	.airdate {
         color: #666;
         font-size: 70%;
-        @media(min-width:992px){ text-align: right; font-size: 100%; color: inherit;}
+        @media(min-width: $screen-md-min){ text-align: right; font-size: 100%; color: inherit;}
 	}
 
 	.seen-column {
@@ -728,7 +730,7 @@ li.disabled{
     }    
 
     img {
-        @media(min-width:992px){ margin-left: -15px;}
+        @media(min-width: $screen-md-min){ margin-left: -15px;}
     }
 
     p, dl {
@@ -795,7 +797,7 @@ li.disabled{
 .series-details-extra {
 	background-color: $primary-color;
 	margin: 0 0px 40px 0px;
-    @media(min-width:992px){ margin: 0px 15px 40px -15px;}
+    @media(min-width: $screen-md-min){ margin: 0px 15px 40px -15px;}
 	padding: 10px;
 
 	dt {
