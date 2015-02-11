@@ -24,3 +24,14 @@ app/config/local/database.php
 public/js/vendor/_bower.js
 public/bower_components
 app/config/client_secret.json
+*.orig
+.idea/workspace.xml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
+.idea/modules.xml
+.idea/misc.xml
+*.iml
+.idea/encodings.xml
+.idea/copyright/profiles_settings.xml
+.idea/compiler.xml
+.idea/.name
