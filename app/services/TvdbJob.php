@@ -69,13 +69,7 @@ class TvdbJob
         Log::info("TvdbJob.updateSingleSeries: {$series->name} Updated.");
 
         $this->attachEpisodeData($series, $data);
-
-        if ($series->poster_image_converted == 0) {
-            $this->attachSeriesPoster($series);    
-        }
-        if ($series->banner_image_converted == 0) {
-            $this->attachSeriesBanner($series, $data);    
-        }
+        $this->attachImages($series);
 
         //Find out if there is a special season and save it in series table
         $firstEpisode = Episode::where('series_id', $series->id )->select('season')->orderBy('season', 'asc')->first();
@@ -91,7 +85,15 @@ class TvdbJob
         $job->delete();
     }
 
+    public function attachImages($series) {
+        $this->attachSeriesPoster($series);
+
+        App::make('tvdb')->getFanartImages($series);
+    }
+
     public function attachSeriesPoster($series){
+        if ($series->poster_image_converted == 1) return;
+
         //echo "trying to getSeriesData: " . $series->id;
         //echo "\n";
 
@@ -99,14 +101,6 @@ class TvdbJob
 
         //echo $data['id'];
         //echo "\n";
-
-        //Try to get fanart for the series
-        $fanart = App::make('tvdb')->getFanartImage($series);
-
-        if($fanart){
-            $series->fanart_image = $series->unique_name.".jpg";
-            $series->save();        	
-        }
 
         if($data['poster']!=""){
             $poster = App::make('tvdb')->getPosterImage($series, $data['poster']);            
@@ -118,17 +112,6 @@ class TvdbJob
             $series->poster_image = $series->unique_name.".jpg";
             $series->poster_image_converted = 1;
             $series->save();
-        }
-    }
-
-    public function attachSeriesBanner(Series $series, $data)
-    {
-        $banner = App::make('tvdb')->getBannerImage($series);
-        
-        if ($banner) {
-            $series->banner_image = $series->unique_name.".jpg";
-            $series->banner_image_converted = 1;
-            $series->save();            
         }
     }
 

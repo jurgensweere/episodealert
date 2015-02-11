@@ -134,13 +134,16 @@ class Tvdb
     /*
      * Get banner/fanart of series
      */
-    public function getFanartImage($series){
+    public function getFanartImages($series){
 
         $url = 'http://www.thetvdb.com/api/CE185B06BC7B86B8/series/' . $series['id'] .'/banners.xml';
-        $seriesSubDirectory = substr($series['unique_name'], 0,2);
         
         $feed = self::downloadUrl($url);
-        $xml = simplexml_load_string($feed);    
+        $xml = simplexml_load_string($feed);
+
+        $fetch_banner = $series->banner_image_converted == 0;
+        $fetch_fanart = $series->fanart_image_converted == 0;
+        $images_fetched = 0;
 
         if($xml){   
             if($xml->Banner){
@@ -148,7 +151,7 @@ class Tvdb
                 //print_r($xml);
 
                 foreach ($xml->Banner as $b) {
-                    if ($b->BannerType == 'fanart' && $b->BannerType2 == '1920x1080') {
+                    if ($fetch_fanart && $b->BannerType == 'fanart' && $b->BannerType2 == '1920x1080') {
                         $fanArtUrl = 'http://www.thetvdb.com/banners/' . $b->BannerPath;
                         $fanArtVignetteUrl = 'http://www.thetvdb.com/banners/' . $b->VignettePath;
 
@@ -163,77 +166,62 @@ class Tvdb
                         $rawdata=curl_exec($ch);
                         curl_close ($ch);
 
-                        if (!file_exists("public/img/fanart/".$seriesSubDirectory."/")) {
-                            mkdir("public/img/fanart/".$seriesSubDirectory."/", 0777, true);
-                        }
+                        File::makeDirectory($series->getFanartLocation(), 0775, true, true);
+                        $bytes_written = File::put($series->getFanartLocation() . $series['unique_name'] . "_raw.jpg", $rawdata);
 
-                        $fp = fopen("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg",'w');
-                        $close = fwrite($fp, $rawdata);
-
-                        if($close){
-                            self::compress_image("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg", 
-                                "public/img/fanart/".$seriesSubDirectory."/".$series['unique_name']."_compressed.jpg", 40);
+                        if ($bytes_written !== false) {
+                            self::compress_image($series->getFanartLocation() . $series['unique_name'] . "_raw.jpg", 
+                                $series->getFanartLocation() . $series['unique_name'] . ".jpg", 40);
                             // delete original file
-                            //unlink("public/img/fanart/".$seriesSubDirectory."/".$series['unique_name'].".jpg");
+                            File::delete($series->getFanartLocation() . $series['unique_name'] . "_raw.jpg");
+
+                            $images_fetched++;
+                            $fetch_fanart = false;
+                            $series->fanart_image = $series->unique_name.".jpg";
+                            $series->fanart_image_converted = 1;
                         }
-                        
-                        return $close;
+                    }
+
+                    if ($fetch_banner && $b->BannerType == 'series' && $b->BannerType2 == 'graphical') {
+                        $fanArtUrl = 'http://www.thetvdb.com/banners/' . $b->BannerPath;
+                        $fanArtVignetteUrl = 'http://www.thetvdb.com/banners/' . $b->VignettePath;
+
+                        //download image
+                        $ch = curl_init($fanArtUrl);
+                        curl_setopt($ch, CURLOPT_HEADER, 0);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                        curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+                        $rawdata=curl_exec($ch);
+                        curl_close ($ch);
+
+                        File::makeDirectory($series->getBannerLocation(), 0775, true, true);
+                        $bytes_written = File::put($series->getBannerLocation() . $series['unique_name'] . "_raw.jpg", $rawdata);
+
+                        if ($bytes_written !== false) {
+                            self::compress_image($series->getBannerLocation() . $series['unique_name'] . "_raw.jpg", 
+                                $series->getBannerLocation() . $series['unique_name'] . ".jpg", 40);
+                            // delete original file
+                            File::delete($series->getBannerLocation() . $series['unique_name'] . "_raw.jpg");
+
+                            $images_fetched++;
+                            $fetch_banner = false;
+
+                            $series->banner_image = $series->unique_name.".jpg";
+                            $series->banner_image_converted = 1;
+                        }
+                    }
+
+                    if (!$fetch_fanart && !$fetch_banner) {
+                        break;
                     }
                 }
             }
         }
-        return false;
-    }
 
-    public function getBannerImage($series) {
-        $url = 'http://www.thetvdb.com/api/CE185B06BC7B86B8/series/' . $series['id'] .'/banners.xml';
-        $seriesSubDirectory = substr($series['unique_name'], 0,2);
-        
-        $feed = self::downloadUrl($url);
-        $xml = simplexml_load_string($feed);    
-
-        if ($xml) {
-            if (!$xml->Banner) {
-                return false;
-            }
-
-            // check all possible banners for a banner lol
-            foreach ($xml->Banner as $b) {
-                if ($b->BannerType == 'series' && $b->BannerType2 == 'graphical') {
-                    $fanArtUrl = 'http://www.thetvdb.com/banners/' . $b->BannerPath;
-                    $fanArtVignetteUrl = 'http://www.thetvdb.com/banners/' . $b->VignettePath;
-
-                    //download image
-                    $ch = curl_init($fanArtUrl);
-                    curl_setopt($ch, CURLOPT_HEADER, 0);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                    curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
-                    $rawdata=curl_exec($ch);
-                    curl_close ($ch);
-
-                    if (!file_exists("public/img/banner/".$seriesSubDirectory."/")) {
-                        mkdir("public/img/banner/".$seriesSubDirectory."/", 0777, true);
-                    }
-
-                    $fp = fopen("public/img/banner/".$seriesSubDirectory."/".$series['unique_name'].".jpg",'w');
-                    $close = fwrite($fp, $rawdata);
-
-                    if ($close) {
-                        self::compress_image("public/img/banner/".$seriesSubDirectory."/".$series['unique_name'].".jpg", 
-                            "public/img/banner/".$seriesSubDirectory."/".$series['unique_name']."_compressed.jpg", 40);
-                        // delete original file
-                        //unlink("public/img/banner/".$seriesSubDirectory."/".$series['unique_name'].".jpg");
-                    }
-                    
-                    return $close; 
-                }
-            }
+        if ($images_fetched > 0) {
+            $series->save();
         }
-
-        // no banners found
-        return false;
     }
-
 
     /*
      * Downloads poster image of a series

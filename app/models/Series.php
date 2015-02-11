@@ -91,4 +91,24 @@ class Series extends Eloquent
             return $this;
         }
     }
+
+    public function getPosterLocation()
+    {
+        return "public/img/poster/" . $this->getImageShortHand() . "/";
+    }
+
+    public function getBannerLocation()
+    {
+        return "public/img/banner/" . $this->getImageShortHand() . "/";
+    }
+
+    public function getFanartLocation()
+    {
+        return "public/img/fanart/" . $this->getImageShortHand() . "/";
+    }
+
+    public function getImageShortHand()
+    {
+        return substr($this->unique_name, 0,2);
+    }
 }
