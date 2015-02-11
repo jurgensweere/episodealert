@@ -28,7 +28,7 @@
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 @endif
 <!-- <div class="background-container"></div> -->
-<div id="masterUI" ui-view="master" ng-controller="SeriesSearchCtrl">
+<div id="masterUI" ui-view="master">
     <!-- loaded by templates-->
     <div id="topbarUI" ui-view="topbar">
         <nav class="navbar navbar-default" role="navigation">
@@ -48,7 +48,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <form class="navbar-form navbar-left" role="search">
                         <div class="input-group">
-                            <input type="text" class="form-control form-control-search" placeholder="Search" ng-model="mainPageQuery" ng-model-options="{ debounce: 300 }" />
+                            <input ng-controller="SearchBoxCtrl" type="text" class="form-control form-control-search" placeholder="Search" ng-model="mainPageQuery" ng-model-options="{ debounce: 300 }" />
                             <span class="input-group-btn">
                                 <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                             </span>
@@ -127,11 +127,14 @@
 <% HTML::script(asset('js/controllers/guideController.js')) %>
 <% HTML::script(asset('js/controllers/profileHeaderController.js')) %>
 <% HTML::script(asset('js/controllers/profileSettingsController.js')) %>
+<% HTML::script(asset('js/controllers/searchBoxController.js')) %>
 
 <% HTML::script(asset('js/factories/authenticationFactory.js')) %>
 <% HTML::script(asset('js/factories/seriesFactory.js')) %>
 <% HTML::script(asset('js/factories/oauthFactory.js')) %>
 <% HTML::script(asset('js/factories/userSettingsFactory.js')) %>
+
+<% HTML::script(asset('js/services/searchService.js')) %>
 
 <% HTML::script(asset('js/directives/eaTab.js')) %>
 

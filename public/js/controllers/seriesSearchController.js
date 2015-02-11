@@ -1,38 +1,23 @@
 (function(){
-    angular.module('eaApp').controller('SeriesSearchCtrl', function($scope, $location, seriesFactory) {
+    angular.module('eaApp').controller('SeriesSearchCtrl', function($scope, $location, seriesFactory, searchService) {
 
         $scope.mainPageQuery = '';
 
-        //There is some debouncing (500ms delay to wait for the user to stop typing) in the HTML, this will start to work with angular 1.3 it seems
-        // Start watching the search box for input
-        $scope.$watch('mainPageQuery', function (newValue, oldValue)
-        {
-            if (newValue !== oldValue) {
-                $location.path("/search");
-                searchSeries(newValue);
-            }
-        });
-
-        /**
-         * Search for series and show results
-         *
-         * @param {string} query    Search query
-         */
-        function searchSeries(query) {
-            seriesFactory.searchSeries(query)
-                .success(function (series) {
-                    if (series.length === 0 || series.length === undefined) {
-                        // load the no-search result page
+        /* 
+         * watch the service
+         */ 
+        $scope.$watch(function() {
+             return searchService.results;
+            },
+            function(newResult, oldResult) {
+                if(newResult !== oldResult) {
+                    if(newResult.length === 0){
                         showNoResults();
-                    } else {
-                        $scope.results = series.length;
-                        $scope.seriesSearchResults = series;
                     }
-                })
-                .error(function (error) {
-                    //$scope.status = 'error error error beep beep;
-                });
-        }
+                    $scope.searchResult = newResult;
+                }
+            }
+        );
 
         /**
          * Show a no results page
@@ -41,7 +26,7 @@
             $scope.results = 0;
             seriesFactory.getTopSeries()
                 .success(function (series) {
-                    $scope.seriesSearchResults = series;
+                    $scope.searchResult = series;
                 })
                 .error(function (error) {
                     //$scope.status = 'error error error beep beep;
