@@ -32,9 +32,9 @@
         </div>
 
         <!-- some spacing added through the offset -->
-        <div class="col-xs-12 col-sm-12 col-md-8 seasons">
-            <tabset>
-                <tab select="loadSeason(series.id, season.number)" ng-repeat="season in seasons" heading="{{ ::season.title}}" active="season.active" disabled="season.disabled" ng-init="loadUnseenForSeason(series.id, season.number)" unseen="{{season.unseen}}">
+        <div class="col-xs-12 col-sm-12 col-md-8 seasons" >
+            <eatabset>
+                <eatab select="loadSeason(series.id, season.number)" ng-repeat="season in seasons" heading="{{ ::season.title}}" active="season.active" disabled="season.disabled" ng-init="loadUnseenForSeason(series.id, season.number)" unseen="{{season.unseen}}">
                     <table class="episode-list">
                         <tr ng-repeat="episode in season.content" ng-class="episode.seen ? 'seen' : 'unseen'">
                             <td class="number">

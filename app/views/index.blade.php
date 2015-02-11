@@ -17,7 +17,7 @@
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-animate.min.js') %>
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-touch.js') %>
     
-    <% HTML::script('/js/vendor/ui-bootstrap-0.11.2.js') %>
+    <% HTML::script('/js/vendor/ui-bootstrap-0.12.0.js') %>
     <% HTML::script('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js') %>
     <% HTML::script('/js/vendor/_bower.js') %>
 
@@ -133,7 +133,9 @@
 <% HTML::script(asset('js/factories/oauthFactory.js')) %>
 <% HTML::script(asset('js/factories/userSettingsFactory.js')) %>
 
-<% HTML::script(asset('js/modules/angular-flash.js')) %>
+<% HTML::script(asset('js/directives/eaTab.js')) %>
 
+<% HTML::script(asset('js/modules/angular-flash.js')) %>
 </body>
 </html>
+
