@@ -19,11 +19,10 @@ public/dist/css/*.css
 public/css/
 app/storage/tmp/
 app/config/local/database.php
-
-app/config/local/database.php
 public/js/vendor/_bower.js
 public/bower_components
 app/config/client_secret.json
+public/fonts
 *.orig
 .idea/workspace.xml
 .idea/scopes/scope_settings.xml
