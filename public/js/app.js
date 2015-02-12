@@ -214,6 +214,19 @@
         };
     });
 
+    app.factory('Page', function(){
+      var title = 'Episode Alert';
+      return {
+        getTitle: function() { 
+            return title; 
+        },
+        setTitle: function(newTitle) { 
+            title = newTitle; 
+        }
+      };
+    });
+
+
     app.controller("LoginCtrl", function($route, $scope, $location, AuthenticationService) {
         $scope.credentials = { username: "", password: "" };
 
