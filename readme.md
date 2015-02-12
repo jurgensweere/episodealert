@@ -2,6 +2,10 @@
 
 The old website: [Episode-Alert](http://www.episode-alert.com).
 
+Beta version of this site: http://supersecretbeta.episode-alert.com
+
+Login with "test/test". Enjoy!
+
 ## Installation
 
 ### Prerequisites fronttend
