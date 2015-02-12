@@ -13,3 +13,4 @@
 
 Artisan::add(new \EA\UpdateSeries);
 Artisan::add(new \EA\Mailer);
+Artisan::add(new \EA\Sitemap);
