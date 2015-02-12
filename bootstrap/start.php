@@ -27,7 +27,8 @@ $app = new Illuminate\Foundation\Application;
 $env = $app->detectEnvironment(array(
 
 	'local' => array('homestead', gethostname()),
-	'production' => array('www.episode-alert.com')
+	'beta' => array('supersecretbeta.episode-alert.com'),
+	'production' => array('www.episode-alert.com'),
 
 ));
 

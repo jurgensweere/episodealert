@@ -13,13 +13,13 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'http://supersecretbeta.episode-alert.com',
 
 	'debug' => true,
 
 	
 	'facebook' => array (
 		'appid'				=> '1518254765105090',
-		'appsecret'			=> 'INSERTSECRET',
+		'appsecret'			=> '23757612c5e1aa3be24e31737c94937c',
 	)
 );
