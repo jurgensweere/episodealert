@@ -145,6 +145,10 @@ ul {
 .container--navbar {
     background-color: #252525;
     @media(min-width: $screen-sm-min){ padding: 12px 0px 12px 20px; }
+
+    p{
+        margin-right: 10px;
+    }
 }
 
 //remove padding from the container
