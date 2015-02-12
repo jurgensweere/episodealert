@@ -2,6 +2,10 @@
 
 The old website: [Episode-Alert](http://www.episode-alert.com).
 
+Beta version of this site: http://supersecretbeta.episode-alert.com
+
+Login with "test/test". Enjoy!
+
 ## Installation
 
 ### Prerequisites fronttend
@@ -40,5 +44,5 @@ The old website: [Episode-Alert](http://www.episode-alert.com).
   'grunt watch' to watch for changes
   'php artisan serve' to start a webserver in root of the project (or you can install apache)
   'php artisan series:update'  to start fetching series
-  
+  'php artisan sitemap:generate' generate a sitemap
 ```
