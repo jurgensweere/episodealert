@@ -1,7 +1,10 @@
 (function(){
 
     angular.module('eaApp').controller('CarouselCtrl',
-        function($scope, $http, $interval, $filter, seriesFactory) {
+        function($scope, $http, $interval, $filter, seriesFactory, Page) {
+
+            Page.setTitle('Episode Alert - Trending');
+
             $scope.series = [];
             $scope.currentSeries = 0;
             $scope.backgroundStyle = {};

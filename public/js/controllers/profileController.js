@@ -1,6 +1,8 @@
 (function(){
     angular.module('eaApp').controller('ProfileCtrl',  
-        function($scope, seriesFactory , flash, userSettingService) {
+        function($scope, seriesFactory , flash, userSettingService, Page) {
+
+            Page.setTitle('Profile | Episode Alert');
 
             /** scope **/
             $scope.activePage = 'profile';

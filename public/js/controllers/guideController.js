@@ -1,6 +1,7 @@
 (function(){
     angular.module('eaApp').controller('GuideCtrl',
-        function($scope, $routeParams, $interval, seriesFactory) {
+        function($scope, $routeParams, $interval, seriesFactory, Page) {
+            Page.setTitle('Guide | Episode Alert');
 
             $scope.guide = [];
             $scope.series = {};

@@ -1,7 +1,9 @@
 (function(){
 
     angular.module('eaApp').controller('SeriesListCtrl',
-        function($scope, $routeParams, seriesFactory) {
+        function($scope, $routeParams, seriesFactory, Page) {
+
+            Page.setTitle('Browse Series | Episode Alert');
             $scope.loadingGenre = false;
             $scope.series = [];
             var skip = 0;

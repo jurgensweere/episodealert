@@ -1,7 +1,7 @@
 	(function () {
     
     angular.module('eaApp').controller('SeriesCtrl',
-        function($scope, $routeParams, seriesFactory) {
+        function($scope, $routeParams, seriesFactory, Page) {
 
 			/* declaration */
 			var unique_name = $routeParams.seriesname;
@@ -10,7 +10,7 @@
 			var loadProfileSeries = getSeries(unique_name);
 
 			loadProfileSeries.success(function(series){
-
+        		Page.setTitle(series.name + ' | Episode Alert');
    				$scope.series = series;
    				$scope.seasons = buildSeasonObject(series.season_amount, series.has_specials);
 

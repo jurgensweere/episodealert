@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en" ng-app="eaApp">
+<html lang="en" ng-app="eaApp" ng-controller="MainPageCtrl">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Episode Alert</title>
+    <title>{{ Page.getTitle() }}</title>
     <base href="/"/>
 
     <% HTML::style('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css') %>
@@ -127,6 +127,7 @@
 <% HTML::script(asset('js/controllers/profileHeaderController.js')) %>
 <% HTML::script(asset('js/controllers/profileSettingsController.js')) %>
 <% HTML::script(asset('js/controllers/searchBoxController.js')) %>
+<% HTML::script(asset('js/controllers/mainePageController.js')) %>
 
 <% HTML::script(asset('js/factories/authenticationFactory.js')) %>
 <% HTML::script(asset('js/factories/seriesFactory.js')) %>

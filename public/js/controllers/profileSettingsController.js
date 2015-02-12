@@ -1,7 +1,8 @@
 (function(){
-    angular.module('eaApp').controller('ProfileSettingsCtrl',  
-        function($scope, userSettingService, flash) {
+    angular.module('eaApp').controller('ProfileSettingsCtrl', 
+        function($scope, userSettingService, Page, flash) {
 
+			Page.setTitle('Settings | Episode Alert');
             $scope.activePage = 'settings';
             $scope.password = {};
             $scope.cred = {};
