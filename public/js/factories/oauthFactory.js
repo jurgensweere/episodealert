@@ -29,7 +29,7 @@ angular.module('eaApp').factory('oauthFactory', ['AuthenticationService', '$loca
 .directive('facebookLogin', ['$timeout', function($timeout) {
     var directive = { restrict: 'E', replace: true, transclude: true };
     directive.template =
-        '<fb:login-button scope="email" data-size="large" data-show-faces="false">' +
+        '<fb:login-button scope="email" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false">' +
         '</fb:login-button>';
 
     directive.link = function (scope, iElement, iAttrs) {
