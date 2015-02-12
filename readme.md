@@ -44,5 +44,5 @@ Login with "test/test". Enjoy!
   'grunt watch' to watch for changes
   'php artisan serve' to start a webserver in root of the project (or you can install apache)
   'php artisan series:update'  to start fetching series
-  
+  'php artisan sitemap:generate' generate a sitemap
 ```
