@@ -45,4 +45,5 @@ Login with "test/test". Enjoy!
   'php artisan serve' to start a webserver in root of the project (or you can install apache)
   'php artisan series:update'  to start fetching series
   'php artisan sitemap:generate' generate a sitemap
+  'php artisan mailer:batch' to send alert emails
 ```
