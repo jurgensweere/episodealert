@@ -507,7 +507,7 @@ li.disabled{
         padding: 3px 10px 4px 8px;
         border: 4px solid orange;
         border-radius: 20px;
-        box-shadow: 0 0 1em lighten(orange, 20%);;
+        box-shadow: 0 0 1em lighten(orange, 20%);
     }
     .seen-badge{
         border: 4px solid $bright-highlight;
@@ -529,6 +529,11 @@ li.disabled{
         a {
             font-size: 110%;
         }
+    }
+
+    .follow-wrapper {
+        background-color: $secondary-color;
+        height: 60px;
     }
 
     .extra-info-episodes {

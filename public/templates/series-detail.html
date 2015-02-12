@@ -16,19 +16,19 @@
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-4">
-                    <img class="img-responsive hidden-xs hidden-sm" ng-src="{{ series.poster_image | createImageUrl : series.unique_name }}">
-                    <img class="img-responsive hidden-md hidden-lg" ng-src="{{ series.banner_image | createBannerUrl : series.unique_name }}">
-                    <div class="series-details-extra">
-                        <dl>
-                            <dt> First aired </dt>
-                            <dd> {{ ::series.firstaired }} </dd>
-                            <dt> Rating </dt>
-                            <dd> {{ ::series.rating }} </dd>
-                            <dt> Status </dt>
-                            <dd> {{ ::series.status }} </dd>
-                        </dl>
-                        <a target="new" href="http://www.imdb.com/title/{{ ::series.imdb_id }}/">IMDB</a>
-                    </div>
+            <img class="img-responsive hidden-xs hidden-sm" ng-src="{{ series.poster_image | createImageUrl : series.unique_name }}">
+            <img class="img-responsive hidden-md hidden-lg" ng-src="{{ series.banner_image | createBannerUrl : series.unique_name }}">
+            <div class="series-details-extra">
+                <dl>
+                    <dt> First aired </dt>
+                    <dd> {{ ::series.firstaired }} </dd>
+                    <dt> Rating </dt>
+                    <dd> {{ ::series.rating }} </dd>
+                    <dt> Status </dt>
+                    <dd> {{ ::series.status }} </dd>
+                </dl>
+                <a target="new" href="http://www.imdb.com/title/{{ ::series.imdb_id }}/">IMDB</a>
+            </div>
         </div>
 
         <!-- some spacing added through the offset -->
