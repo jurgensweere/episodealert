@@ -124,9 +124,9 @@
                 },
                 'requestError': function(rejection) {
                     $('#spinner').hide();
-                    if (canRecover(rejection)) {
-                        return responseOrNewPromise;
-                    }
+                    //if (canRecover(rejection)) {
+                    //    return responseOrNewPromise;
+                    //}
                     return $q.reject(rejection);
                 },
                 'response': function(response) {
@@ -135,9 +135,9 @@
                 },
                 'responseError': function(rejection) {
                     $('#spinner').hide();
-                    if (canRecover(rejection)) {
-                        return responseOrNewPromise;
-                    }
+                    //if (canRecover(rejection)) {
+                    //    return responseOrNewPromise;
+                    //}
                     return $q.reject(rejection);
                 }
             };

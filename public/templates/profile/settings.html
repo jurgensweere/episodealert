@@ -11,17 +11,17 @@
                 <label>
                     Change your username
                 </label>
-                <input class="form-control" type="text" />
+                <input class="form-control" type="text" ng-model="cred.username" />
             </div>
             <div>
                 <label>
                     Change your e-mail address
                 </label>
-                <input class="form-control" type="text" />
+                <input class="form-control" type="text" ng-model="cred.email" />
 
             </div>
             <div>
-                <button>Save</button>
+                <button ng-click="saveCredentials()">Save</button>
             </div>            
         </div>
     </div>
@@ -33,24 +33,24 @@
                 <label>
                     Your current password
                 </label>
-                <input class="form-control" type="password" />
+                <input class="form-control" type="password" ng-model="password.old"/>
 
             </div>
             <div>
                 <label>
                     New password
                 </label>
-                <input class="form-control" type="password" />
+                <input class="form-control" type="password" ng-model="password.new"/>
 
             </div>
             <div>
                 <label>
                     Re-Type new password
                 </label>
-                <input class="form-control" type="password" />
+                <input class="form-control" type="password" ng-model="password.new_confirmation"/>
             </div>
             <div>
-                <button>Save</button>
+                <button ng-click="savePassword()">Save</button>
             </div>
         </div>
     </div>    

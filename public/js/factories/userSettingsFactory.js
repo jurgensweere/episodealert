@@ -1,4 +1,4 @@
-angular.module('eaApp').factory('userSettingService', ['$rootScope', function ($rootScope) {
+angular.module('eaApp').factory('userSettingService', ['$rootScope', '$http', function ($rootScope, $http) {
 
     var service = {
 
@@ -47,6 +47,27 @@ angular.module('eaApp').factory('userSettingService', ['$rootScope', function ($
                 //save the default values
                 service.saveState();
             }
+        },
+
+        savePassword: function (currentPassword, password, password_confirmation) {
+            return $http.post(
+                '/api/profile/password', 
+                data = {
+                    oldpassword: currentPassword,
+                    password: password,
+                    password_confirmation: password_confirmation
+                }
+            );
+        },
+
+        saveCredentials: function (username, email) {
+            return $http.post(
+                '/api/profile/credentials', 
+                data = {
+                    username: username,
+                    email: email
+                }
+            );
         }
 
     };

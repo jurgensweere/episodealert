@@ -63,6 +63,10 @@ Route::group(
             Route::post('series/seen/{episode}', 'SeriesController@setSeenEpisode');
             Route::post('series/unseen/{episode}', 'SeriesController@unsetSeenEpisode');
 
+            // Profile
+            Route::post('profile/password', 'ProfileController@postChangePassword');
+            Route::post('profile/credentials', 'ProfileController@postChangeCredentials');
+
         });
 
         // Route::get('/contact', 'HomeController@showContact');
