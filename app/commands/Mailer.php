@@ -55,6 +55,8 @@ class Mailer extends Command
         // I've added the last_notified column to enable batching
         // we need to get a list of series that had an episode yesterday
         $followings = Following::join('episode', 'episode.series_id', '=', 'following.series_id')
+            ->join('user', 'user.id', '=', 'following.user_id')
+            ->where('user.alerts', '=', 1)
             ->where('episode.airdate', '=', $yesterday)
             ->where(function($query) {
                 $query->whereNull('following.last_notified');

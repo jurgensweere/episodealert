@@ -61,25 +61,18 @@
             <div>
                 <label>
                     Public following list
-                    <input type="checkbox" checked />
+                    <input type="checkbox" ng-model="preferences.publicfollow" />
                 </label>
             </div>
 
             <div>
                 <label>
                     Receive e-mail alerts
-                    <input type="checkbox" checked />
-                </label>
-            </div>
-
-            <div>
-                <label>
-                    Show adds
-                    <input type="checkbox" />
+                    <input type="checkbox" ng-model="preferences.alerts" />
                 </label>
             </div>
             <div>
-                <button>Save</button>
+                <button ng-click="savePreferences()">Save</button>
             </div>            
         </div>
     </div>

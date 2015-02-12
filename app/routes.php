@@ -64,8 +64,10 @@ Route::group(
             Route::post('series/unseen/{episode}', 'SeriesController@unsetSeenEpisode');
 
             // Profile
+            Route::get('profile', 'ProfileController@getUserData');
             Route::post('profile/password', 'ProfileController@postChangePassword');
             Route::post('profile/credentials', 'ProfileController@postChangeCredentials');
+            Route::post('profile/preferences', 'ProfileController@postChangePreferences');
 
         });
 

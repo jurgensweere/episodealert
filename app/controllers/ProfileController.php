@@ -9,6 +9,23 @@ use Input;
 
 class ProfileController extends BaseController
 {
+    public function getUserData()
+    {
+        $user = Auth::user();
+        // you can only change the password, if you are logged in
+        if (!$user) {
+            return Response::json(array('flash' => 'You need to log in'), 403);
+        }
+
+        unset($user->oauthprovider);
+        unset($user->oauthid);
+        unset($user->password);
+        unset($user->username);
+        unset($user->remember_token);
+
+        return Response::json($user);
+    }
+
     public function postChangePassword()
     {
         $user = Auth::user();
@@ -27,8 +44,11 @@ class ProfileController extends BaseController
         });
 
         $validator = Validator::make(
-            array('oldpassword' => 'required|hashmatch:password'),
-            array('password' => 'required|min:6|confirmation')
+            Input::all(),
+            array(
+                'oldpassword' => 'required|hashmatch:password',
+                'password' => 'required|min:6|confirmation',
+            )
         );
 
         if ($validator->fails())
@@ -49,17 +69,25 @@ class ProfileController extends BaseController
 
         // you can only change name or email, if you are logged in
         if (!$user) {
-            return Response::json(array('flash' => 'You need to log.'), 403);
+            return Response::json(array('flash' => 'You need to log in.'), 403);
         }
 
         $validator = Validator::make(
-            array('username' => 'min:4|max:20'),
-            array('email' => 'email')
+            Input::all(),
+            array(
+                'username' => 'min:4|max:20',
+                'email' => 'email',
+            )
         );
 
         if ($validator->fails())
         {
-            return Response::json(array('flash' => 'Error saving password'), 400);
+            return Response::json(
+                array(
+                    'flash' => 'Invalid data',
+                    'username' => $user->accountname,
+                    'email' => $user->email,
+                ), 400);
         }
 
         $username = Input::get('username');
@@ -74,6 +102,50 @@ class ProfileController extends BaseController
         }
         $user->save();
 
-        return Response::json(array('flash' => 'Saved'), 200);
+        return Response::json(
+            array(
+                'flash' => 'Saved',
+                'username' => $user->accountname,
+                'email' => $user->email,
+            ), 200);
+    }
+
+    public function postChangePreferences()
+    {
+        $user = Auth::user();
+
+        // you can only change name or email, if you are logged in
+        if (!$user) {
+            return Response::json(array('flash' => 'You need to log in.'), 403);
+        }
+
+        $validator = Validator::make(
+            Input::all(),
+            array(
+                'publicfollow' => 'required|boolean',
+                'alerts' => 'required|boolean',
+            )
+        );
+
+        if ($validator->fails())
+        {
+            return Response::json(
+                array(
+                    'flash' => 'Invalid data',
+                    'publicfollow' => $user->publicfollow == 1,
+                    'alerts' => $user->alerts == 1,
+                ), 400);
+        }
+
+        $user->publicfollow = Input::get('publicfollow');
+        $user->alerts = Input::get('alerts');
+        $user->save();
+
+        return Response::json(
+            array(
+                'flash' => 'Saved',
+                'publicfollow' => $user->publicfollow == 1,
+                'alerts' => $user->alerts == 1,
+            ), 200);
     }
 }

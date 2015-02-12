@@ -68,6 +68,20 @@ angular.module('eaApp').factory('userSettingService', ['$rootScope', '$http', fu
                     email: email
                 }
             );
+        },
+
+        savePreferences: function (publicfollow, alerts) {
+            return $http.post(
+                '/api/profile/preferences', 
+                data = {
+                    publicfollow: publicfollow,
+                    alerts: alerts
+                }
+            );
+        },
+
+        getUserData: function () {
+            return $http.get('/api/profile');
         }
 
     };
