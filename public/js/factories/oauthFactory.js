@@ -26,22 +26,37 @@ angular.module('eaApp').factory('oauthFactory', ['AuthenticationService', '$loca
 
     return oauthFactory;
 }])
-.directive('facebookLogin', ['$rootScope', function() {
+.directive('facebookLogin', ['$timeout', function($timeout) {
     var directive = { restrict: 'E', replace: true, transclude: true };
     directive.template =
         '<fb:login-button scope="email" data-size="large" data-show-faces="false">' +
         '</fb:login-button>';
 
     directive.link = function (scope, iElement, iAttrs) {
-        if (FB) {
-            // tell facebook to render the login button
-            FB.XFBML.parse(iElement[0].parent);
+
+        // We need to wait for FB to be available, before we can call it.
+        function renderWithFacebook(tries) {
+            if (isNaN(+tries)) {
+              tries = 10;
+            }
+
+            if (tries > 0) {
+                $timeout(function() {
+                    if (FB) {
+                        // tell facebook to render the login button
+                        FB.XFBML.parse(iElement[0].parent);
+                    } else {
+                        renderWithFacebook(--tries);
+                    }
+                }, 100);
+            }
         }
+        renderWithFacebook(10);
     };
         
     return directive;
 }])
-.directive('googleLogin', ['$window', function ($window) {
+.directive('googleLogin', ['$window', '$timeout', function ($window, $timeout) {
     var ending = /\.apps\.googleusercontent\.com$/;
 
     var directive = {
@@ -78,8 +93,24 @@ angular.module('eaApp').factory('oauthFactory', ['AuthenticationService', '$loca
           }
         });
 
-        gapi.signin.render(iElement[0], defaults
-        );
+        // We need to wait for gapi to be available, before we can call it.
+        function renderWithGapi(tries) {
+            if (isNaN(+tries)) {
+              tries = 10;
+            }
+
+            if (tries > 0) {
+                $timeout(function() {
+                    if (gapi) {
+                        gapi.signin.render(iElement[0], defaults);
+                    } else {
+                        renderWithGapi(--tries);
+                    }
+                }, 100);
+            }
+        }
+        renderWithGapi(10);
+        
         //gapi.signin.render(iElement[0]);
     };
 
