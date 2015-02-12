@@ -499,11 +499,19 @@ li.disabled{
     }
 
     .badge {
-        top: 90%;
-        left: 80%;
-        right: auto;
-        font-size: 120%;
+        bottom: 5%;
+        right: 5%;
+        left: auto;
+        top: auto;
+        font-size: 180%;
         padding: 3px 10px 4px 8px;
+        border: 4px solid orange;
+        border-radius: 20px;
+        box-shadow: 0 0 1em lighten(orange, 20%);;
+    }
+    .seen-badge{
+        border: 4px solid $bright-highlight;
+        box-shadow: 0 0 1em lighten($bright-highlight, 20%);
     }
 
     p {
