@@ -20,6 +20,6 @@ return array(
 	
 	'facebook' => array (
 		'appid'				=> '1518254765105090',
-		'appsecret'			=> '23757612c5e1aa3be24e31737c94937c',
+		'appsecret'			=> 'INSERTSECRET',
 	)
 );
