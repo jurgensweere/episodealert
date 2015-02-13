@@ -1,6 +1,6 @@
 (function(){
     angular.module('eaApp').controller('GuideCtrl',
-        function($scope, $routeParams, $interval, seriesFactory, Page) {
+        function($scope, $routeParams, $interval, seriesFactory, Page, userSettingService) {
             Page.setTitle('Guide | Episode Alert');
 
             $scope.guide = [];
@@ -8,15 +8,17 @@
 
             $scope.activePage = 'guide';
 
-            $scope.unseen = true;
-            $scope.upcoming = true;
+            $scope.unseen = userSettingService.getGuideIncludeUnseen();
+            $scope.upcoming = userSettingService.getGuideIncludeUpcoming();
 
             $scope.toggleUnseen = function () {
+                userSettingService.setGuideIncludeUnseen(!$scope.unseen);
                 $scope.unseen = !$scope.unseen;
                 loadGuide();
             };
 
             $scope.toggleUpcoming = function () {
+                userSettingService.setGuideIncludeUpcoming(!$scope.upcoming);
                 $scope.upcoming = !$scope.upcoming;
                 loadGuide();
             };

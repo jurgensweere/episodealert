@@ -12,11 +12,15 @@ angular.module('eaApp').factory('userSettingService', ['$rootScope', '$http', fu
             userGuideSettings : {
                 seen: true,
                 upcoming: true
-            }            
+            },       
         },
 
         init : function () {
             service.restoreState();
+        },
+
+        getProfileArchive : function () {
+            return service.model.userProfileSettings.archive;
         },
 
         setProfileArchive : function ( archive ) {
@@ -24,13 +28,39 @@ angular.module('eaApp').factory('userSettingService', ['$rootScope', '$http', fu
             service.saveState();
         },
 
+        getProfileSeen : function () {
+            return service.model.userProfileSettings.seen;
+        },
+
         setProfileSeen : function ( seen ) {
             service.model.userProfileSettings.seen = seen;
             service.saveState();
         },
 
+        getProfileEnded: function () {
+            return service.model.userProfileSettings.ended;
+        },
+
         setProfileEnded: function ( ended ) {
             service.model.userProfileSettings.ended = ended;
+            service.saveState();
+        },
+
+        getGuideIncludeUnseen: function () {
+            return service.model.userGuideSettings.seen;
+        },
+
+        setGuideIncludeUnseen: function ( includeUnseen ) {
+            service.model.userGuideSettings.seen = includeUnseen;
+            service.saveState();
+        },
+
+        getGuideIncludeUpcoming: function () {
+            return service.model.userGuideSettings.upcoming;
+        },
+
+        setGuideIncludeUpcoming: function ( includeUpcoming ) {
+            service.model.userGuideSettings.upcoming = includeUpcoming;
             service.saveState();
         },
 

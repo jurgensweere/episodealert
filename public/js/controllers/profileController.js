@@ -6,9 +6,9 @@
 
             /** scope **/
             $scope.activePage = 'profile';
-            $scope.archive = userSettingService.model.userProfileSettings.archive;
-            $scope.ended = userSettingService.model.userProfileSettings.ended;
-            $scope.seen = userSettingService.model.userProfileSettings.seen; // exclude seen?
+            $scope.archive = userSettingService.getProfileArchive();
+            $scope.ended = userSettingService.getProfileEnded();
+            $scope.seen = userSettingService.getProfileSeen(); // exclude seen?
 
             $scope.toggleArchive = function () {
                 userSettingService.setProfileArchive(!$scope.archive);
