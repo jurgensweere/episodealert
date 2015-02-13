@@ -10,7 +10,10 @@
 			var loadProfileSeries = getSeries(unique_name);
 
 			loadProfileSeries.success(function(series){
+
         		Page.setTitle(series.name + ' | Episode Alert');
+        		Page.setMetaDescription('Find the latest on ' + series.name + ', including season and episode information.');
+
    				$scope.series = series;
    				$scope.seasons = buildSeasonObject(series.season_amount, series.has_specials);
 

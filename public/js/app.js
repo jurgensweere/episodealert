@@ -214,14 +214,27 @@
         };
     });
 
+    /*
+     * Page factory supplies dynamic page title and meta information
+     */
+
     app.factory('Page', function(){
       var title = 'Episode Alert';
+      var metaDescription = 'The best source for show and episode info. Keeping you up to date on the latest broadcasts';
+
       return {
-        getTitle: function() { 
+        getTitle : function() { 
             return title; 
         },
-        setTitle: function(newTitle) { 
+        setTitle : function(newTitle) { 
             title = newTitle; 
+        },
+
+        getMetaDescription : function(){
+            return metaDescription;
+        },
+        setMetaDescription : function(newDescription){
+            metaDescription = newDescription;
         }
       };
     });
