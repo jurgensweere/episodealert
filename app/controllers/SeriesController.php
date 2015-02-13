@@ -110,7 +110,7 @@ class SeriesController extends BaseController
                     ->orderBy('episode.season', 'asc')
                     ->orderBy('episode.episode', 'asc')
                     ->take(3)
-                    ->get(array('episode.*'));
+                    ->get(array('episode.*', DB::raw('1 as aired')));
 
                 // And the total:
                 // TODO: make sure we use the same count query everywhere, instead of having different counts.

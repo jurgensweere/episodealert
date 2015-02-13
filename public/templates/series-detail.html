@@ -48,11 +48,7 @@
                                 </div>
                             </td>
                             <td class="seen-column">
-                                <div class="ea-seen-button" ng-if="episode.aired > 0">
-                                    <button ng-controller="SeenCtrl" class="btn seen-button seen-button--season hidden-xs" ng-click="toggleSeason(episode)">entire season</button>
-                                    <button ng-controller="SeenCtrl" class="btn seen-button seen-button--untill hidden-xs" ng-click="toggleUntil(episode)">until here</button>
-                                    <button ng-controller="SeenCtrl" class="btn seen-button seen-button--episode" ng-click="toggleEpisode(episode)">{{ episode.seen ? 'Seen' : 'Not seen' }}</button>
-                                </div>
+                                <seen-button episode="episode"></seen-button>
                             </td>
                         </tr>
                     </table>

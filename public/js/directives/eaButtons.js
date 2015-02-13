@@ -1,7 +1,19 @@
 (function(){
     angular.module('eaApp')
+    .directive('seenButton', function() {
+        var directive = { restrict: 'E', replace: true, transclude: true };
+        directive.template =
+            '<div class="ea-seen-button" ng-if="episode.aired > 0">'+
+            '    <button ng-controller="SeenCtrl" class="btn seen-button seen-button--season hidden-xs" ng-click="toggleSeason(episode)">entire season</button>' +
+            '    <button ng-controller="SeenCtrl" class="btn seen-button seen-button--untill hidden-xs" ng-click="toggleUntil(episode)">until here</button>' +
+            '    <button ng-controller="SeenCtrl" class="btn seen-button seen-button--episode" ng-click="toggleEpisode(episode)">{{ episode.seen ? \'Seen\' : \'Not seen\' }}</button>' +
+            '</div>';
+        directive.scope = {
+            episode: '='
+        };
 
-
+        return directive;
+    })
 
     .directive('followButton', function(seriesFactory) {
         var directive = { restrict: 'E', replace: true, transclude: true };

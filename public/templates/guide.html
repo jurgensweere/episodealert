@@ -41,10 +41,10 @@
                     <div class="col-md-9 col-xs-12">
                         <div class="unseen-episode row" ng-repeat="episode in series.unseen">
                             <div class="col-md-2 col-xs-2">S{{ episode.season }}E{{ episode.episode }}</div>
-                            <div class="col-md-3 col-xs-4 ">{{ episode.name }}</div>
+                            <div class="col-md-3 col-xs-4">{{ episode.name }}</div>
                             <div class="col-md-1 hidden-xs hidden-sm"><span class="glyphicon glyphicon-download-alt" /></div>
-                            <div class="col-md-3 col-xs-3 ">{{ episode.airdate }}</div>
-                            <div class="col-md-3 col-xs-3"><button ng-controller="SeenCtrl" class="btn seen-button" ng-click="toggleEpisode(episode, series)">{{ episode.seen ? 'Seen' : 'Not seen' }}</button></div>
+                            <div class="col-md-3 col-xs-3">{{ episode.airdate }}</div>
+                            <div class="col-md-3 col-xs-3"><seen-button episode="episode"></seen-button></div>
                         </div>
                     </div>
                 </div>
