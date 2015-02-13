@@ -56,7 +56,17 @@
                     .when('/guide', {
                         templateUrl: 'templates/guide.html',
                         controller: 'GuideCtrl'
-                    })          
+                    })
+                    
+                    .when('/contact', {
+                        templateUrl: 'templates/contact.html',
+                        controller: 'ContactCtrl'
+                    })
+                    
+                    .when('/privacy', {
+                        templateUrl: 'templates/privacy.html',
+                        controller: 'PrivacyCtrl'
+                    })
 
                     .otherwise({
                         redirectTo: '/trending'
