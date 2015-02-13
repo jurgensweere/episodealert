@@ -11,13 +11,6 @@
 </div>  -->
 
 <div class="follow-wrapper">
-<button 
-  ng-controller="FollowingCtrl"
-  ng-show="series"
-  ng-mouseover="mouseOver(series)" 
-  ng-mouseout="mouseOut(series)" 
-  ng-click="toggleFollowing(series)"
-  ng-class="series.following ? 'following' : 'notfollowing'"
-  class="btn following-button following-button--search-results" >{{ buttonLabel }}</button>
+<follow-button series="series"></follow-button>
 </div>
 
