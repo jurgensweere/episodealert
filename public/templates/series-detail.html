@@ -2,14 +2,8 @@
     <div class="row info-text-top">
         <h1>{{ ::series.name }}</h1> 
 
-        <button 
-              ng-controller="FollowingCtrl"
-              ng-show="series"
-              ng-mouseover="mouseOver(series)" 
-              ng-mouseout="mouseOut(series)" 
-              ng-click="toggleFollowing(series)"
-              ng-class="series.following ? 'following' : 'notfollowing'"
-              class="btn following-button following-button--series-detail" >{{ buttonLabel }}</button>
+        <follow-button series="series"></follow-button>
+        
 
         <p class="hidden-xs hidden-xm">{{ ::series.description }}</p>
     </div>

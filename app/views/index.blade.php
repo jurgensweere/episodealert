@@ -142,6 +142,7 @@
 <% HTML::script(asset('js/services/searchService.js')) %>
 
 <% HTML::script(asset('js/directives/eaTab.js')) %>
+<% HTML::script(asset('js/directives/eaButtons.js')) %>
 
 <% HTML::script(asset('js/modules/angular-flash.js')) %>
 </body>
