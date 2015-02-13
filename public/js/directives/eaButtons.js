@@ -24,7 +24,7 @@
                 if (series) {
                     scope.buttonLabel = series.following ? 'Following' : 'Follow';
                 }
-            });
+            }, true);
 
             scope.mouseOver = function(series) {
                 if (series.following) {
