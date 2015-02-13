@@ -64,8 +64,7 @@
                     })
                     
                     .when('/privacy', {
-                        templateUrl: 'templates/privacy.html',
-                        controller: 'PrivacyCtrl'
+                        templateUrl: 'templates/privacy.html'
                     })
 
                     .otherwise({
