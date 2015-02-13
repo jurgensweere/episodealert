@@ -502,6 +502,10 @@ li.disabled{
         position: relative;
     }
 
+    .following-button {
+        margin-top: 10px;
+    }
+
     .badge {
         bottom: 5%;
         right: 5%;
@@ -609,7 +613,7 @@ li.disabled{
 	font-size: 120%;
 	border: 2px solid $bright-highlight;
 	color: $bright-highlight;
-	border-radius: 15px;
+	border-radius: 2px;
 	padding: 3px 10px 4px 8px;
 }
 
@@ -628,15 +632,7 @@ li.disabled{
 	color: $bright-highlight;
 }
 
-.following-button--series-detail {
-    color: $bright-highlight;
-    margin-top: -10px;
-    margin-left: 10px; 
-}
 
-.following-button--search-results {
-    margin-top: 10px;
-}
 
 /* seen button */
 
@@ -755,6 +751,12 @@ li.disabled{
     }
 
     .badge {
+    }
+
+    .following-button {
+        color: $bright-highlight;
+        margin-top: -10px;
+        margin-left: 10px; 
     }
 
     .seasons{
