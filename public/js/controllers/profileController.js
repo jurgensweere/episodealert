@@ -3,6 +3,7 @@
         function($scope, seriesFactory , flash, userSettingService, Page) {
 
             Page.setTitle('Profile | Episode Alert');
+            var series = [];
 
             /** scope **/
             $scope.activePage = 'profile';
@@ -13,21 +14,54 @@
             $scope.toggleArchive = function () {
                 userSettingService.setProfileArchive(!$scope.archive);
                 $scope.archive = !$scope.archive;
-                getFollowingSeries();
+                filterSeries();
             };
 
             $scope.toggleEnded = function () {
                 userSettingService.setProfileEnded(!$scope.ended);
                 $scope.ended = !$scope.ended;
-                getFollowingSeries();
+                filterSeries();
             };
 
             $scope.toggleUnseen = function () {
                 userSettingService.setProfileSeen(!$scope.seen);                
                 $scope.seen = !$scope.seen;
-                getFollowingSeries();
+                filterSeries();
             };
-        
+
+
+            function filterSeries(){
+                $scope.profileSeries = series.slice();
+                console.log(series);
+
+                // Pick out episode without unseen
+                for (var i = $scope.profileSeries.length - 1; i >= 0; i--) {
+                    if($scope.seen){
+                        if($scope.profileSeries[i].unseen_episodes === 0 ){
+                            $scope.profileSeries.splice(i, 1);
+                        }
+                    }
+                }
+
+                // Pick out ended series
+                for (i = $scope.profileSeries.length - 1; i >= 0; i--) {
+                    if(!$scope.ended){
+                        if($scope.profileSeries[i].status === "Ended" ){
+                            $scope.profileSeries.splice(i, 1);
+                        }
+                    }
+                }
+
+                // Pick out ended series
+                for (i = $scope.profileSeries.length - 1; i >= 0; i--) {
+                    if(!$scope.archive){
+                        if($scope.profileSeries[i].archive){
+                            $scope.profileSeries.splice(i, 1);
+                        }
+                    }
+                }                
+
+            }
 
             /** init **/
             getFollowingSeries();
@@ -35,9 +69,11 @@
                 
             /** Load the series that this user is following */
             function getFollowingSeries() {
-                seriesFactory.getFollowingSeries($scope.seen, $scope.ended, $scope.archive)
+                seriesFactory.getFollowingSeries(false, true, true)
                     .success(function (response) {
-                        $scope.series = response;
+                        $scope.profileSeries = response;
+                        series = response;
+                        filterSeries();
                     })
                     .error(function (response) {
                         flash(response.flash);
