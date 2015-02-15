@@ -314,10 +314,10 @@ h1 {
 
 /* After the transition this will be the only class remaining */
 .fadein {
-  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-  -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-  -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.35s;
+  -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.35s;
+  -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.35s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.35s;
   opacity: 1; /* Default value but added for clarity */
 }
 
