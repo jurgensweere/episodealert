@@ -32,7 +32,6 @@
 
             function filterSeries(){
                 $scope.profileSeries = series.slice();
-                console.log(series);
 
                 // Pick out episode without unseen
                 for (var i = $scope.profileSeries.length - 1; i >= 0; i--) {
