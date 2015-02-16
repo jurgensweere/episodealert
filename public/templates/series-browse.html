@@ -1,7 +1,7 @@
 <div class="row series-browse">
 	<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
 		<ul class="series-genres">
-			<li ng-repeat="genre in allGenres">
+			<li ng-repeat="genre in ::allGenres">
 				<a ng-class="{highlight: highlightGenre(selectedGenre, genre)}" href="/series/genre/{{getGenreInLowerCase(genre)}}">{{genre}}</a>
 			</li>	
 		</ul>
