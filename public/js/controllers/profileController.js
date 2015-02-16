@@ -1,6 +1,6 @@
-(function(){
-    angular.module('eaApp').controller('ProfileCtrl',  
-        function($scope, seriesFactory , flash, userSettingService, Page) {
+(function () {
+    angular.module('eaApp').controller('ProfileCtrl',
+        function ($scope, seriesFactory, flash, userSettingService, Page) {
 
             Page.setTitle('Profile | Episode Alert');
             var series = [];
@@ -24,48 +24,48 @@
             };
 
             $scope.toggleUnseen = function () {
-                userSettingService.setProfileSeen(!$scope.seen);                
+                userSettingService.setProfileSeen(!$scope.seen);
                 $scope.seen = !$scope.seen;
                 filterSeries();
             };
 
 
-            function filterSeries(){
+            function filterSeries() {
                 $scope.profileSeries = series.slice();
 
                 // Pick out episode without unseen
-                for (var i = $scope.profileSeries.length - 1; i >= 0; i--) {
-                    if($scope.seen){
-                        if($scope.profileSeries[i].unseen_episodes === 0 ){
+                if ($scope.seen) {
+                    for (var i = $scope.profileSeries.length - 1; i >= 0; i--) {
+                        if ($scope.profileSeries[i].unseen_episodes === 0) {
                             $scope.profileSeries.splice(i, 1);
                         }
                     }
                 }
 
                 // Pick out ended series
-                for (i = $scope.profileSeries.length - 1; i >= 0; i--) {
-                    if(!$scope.ended){
-                        if($scope.profileSeries[i].status === "Ended" ){
+                if (!$scope.ended) {
+                    for (i = $scope.profileSeries.length - 1; i >= 0; i--) {
+                        if ($scope.profileSeries[i].status === "Ended") {
                             $scope.profileSeries.splice(i, 1);
                         }
                     }
                 }
 
                 // Pick out ended series
-                for (i = $scope.profileSeries.length - 1; i >= 0; i--) {
-                    if(!$scope.archive){
-                        if($scope.profileSeries[i].archive){
+                if (!$scope.archive) {
+                    for (i = $scope.profileSeries.length - 1; i >= 0; i--) {
+                        if ($scope.profileSeries[i].archive) {
                             $scope.profileSeries.splice(i, 1);
                         }
                     }
-                }                
+                }
 
             }
 
             /** init **/
             getFollowingSeries();
-            getUnseenAmount();                
-                
+            getUnseenAmount();
+
             /** Load the series that this user is following */
             function getFollowingSeries() {
                 seriesFactory.getFollowingSeries(false, true, true)
@@ -77,8 +77,8 @@
                     .error(function (response) {
                         flash(response.flash);
                     });
-            }  
-        
+            }
+
             /** Load the total unseen count */
             function getUnseenAmount() {
                 seriesFactory.getUnseenAmount()
@@ -89,7 +89,7 @@
                         flash(response.flash);
                     });
             }
-                
+
         }
     );
 })();
