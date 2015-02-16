@@ -5,7 +5,7 @@
     <div ng-repeat="series in series" 
         ng-show="currentSeries==series.id"
         class="fanart-background" 
-        style="background-image: url('{{ series.poster_image | createFanartUrl : series.unique_name }}');">
+        style="background-image: url('{{ ::series.poster_image | createFanartUrl : series.unique_name }}');">
     </div>
     <span class="splash-fanart-fade"></span>
 
@@ -26,8 +26,8 @@
 
     <div class="splash-posters">
         <div class="series" ng-repeat="series in series">
-            <a href="/series/{{series.unique_name}}">
-                <img class="img-responsive poster" ng-src="{{ series.poster_image | createImageUrl : series.unique_name }}" alt="{{ series.name }}" />
+            <a href="/series/{{::series.unique_name}}">
+                <img class="img-responsive poster" ng-src="{{ ::series.poster_image | createImageUrl : series.unique_name }}" alt="{{ ::series.name }}" />
             </a>
             <span ng-class="{active: isSelected(series.id)}"></span>
         </div>

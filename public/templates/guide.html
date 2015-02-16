@@ -35,15 +35,15 @@
     <div class="row guide-series">
         <ul class="series-guide">
             <li ng-repeat="series in guide">
-                <h2>{{ series.name }}</h2>
+                <h2>{{ ::series.name }}</h2>
                 <div class="unseen-episodes row" ng-show="series.unseen">
-                    <div class="col-md-3 col-xs-12"><p ng-show="series.unseen_total"><strong>Unseen episodes</strong></p><p class="hidden-xs hidden-sm" ng-show="series.unseen_total">{{ series.unseen_total }} episodes available</p></div>
+                    <div class="col-md-3 col-xs-12"><p ng-show="series.unseen_total"><strong>Unseen episodes</strong></p><p class="hidden-xs hidden-sm" ng-show="series.unseen_total">{{ ::series.unseen_total }} episodes available</p></div>
                     <div class="col-md-9 col-xs-12">
                         <div class="unseen-episode row" ng-repeat="episode in series.unseen">
-                            <div class="col-md-2 col-xs-2">S{{ episode.season }}E{{ episode.episode }}</div>
-                            <div class="col-md-3 col-xs-4">{{ episode.name }}</div>
+                            <div class="col-md-2 col-xs-2">S{{ ::episode.season }}E{{ ::episode.episode }}</div>
+                            <div class="col-md-3 col-xs-4">{{ ::episode.name }}</div>
                             <div class="col-md-1 hidden-xs hidden-sm"><span class="glyphicon glyphicon-download-alt" /></div>
-                            <div class="col-md-3 col-xs-3">{{ episode.airdate }}</div>
+                            <div class="col-md-3 col-xs-3">{{ ::episode.airdate }}</div>
                             <div class="col-md-3 col-xs-3"><seen-button episode="episode"></seen-button></div>
                         </div>
                     </div>
@@ -52,10 +52,10 @@
                     <div class="col-md-3 col-xs-12"><p><strong>Upcoming episodes</strong></p></div>
                     <div class="col-md-9 col-xs-12">
                         <div class="unaired-episode row" ng-repeat="episode in series.unaired">
-                            <div class="col-md-2 col-xs-2">S{{ episode.season }}E{{ episode.episode }}</div>
-                            <div class="col-md-3 col-xs-4 ">{{ episode.name }}</div>
+                            <div class="col-md-2 col-xs-2">S{{ ::episode.season }}E{{ ::episode.episode }}</div>
+                            <div class="col-md-3 col-xs-4 ">{{ ::episode.name }}</div>
                             <div class="col-md-1 hidden-xs hidden-sm"></div>
-                            <div class="col-md-3 col-xs-3 ">{{ episode.airdate }}</div>
+                            <div class="col-md-3 col-xs-3 ">{{ ::episode.airdate }}</div>
                             <div class="col-md-3 col-xs-3"></div>
                         </div>
                     </div>
