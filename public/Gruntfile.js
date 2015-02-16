@@ -1,65 +1,163 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
-// 1. All configuration goes here
-grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+    // 1. All configuration goes here
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
 
-    // Configuration for the Sass task
-    sass: {
-        dist: {
-            options: {
-                style: 'uncompressed',
-                precision: 8,
-            },
-
-            //TODO These files should be combined and minified etc.
-            files: {
-            'css/global.css': 'scss/global.scss'
-            }
-        }
-    },
-
-    concat: {
-        options: {
-            separator: ';',
-        },
-        dist: {
-            src: ['js/*.js', 'js/controllers/*.js', 'js/factories/*.js'],
-            dest: 'dist/js/ea.js',
-        },
-    },
-
-    uglify: {
-        options: {
-            banner: ''
-        },
-        target_1: {
-            src: ['dist/js/ea.js'],
-            dest: 'dist/js/ea.min.js'
-        }
-    },
-
-    jshint: {
-      files: ['js/app.js', 'js/controllers/*.js', 'js/factories/*.js', 'js/modules/*.js'],
-          options: {
-            globals: {
-                jQuery: true,
-                console: true,
-                module: true
-            }
-        }
-    },
-
-    watch: {
+        // Configuration for the Sass task
         sass: {
-            files: ['scss/*.scss'],
-            tasks: ['sass'],
-        },
-        livereload: {
-            options: {
-                livereload: true
+            local: {
+                options: {
+                    style: 'uncompressed',
+                    precision: 8,
+                },
+
+                //TODO These files should be combined and minified etc.
+                files: {
+                    'css/global.css': 'scss/global.scss'
+                }
             },
-            files: [
+            production: {
+                options: {
+                    style: 'uncompressed',
+                    precision: 8,
+                },
+
+                //TODO These files should be combined and minified etc.
+                files: {
+                    'css/global.css': 'scss/global.scss'
+                }
+            },
+        },
+
+        concat: {
+            options: {
+                separator: ';',
+            },
+            local: {
+                src: ['js/app.js', 'js/controllers/*.js', 'js/factories/*.js', 'js/services/*.js', 'js/directives/*.js', 'js/modules/*.js', 'js/modules/*.js'],
+                dest: 'dist/production/js/ea.js',
+            },
+            production: {
+                src: ['js/app.js', 'js/controllers/*.js', 'js/factories/*.js', 'js/services/*.js', 'js/directives/*.js', 'js/modules/*.js', 'js/modules/*.js'],
+                dest: 'dist/production/js/ea.js',
+            },
+        },
+
+        uglify: {
+            options: {
+                banner: ''
+            },
+            local: {
+                src: ['dist/js/ea.js'],
+                dest: 'dist/js/ea.min.js'
+            },
+            production: {
+                src: ['dist/js/ea.js'],
+                dest: 'dist/production/js/ea.min.js'
+            }
+        },
+
+        jshint: {
+            options: {
+                globals: {
+                    jQuery: true,
+                    console: true,
+                    module: true
+                }
+            },
+            local: ['js/app.js', 'js/controllers/*.js', 'js/factories/*.js', 'js/services/*.js', 'js/directives/*.js', 'js/modules/*.js', 'js/modules/*.js']
+        },
+
+        cssmin: {
+            local: {
+                files: [{
+                  expand: true,
+                  cwd: 'css',
+                  src: ['*.css', '!*.min.css'],
+                  dest: 'dist/local/css',
+                  ext: '.min.css'
+                }]
+            },
+            production: {
+                files: [{
+                  expand: true,
+                  cwd: 'css',
+                  src: ['*.css', '!*.min.css'],
+                  dest: 'dist/production/css',
+                  ext: '.min.css'
+                }]
+            }
+        },
+
+        bower_concat: {
+            local: {
+                dest: 'js/vendor/_bower.js',
+                cssDest: 'css/vendor/_bower.css',
+                exclude: [],
+                dependencies: {
+
+                },
+                bowerOptions: {
+                    relative: false
+                }
+            },
+            production: {
+                dest: 'dist/production/js/vendor/_bower.js',
+                cssDest: 'dist/production/css/vendor/_bower.css',
+                exclude: [],
+                dependencies: {
+
+                },
+                bowerOptions: {
+                    relative: false
+                }
+            }
+        },
+
+        copy: {
+            local: {
+                files: [{
+                        expand: true,
+                        cwd: 'bower_components/bootstrap-sass/assets/fonts',
+                        src: ['**'],
+                        dest: 'fonts/'
+                    },
+                ],
+            },
+            production: {
+                files: [{
+                        expand: true,
+                        cwd: 'bower_components/bootstrap-sass/assets/fonts',
+                        src: ['**'],
+                        dest: 'dist/production/fonts/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'templates',
+                        src: ['**'],
+                        dest: 'dist/production/templates/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'js/vendor/',
+                        src: ['ui-bootstrap*.js'],
+                        dest: 'dist/production/js/vendor/'
+                    }                    
+                ]
+            }
+        },
+
+        watch: {
+            sass: {
+                files: ['scss/*.scss'],
+                tasks: ['sass'],
+            },
+            livereload: {
+                options: {
+                    livereload: true
+                },
+                files: [
             '../app/views/*.php',
             'css/*.css',
             'js/*.js',
@@ -69,45 +167,13 @@ grunt.initConfig({
             'templates/*.html',
             'templates/partial/*.html'
             ]
-        },
-        jshint: {
-            // add all the mega files when we have them
-            files: ['js/*.js', 'js/controllers/*.js', 'js/factories/*.js', 'js/modules/*.js'],
-            tasks: ['jshint'],
-        }
-    },
-
-    cssmin: {
-      minify: {
-        expand: true,
-        src: ['css/global.css'],
-        dest: 'dist/',
-        ext: '.min.css'
-      }
-    },
-
-    bower_concat: {
-        all: {
-            dest: 'js/vendor/_bower.js',
-            cssDest: 'css/vendor/_bower.css',
-            exclude: [
-            ],
-            dependencies: {
-
             },
-            bowerOptions: {
-              relative: false
+            jshint: {
+                // add all the mega files when we have them
+                files: ['js/*.js', 'js/controllers/*.js', 'js/factories/*.js', 'js/modules/*.js'],
+                tasks: ['jshint'],
             }
         }
-    },
-
-    copy: {
-        main: {
-            files: [
-                {expand: true, cwd: 'bower_components/bootstrap-sass/assets/fonts', src: ['**'], dest: 'fonts/'},
-            ],
-        },
-    },
 
     });
 
@@ -120,9 +186,13 @@ grunt.initConfig({
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-bower-concat');
 
+    var target = grunt.option('target') || 'local';
     //Default tasks to run when you type 'grunt'
     grunt.registerTask('default', ['sass', 'jshint']);
-
-    //building for production/testing
-    grunt.registerTask('build', ['sass', 'cssmin', 'jshint', 'concat', 'uglify', 'bower_concat', 'copy'])
+    //building for local
+    //grunt.registerTask('build', ['sass', 'cssmin', 'jshint', 'concat', 'uglify', 'bower_concat', 'copy'])
+    //building for production
+    //example : 'grunt build --target=production' || 'grunt build' (default local)
+    grunt.registerTask('build', ['jshint', 'sass:' + target, 'cssmin:' + target, 'concat:' + target,
+                                 'uglify:' + target, 'bower_concat:' + target, 'copy:' + target]);
 };

@@ -160,4 +160,4 @@ angular.module('ui.bootstrap.tabs', [])
       node.tagName.toLowerCase() === 'data-tab-heading'
     );
   }
-})
+});
