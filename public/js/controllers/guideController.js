@@ -5,7 +5,6 @@
 
             $scope.guide = [];
             $scope.series = {};
-
             $scope.activePage = 'guide';
 
             $scope.unseen = userSettingService.getGuideIncludeUnseen();

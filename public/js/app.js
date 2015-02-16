@@ -53,7 +53,7 @@
                         controller: 'ProfileSettingsCtrl'
                     })
                     
-                    .when('/guide', {
+                    .when('/profile/guide', {
                         templateUrl: 'templates/guide.html',
                         controller: 'GuideCtrl'
                     })

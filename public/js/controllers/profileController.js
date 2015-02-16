@@ -30,36 +30,36 @@
             };
 
 
+            /* filter out the series */
             function filterSeries() {
                 $scope.profileSeries = series.slice();
 
-                // Pick out episode without unseen
-                if ($scope.seen) {
+                if ($scope.seen || !$scope.ended || !$scope.archive) {
+
                     for (var i = $scope.profileSeries.length - 1; i >= 0; i--) {
-                        if ($scope.profileSeries[i].unseen_episodes === 0) {
-                            $scope.profileSeries.splice(i, 1);
+
+                        //check and remove series that don't have unseen episodes
+                        if ($scope.seen) {
+                            if ($scope.profileSeries[i].unseen_episodes === 0) {
+                                $scope.profileSeries.splice(i, 1);
+                            }
+                        }
+
+                        //check and remove series that are ended
+                        if (!$scope.ended) {
+                            if ($scope.profileSeries[i].status === "Ended") {
+                                $scope.profileSeries.splice(i, 1);
+                            }
+                        }
+
+                        //check and remove series that are archived
+                        if (!$scope.archive) {
+                            if ($scope.profileSeries[i].archive) {
+                                $scope.profileSeries.splice(i, 1);
+                            }
                         }
                     }
                 }
-
-                // Pick out ended series
-                if (!$scope.ended) {
-                    for (i = $scope.profileSeries.length - 1; i >= 0; i--) {
-                        if ($scope.profileSeries[i].status === "Ended") {
-                            $scope.profileSeries.splice(i, 1);
-                        }
-                    }
-                }
-
-                // Pick out ended series
-                if (!$scope.archive) {
-                    for (i = $scope.profileSeries.length - 1; i >= 0; i--) {
-                        if ($scope.profileSeries[i].archive) {
-                            $scope.profileSeries.splice(i, 1);
-                        }
-                    }
-                }
-
             }
 
             /** init **/
