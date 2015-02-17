@@ -48,7 +48,8 @@ class AuthController extends BaseController
         {
             return Response::json(array('id' => Auth::user()->id,
                     'username' => Auth::user()->accountname,
-                    'email' => Auth::user()->email));
+                    'email' => Auth::user()->email,
+                    'thirdparty' => Auth::user()->isThirdParty()));
         } else {
              return Response::json(array('flash' => 'Invalid username or password'), 500);
         }
@@ -67,7 +68,8 @@ class AuthController extends BaseController
         if (Auth::user()) {
             return Response::json(array('id' => Auth::user()->id,
                     'username' => Auth::user()->accountname,
-                    'email' => Auth::user()->email));
+                    'email' => Auth::user()->email,
+                    'thirdparty' => Auth::user()->isThirdParty()));
         } else {
             return Response::json(array('flash' => 'Not authorized'), 500);
         }

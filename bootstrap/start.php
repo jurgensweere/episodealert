@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('homestead', 'L141755', 'Maartens-MacBook-Pro', 'bats-pc'),
+	'local' => array('homestead', 'L141755', 'Maartens-MacBook-Pro', 'bats-pc', 'Castor'),
 	'beta' => array('recipeshuffle.net'),
 	'production' => array('www.episode-alert.com'),
 

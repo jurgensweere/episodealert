@@ -8,12 +8,14 @@ angular.module('eaApp').factory("AuthenticationService", function($rootScope, $l
         $rootScope.credentials.auth = true;
         $rootScope.credentials.username = response.username;
         $rootScope.credentials.id = response.id;
+        $rootScope.credentials.thirdparty = response.thirdparty;
     };
 
     var unSetUserInfo = function(){
         $rootScope.credentials.auth = null;
         $rootScope.credentials.username = null;
         $rootScope.credentials.id = null;
+        $rootScope.credentials.thirdparty = null;
     };
 
     var uncacheSession = function(){

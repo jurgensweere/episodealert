@@ -20,13 +20,19 @@
                 <input class="form-control" type="text" ng-model="cred.email" />
 
             </div>
+            <div ng-if="!credentials.thirdparty">
+                <label>
+                    Enter Password
+                </label>
+                <input class="form-control" type="password" ng-model="cred.password"/>
+            </div>
             <div>
                 <button ng-click="saveCredentials()">Save</button>
             </div>            
         </div>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-4 settings-block">
+    <div class="col-xs-12 col-sm-12 col-md-4 settings-block" ng-if="!credentials.thirdparty">
         <div>
             <h3>Password change</h3>
             <div>

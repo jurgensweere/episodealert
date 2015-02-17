@@ -34,7 +34,7 @@
             };
 
             $scope.saveCredentials = function() {
-                userSettingService.saveCredentials($scope.cred.username, $scope.cred.email)
+                userSettingService.saveCredentials($scope.cred.username, $scope.cred.email, $scope.cred.password)
                     .success(function (msg) {
                         $scope.cred = msg;
                         // Update name in the rest of the app

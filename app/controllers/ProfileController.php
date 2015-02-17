@@ -6,6 +6,7 @@ use EA\models\User;
 use Auth;
 use Validator;
 use Input;
+use Hash;
 
 class ProfileController extends BaseController
 {
@@ -85,6 +86,15 @@ class ProfileController extends BaseController
             return Response::json(
                 array(
                     'flash' => 'Invalid data',
+                    'username' => $user->accountname,
+                    'email' => $user->email,
+                ), 400);
+        }
+
+        if (!$user->isThirdParty() && !Hash::check(Input::get('password'), Auth::user()->password)) {
+            return Response::json(
+                array(
+                    'flash' => 'Incorrect password',
                     'username' => $user->accountname,
                     'email' => $user->email,
                 ), 400);
