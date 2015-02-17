@@ -20,6 +20,7 @@ body {
     background-color: $background-color; 
     color: #fff;
     font-family: $font-family;
+    overflow-y: scroll;
 }
 
 /* reset some defaults */
