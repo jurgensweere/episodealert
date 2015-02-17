@@ -14,8 +14,7 @@ public/css/*.css
 public/img/banner/*
 public/img/fanart/*
 public/img/poster/*
-public/dist/js/*.js
-public/dist/css/*.css
+public/dist/
 public/css/
 app/storage/tmp/
 app/config/local/database.php
