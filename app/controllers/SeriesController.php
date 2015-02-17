@@ -17,11 +17,32 @@ use App;
 class SeriesController extends BaseController
 {
     public function getSeries($uniqueName){
-	  $series = Series::where('unique_name', $uniqueName)->first();
-	 // $series->following = $series->isFollowing();
+        $series = Series::where('unique_name', $uniqueName)->first();
+        // $series->following = $series->isFollowing();
 
-      return Response::json( $series );
+        if(Auth::user()){
+            $series->last_seen_season = self::getLastSeenSeason($series->id, Auth::user()->id);
+        }else{
+            $series->last_seen_season = 1;
+        }
+
+        return Response::json( $series );
     }
+
+
+    /*
+     * Get last seen season episode. Returns the season of which the user last saw an episode
+     */
+    private function getLastSeenSeason($series_id, $user_id) {
+        $lastSeenSeason = Seen::where('user_id', $user_id)->where('series_id', '=', $series_id )->orderBy('season', 'desc')->first();
+        if(count($lastSeenSeason) > 0){
+            return $lastSeenSeason->season;
+        }else{
+            //default return season 1
+            return 1;
+        }
+        
+    }    
 
     public function getByGenre($genre, $skip = 0){
         return Response::json(

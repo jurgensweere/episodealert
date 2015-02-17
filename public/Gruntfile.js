@@ -53,8 +53,11 @@ module.exports = function (grunt) {
                 dest: 'dist/js/ea.min.js'
             },
             production: {
-                src: ['dist/js/ea.js'],
-                dest: 'dist/production/js/ea.min.js'
+                files : {
+                    'dist/production/js/ea.min.js' : 'dist/js/ea.js',
+                    'dist/production/js/vendor/_bower.min.js' : 'dist/production/js/vendor/_bower.js',
+                    'dist/production/js/vendor/ui-bootstrap-0.12.0.min.js' : 'dist/production/js/vendor/ui-bootstrap-0.12.0.js',
+                }
             }
         },
 
@@ -72,20 +75,20 @@ module.exports = function (grunt) {
         cssmin: {
             local: {
                 files: [{
-                  expand: true,
-                  cwd: 'css',
-                  src: ['*.css', '!*.min.css'],
-                  dest: 'dist/local/css',
-                  ext: '.min.css'
+                    expand: true,
+                    cwd: 'css',
+                    src: ['*.css', '!*.min.css'],
+                    dest: 'dist/local/css',
+                    ext: '.min.css'
                 }]
             },
             production: {
                 files: [{
-                  expand: true,
-                  cwd: 'css',
-                  src: ['*.css', '!*.min.css'],
-                  dest: 'dist/production/css',
-                  ext: '.min.css'
+                    expand: true,
+                    cwd: 'css',
+                    src: ['*.css', '!*.min.css'],
+                    dest: 'dist/production/css',
+                    ext: '.min.css'
                 }]
             }
         },
@@ -143,7 +146,7 @@ module.exports = function (grunt) {
                         cwd: 'js/vendor/',
                         src: ['ui-bootstrap*.js'],
                         dest: 'dist/production/js/vendor/'
-                    }                    
+                    }
                 ]
             }
         },

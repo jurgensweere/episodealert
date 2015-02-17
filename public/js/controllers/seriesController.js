@@ -15,7 +15,7 @@
         		Page.setMetaDescription('Find the latest on ' + series.name + ', including season and episode information.');
 
    				$scope.series = series;
-   				$scope.seasons = buildSeasonObject(series.season_amount, series.has_specials);
+   				$scope.seasons = buildSeasonObject(series.season_amount, series.has_specials, series.last_seen_season);
 
 			});
 
@@ -79,7 +79,7 @@
 			}
 
 			/* functions */
-			function buildSeasonObject(numberOfSeasons, hasSpecials){
+			function buildSeasonObject(numberOfSeasons, hasSpecials, activeSeason){
         
 				var seasons = [];
 
@@ -93,7 +93,7 @@
 					seasons.push( { number : i, title : i, active : false, unseen : 999 } );
 				}
 
-        		seasons[seasons.length-1].active = true;
+        		seasons[activeSeason].active = true;
 
 				return seasons;
 			 }

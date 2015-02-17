@@ -1,9 +1,9 @@
 <div class="series-detail">
     <div class="row info-text-top">
-        <h1>{{ ::series.name }}</h1> 
+        <h1>{{ ::series.name }}</h1>
 
         <follow-button series="series"></follow-button>
-        
+
 
         <p class="hidden-xs hidden-xm">{{ ::series.description }}</p>
     </div>
@@ -26,7 +26,7 @@
         </div>
 
         <!-- some spacing added through the offset -->
-        <div class="col-xs-12 col-sm-12 col-md-8 seasons" >
+        <div class="col-xs-12 col-sm-12 col-md-8 seasons">
             <eatabset>
                 <eatab select="loadSeason(series.id, season.number)" ng-repeat="season in seasons" heading="{{ ::season.title}}" active="season.active" disabled="season.disabled" ng-init="loadUnseenForSeason(series.id, season.number)" unseen="{{season.unseen}}">
                     <table class="episode-list">
@@ -52,9 +52,9 @@
                             </td>
                         </tr>
                     </table>
-                </tab>
-            </tabset>
-       </div>
+                    </tab>
+                    </tabset>
+        </div>
     </div>
 
     <div class="row">
