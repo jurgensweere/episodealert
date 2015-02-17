@@ -53,10 +53,10 @@ module.exports = function (grunt) {
                 dest: 'dist/js/ea.min.js'
             },
             production: {
-                files : {
-                    'dist/production/js/ea.min.js' : 'dist/js/ea.js',
-                    'dist/production/js/vendor/_bower.min.js' : 'dist/production/js/vendor/_bower.js',
-                    'dist/production/js/vendor/ui-bootstrap-0.12.0.min.js' : 'dist/production/js/vendor/ui-bootstrap-0.12.0.js',
+                files: {
+                    'dist/production/js/ea.min.js': 'dist/js/ea.js',
+                    'dist/production/js/vendor/_bower.min.js': 'dist/production/js/vendor/_bower.js',
+                    'dist/production/js/vendor/ui-bootstrap-0.12.0.min.js': 'dist/production/js/vendor/ui-bootstrap-0.12.0.js',
                 }
             }
         },
@@ -192,10 +192,15 @@ module.exports = function (grunt) {
     var target = grunt.option('target') || 'local';
     //Default tasks to run when you type 'grunt'
     grunt.registerTask('default', ['sass', 'jshint']);
-    //building for local
-    //grunt.registerTask('build', ['sass', 'cssmin', 'jshint', 'concat', 'uglify', 'bower_concat', 'copy'])
-    //building for production
-    //example : 'grunt build --target=production' || 'grunt build' (default local)
-    grunt.registerTask('build', ['jshint', 'sass:' + target, 'cssmin:' + target, 'concat:' + target,
-                                 'uglify:' + target, 'bower_concat:' + target, 'copy:' + target]);
+
+
+    //example : 'grunt build:production' || 'grunt build' (default local)
+    grunt.registerTask('build', 'A sample task that logs stuff.', function (buildType) {
+        if (arguments.length === 0) {
+            grunt.task.run('jshint', 'sass:local', 'cssmin:local', 'bower_concat:local', 'copy:local', 'concat:local', 'uglify:local');
+        } else {
+            grunt.task.run('jshint', 'sass:' + buildType, 'cssmin:' + buildType, 'bower_concat:' + buildType,
+                'concat:' + buildType, 'copy:' + buildType, 'uglify:' + buildType);
+        }
+    });
 };
