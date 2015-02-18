@@ -5,12 +5,11 @@ use EA\models\Following;
 use EA\models\Series;
 use Faker\Factory as Faker;
 
-class TestSeeder extends Seeder{
+class TestDataSeeder extends Seeder{
 
 	public function run(){
 		$faker = Faker::create();
-		$amountOfUsers = 500;
-		$amountOfFollowingPerUser = 50;
+		$amountOfUsers = 3000;
 
 		//Delete all users
 		foreach (User::all() as $user) {
@@ -36,13 +35,17 @@ class TestSeeder extends Seeder{
 		//create super following
 		foreach($allUsers as $user){
 
+			//follow some random amount
+			$amountOfFollowingPerUser = rand(10, 80);
+
 			//follow x random series
 			foreach(range(1, $amountOfFollowingPerUser) as $index){
 				$series = Series::orderByRaw("RAND()")->first();
 				
 				Following::create(array(
 					'series_id' => $series->id,
-				 	'user_id' => $user->id
+				 	'user_id' => $user->id,
+				 	'created_at' => $faker->dateTimeThisMonth($max = 'now')
 				));
 			}
 
