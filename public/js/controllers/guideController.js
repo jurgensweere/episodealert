@@ -10,6 +10,10 @@
             $scope.unseen = userSettingService.getGuideIncludeUnseen();
             $scope.upcoming = userSettingService.getGuideIncludeUpcoming();
 
+            $scope.lolz = function (){
+                console.log('lolz');
+            };
+
             $scope.toggleUnseen = function () {
                 userSettingService.setGuideIncludeUnseen(!$scope.unseen);
                 $scope.unseen = !$scope.unseen;

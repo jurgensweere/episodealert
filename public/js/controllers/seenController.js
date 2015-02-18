@@ -28,6 +28,14 @@
                 }  
             };
 
+            $scope.onSeenResponse = function (response) {
+                console.log("YES !");
+            };
+
+            $scope.onUnseenResponse = function (response) {
+                console.log("NO !");
+            };
+
             /**
              * Set an episode to 'seen'
              *

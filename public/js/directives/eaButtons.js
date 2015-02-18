@@ -1,19 +1,81 @@
 (function(){
     angular.module('eaApp')
-    .directive('seenButton', function() {
-        var directive = { restrict: 'E', replace: true, transclude: true };
-        directive.template =
-            '<div class="ea-seen-button" ng-if="episode.aired > 0">'+
-            '    <button ng-controller="SeenCtrl" class="btn seen-button seen-button--season hidden-xs" ng-click="toggleSeason(episode)">entire season</button>' +
-            '    <button ng-controller="SeenCtrl" class="btn seen-button seen-button--untill hidden-xs" ng-click="toggleUntil(episode)">until here</button>' +
-            '    <button ng-controller="SeenCtrl" class="btn seen-button seen-button--episode" ng-click="toggleEpisode(episode)">{{ episode.seen ? \'Seen\' : \'Not seen\' }}</button>' +
-            '</div>';
-        directive.scope = {
-            episode: '='
-        };
+    .directive('seenButton', ['seriesFactory', function(seriesFactory) {
+        return { 
+            restrict: 'E', 
+            scope: {
+                episode: '=',
+                seenResponse: '&OnSeenResponse',
+                unseenResponse: '&OnUnseenResponse',
+            },
+            template: 
+                '<div class="ea-seen-button" ng-if="episode.aired > 0">'+
+                '    <button class="btn seen-button seen-button--season hidden-xs" ng-click="toggleSeason(episode)">entire season</button>' +
+                '    <button class="btn seen-button seen-button--untill hidden-xs" ng-click="toggleUntil(episode)">until here</button>' +
+                '    <button class="btn seen-button seen-button--episode" ng-click="toggleEpisode(episode)">{{ episode.seen ? \'Seen\' : \'Not seen\' }}</button>' +
+                '</div>',
+            link: function(scope, element, attrs) {
+                /** Toggle an episode (un)seen */
+                scope.toggleEpisode = function(episode) {
+                    if (episode.seen) {
+                        unseenServiceCall(episode, 'single');
+                    } else {
+                        seenServiceCall(episode, 'single');
+                    }            
+                };
 
-        return directive;
-    })
+                /** Toggle a episodes (un)seen until here */
+                scope.toggleUntil = function (episode) {
+                    if (episode.seen) {
+                        unseenServiceCall(episode, 'until');
+                    } else {
+                        seenServiceCall(episode, 'until');
+                    }  
+                };
+
+                /** Toggle a season (un)seen */
+                scope.toggleSeason = function (episode) {
+                    if (episode.seen) {
+                        unseenServiceCall(episode, 'season');
+                    } else {
+                        seenServiceCall(episode, 'season');
+                    }  
+                };
+
+                /**
+                 * Set an episode to 'seen'
+                 *
+                 * @param episode
+                 * @param mode
+                 */
+                function seenServiceCall(episode, mode) {
+                    seriesFactory.setSeenEpisode(episode.id, mode)
+                        .success(function (response) {
+                            scope.seenResponse(response);
+                        })
+                        .error(function (error) {
+                            flash(error.seen);
+                        });
+                }      
+
+                /**
+                 * Set an episode to 'unseen'
+                 *
+                 * @param episode
+                 * @param series
+                 */
+                function unseenServiceCall(episode, mode) {
+                    seriesFactory.setUnseenEpisode(episode.id, mode)
+                        .success(function (response) {
+                            scope.unseenResponse(response);                        
+                        })
+                        .error(function (error) {
+                            flash(response.unseen);
+                        });
+                }
+            }
+        };
+    }])
 
     .directive('followButton', function(seriesFactory) {
         var directive = { restrict: 'E', replace: true, transclude: true };
