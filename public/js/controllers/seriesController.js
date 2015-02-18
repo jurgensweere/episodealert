@@ -19,6 +19,11 @@
 
 			});
 
+			$scope.callbackTest = function(){
+				//Put the logic here that needs to run after an episode is seen
+				console.log('callback from series controller');
+			}
+
 			//watcher to check if the initial episodes have been loaded
 			$scope.$watch('episodesDoneLoading',function() {
 			    if($scope.series){

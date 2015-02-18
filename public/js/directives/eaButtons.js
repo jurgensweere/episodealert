@@ -7,6 +7,7 @@
                 episode: '=',
                 seenResponse: '&OnSeenResponse',
                 unseenResponse: '&OnUnseenResponse',
+                callback: '='
             },
             template: 
                 '<div class="ea-seen-button" ng-if="episode.aired > 0">'+
@@ -51,7 +52,7 @@
                 function seenServiceCall(episode, mode) {
                     seriesFactory.setSeenEpisode(episode.id, mode)
                         .success(function (response) {
-                            scope.seenResponse(response);
+                            scope.callback();
                         })
                         .error(function (error) {
                             flash(error.seen);
