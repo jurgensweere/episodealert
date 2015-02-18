@@ -17,17 +17,19 @@ class FollowingController extends BaseController
     public function follow($series_id){
 
         if(Auth::user()){
-            $user_id = Auth::user()->id;
+            $user = Auth::user();
 
-            $followingCheck = Following::where('series_id', $series_id)->where('user_id', $user_id)->count();
+            $followingCheck = Following::where('series_id', $series_id)->where('user_id', $user->id)->count();
 
             if(!$followingCheck){
 
                 $following = new Following;
                 $following->series_id = $series_id;
-                $following->user_id = $user_id;
+                $following->user_id = $user->id;
 
                 if($following->save()){
+                    $user->following = Following::where('user_id', '=', $user->id)->count();
+                    $user->save();
                     return Response::json(array('follow' => 'success'));
                 }else{
                     return Response::json(array('follow' => 'fail to save'));
@@ -45,13 +47,15 @@ class FollowingController extends BaseController
     public function unfollow($series_id){
         if(Auth::user()){
 
-            $user_id = Auth::user()->id;
-            $unfollow = Following::where('series_id', $series_id)->where('user_id', $user_id)->delete();
+            $user = Auth::user();
+            $unfollow = Following::where('series_id', $series_id)->where('user_id', $user->id)->delete();
 
             //Delete seen information on unfollow 
             Seen::where('user_id', Auth::user()->id)->where('series_id', '=', $series_id)->delete();
 
             if($unfollow){
+                $user->following = Following::where('user_id', '=', $user->id)->count();
+                $user->save();
                 return Response::json(array('follow' => 'unfollow'));
             }
         }else{
@@ -80,7 +84,9 @@ class FollowingController extends BaseController
                 $query->where('series.status', '!=', 'Ended');
             }
 
-            $series = $query->get();
+            $series = $query
+                ->orderBy('following.archive', 'asc')
+                ->get();
 
             self::addSeenEpisodesToSeries($series, $user->id);
 
