@@ -10,10 +10,6 @@
             $scope.unseen = userSettingService.getGuideIncludeUnseen();
             $scope.upcoming = userSettingService.getGuideIncludeUpcoming();
 
-            $scope.lolz = function (){
-                console.log('lolz');
-            };
-
             $scope.toggleUnseen = function () {
                 userSettingService.setGuideIncludeUnseen(!$scope.unseen);
                 $scope.unseen = !$scope.unseen;
@@ -23,6 +19,14 @@
             $scope.toggleUpcoming = function () {
                 userSettingService.setGuideIncludeUpcoming(!$scope.upcoming);
                 $scope.upcoming = !$scope.upcoming;
+                loadGuide();
+            };
+
+            $scope.onSeen = function (episode, response) {
+                loadGuide();
+            };
+
+            $scope.onUnseen = function (episode, response) {
                 loadGuide();
             };
 

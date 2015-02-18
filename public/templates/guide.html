@@ -44,7 +44,7 @@
                             <div class="col-md-3 col-xs-4">{{ ::episode.name }}</div>
                             <div class="col-md-1 hidden-xs hidden-sm"><span class="glyphicon glyphicon-download-alt" /></div>
                             <div class="col-md-3 col-xs-3">{{ ::episode.airdate }}</div>
-                            <div class="col-md-3 col-xs-3"><seen-button episode="episode" on-seen-response="lolz(response)" on-unseen-response="lolz(response)"></seen-button></div>
+                            <div class="col-md-3 col-xs-3"><seen-button episode="episode" on-seen-response="onSeen(episode, response)" on-unseen-response="onUnseen(episode, response)"></seen-button></div>
                         </div>
                     </div>
                 </div>

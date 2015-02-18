@@ -5,9 +5,8 @@
             restrict: 'E', 
             scope: {
                 episode: '=',
-                seenResponse: '&OnSeenResponse',
-                unseenResponse: '&OnUnseenResponse',
-                callback: '='
+                seenResponse: '&onSeenResponse',
+                unseenResponse: '&onUnseenResponse'
             },
             template: 
                 '<div class="ea-seen-button" ng-if="episode.aired > 0">'+
@@ -52,7 +51,7 @@
                 function seenServiceCall(episode, mode) {
                     seriesFactory.setSeenEpisode(episode.id, mode)
                         .success(function (response) {
-                            scope.callback();
+                            scope.seenResponse({response: response});
                         })
                         .error(function (error) {
                             flash(error.seen);
@@ -68,7 +67,7 @@
                 function unseenServiceCall(episode, mode) {
                     seriesFactory.setUnseenEpisode(episode.id, mode)
                         .success(function (response) {
-                            scope.unseenResponse(response);                        
+                            scope.unseenResponse({response: response});                        
                         })
                         .error(function (error) {
                             flash(response.unseen);

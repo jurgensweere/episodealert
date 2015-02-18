@@ -19,10 +19,40 @@
 
 			});
 
-			$scope.callbackTest = function(){
-				//Put the logic here that needs to run after an episode is seen
-				console.log('callback from series controller');
-			}
+            $scope.onSeen = function (episode, response) {
+                // Mark episodes as seen from response
+                angular.forEach($scope.seasons[episode.season].content, function(episode, key) {
+                    if (response.seen.indexOf(episode.id) > -1) {
+                        episode.seen = 1;
+                    }
+                });
+
+                //After the episode is succesfully set to seen, we should request an update on the unseen object
+                var loadUnseen = getUnseenAmountBySeries($scope.series.id, $scope.series.season_amount);
+                loadUnseen.success(function(unseen){
+                    for( var i = 0; i < unseen.length; i++){
+                        var index = i + 1; 
+                        $scope.seasons[index].unseen = unseen[i];
+                    }
+                });
+            };
+
+            $scope.onUnseen = function (episode, response) {
+                angular.forEach($scope.seasons[episode.season].content, function(episode, key) {
+                    if (response.unseen.indexOf(episode.id) > -1) {
+                        episode.seen = 0;
+                    }
+                });
+
+                //After the episode is succesfully set to unseen, we should request an update on the unseen object
+                var loadUnseen = getUnseenAmountBySeries($scope.series.id, $scope.series.season_amount);
+                loadUnseen.success(function(unseen){
+                    for( var i = 0; i < unseen.length; i++){
+                        var index = i + 1; 
+                        $scope.seasons[index].unseen = unseen[i];
+                    }
+                }); 
+            };
 
 			//watcher to check if the initial episodes have been loaded
 			$scope.$watch('episodesDoneLoading',function() {
