@@ -507,6 +507,19 @@ li.disabled{
         margin-top: 10px;
     }
 
+    .archive {
+        top: 5%;
+        left: 0;
+        right: 0;
+        position: absolute;
+        text-align: center;
+        p {
+            font-size: 100%;
+            background-color: rgba($secondary-color, 0.5);
+        }
+        
+    }
+
     .badge {
         bottom: 5%;
         right: 5%;
@@ -538,6 +551,7 @@ li.disabled{
         a {
             font-size: 110%;
         }
+
     }
 
     .follow-wrapper {
@@ -549,8 +563,21 @@ li.disabled{
         padding: 5px 0px 15px 10px;
         text-align: left;
         background-color: $secondary-color;
-        height: 60px;
-        text-shadow: 1px 1px $lighter-text-shadow;       
+        height: 100px;
+        text-shadow: 1px 1px $lighter-text-shadow;
+
+        button {
+            background-color: rgba(0,0,0,0.5);
+            font-size: 120%;
+            border: 2px solid $bright-highlight;
+            color: $bright-highlight;
+            border-radius: 2px;
+            padding: 3px 10px 4px 8px;
+            right: 5%;
+        }
+        button:hover {
+            color: white;
+        }   
     }
 
     li {
@@ -595,7 +622,7 @@ li.disabled{
         text-align: left;
         background-color: $secondary-color;
         height: 30px;
-        text-shadow: 1px 1px $lighter-text-shadow;       
+        text-shadow: 1px 1px $lighter-text-shadow;     
     }
 
     li {
