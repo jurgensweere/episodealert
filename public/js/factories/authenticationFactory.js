@@ -88,6 +88,7 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
             googleSignIn.success(registerMessage);
             googleSignIn.success(cacheSession);
             googleSignIn.success(setUserInfo);
+            googleSignIn.success(executeCachedActions);
             googleSignIn.error(registerError);
             return googleSignIn;
         },
@@ -99,6 +100,7 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
             facebookSignIn.success(registerMessage);
             facebookSignIn.success(cacheSession);
             facebookSignIn.success(setUserInfo);
+            facebookSignIn.success(executeCachedActions);
             facebookSignIn.error(registerError);
             return facebookSignIn;
         }
