@@ -1,13 +1,14 @@
 	(function () {
     
     angular.module('eaApp').controller('SeriesCtrl',
-        function($scope, $routeParams, seriesFactory, Page) {
+        function($scope, $routeParams, seriesFactory, AuthenticationService, Page) {
 
 			/* declaration */
 			var unique_name = $routeParams.seriesname;
 
 			/* Execute on load */
 			var loadProfileSeries = getSeries(unique_name);
+            var authorized = AuthenticationService.isLoggedIn();
 
 			loadProfileSeries.success(function(series){
 
@@ -56,7 +57,7 @@
 
 			//watcher to check if the initial episodes have been loaded
 			$scope.$watch('episodesDoneLoading',function() {
-			    if($scope.series){
+			    if($scope.series && authorized){
 
 					var loadUnseen = getUnseenAmountBySeries($scope.series.id, $scope.series.season_amount);
 	   				loadUnseen.success(function(unseen){

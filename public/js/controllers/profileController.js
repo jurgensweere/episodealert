@@ -32,30 +32,34 @@
 
             /* filter out the series */
             function filterSeries() {
-                $scope.profileSeries = series.slice();
 
-                if ($scope.seen || !$scope.ended || !$scope.archive) {
+                if(series.length > 0){
 
-                    for (var i = $scope.profileSeries.length - 1; i >= 0; i--) {
+                    $scope.profileSeries = series.slice();
 
-                        //check and remove series that don't have unseen episodes
-                        if ($scope.seen) {
-                            if ($scope.profileSeries[i].unseen_episodes === 0) {
-                                $scope.profileSeries.splice(i, 1);
+                    if ($scope.seen || !$scope.ended || !$scope.archive) {
+
+                        for (var i = $scope.profileSeries.length - 1; i >= 0; i--) {
+
+                            //check and remove series that don't have unseen episodes
+                            if ($scope.seen) {
+                                if ($scope.profileSeries[i].unseen_episodes === 0) {
+                                    $scope.profileSeries.splice(i, 1);
+                                }
                             }
-                        }
 
-                        //check and remove series that are ended
-                        if (!$scope.ended) {
-                            if ($scope.profileSeries[i].status === "Ended") {
-                                $scope.profileSeries.splice(i, 1);
+                            //check and remove series that are ended
+                            if (!$scope.ended) {
+                                if ($scope.profileSeries[i].status === "Ended") {
+                                    $scope.profileSeries.splice(i, 1);
+                                }
                             }
-                        }
 
-                        //check and remove series that are archived
-                        if (!$scope.archive) {
-                            if ($scope.profileSeries[i].archive) {
-                                $scope.profileSeries.splice(i, 1);
+                            //check and remove series that are archived
+                            if (!$scope.archive) {
+                                if ($scope.profileSeries[i].archive) {
+                                    $scope.profileSeries.splice(i, 1);
+                                }
                             }
                         }
                     }
@@ -75,7 +79,7 @@
                         filterSeries();
                     })
                     .error(function (response) {
-                        flash(response.flash);
+                        //flash(response.flash);
                     });
             }
 
@@ -86,7 +90,7 @@
                         $scope.unseenAmount = response.unseenepisodes;
                     })
                     .error(function (response) {
-                        flash(response.flash);
+                       //flash(response.flash);
                     });
             }
 

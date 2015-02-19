@@ -76,6 +76,13 @@
         </nav>
     </div>
     <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()">{{alert.msg}}</alert>
+            </div>
+        </div>
+    </div>
+    <div class="container">
         <div class="row flash-container">
             <div class="col-md-12 col-lg-12">    
                 <flash:messages class="animation" />
@@ -138,6 +145,7 @@
 <% HTML::script(asset('js/factories/seriesFactory.js')) %>
 <% HTML::script(asset('js/factories/oauthFactory.js')) %>
 <% HTML::script(asset('js/factories/userSettingsFactory.js')) %>
+<% HTML::script(asset('js/factories/alertFactory.js')) %>
 
 <% HTML::script(asset('js/services/searchService.js')) %>
 

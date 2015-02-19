@@ -13,7 +13,7 @@
                         $scope.unseenAmount = response.unseenepisodes;
                     })
                     .error(function (response) {
-                        flash(response.flash);
+                        //flash(response.flash);
                     });
             }            
                 
