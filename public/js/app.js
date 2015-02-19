@@ -222,8 +222,7 @@
             executeActions: function () {
                 for (var i = actions.length - 1; i >= 0; i--) {
                     actions.shift().call();
-                };
-                
+                }
             },
 
             deleteActions: function () {

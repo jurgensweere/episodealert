@@ -61,6 +61,16 @@ ul {
     z-index: -9999;*/
 }
 
+.ea-alert{
+    .row {
+        .alert{
+            margin-bottom: 0px;
+        }
+
+        margin-top:10px;
+    }
+}
+
 .unseen-badge{
     position: absolute;
     top: -10px;

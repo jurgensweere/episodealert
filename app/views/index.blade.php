@@ -75,20 +75,21 @@
             </div>
         </nav>
     </div>
-    <div class="container">
+    <div class="container ea-alert">
         <div class="row">
             <div class="col-md-12 col-lg-12">
                 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()">{{alert.msg}}</alert>
             </div>
         </div>
     </div>
+    <!-- 
     <div class="container">
         <div class="row flash-container">
             <div class="col-md-12 col-lg-12">    
                 <flash:messages class="animation" />
             </div>
         </div>
-    </div>
+    </div> -->
     <div id="fb-root"></div>
     <div id="contentUI" ui-view="content" class="container ea-content fade" ng-view>
     </div>
