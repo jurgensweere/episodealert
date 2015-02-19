@@ -12,6 +12,7 @@ use Log;
 use Input;
 use DB;
 use DateTime;
+use DateInterval;
 use App;
 
 class SeriesController extends BaseController
@@ -65,6 +66,22 @@ class SeriesController extends BaseController
                 ->take(5)
                 ->get()
         );
+    }
+
+    public function trending(){
+        //most followed series in the past 15 days
+        $date = new DateTime;
+        $trendingDate = $date->sub(new DateInterval('P15D'))->format('Y-m-d H:i:s');
+
+        return Response::json(
+            Series::join('following', 'following.series_id', '=', 'series.id')
+                ->where('following.created_at', '>', $trendingDate)
+                ->whereNotNull('fanart_image')
+                ->groupBy('following.series_id')
+                ->orderBy(DB::raw('count(following.id)'), 'desc')
+                ->take(10)
+                ->get()
+        );        
     }
 
     public function search($query)

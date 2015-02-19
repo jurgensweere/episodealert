@@ -54,7 +54,7 @@
                             scope.seenResponse({response: response});
                         })
                         .error(function (error) {
-                            flash(error.seen);
+                            //flash(error.seen);
                         });
                 }      
 
@@ -70,14 +70,14 @@
                             scope.unseenResponse({response: response});                        
                         })
                         .error(function (error) {
-                            flash(response.unseen);
+                            //flash(response.unseen);
                         });
                 }
             }
         };
     }])
 
-    .directive('followButton', function(seriesFactory) {
+    .directive('followButton', function(seriesFactory, AuthenticationService, ActionCache, alertService, $location) {
         var directive = { restrict: 'E', replace: true, transclude: true };
         directive.template =
             '<button' +
@@ -113,10 +113,32 @@
             };
 
             scope.toggleFollowing = function (series) {
-                if (series.following) {   
+                if (series.following) {                       
                     unfollowServiceCall(series);
                 } else {
-                    followServiceCall(series);
+                    if(AuthenticationService.isLoggedIn()){
+                        followServiceCall(series);
+                    }else{
+                        //Save the action in the cache
+                        var functionToQueue = function(){
+                            followServiceCall(series);    
+                        };
+
+                        //Add the function call to the action cache, will be called after user logs in
+                        ActionCache.addAction(functionToQueue);
+
+                        //add alert info 
+                        //alertService.add('success', 'je moet wel inloggen');
+                        //alertService.add('info', 'om lekker');
+                        alertService.add('warning', 'Please register or login to follow this show and continue to your profile');
+                        //alertService.add('danger', 'te volgen');
+                            
+                        //Redirect to login or registration
+                        $location.path("/login");
+                        
+                        //Set a message to be shown 
+                        //TODO: implement decent actions (ui-bootstrap)
+                    }
                 }
             };
         };
@@ -126,7 +148,7 @@
             seriesFactory.unfollowSeries(series.id)
                 .success(function (response) {
                     //flash(response.follow);
-          
+                    alertService.add('success', 'Unfollowed ' + series.name);
                     series.following = 0;
                 })
                 .error(function (error) {
@@ -139,7 +161,7 @@
             seriesFactory.followSeries(series.id)
                 .success(function (response) {
                     //flash(response.follow);
-          
+                    alertService.add('success', 'Following ' + series.name);
                     series.following = 1;
                 })
                 .error(function (error) {

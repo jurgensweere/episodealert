@@ -47,7 +47,8 @@ Route::group(
             Route::get('unfollow/{series_id}', 'FollowingController@unfollow');
 
             //Series
-            Route::get('series/top', 'SeriesController@top');
+            Route::get('series/top', 'SeriesController@top');\
+            Route::get('series/trending', 'SeriesController@trending');
             Route::get('series/guide', 'SeriesController@getEpisodeGuide');
             Route::get('series/search/{query}', 'SeriesController@search');
             Route::get('series/genre/{genre}/{skip?}', 'SeriesController@getByGenre');
@@ -68,6 +69,7 @@ Route::group(
             Route::post('profile/password', 'ProfileController@postChangePassword');
             Route::post('profile/credentials', 'ProfileController@postChangeCredentials');
             Route::post('profile/preferences', 'ProfileController@postChangePreferences');
+
 
         });
 
