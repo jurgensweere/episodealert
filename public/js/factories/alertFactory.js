@@ -6,7 +6,7 @@ angular.module('eaApp').factory('alertService', ['$timeout', function($timeout) 
   alertFactory.add = function(type, msg) {
       $timeout(function(){
         alerts.splice(alerts.indexOf(alert), 1);
-      }, 8000); 
+      }, 5000); 
 
       return alerts.push({
           type: type,

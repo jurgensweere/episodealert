@@ -64,7 +64,7 @@ ul {
 .ea-alert{
     .row {
         .alert{
-            margin-bottom: 0px;
+            margin-bottom: 6px;
         }
 
         margin-top:10px;
@@ -369,6 +369,33 @@ h1 {
     opacity: 1;
 }
 .fade.ng-leave-active {
+    opacity: 0;
+}
+
+.fade-slow {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    opacity: 1;
+}
+.fade-slow.ng-enter,
+.fade-slow.ng-leave{
+    -webkit-transition: all 1.25s ease;
+    -moz-transition: all 1.25s ease;
+    -o-transition: all 1.25s ease;
+    transition: all 1.25s ease;
+}
+.fade-slow.ng-enter {
+    opacity: 0;
+}
+.fade-slow.ng-enter-active {
+    opacity: 1;
+}
+.fade-slow.ng-leave {
+    opacity: 1;
+}
+.fade-slow.ng-leave-active {
     opacity: 0;
 }
 
