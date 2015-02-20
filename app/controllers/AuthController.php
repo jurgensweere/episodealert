@@ -156,7 +156,7 @@ class AuthController extends BaseController
         Auth::login($user);
 
         // We need to redirect here
-        return Redirect::to('/profile');
+        return Redirect::to('/');
 
         // This no longer werkz
         return Response::json(array('id' => Auth::user()->id,
