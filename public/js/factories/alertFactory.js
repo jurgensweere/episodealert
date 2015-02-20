@@ -3,10 +3,10 @@ angular.module('eaApp').factory('alertService', ['$timeout', function($timeout) 
   var alerts = [];
   var alertFactory = {};
  
-  alertFactory.add = function(type, msg) {
+  alertFactory.add = function(type, msg, time) {
       $timeout(function(){
         alerts.splice(alerts.indexOf(alert), 1);
-      }, 5000); 
+      }, time); 
 
       return alerts.push({
           type: type,

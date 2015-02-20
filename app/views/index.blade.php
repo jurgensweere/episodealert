@@ -74,12 +74,8 @@
             </div>
         </nav>
     </div>
-    <div class="container ea-alert">
-        <div class="row">
-            <div class="col-md-12 col-lg-12">
-                <alert class="fade-slow" ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()">{{alert.msg}}</alert>
-            </div>
-        </div>
+    <div class="ea-alert">
+        <alert class="fade-slow" ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()">{{alert.msg}}</alert>
     </div>
     <!-- 
     <div class="container">

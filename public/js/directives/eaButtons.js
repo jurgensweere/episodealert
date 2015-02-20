@@ -130,7 +130,7 @@
                         //add alert info 
                         //alertService.add('success', 'je moet wel inloggen');
                         //alertService.add('info', 'om lekker');
-                        alertService.add('warning', 'Please register or login to follow this show and continue to your profile');
+                        alertService.add('warning', 'Please register or login to follow this show and continue to your profile', 5000);
                         //alertService.add('danger', 'te volgen');
                             
                         //Redirect to login or registration
@@ -148,7 +148,7 @@
             seriesFactory.unfollowSeries(series.id)
                 .success(function (response) {
                     //flash(response.follow);
-                    alertService.add('success', 'Unfollowed ' + series.name);
+                    alertService.add('success', 'Unfollowed ' + series.name, 5000);
                     series.following = 0;
                 })
                 .error(function (error) {
@@ -161,7 +161,7 @@
             seriesFactory.followSeries(series.id)
                 .success(function (response) {
                     //flash(response.follow);
-                    alertService.add('success', 'Following ' + series.name);
+                    alertService.add('success', 'Following ' + series.name, 5000);
                     series.following = 1;
                 })
                 .error(function (error) {

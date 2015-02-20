@@ -63,12 +63,19 @@ ul {
 }
 
 .ea-alert{
-    .row {
-        .alert{
-            margin-bottom: 6px;
-        }
+    bottom: 20px;
+    right: 20px;
+    position: fixed;
+    width: 310px;
+    height: auto;
+    list-style-type: none;
+    z-index: 10000000; 
 
-        margin-top:10px;
+    .alert{
+        margin-bottom: 5px;
+        .alert-success{
+            color: rgb(0, 100, 0);
+        }
     }
 }
 
@@ -377,7 +384,6 @@ h1 {
     top: 0;
     left: 0;
     right: 0;
-    height: 100%;
     opacity: 1;
 }
 .fade-slow.ng-enter,
