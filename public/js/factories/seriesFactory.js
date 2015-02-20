@@ -164,5 +164,13 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
         return $http.get(urlBase + 'unseenamountbyseries/' + series_id + '/' + seasons_amount);
     };
 
+    seriesFactory.archiveSeries = function (series_id) {
+        return $http.post(urlBase + 'archive/' + series_id);
+    };
+
+    seriesFactory.restoreSeries = function (series_id) {
+        return $http.post(urlBase + 'restore/' + series_id);
+    };
+
     return seriesFactory;
 }]);

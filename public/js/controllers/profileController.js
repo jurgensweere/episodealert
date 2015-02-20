@@ -11,7 +11,7 @@
             $scope.ended = userSettingService.getProfileEnded();
             $scope.seen = userSettingService.getProfileSeen(); // exclude seen?
 
-            $scope.toggleArchive = function () {
+            $scope.toggleArchiveSetting = function () {
                 userSettingService.setProfileArchive(!$scope.archive);
                 $scope.archive = !$scope.archive;
                 filterSeries();
@@ -27,6 +27,24 @@
                 userSettingService.setProfileSeen(!$scope.seen);
                 $scope.seen = !$scope.seen;
                 filterSeries();
+            };
+
+            $scope.toggleArchive = function (series) {
+                if (series.archive) {
+                    seriesFactory.restoreSeries(series.id)
+                        .success(
+                            function (response) {
+                                series.archive = 0;
+                            }
+                        );
+                } else {
+                    seriesFactory.archiveSeries(series.id)
+                        .success(
+                            function (response) {
+                                series.archive = 1;
+                            }
+                        );
+                }
             };
 
 

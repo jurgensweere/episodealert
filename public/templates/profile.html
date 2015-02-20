@@ -17,7 +17,7 @@
 			<span ng-show="ended == false" class="glyphicon glyphicon-ok" />
 			continueing
 		</button>
-		<button class="btn btn--profile-filter" ng-class="{active: archive}" ng-click="toggleArchive()">
+		<button class="btn btn--profile-filter" ng-class="{active: archive}" ng-click="toggleArchiveSetting()">
 			<span ng-show="archive == true" class="glyphicon glyphicon-ok" />
 			<span ng-show="archive == false" class="glyphicon glyphicon-plus" />		
 			archived
@@ -31,7 +31,7 @@
 	</div>
 	<div class="row profile-series">
 		<ul class="series-profile">
-		    <li ng-repeat="series in profileSeries" class="fade fadein">
+		    <li ng-repeat="series in profileSeries| orderBy:'archive'" class="fade fadein">
 				<div onLoad="followButton='false'" ng-include src="'templates/partial/_series-profile.html'" />
 		    </li>
 		 </ul>

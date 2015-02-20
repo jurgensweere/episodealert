@@ -199,4 +199,25 @@ class FollowingController extends BaseController
         }
     }
 
+    public function postArchive(Series $series)
+    {
+        Following::where('user_id', '=', Auth::user()->id)
+            ->where('series_id', '=', $series->id)
+            ->update(array(
+                'archive' => 1
+                ));
+
+        return Response::json($series);
+    }
+
+    public function postRestore(Series $series)
+    {
+        Following::where('user_id', '=', Auth::user()->id)
+            ->where('series_id', '=', $series->id)
+            ->update(array(
+                'archive' => 0
+                ));
+        return Response::json($series);
+    }
+
 }

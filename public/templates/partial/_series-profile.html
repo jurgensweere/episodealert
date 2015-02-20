@@ -21,6 +21,6 @@
     <p ng-if="series.status != 'Ended'">Next episode: {{ ::series.latest_episodes[1].airdate || 'unknown' }}</p>
     <p ng-if="series.status == 'Ended'">&nbsp;</p>
 
-    <button class="btn">{{ ::series.archive ? 'Restore' : 'Archive' }}</button>
+    <button class="btn" ng-click="toggleArchive(series)">{{ series.archive ? 'Restore' : 'Archive' }}</button>
 </div>  
  

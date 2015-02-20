@@ -16,6 +16,7 @@ Blade::setContentTags('<%', '%>');
 Blade::setEscapedContentTags('<%%', '%%>');
 
 Route::model('episode', 'EA\models\Episode');
+Route::model('series', 'EA\models\Series');
 
 Route::group(
     array('namespace' => 'EA\controllers'),
@@ -46,6 +47,8 @@ Route::group(
             //Following (has to go behind auth)
             Route::get('follow/{series_id}', 'FollowingController@follow');
             Route::get('unfollow/{series_id}', 'FollowingController@unfollow');
+            Route::post('series/archive/{series}', 'FollowingController@postArchive');
+            Route::post('series/restore/{series}', 'FollowingController@postRestore');
 
             //Series
             Route::get('series/top', 'SeriesController@top');\
