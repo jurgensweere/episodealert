@@ -58,7 +58,7 @@ class UpdateSeries extends Command
             Settings::store('lastUpdateTime', $lastUpdateTime);
 
             $series_count = $data ? count($data->Series) : 0;
-            Log::info("UpdateSeries: $series_count series downloaded from thetvdb.com");
+            $this->info("UpdateSeries: $series_count series downloaded from thetvdb.com");
 
             if ($series_count > 0) {
                 foreach ($data->Series as $series_id) {
@@ -66,9 +66,9 @@ class UpdateSeries extends Command
                 }
             }
         } else {
-            Log::error("UpdateSeries: Error while downloading Series data from TVDB");
+            $this->info("UpdateSeries: Error while downloading Series data from TVDB");
         }
-        Log::info("UpdateSeries: Done.");
+        $this->info("UpdateSeries: Done.");
     }
 
     /**
