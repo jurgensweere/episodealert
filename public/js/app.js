@@ -235,6 +235,48 @@
 
     });
 
+    app.factory('FollowingQueue', function (seriesFactory) {
+
+        var actions = {};
+
+        return {
+            addFollowing: function (series_id) {
+                actions.series_id = series_id;
+                this.saveState();
+            },
+
+            executeActions: function () {
+                this.restoreState();
+
+                if(actions.series_id){
+
+                    seriesFactory.followSeries(actions.series_id)
+                        .success(function (response) {
+                        });
+                }
+
+                actions = {};
+                this.saveState();
+            },
+
+            saveState: function () {
+                localStorage.followingItem = angular.toJson(actions);
+            },
+
+            restoreState: function () {
+                //check if the userSettings is available in the users local storage
+                if(localStorage.followingItem){
+                    //collect the data and set it to local model
+                    actions = angular.fromJson(localStorage.followingItem);
+                }else{
+                    //save the default values
+                    actions = {};
+                }
+            }
+
+        };
+    });
+
     app.factory('SessionService', function () {
         return {
             get: function (key) {

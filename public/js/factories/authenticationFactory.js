@@ -1,4 +1,4 @@
-angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $location, $http, SessionService, flash, $window, ActionCache) {
+angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $location, $http, SessionService, flash, $window, ActionCache, FollowingQueue) {
 
     var cacheSession = function (response) {
         SessionService.set('authenticated', true);
@@ -13,7 +13,7 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
 
     var executeCachedActions = function () {
         //Execute any cache actions that 
-        ActionCache.executeActions();
+        FollowingQueue.executeActions();
     };
 
     var unSetUserInfo = function () {
@@ -56,10 +56,10 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
         },
         login: function (credentials) {
             var login = $http.post('api/auth/login', credentials);
+            login.success(executeCachedActions);
             login.success(cacheSession);
             login.success(loginMessage);
             login.success(setUserInfo);
-            login.success(executeCachedActions);
             login.error(loginError);
             return login;
 
@@ -74,10 +74,10 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
             return SessionService.get('authenticated');
         },
         check: function () {
-
             var check = $http.get('api/auth/check');
             check.success(cacheSession);
             check.success(setUserInfo);
+            check.success(executeCachedActions);
             check.error(checkError);
             check.error(unSetUserInfo);
             check.error(uncacheSession);
@@ -86,6 +86,7 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
         pageLoadInit: function ()
         {
             if ($window.user && $window.user.id) {
+                executeCachedActions();
                 cacheSession($window.user);
                 setUserInfo($window.user);
                 delete window.user;

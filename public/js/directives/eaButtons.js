@@ -77,7 +77,7 @@
         };
     }])
 
-    .directive('followButton', function(seriesFactory, AuthenticationService, ActionCache, alertService, $location) {
+    .directive('followButton', function(seriesFactory, AuthenticationService, FollowingQueue, alertService, $location) {
         var directive = { restrict: 'E', replace: true, transclude: true };
         directive.template =
             '<button' +
@@ -125,7 +125,7 @@
                         };
 
                         //Add the function call to the action cache, will be called after user logs in
-                        ActionCache.addAction(functionToQueue);
+                        FollowingQueue.addFollowing(series.id);
 
                         //add alert info 
                         //alertService.add('success', 'je moet wel inloggen');

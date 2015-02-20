@@ -41,8 +41,6 @@
             function unfollowServiceCall(series) {
                 seriesFactory.unfollowSeries(series.id)
                     .success(function (response) {
-                        //flash(response.follow);
-              
                         series.following = 0;
                     })
                     .error(function (error) {
