@@ -52,7 +52,25 @@ class AuthController extends BaseController
                     'email' => Auth::user()->email,
                     'thirdparty' => Auth::user()->isThirdParty()));
         } else {
-             return Response::json(array('flash' => 'Invalid username or password'), 500);
+            // it might be possible, this is a user with an old password.
+            $user = User::where('username', '=', Input::json('username'))
+                ->where('old_password', '=', md5(Input::json('password')))
+                ->first();
+            if ($user) {
+                $user->password = Hash::make(Input::json('password'));
+                $user->old_password = null;
+                $user->save();
+
+                if (Auth::attempt(array('username' => Input::json('username'), 'password' => Input::json('password'))))
+                {
+                    return Response::json(array('id' => Auth::user()->id,
+                            'username' => Auth::user()->accountname,
+                            'email' => Auth::user()->email,
+                            'thirdparty' => Auth::user()->isThirdParty()));
+                }
+            }
+
+            return Response::json(array('flash' => 'Invalid username or password'), 500);
         }
     }
 
