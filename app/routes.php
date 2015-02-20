@@ -58,7 +58,7 @@ Route::group(
             Route::get('series/genre/{genre}/{skip?}', 'SeriesController@getByGenre');
             Route::get('series/browse', 'SeriesController@getAllCategories');
             Route::get('series/episodes/{uniqueName}', 'SeriesController@getEpisodes');
-            Route::get('series/episodesbyseason/{series}/{season}', 'SeriesController@getEpisodesBySeason');
+            Route::get('series/episodesbyseason/{series_id}/{season}', 'SeriesController@getEpisodesBySeason');
             Route::get('series/unseenamount', 'SeriesController@getUnseenEpisodes');
             Route::get('series/unseenamountbyseason/{series_id}/{season}', 'SeriesController@getUnseenEpisodesPerSeason');
             Route::get('series/unseenamountbyseries/{series_id}/{seasons}', 'SeriesController@getUnseenEpisodesPerSeries');
