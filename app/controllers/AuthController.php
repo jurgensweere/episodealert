@@ -49,7 +49,6 @@ class AuthController extends BaseController
         {
             return Response::json(array('id' => Auth::user()->id,
                     'username' => Auth::user()->accountname,
-                    'email' => Auth::user()->email,
                     'thirdparty' => Auth::user()->isThirdParty()));
         } else {
             // it might be possible, this is a user with an old password.
@@ -65,7 +64,6 @@ class AuthController extends BaseController
                 {
                     return Response::json(array('id' => Auth::user()->id,
                             'username' => Auth::user()->accountname,
-                            'email' => Auth::user()->email,
                             'thirdparty' => Auth::user()->isThirdParty()));
                 }
             }
@@ -87,7 +85,6 @@ class AuthController extends BaseController
         if (Auth::user()) {
             return Response::json(array('id' => Auth::user()->id,
                     'username' => Auth::user()->accountname,
-                    'email' => Auth::user()->email,
                     'thirdparty' => Auth::user()->isThirdParty()));
         } else {
             return Response::json(array('flash' => 'Not authorized'), 500);
@@ -156,12 +153,12 @@ class AuthController extends BaseController
         Auth::login($user);
 
         // We need to redirect here
-        return Redirect::to('/');
+        return Redirect::to('/profile');
 
         // This no longer werkz
         return Response::json(array('id' => Auth::user()->id,
                     'username' => Auth::user()->accountname,
-                    'email' => Auth::user()->email));
+                    'thirdparty' => Auth::user()->isThirdParty()));
     }
 
     public function callbackFacebookOAuth()
@@ -202,6 +199,6 @@ class AuthController extends BaseController
 
         return Response::json(array('id' => Auth::user()->id,
                     'username' => Auth::user()->accountname,
-                    'email' => Auth::user()->email));
+                    'thirdparty' => Auth::user()->isThirdParty()));
     }
 }

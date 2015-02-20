@@ -73,25 +73,28 @@
                 }]);
 
     // We can add some stuff to the rootscope here
-    app.run(function ($rootScope, $location, AuthenticationService) {
+    app.run(function ($rootScope, $location, $window, AuthenticationService) {
+        $rootScope.credentials = {};
+        AuthenticationService.pageLoadInit();
+
+        // Add routes that required auth from the front-end
+        var routesThatRequireAuth = ['/profile', '/profile/settings'];
 
         // check if a user is logged in at the backend
         AuthenticationService.check();
-
-        $rootScope.credentials = {};
 
         $rootScope.hello = function () {
             //console.log('hello');
             // you can use this in anywhere using $scope.hello();
         };
 
-        // Add routes that required auth from the front-end
-        var routesThatRequireAuth = ['/profile', '/profile/settings'];
+        
 
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
 
             for (var i = 0, max = routesThatRequireAuth.length; i < max; i++) {
                 if (($location.path() === routesThatRequireAuth[i]) && (!AuthenticationService.isLoggedIn())) {
+
                     $rootScope.$evalAsync(function () {
                         $location.path('/login');
                     });

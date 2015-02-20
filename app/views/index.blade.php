@@ -110,6 +110,7 @@
 </div>
 
 <script>
+    user = <% json_encode($user) %>;
     var clientId = '<% $clientId %>';
     var state = '<% $state %>';
     var fbAppId = '<% $fbAppId %>';

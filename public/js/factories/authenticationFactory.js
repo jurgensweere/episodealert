@@ -74,11 +74,22 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
             return SessionService.get('authenticated');
         },
         check: function () {
+
             var check = $http.get('api/auth/check');
             check.success(cacheSession);
             check.success(setUserInfo);
             check.error(checkError);
+            check.error(unSetUserInfo);
+            check.error(uncacheSession);
             return check;
+        },
+        pageLoadInit: function ()
+        {
+            if ($window.user && $window.user.id) {
+                cacheSession($window.user);
+                setUserInfo($window.user);
+                delete window.user;
+            }
         },
         facebookSignIn: function (authResult) {
             var facebookSignIn = $http.post('api/auth/oauth/facebook', {

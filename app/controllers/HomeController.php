@@ -33,10 +33,18 @@ class HomeController extends BaseController
         $config = json_decode(File::get(app_path().'/config/client_secret.json'));
         $key = isset($config->installed) ? 'installed' : 'web';
 
+        $user = array();
+        if (Auth::user()) {
+            $user = array('id' => Auth::user()->id,
+                    'username' => Auth::user()->accountname,
+                    'thirdparty' => Auth::user()->isThirdParty());
+        }
+
         // Set the client ID, token state, and application name in the HTML while
         // serving it.
         return View::make('index',
             array(
+                'user' => $user,
                 'clientId' => $config->$key->client_id,
                 'state' => $state,
                 'app_name' => 'Episode-Alert',
