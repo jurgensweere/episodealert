@@ -12,6 +12,7 @@ use Hash;
 use Config;
 use Google_Client;
 use Google_Service_Oauth2;
+use Google_Service_IdentityToolkit;
 use Google_Http_Request;
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
@@ -84,15 +85,17 @@ class AuthController extends BaseController
     public function callbackGoogleOAuth()
     {
         if (Input::get('state') != (Session::get('state'))) {
+            // ???? we are not in json here.
             return Response::json(array('flash' => 'Invalid state'), 401);
         }
 
-        $authResult = Input::get('authResult');
+        $code = Input::get('code');
+
         //$gPlusId = $request->get['gplus_id']; // ???
         $client = new Google_Client();
-        $client->setRedirectUri('postmessage');
+        $client->setRedirectUri(Config::get('app.url') . '/login');
         $client->setAuthConfigFile(app_path().'/config/client_secret.json');
-        $client->authenticate($authResult['code']);
+        $client->authenticate($code);
 
         $token = $client->getAccessToken();
         $gso = new Google_Service_Oauth2($client);
@@ -103,23 +106,41 @@ class AuthController extends BaseController
             ->where('oauthid', '=', $me->id)
             ->first();
         if (!$user) {
-            // Create User
-            $user = User::create(
-                array(
-                    'accountname' => $me->name,
-                    'oauthprovider' => 'google',
-                    'oauthid' => $me->id,
-                    'username' => '',
-                    'email' => $me->email,
-                    'password' => '',
-                    'role' => User::ROLE_MEMBER,
-                    'publicfollow' => 0,
-                )
-            );
+            // No user found, maybe we have the old openid id?
+            $jwt = $client->verifyIdToken()->getAttributes();
+
+            $user = User::where('oauthprovider', '=', 'google')
+                ->where('old_accountname', '=', $jwt['payload']['openid_id'])
+                ->first();
+
+            if (!$user) {
+                // Create User
+                $user = User::create(
+                    array(
+                        'accountname' => $me->name,
+                        'oauthprovider' => 'google',
+                        'oauthid' => $me->id,
+                        'username' => '',
+                        'email' => $me->email,
+                        'password' => '',
+                        'role' => User::ROLE_MEMBER,
+                        'publicfollow' => 0,
+                    )
+                );
+            } else {
+                // We need to update the user, to make sure we no longer need this oauth stuff
+                $user->oauthid = $me->id;
+                $user->old_accountname = null;
+                $user->save();
+            }
         }
       
         Auth::login($user);
 
+        // We need to redirect here
+        return Redirect::to('/profile');
+
+        // This no longer werkz
         return Response::json(array('id' => Auth::user()->id,
                     'username' => Auth::user()->accountname,
                     'email' => Auth::user()->email));

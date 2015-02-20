@@ -114,6 +114,7 @@
     var clientId = '<% $clientId %>';
     var state = '<% $state %>';
     var fbAppId = '<% $fbAppId %>';
+    var googleRedirectURI = '<% Config::get('app.url') . '/login' %>';
     
     /**
       * dirty hack because twitter bootstrap mobile first responsive

@@ -80,18 +80,6 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
             check.error(checkError);
             return check;
         },
-        googleSignIn: function (authResult) {
-            var googleSignIn = $http.post('api/auth/oauth/google', {
-                state: $window.state,
-                authResult: authResult
-            });
-            googleSignIn.success(registerMessage);
-            googleSignIn.success(cacheSession);
-            googleSignIn.success(setUserInfo);
-            googleSignIn.success(executeCachedActions);
-            googleSignIn.error(registerError);
-            return googleSignIn;
-        },
         facebookSignIn: function (authResult) {
             var facebookSignIn = $http.post('api/auth/oauth/facebook', {
                 state: $window.state,

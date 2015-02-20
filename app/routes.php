@@ -23,6 +23,7 @@ Route::group(
 
         Route::get('/', 'HomeController@showWelcome');
         Route::get('/testpage', 'HomeController@showTestPage');
+        Route::get('/login', 'LoginController@processLogin');
 
         Route::group(array('prefix' => 'api'), function () {
 

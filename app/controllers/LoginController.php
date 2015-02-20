@@ -7,9 +7,18 @@ use Input;
 use Redirect;
 use Validator;
 use View;
+use App;
 
 class LoginController extends BaseController
 {
+    public function processLogin()
+    {
+        if (Input::has('state')) {
+            return App::make('EA\controllers\AuthController')->callbackGoogleOAuth();
+        }
+        return App::make('EA\controllers\HomeController')->showWelcome();
+    }
+
     public function showLogin()
     {
         return View::make(
