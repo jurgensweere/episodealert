@@ -353,19 +353,24 @@ h1 {
     opacity: 1;
 }
 
+/* fade used for main content */
 .fade {
     top: 0;
     left: 0;
     right: 0;
     opacity: 1;
 }
-.fade.ng-enter,
-.fade.ng-leave{
-    -webkit-transition: all 0.25s ease;
-    -moz-transition: all 0.25s ease;
-    -o-transition: all 0.25s ease;
-    transition: all 0.25s ease;
+
+.fade.ng-enter{
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
+.fade.ng-leave{
+    display: none;
+}
+
 .fade.ng-enter {
     opacity: 0;
 }
