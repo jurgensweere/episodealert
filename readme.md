@@ -34,14 +34,15 @@ Login with "test/test". Enjoy!
   gem install sass compass
   bower install
   nmp install (Or 'npm install --no-bin-links' if it doenst work on vagrant)
-  grunt build
+  grunt build or gulp build
 ```
 
 ### Work
 
 ```
   
-  'grunt watch' to watch for changes
+  'grunt watch' to watch for changes -or-
+  'gulp watch' to watch for changes
   'php artisan serve' to start a webserver in root of the project (or you can install apache)
   'php artisan series:update'  to start fetching series
   'php artisan sitemap:generate' generate a sitemap
