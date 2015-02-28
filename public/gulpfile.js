@@ -82,50 +82,44 @@ var bowerConcatTask = function(env) {
     var cssFilter = gulpFilter('*.css');
     var fontFilter = gulpFilter(['*.eot', '*.woff', '*.woff2', '*.svg', '*.ttf']);
 
-// TODO: simplify these paths, only change the base path.
-    var path = {
-        'js': {
-            'dev': './js/vendor',
-            'beta': './dist/beta/js/vendor',
-            'live': './dist/production/js/vendor',
-        },
-        'css': {
-            'dev': './css/vendor',
-            'beta': './dist/beta/css/vendor',
-            'live': './dist/production/css/vendor',
-        },
-        'font': {
-            'dev': './fonts/bootstrap',
-            'beta': './dist/beta/fonts/bootstrap',
-            'live': './dist/production/fonts/bootstrap',
-        },
+    var basepath = {
+        'dev': '.',
+        'beta': './dist/beta',
+        'live': './dist/production',
     }
-
-    // TODO: On live, we also want to copy these files, maybe this needs to be a seperate function?
-    // cwd: 'templates',
-    // src: ['**'],
-    // dest: 'dist/production/templates/'
-
-    // cwd: 'js/vendor/',
-    // src: ['ui-bootstrap*.js'],
-    // dest: 'dist/production/js/vendor/'
 
     gulp.src(mainBowerFiles())
         // Concat all js files
         .pipe(jsFilter)
         .pipe(concat('_bower.js'))
-        .pipe(gulp.dest(path.js[env]))
+        .pipe(uglify())
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest(basepath[env] + '/js/vendor'))
         .pipe(jsFilter.restore())
 
         // Concat all css files
         .pipe(cssFilter)
         .pipe(concat('_bower.css'))
-        .pipe(gulp.dest(path.css[env]))
+        .pipe(gulp.dest(basepath[env] + '/css/vendor'))
         .pipe(cssFilter.restore())
 
         // Copy fonts
         .pipe(fontFilter)
-        .pipe(gulp.dest(path.font[env])); // <-- check the path, or change it?
+        .pipe(gulp.dest(basepath[env] + '/fonts/bootstrap'));
+
+    if (env == 'live') {
+        gulp.src('./templates/**')
+            .pipe(gulp.dest(basepath[env] + '/templates'));
+        // Not sure what the purpose here is, as it should be in _bower.js
+        //gulp.src('./js/vendor/ui-bootstrap*.js')
+        //    .pipe(uglify())
+        //    .pipe(rename({
+        //        suffix: '.min'
+        //    }))
+        //    .pipe(gulp.dest(basepath[env] + '/js/vendor'))
+    }
 };
 
 var buildCssTask = function (env) {
@@ -149,10 +143,6 @@ var buildJsTask = function (env) {
         'beta': './dist/beta/js',
         'live': './dist/production/js',
     }
-
-    //TODO: On live, we also want to uglify these:
-    //'dist/production/js/vendor/_bower.min.js': 'dist/production/js/vendor/_bower.js',
-    //'dist/production/js/vendor/ui-bootstrap-0.12.0.min.js': 'dist/production/js/vendor/ui-bootstrap-0.12.0.js',
 
     gulp.src(paths.js)
         .pipe(concat('ea.js'))
