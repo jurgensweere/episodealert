@@ -134,7 +134,7 @@ var buildHtmlTask = function (env) {
     
     gulp.src(paths.html)
         .pipe(htmlreplace({
-            'js' : 'js/dist/' + env + '/js/ea.min.js'
+            'js' : '/dist/' + env + '/js/ea.min.js'
         }))
         .pipe(gulp.dest(path[env]));
     
