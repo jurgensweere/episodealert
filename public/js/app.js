@@ -1,6 +1,6 @@
 /*jshint loopfunc: true */
 (function () {
-    var app = angular.module('eaApp', ['ngRoute', 'ngTouch', 'ngAnimate', 'flash', 'ui.bootstrap', 'infinite-scroll']);
+    var app = angular.module('eaApp', ['ngRoute', 'ngTouch', 'ngAnimate', 'ui.bootstrap', 'infinite-scroll']);
 
     // Configure All routing
     app.config(['$routeProvider', '$locationProvider',
@@ -70,7 +70,7 @@
             .otherwise({
                 redirectTo: '/trending'
             });
-                }]);
+    }]);
 
     // We can add some stuff to the rootscope here
     app.run(function ($rootScope, $location, $window, AuthenticationService) {

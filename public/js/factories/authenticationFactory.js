@@ -1,4 +1,4 @@
-angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $location, $http, SessionService, flash, $window, ActionCache, FollowingQueue) {
+angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $location, $http, SessionService, $window, ActionCache, FollowingQueue) {
 
     var cacheSession = function (response) {
         SessionService.set('authenticated', true);
@@ -28,7 +28,7 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
     };
 
     var loginError = function (response) {
-        flash('danger', 'Login error');
+        //flash('danger', 'Login error');
     };
 
     var loginMessage = function (response) {
@@ -36,11 +36,11 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
     };
 
     var registerMessage = function (response) {
-        flash('success', response.flash);
+        //flash('success', response.flash);
     };
 
     var registerError = function (response) {
-        flash('danger', response.flash);
+        //flash('danger', response.flash);
     };
 
     var checkError = function (response) {

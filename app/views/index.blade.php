@@ -8,7 +8,8 @@
     <meta name="robots" content="index,follow">
     <meta name="keywords" content="tv, series, episode, alert, Reality TV Shows, Comedy TV Shows, Old Television Shows, Reality TV, Comedy TV, TV Shows, Television Shows, Old TV Shows, Action/Adventure, Animation, Children, Comedy, Drama, Science-Fiction, Soap, Talk Shows, Popular Shows, TV Listings, CBS, NBC, Fox, HBO, ABC, CW" />
     <meta name="description" content="{{ Page.getMetaDescription() ? Page.getMetaDescription() : 'The best source for show and episode info. Keeping you up to date on the latest broadcasts' }}" />  
-
+    <meta name="fragment" content="!">
+    
     <title ng-bind="Page.getTitle()">Episode-Alert</title>
     <base href="/"/>
 
@@ -122,7 +123,8 @@
         }
     });    
 </script>
-
+    
+<!-- build:js -->
 <% HTML::script(asset('js/app.js')) %>
 
 <% HTML::script(asset('js/controllers/carouselController.js')) %>
@@ -149,8 +151,9 @@
 
 <% HTML::script(asset('js/directives/eaTab.js')) %>
 <% HTML::script(asset('js/directives/eaButtons.js')) %>
+<!-- endbuild -->   
 
-<% HTML::script(asset('js/modules/angular-flash.js')) %>
+    
 </body>
 </html>
 

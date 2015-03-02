@@ -10,11 +10,13 @@ var mainBowerFiles = require('main-bower-files');
 var gulpFilter = require('gulp-filter');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var htmlreplace = require('gulp-html-replace');
 
 var paths = {
   js: ['./js/**/*.js', '!./js/vendor/**/*.js', '!./js/**/*.min.js'],
   scss: './scss/global.scss',
-  css: ['./css/*.css', '!./css/*.min.css']
+  css: ['./css/*.css', '!./css/*.min.css'],
+  html: ['../app/views/index.blade.php']
 };
 
 var environments = ['dev', 'beta', 'live'];
@@ -46,6 +48,7 @@ environments.forEach(function (environment) {
             buildCssTask(environment);
             bowerConcatTask(environment);
             buildJsTask(environment);
+            buildHtmlTask(environment);
         }
     );
 });
@@ -120,6 +123,21 @@ var bowerConcatTask = function(env) {
         //    }))
         //    .pipe(gulp.dest(basepath[env] + '/js/vendor'))
     }
+};
+
+var buildHtmlTask = function (env) {
+    var path = {
+        'dev': './dist/local/',
+        'beta': './dist/beta/',
+        'live': './dist/production/',
+    }
+    
+    gulp.src(paths.html)
+        .pipe(htmlreplace({
+            'js' : 'js/dist/' + env + '/js/ea.min.js'
+        }))
+        .pipe(gulp.dest(path[env]));
+    
 };
 
 var buildCssTask = function (env) {
