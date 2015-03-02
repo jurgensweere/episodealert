@@ -1,6 +1,6 @@
 (function(){
     angular.module('eaApp').controller('ProfileSettingsCtrl', 
-        function($scope, $rootScope, userSettingService, Page, flash) {
+        function($scope, $rootScope, userSettingService, Page) {
 
 			Page.setTitle('Settings | Episode Alert');
             $scope.activePage = 'settings';
@@ -25,11 +25,11 @@
                 userSettingService.savePassword($scope.password.old, $scope.password.new, $scope.password.new_confirmation)
                     .success(function (msg) {
                         $scope.password = {};
-                        flash('success', msg.flash);
+                        //flash('success', msg.flash);
                     })
                     .error(function (error) {
                         $scope.password = {};
-                        flash('warning', error.flash);
+                        //flash('warning', error.flash);
                     });
             };
 
@@ -39,11 +39,11 @@
                         $scope.cred = msg;
                         // Update name in the rest of the app
                         $rootScope.credentials.username = msg.username;
-                        flash('success', msg.flash);
+                        //flash('success', msg.flash);
                     })
                     .error(function (error) {
                         $scope.cred = error;
-                        flash('warning', error.flash);
+                        //flash('warning', error.flash);
                     });
             };
 
@@ -51,11 +51,11 @@
                 userSettingService.savePreferences($scope.preferences.publicfollow, $scope.preferences.alerts)
                     .success(function (msg) {
                         $scope.preferences = msg;
-                        flash('success', msg.flash);
+                        //flash('success', msg.flash);
                     })
                     .error(function (error) {
                         $scope.preferences = error;
-                        flash('warning', error.flash);
+                        //flash('warning', error.flash);
                     });
             };
         }

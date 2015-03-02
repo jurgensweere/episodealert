@@ -1,6 +1,6 @@
 (function () {
     angular.module('eaApp').controller('ProfileCtrl',
-        function ($scope, seriesFactory, flash, userSettingService, Page) {
+        function ($scope, seriesFactory, userSettingService, Page) {
 
             Page.setTitle('Profile | Episode Alert');
             var series = [];
@@ -28,6 +28,7 @@
                 $scope.seen = !$scope.seen;
                 filterSeries();
             };
+
 
             $scope.toggleArchive = function (series) {
                 if (series.archive) {
