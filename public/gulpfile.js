@@ -164,7 +164,7 @@ var buildJsTask = function (env) {
 
     gulp.src(paths.js)
         .pipe(concat('ea.js'))
-        .pipe(uglify())
+        .pipe(uglify({mangle: false}))
         .pipe(rename({
             suffix: '.min'
         }))
