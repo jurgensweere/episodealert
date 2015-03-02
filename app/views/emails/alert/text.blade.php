@@ -1,5 +1,5 @@
 Dear <?php echo $username; ?>,
 
-New <?php echo $series; ?> Episode
+New  Episode
 
 bla bla bla
