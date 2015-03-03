@@ -88,7 +88,9 @@ class Mailer extends Command
                 'user_id' => $user->id
             );
             
-            Queue::push('EA\MailJob@sendAlertEmail', $data);
+            if(count($userEpisodesList) > 0) {
+                Queue::push('EA\MailJob@sendAlertEmail', $data);
+            }
             
         }        
         
