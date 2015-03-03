@@ -3,8 +3,7 @@
 use App;
 use DB;
 use Log;
-use EA\models\Following;
-use EA\models\Episode;
+use EA\models\User;
 use DateTime;
 use Mail;
 
@@ -19,10 +18,13 @@ class MailJob
                 ->from('alerts@episode-alert.com')
                 ->subject("New Episode Alert");
         });
-
+        
+        $user = User::find($data['user_id']);
+        $user->last_notified = new DateTime;
+        $user->save();
+        
         $job->delete();
         
-        //TODO:here we should save the user last updated state
         
 //        $following = Following::find(intval($data['following_id']));
 //        $episode = Episode::find(intval($data['episode_id']));

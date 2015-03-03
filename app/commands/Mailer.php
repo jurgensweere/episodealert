@@ -11,6 +11,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use DateTime;
 use DateInterval;
+use URL;
 
 class Mailer extends Command
 {
@@ -48,10 +49,15 @@ class Mailer extends Command
     {
         $yesterday = new DateTime;
         $yesterday->sub(new DateInterval('P1D'));
-        $yesterday = $yesterday->format('Y-m-d');        
+        $yesterday = $yesterday->format('Y-m-d');   
+        
+        $today = new DateTime;
+        $today = $today->format('Y-m-d');
         
         //TODO:get users that have not been updated today!
-        $users = User::where('alerts', '=', 1)->take(10)->get();
+        $users = User::where('alerts', '=', 1)
+            ->where('last_notified', '!=', $today)
+            ->take(100)->get();
 
         foreach ($users as $user) {
             $userEpisodesList = array();
@@ -65,15 +71,20 @@ class Mailer extends Command
                 $yesterdayEpisode = Episode::where('series_id', '=', $f->id)->where('airdate', '=', $yesterday)->get();
 
                 foreach ($yesterdayEpisode as $episode) {
-                    array_push($userEpisodesList, "<strong>".$f->name. "</strong>" . " Season " . $episode->season . " Episode " . $episode->episode . " : " . $episode->name);
+                    array_push($userEpisodesList, ['series' => $f->name,
+                                                   'season' => $episode->season,
+                                                   'number' => $episode->episode,
+                                                   'name' => $episode->name]);
                 }
-
             } 
             
             $data = array(
                 'episodelist' => $userEpisodesList,
                 'username' => $user->username,
-                'email' => $user->email
+                'email' => $user->email,
+                'base_url' => URL::to('/'),
+                'unique_name' => $f->unique_name,
+                'user_id' => $user->id
             );
             
             Queue::push('EA\MailJob@sendAlertEmail', $data);
