@@ -56,7 +56,8 @@ class Mailer extends Command
         
         //TODO:get users that have not been updated today!
         $users = User::where('alerts', '=', 1)
-            ->where('last_notified', '!=', $today)
+            ->where('last_notified', '<', $today)
+            ->orWhereNull('last_notified')
             ->take(100)->get();
 
         foreach ($users as $user) {
