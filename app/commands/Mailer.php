@@ -79,17 +79,20 @@ class Mailer extends Command
                 }
             } 
             
-            $data = array(
-                'episodelist' => $userEpisodesList,
-                'username' => $user->username,
-                'email' => $user->email,
-                'base_url' => URL::to('/'),
-                'unique_name' => $f->unique_name,
-                'user_id' => $user->id
-            );
+            if(count($following) > 0){
             
-            if(count($userEpisodesList) > 0) {
-                Queue::push('EA\MailJob@sendAlertEmail', $data);
+                $data = array(
+                    'episodelist' => $userEpisodesList,
+                    'username' => $user->username,
+                    'email' => $user->email,
+                    'base_url' => URL::to('/'),
+                    'unique_name' => $f->unique_name,
+                    'user_id' => $user->id
+                );
+
+                if(count($userEpisodesList) > 0) {
+                    Queue::push('EA\MailJob@sendAlertEmail', $data);
+                }
             }
             
         }        
