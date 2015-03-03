@@ -95,6 +95,8 @@ class Mailer extends Command
                 }
             }
             
+            $user->last_notified = new DateTime;
+            $user->save();            
         }        
         
         
