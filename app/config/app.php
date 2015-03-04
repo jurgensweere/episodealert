@@ -123,6 +123,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'EA\EaServiceProvider',
 		'Roumen\Sitemap\SitemapServiceProvider',
+		'Nutsweb\LaravelPrerender\LaravelPrerenderServiceProvider',		
 	),
 
 	/*
