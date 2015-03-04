@@ -80,6 +80,12 @@ class Mailer extends Command
             } 
             
             if(count($following) > 0){
+                if($user->username != ""){
+                    $mailname = $user->username;
+                }else{
+                    $mailname = $user->accountname;
+                }
+                
             
                 $data = array(
                     'episodelist' => $userEpisodesList,
