@@ -56,7 +56,8 @@ class Mailer extends Command
         
         //TODO:get users that have not been updated today!
         $users = User::where('alerts', '=', 1)
-            ->where('last_notified', '!=', $today)
+            ->where('last_notified', '<', $today)
+            ->orWhereNull('last_notified')
             ->take(100)->get();
 
         foreach ($users as $user) {
@@ -78,17 +79,24 @@ class Mailer extends Command
                 }
             } 
             
-            $data = array(
-                'episodelist' => $userEpisodesList,
-                'username' => $user->username,
-                'email' => $user->email,
-                'base_url' => URL::to('/'),
-                'unique_name' => $f->unique_name,
-                'user_id' => $user->id
-            );
+            if(count($following) > 0){
             
-            Queue::push('EA\MailJob@sendAlertEmail', $data);
+                $data = array(
+                    'episodelist' => $userEpisodesList,
+                    'username' => $user->username,
+                    'email' => $user->email,
+                    'base_url' => URL::to('/'),
+                    'unique_name' => $f->unique_name,
+                    'user_id' => $user->id
+                );
+
+                if(count($userEpisodesList) > 0) {
+                    Queue::push('EA\MailJob@sendAlertEmail', $data);
+                }
+            }
             
+            $user->last_notified = new DateTime;
+            $user->save();            
         }        
         
         

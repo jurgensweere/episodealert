@@ -3,7 +3,6 @@
 use App;
 use DB;
 use Log;
-use EA\models\User;
 use DateTime;
 use Mail;
 
@@ -18,10 +17,6 @@ class MailJob
                 ->from('alerts@episode-alert.com')
                 ->subject("New Episode Alert");
         });
-        
-        $user = User::find($data['user_id']);
-        $user->last_notified = new DateTime;
-        $user->save();
         
         $job->delete();
         
