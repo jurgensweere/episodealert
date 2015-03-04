@@ -9,6 +9,11 @@
     <meta name="keywords" content="tv, series, episode, alert, Reality TV Shows, Comedy TV Shows, Old Television Shows, Reality TV, Comedy TV, TV Shows, Television Shows, Old TV Shows, Action/Adventure, Animation, Children, Comedy, Drama, Science-Fiction, Soap, Talk Shows, Popular Shows, TV Listings, CBS, NBC, Fox, HBO, ABC, CW" />
     <meta name="description" content="{{ Page.getMetaDescription() ? Page.getMetaDescription() : 'The best source for show and episode info. Keeping you up to date on the latest broadcasts' }}" />  
     <meta name="fragment" content="!">
+
+    <meta property="og:title" content="Episode Alert" />
+    <meta property="og:title" content="{{ Page.getTitle() }}" />
+    <meta property="og:image" content="{{ Page.getImage() }}" />    
+    <meta property="og:description" content="{{ Page.getMetaDescription() ? Page.getMetaDescription() : 'The best source for show and episode info. Keeping you up to date on the latest broadcasts' }}" />  
     
     <title ng-bind="Page.getTitle()">Episode-Alert</title>
     <base href="/"/>

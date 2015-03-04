@@ -25,7 +25,7 @@
     |
     */
 
-    'prerender_url' => 'https://localhost:9009',
+    'prerender_url' => 'https://localhost:3000',
 
     /*
     |--------------------------------------------------------------------------
@@ -133,6 +133,7 @@
         // 'yahoo',
         // 'bingbot',
         'baiduspider',
+        'Facebot',
         'facebookexternalhit',
         'twitterbot',
         'rogerbot',
