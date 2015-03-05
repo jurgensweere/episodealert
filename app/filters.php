@@ -79,3 +79,31 @@ Route::filter('csrf', function () {
         throw new Illuminate\Session\TokenMismatchException;
     }
 });
+
+/*
+|--------------------------------------------------------------------------
+| Transactions
+|--------------------------------------------------------------------------
+|
+| Wrap any requests that may read to the database (i.e. requests using a
+| verb other than GET) in a database transaction, to ensure data
+| consistency. If the response is an error, we roll back the transaction,
+| otherwise we commit it.
+|
+*/
+
+App::before(function ($request) {
+    if ($request->method() != 'GET') {
+        DB::beginTransaction();
+    }
+});
+
+App::after(function ($request, $response) {
+    if ($request->method() != 'GET') {
+        if ($response->isSuccessful() || $response->isRedirection()) {
+            DB::commit();
+        } else {
+            DB::rollBack();
+        }
+    }
+});
