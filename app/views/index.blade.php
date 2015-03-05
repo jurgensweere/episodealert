@@ -10,8 +10,7 @@
     <meta name="description" content="{{ Page.getMetaDescription() ? Page.getMetaDescription() : 'The best source for show and episode info. Keeping you up to date on the latest broadcasts' }}" />  
     <meta name="fragment" content="!">
 
-    <meta property="og:title" content="Episode Alert" />
-    <meta property="og:title" content="{{ Page.getTitle() }}" />
+    <meta property="og:title" content="{{ Page.getTitle() ? Page.getTitle() : 'Episode-Alert' }}" />
     <meta property="og:image" content="{{ Page.getImage() }}" />    
     <meta property="og:description" content="{{ Page.getMetaDescription() ? Page.getMetaDescription() : 'The best source for show and episode info. Keeping you up to date on the latest broadcasts' }}" />  
     

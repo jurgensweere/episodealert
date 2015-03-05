@@ -89,7 +89,7 @@ class Mailer extends Command
             
                 $data = array(
                     'episodelist' => $userEpisodesList,
-                    'username' => $user->username,
+                    'username' => $mailname,
                     'email' => $user->email,
                     'base_url' => URL::to('/'),
                     'unique_name' => $f->unique_name,
