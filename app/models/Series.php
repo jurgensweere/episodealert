@@ -14,6 +14,13 @@ class Series extends Eloquent
      */
     protected $table = 'series';
 
+    /**
+     * Indicates which fields should be returned as booleans.
+     *
+     * @var array
+     */
+    public $booleans = array('poster_image_converted', 'fanart_image_converted', 'banner_image_converted', 'popular', 'has_specials');
+
     // appends following to the model when its created, very fancy
     protected $appends = array('following');
 
