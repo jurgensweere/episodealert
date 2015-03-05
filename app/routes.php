@@ -41,7 +41,7 @@ Route::group(
             Route::get('profile/following', 'FollowingController@getFollowingSeries');
 
             Route::get('auth/expiry', function(){
-                return Response::json(array('flash' => 'Session expired'), 401);        
+                return Response::json(array('flash' => 'Session expired'), 401);
             });
 
             //Following (has to go behind auth)
@@ -63,13 +63,14 @@ Route::group(
             Route::get('series/unseenamountbyseason/{series_id}/{season}', 'SeriesController@getUnseenEpisodesPerSeason');
             Route::get('series/unseenamountbyseries/{series_id}/{seasons}', 'SeriesController@getUnseenEpisodesPerSeries');
             Route::get('series/{uniqueName}', 'SeriesController@getSeries');
-            
+
             //Seen
             Route::post('series/seen/{episode}', 'SeriesController@setSeenEpisode');
             Route::post('series/unseen/{episode}', 'SeriesController@unsetSeenEpisode');
 
             // Profile
             Route::get('profile', 'ProfileController@getUserData');
+            Route::get('profile/stats', 'ProfileController@getStats');
             Route::post('profile/password', 'ProfileController@postChangePassword');
             Route::post('profile/credentials', 'ProfileController@postChangeCredentials');
             Route::post('profile/preferences', 'ProfileController@postChangePreferences');

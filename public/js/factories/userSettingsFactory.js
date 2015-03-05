@@ -12,7 +12,7 @@ angular.module('eaApp').factory('userSettingService', ['$rootScope', '$http', fu
             userGuideSettings : {
                 seen: true,
                 upcoming: true
-            },       
+            },
         },
 
         init : function () {
@@ -81,7 +81,7 @@ angular.module('eaApp').factory('userSettingService', ['$rootScope', '$http', fu
 
         savePassword: function (currentPassword, password, password_confirmation) {
             return $http.post(
-                '/api/profile/password', 
+                '/api/profile/password',
                 data = {
                     oldpassword: currentPassword,
                     password: password,
@@ -92,7 +92,7 @@ angular.module('eaApp').factory('userSettingService', ['$rootScope', '$http', fu
 
         saveCredentials: function (username, email, password) {
             return $http.post(
-                '/api/profile/credentials', 
+                '/api/profile/credentials',
                 data = {
                     username: username,
                     email: email,
@@ -103,7 +103,7 @@ angular.module('eaApp').factory('userSettingService', ['$rootScope', '$http', fu
 
         savePreferences: function (publicfollow, alerts) {
             return $http.post(
-                '/api/profile/preferences', 
+                '/api/profile/preferences',
                 data = {
                     publicfollow: publicfollow,
                     alerts: alerts
@@ -113,6 +113,10 @@ angular.module('eaApp').factory('userSettingService', ['$rootScope', '$http', fu
 
         getUserData: function () {
             return $http.get('/api/profile');
+        },
+
+        getProfileStats: function () {
+            return $http.get('/api/profile/stats');
         }
 
     };
