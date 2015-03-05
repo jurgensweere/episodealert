@@ -3,7 +3,7 @@
         <p ng-show="series.archive">Archived <span class="glyphicon glyphicon-floppy-saved"></span></p>
     </span>
     <span ng-if="series.unseen_episodes > 0" class="badge">{{ series.unseen_episodes }}</span>
-    <span ng-if="series.unseen_episodes == 0" class="seen-badge badge"><span class="glyphicon glyphicon-ok"></span></span> 
+    <span ng-if="series.unseen_episodes == 0" class="seen-badge badge"><span class="glyphicon glyphicon-ok"></span></span>
     <img class="img-responsive hidden-xs" ng-src="{{ series.poster_image | createImageUrl : series.unique_name : 'medium' }}" alt="{{ series.name }}" />
     <img class="img-responsive visible-xs" ng-src="{{ series.banner_image | createBannerUrl : series.unique_name }}" alt="{{ series.name }}" />
 </a>
@@ -13,17 +13,17 @@
        <p>Your current episode:</p>
        <p>Season {{ ::series.current_episode.season }} - Episode {{ ::series.current_episode.episode }}</p>
     </span>
-</div> 
+</div>
 <div class="extra-info-episodes">
     <p ng-if="series.status != 'Ended'"><span ng-if="series.latest_episodes[0]">Latest: Season {{ ::series.latest_episodes[0].season }} - Episode {{ ::series.latest_episodes[0].episode }}</span>&nbsp;</p>
     <p ng-if="series.status == 'Ended'">Status: Ended</p>
 
-    <p ng-if="series.status != 'Ended'">Next episode: {{ ::series.latest_episodes[1].airdate || 'unknown' }}</p>
+    <p ng-if="series.status != 'Ended'">Next episode: {{ ::series.latest_episodes[1].airdate || 'Unknown' }}</p>
     <p ng-if="series.status == 'Ended'">&nbsp;</p>
 
     <button class="btn" ng-click="toggleArchive(series)">
         <span ng-show="series.archive" class="glyphicon glyphicon-floppy-remove"></span>
         <span ng-show="!series.archive" class="glyphicon glyphicon-floppy-disk"></span>
     </button>
-</div>  
- 
+</div>
+
