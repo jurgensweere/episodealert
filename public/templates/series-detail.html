@@ -36,7 +36,7 @@
                             </td>
                             <td class="title">
                                 <div class="row title-row" ng-click="isCollapsed = !isCollapsed">
-                                    <div class="col-xs-12 col-sm-12 col-md-8">{{ ::episode.name }}
+                                    <div class="col-xs-12 col-sm-12 col-md-8">{{ ::episode.name || 'Unnamed episode' }}
                                         <span class="description-info">
                                             <span ng-class="isCollapsed ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'" class="glyphicon " />
                                         </span>
