@@ -42,8 +42,8 @@ class SeriesController extends BaseController
             //default return season 1
             return 1;
         }
-        
-    }    
+
+    }
 
     public function getByGenre($genre, $skip = 0){
         return Response::json(
@@ -81,7 +81,7 @@ class SeriesController extends BaseController
                 ->orderBy(DB::raw('count(following.id)'), 'desc')
                 ->take(10)
                 ->get()
-        );        
+        );
     }
 
     public function search($query)
@@ -307,15 +307,20 @@ class SeriesController extends BaseController
      * Get unseen episodes per series
      */
 
-    public function getUnseenEpisodesPerSeries($series_id, $seasons_amount){
-        if(Auth::user()){
-
+    public function getUnseenEpisodesPerSeries($series_id, $seasons_amount)
+    {
+        if (Auth::user()) {
             $seasonObject = array();
             $user_id = Auth::user()->id;
 
 
             for ($i=1; $i <= $seasons_amount; $i++) {
-                $totalAmountofEpisodes = Episode::where('series_id', $series_id)->where('season', $i)->whereNotNull('airdate')->where('airdate', '<', new DateTime)->count();
+                $totalAmountofEpisodes = Episode::where('series_id', $series_id)
+                    ->where('season', $i)
+                    ->whereNotNull('airdate')
+                    ->where('airdate', '<', new DateTime('today'))
+                    ->count();
+
                 $seenAmount = Seen::where('series_id', $series_id)->where('user_id', $user_id)->where('season', $i)->count();
 
                 $unseenAmountOfEpisodes = $totalAmountofEpisodes - $seenAmount;
@@ -323,9 +328,7 @@ class SeriesController extends BaseController
             }
 
             return Response::json($seasonObject);
-
-        }else{
-
+        } else {
             return Response::json(array('error' => 'fail unauthorized'), 500);
 
         }
