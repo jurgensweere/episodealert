@@ -132,8 +132,7 @@ class SeriesController extends BaseController
             ->orderBy('following.updated_at', 'desc')
             ->get(array('series.*'));
 
-        foreach ($seriesFollowed as $key => $series)
-        {
+        foreach ($seriesFollowed as $key => $series) {
             // Fetch last three unseen episodes, if needed
             if (filter_var(Input::get('unseen', 'true'), FILTER_VALIDATE_BOOLEAN)) {
                 $series->unseen = Episode::leftJoin('seen', function($join) {
@@ -142,7 +141,7 @@ class SeriesController extends BaseController
                     })
                     ->where('episode.series_id', '=', $series->id)
                     ->whereNull('seen.id')
-                    ->where('episode.airdate', '<', new DateTime)
+                    ->where('episode.airdate', '<', new DateTime('today'))
                     ->where('episode.season', '>', 0)
                     ->orderBy('episode.airdate', 'asc')
                     ->orderBy('episode.season', 'asc')
@@ -159,7 +158,7 @@ class SeriesController extends BaseController
                     ->where('episode.series_id', '=', $series->id)
                     ->whereNull('seen.id')
                     ->where('episode.airdate', '>', '0000-00-00')
-                    ->where('episode.airdate', '<', new DateTime)
+                    ->where('episode.airdate', '<', new DateTime('today'))
                     ->where('episode.season', '>', 0)
                     ->count();
             }
@@ -167,7 +166,7 @@ class SeriesController extends BaseController
             if (filter_var(Input::get('upcoming', 'true'), FILTER_VALIDATE_BOOLEAN)) {
                 // Fetch the first 3 unaired episodes
                 $series->unaired = Episode::where('series_id', '=', $series->id)
-                    ->where('airdate', '>', new DateTime)
+                    ->where('airdate', '>=', new DateTime('today'))
                     ->where('episode.season', '>', 0)
                     ->orderBy('airdate', 'asc')
                     ->orderBy('episode.season', 'asc')
@@ -234,7 +233,6 @@ class SeriesController extends BaseController
     public function unsetSeenEpisode(Episode $episode)
     {
         if (Auth::user()) {
-
             $mode = Input::get('mode', Seen::MODE_SINGLE); // which mode to use?
             $service = App::make('series');
 
@@ -259,13 +257,14 @@ class SeriesController extends BaseController
      * Get the total number of unseen episodes
      * path: /api/series/unseenamount
      */
-    public function getUnseenEpisodes() {
+    public function getUnseenEpisodes()
+    {
         if (Auth::user()) {
             $totalEpisodes = DB::table('following')
                 ->join('episode', 'episode.series_id', '=', 'following.series_id')
                 ->where('following.user_id', '=', Auth::user()->id)
                 ->where('episode.season', '>', 0)
-                ->where('episode.airdate', '<', new DateTime)
+                ->where('episode.airdate', '<', new DateTime('today'))
                 ->count();
             $totalSeen = Seen::where('user_id', Auth::user()->id)->where('season', '>', 0)->count();
 
@@ -285,9 +284,9 @@ class SeriesController extends BaseController
      * path: /api/series/unseenamountbyseason/{series_id}/{season_number}
      *
      */
-    public function getUnseenEpisodesPerSeason($series_id, $season_number){
-        if(Auth::user()){
-
+    public function getUnseenEpisodesPerSeason($series_id, $season_number)
+    {
+        if (Auth::user()) {
             $user_id = Auth::user()->id;
             $totalAmountofEpisodes = Episode::where('series_id', $series_id)->where('season', $season_number)->count();
             $seenAmount = Seen::where('series_id', $series_id)->where('user_id', $user_id)->where('season', $season_number)->count();
@@ -295,11 +294,8 @@ class SeriesController extends BaseController
             $unseenAmountOfEpisodes = $totalAmountofEpisodes - $seenAmount;
 
             return Response::json(array('unseenepisodes' => $unseenAmountOfEpisodes, 'season' => $season_number));
-
-        }else{
-
+        } else {
             return Response::json(array('error' => 'fail unauthorized'), 500);
-
         }
     }
 
