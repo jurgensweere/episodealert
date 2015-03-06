@@ -1,6 +1,6 @@
 (function(){
     angular.module('eaApp').controller('FollowingCtrl',
-        function($scope, seriesFactory, flash) {
+        function($scope, seriesFactory) {
 
             /* watch for any series.following */
             $scope.$watch('series.following', function(following) {
@@ -44,7 +44,7 @@
                         series.following = 0;
                     })
                     .error(function (error) {
-                        flash(response.follow);
+                        //flash(response.follow);
                     });
             }
 
@@ -57,7 +57,7 @@
                         series.following = 1;
                     })
                     .error(function (error) {
-                        flash(response.follow);
+                        //flash(response.follow);
                     });
             }
         }

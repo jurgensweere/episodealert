@@ -8,6 +8,7 @@ composer.lock
 Thumbs.db
 public/js/*.min.js
 public/node_modules/
+node_modules
 *.scssc
 npm-debug.log
 public/css/*.css
@@ -34,3 +35,5 @@ public/fonts
 .idea/compiler.xml
 .idea/.name
 public/sitemap.xml
+node_modules/gulp/node_modules/chalk/node_modules/.bin/strip-ansi
+.brackets.json

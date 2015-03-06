@@ -118,6 +118,12 @@ ul {
     @media(min-width: $screen-sm-min){ height: 740px; }
     @media(min-width: $screen-md-min){ height: 740px; }
     @media(min-width: $screen-lg-min){ height: 740px; }
+
+    /* for lower resolution laptops the series were falling out of the screen */
+    @media(max-height: 740px)
+    { 
+        height: 490px; 
+    }
     
     position: relative;
     margin-top: 50px;
@@ -130,6 +136,12 @@ ul {
         @media(min-width: $screen-sm-min){ height: 740px; }
         @media(min-width: $screen-md-min){ height: 740px; }
         @media(min-width: $screen-lg-min){ height: 740px; }
+        
+        /* for lower resolution laptops the series were falling out of the screen */
+        @media(max-height: 740px)
+        { 
+            height: 490px; 
+        }        
     }
 }
 .fanart-background.ng-hide-add, .fanart-background.ng-hide-remove {

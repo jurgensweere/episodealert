@@ -13,6 +13,14 @@ class Following extends Eloquent
      */
     protected $table = 'following';
 
+    /**
+     * Indicates which fields should be returned as booleans.
+     *
+     * @var array
+     */
+    public $booleans = array('archive');
+
+
     public function user()
     {
         return $this->belongsTo('EA\models\User');

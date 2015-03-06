@@ -50,7 +50,7 @@ class FollowingController extends BaseController
             $user = Auth::user();
             $unfollow = Following::where('series_id', $series_id)->where('user_id', $user->id)->delete();
 
-            //Delete seen information on unfollow 
+            //Delete seen information on unfollow
             Seen::where('user_id', Auth::user()->id)->where('series_id', '=', $series_id)->delete();
 
             if($unfollow){
@@ -69,10 +69,10 @@ class FollowingController extends BaseController
     /*
      * Get all the series that the user is following for the profile page
      */
-    public function getFollowingSeries(){
+    public function getFollowingSeries()
+    {
         $user = Auth::user();
-        if($user){
-
+        if ($user) {
             $query = Following::where('user_id', $user->id)
                 ->select('following.archive', 'series.*')
                 ->join('series', 'following.series_id', '=', 'series.id');
@@ -102,8 +102,7 @@ class FollowingController extends BaseController
             self::addLatestEpisodes($series);
 
             return Response::json($series);
-
-        }else{
+        } else {
             return Response::json(array('flash' => 'Unauthorized, please login'));
         }
     }
@@ -111,13 +110,13 @@ class FollowingController extends BaseController
     /*
      * add the total of seen_episodes and unseen_episodes to the series
      */
-    private function addSeenEpisodesToSeries($series, $userid){
-
+    private function addSeenEpisodesToSeries($series, $userid)
+    {
         foreach ($series as $s) {
             $s->seen_episodes = Seen::where('series_id', $s->id)->where('user_id', $userid)->where('season', '>', 0)->count();
             $s->unseen_episodes = Episode::where('series_id', '=', $s->id)
                 ->where('season', '>', 0)
-                ->where('airdate', '<', new DateTime)
+                ->where('airdate', '<', new DateTime('today'))
                 ->count() - $s->seen_episodes;
         }
     }

@@ -4,7 +4,7 @@
         <div ng-controller="ProfileHeaderCtrl" ng-include src="'templates/partial/_profile-header.html'" />
     </div>
 
-    <!-- 
+    <!--
     <div class="row info-top" style="background-image: url('{{ series.poster_image | createFanartUrl : series.unique_name }}');">
         <div class="fanart-fade">
             <div class="info-text-top">
@@ -15,7 +15,7 @@
     </div> -->
 
     <div class="row guide-filters">
-        Filters 
+        Filters
         <button class="btn btn--guide-filter" ng-class="{active: unseen}" ng-click="toggleUnseen()">
             <span ng-show="unseen == true" class="glyphicon glyphicon-ok" />
             <span ng-show="unseen == false" class="glyphicon glyphicon-plus" />
@@ -36,7 +36,7 @@
         <ul class="series-guide">
             <li ng-repeat="series in guide">
                 <h2>{{ ::series.name }}</h2>
-                <div class="unseen-episodes row" ng-show="series.unseen">
+                <div class="unseen-episodes row" ng-show="series.unseen.length">
                     <div class="col-md-3 col-xs-12"><p ng-show="series.unseen_total"><strong>Unseen episodes</strong></p><p class="hidden-xs hidden-sm" ng-show="series.unseen_total">{{ ::series.unseen_total }} episodes available</p></div>
                     <div class="col-md-9 col-xs-12">
                         <div class="unseen-episode row" ng-repeat="episode in series.unseen">

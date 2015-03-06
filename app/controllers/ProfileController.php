@@ -1,12 +1,13 @@
 <?php namespace EA\controllers;
 
-use BaseController;
-use Response;
-use EA\models\User;
 use Auth;
-use Validator;
-use Input;
+use BaseController;
+use DB;
+use EA\models\User;
 use Hash;
+use Input;
+use Response;
+use Validator;
 
 class ProfileController extends BaseController
 {
@@ -157,5 +158,39 @@ class ProfileController extends BaseController
                 'publicfollow' => $user->publicfollow == 1,
                 'alerts' => $user->alerts == 1,
             ), 200);
+    }
+
+    public function getStats()
+    {
+        $user = Auth::user();
+
+        // you can only change name or email, if you are logged in
+        if (!$user) {
+            return Response::json(array('flash' => 'You need to log in.'), 403);
+        }
+
+        // get unseen amount from following controller
+        $unseenAmount = (new SeriesController)->getUnseenEpisodes()->getData()->unseenepisodes;
+
+        // get number of followed series
+        $followingAmount = $user->following()->count();
+
+        // find out the number of people who follow less series
+        $followingByUser = User::leftJoin('following as f', 'f.user_id', '=', 'user.id')
+            ->select(['user.id', DB::raw('count(f.id) as following')])
+            ->groupBy('user.id');
+
+        $peopleFollowingLess = DB::table(DB::raw('(' . $followingByUser->toSql() . ') as sub'))
+            ->where('sub.following', '<', $followingAmount)
+            ->count('sub.id');
+
+        // total number of users
+        $userAmount = User::count();
+
+        return Response::json([
+            'following' => $followingAmount,
+            'unseen' => $unseenAmount,
+            'followmorethan' => round($peopleFollowingLess / $userAmount)
+        ]);
     }
 }

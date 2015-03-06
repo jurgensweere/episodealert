@@ -1,6 +1,6 @@
 /*jshint loopfunc: true */
 (function () {
-    var app = angular.module('eaApp', ['ngRoute', 'ngTouch', 'ngAnimate', 'flash', 'ui.bootstrap', 'infinite-scroll']);
+    var app = angular.module('eaApp', ['ngRoute', 'ngTouch', 'ngAnimate', 'ui.bootstrap', 'infinite-scroll']);
 
     // Configure All routing
     app.config(['$routeProvider', '$locationProvider',
@@ -70,7 +70,7 @@
             .otherwise({
                 redirectTo: '/trending'
             });
-                }]);
+    }]);
 
     // We can add some stuff to the rootscope here
     app.run(function ($rootScope, $location, $window, AuthenticationService) {
@@ -299,11 +299,13 @@
     app.factory('Page', function () {
         var title = 'Episode Alert';
         var metaDescription = 'The best source for show and episode info. Keeping you up to date on the latest broadcasts';
+        var image = '';
 
         return {
             getTitle: function () {
                 return title;
             },
+            
             setTitle: function (newTitle) {
                 title = newTitle;
             },
@@ -311,8 +313,17 @@
             getMetaDescription: function () {
                 return metaDescription;
             },
+            
             setMetaDescription: function (newDescription) {
                 metaDescription = newDescription;
+            },
+            
+            getImage : function () {
+                return image;
+            },
+            
+            setImage : function (newImage) {
+                image = newImage;
             }
         };
     });

@@ -1,6 +1,6 @@
 (function () {
     angular.module('eaApp').controller('ProfileCtrl',
-        function ($scope, seriesFactory, flash, userSettingService, Page) {
+        function ($scope, seriesFactory, userSettingService, Page) {
 
             Page.setTitle('Profile | Episode Alert');
             var series = [];
@@ -29,6 +29,7 @@
                 filterSeries();
             };
 
+
             $scope.toggleArchive = function (series) {
                 if (series.archive) {
                     seriesFactory.restoreSeries(series.id)
@@ -46,7 +47,6 @@
                         );
                 }
             };
-
 
             /* filter out the series */
             function filterSeries() {
@@ -86,7 +86,6 @@
 
             /** init **/
             getFollowingSeries();
-            getUnseenAmount();
 
             /** Load the series that this user is following */
             function getFollowingSeries() {
@@ -100,18 +99,6 @@
                         //flash(response.flash);
                     });
             }
-
-            /** Load the total unseen count */
-            function getUnseenAmount() {
-                seriesFactory.getUnseenAmount()
-                    .success(function (response) {
-                        $scope.unseenAmount = response.unseenepisodes;
-                    })
-                    .error(function (response) {
-                       //flash(response.flash);
-                    });
-            }
-
         }
     );
 })();

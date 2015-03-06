@@ -1,7 +1,7 @@
 	(function () {
     
     angular.module('eaApp').controller('SeriesCtrl',
-        function($scope, $routeParams, seriesFactory, AuthenticationService, Page) {
+        function($scope, $routeParams, $filter, seriesFactory, AuthenticationService, Page) {
 
 			/* declaration */
 			var unique_name = $routeParams.seriesname;
@@ -14,6 +14,7 @@
 
         		Page.setTitle(series.name + ' | Episode Alert');
         		Page.setMetaDescription('Find the latest on ' + series.name + ', including season and episode information.');
+                Page.setImage(window.location.origin + "/" + $filter('createImageUrl')(series.poster_image, series.unique_name));
 
    				$scope.series = series;
    				$scope.seasons = buildSeasonObject(series.season_amount, series.has_specials, series.last_seen_season);

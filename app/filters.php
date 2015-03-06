@@ -11,15 +11,13 @@
 |
 */
 
-App::before(function($request)
-{
-	//
+App::before(function ($request) {
+    //
 });
 
 
-App::after(function($request, $response)
-{
-	//
+App::after(function ($request, $response) {
+    //
 });
 
 /*
@@ -33,25 +31,19 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
-{
-	if (Auth::guest())
-	{
-		if (Request::ajax())
-		{
-			return Response::make('Unauthorized', 401);
-		}
-		else
-		{
-			return Redirect::guest('login');
-		}
-	}
+Route::filter('auth', function () {
+    if (Auth::guest()) {
+        if (Request::ajax()) {
+            return Response::make('Unauthorized', 401);
+        } else {
+            return Redirect::guest('login');
+        }
+    }
 });
 
 
-Route::filter('auth.basic', function()
-{
-	return Auth::basic();
+Route::filter('auth.basic', function () {
+    return Auth::basic();
 });
 
 /*
@@ -65,9 +57,10 @@ Route::filter('auth.basic', function()
 |
 */
 
-Route::filter('guest', function()
-{
-	if (Auth::check()) return Redirect::to('/');
+Route::filter('guest', function () {
+    if (Auth::check()) {
+        return Redirect::to('/');
+    }
 });
 
 /*
@@ -81,10 +74,36 @@ Route::filter('guest', function()
 |
 */
 
-Route::filter('csrf', function()
-{
-	if (Session::token() != Input::get('_token'))
-	{
-		throw new Illuminate\Session\TokenMismatchException;
-	}
+Route::filter('csrf', function () {
+    if (Session::token() != Input::get('_token')) {
+        throw new Illuminate\Session\TokenMismatchException;
+    }
+});
+
+/*
+|--------------------------------------------------------------------------
+| Transactions
+|--------------------------------------------------------------------------
+|
+| Wrap any requests that may read to the database (i.e. requests using a
+| verb other than GET) in a database transaction, to ensure data
+| consistency. If the response is an error, we roll back the transaction,
+| otherwise we commit it.
+|
+*/
+
+App::before(function ($request) {
+    if ($request->method() != 'GET') {
+        DB::beginTransaction();
+    }
+});
+
+App::after(function ($request, $response) {
+    if ($request->method() != 'GET') {
+        if ($response->isSuccessful() || $response->isRedirection()) {
+            DB::commit();
+        } else {
+            DB::rollBack();
+        }
+    }
 });
