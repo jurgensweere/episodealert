@@ -184,7 +184,7 @@ class AuthController extends BaseController
             $user = User::create(
                 array(
                     'accountname' => $me->getName(),
-                    'oauthprovider' => 'google',
+                    'oauthprovider' => 'facebook',
                     'oauthid' => $me->getId(),
                     'username' => '',
                     'email' => $me->getEmail(),
