@@ -15,32 +15,18 @@ angular.module('eaApp').factory('oauthFactory', ['AuthenticationService', '$loca
 
     return oauthFactory;
 }])
-.directive('facebookLogin', ['$timeout', function($timeout) {
-    var directive = { restrict: 'E', replace: true, transclude: true };
+.directive('facebookLogin', ['$timeout', 'oauthFactory', function($timeout, oauthFactory) {
+    var directive = { restrict: 'E' };
     directive.template =
-        '<fb:login-button scope="email" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false">' +
-        '</fb:login-button>';
+        '<a class="btn btn-block btn-social btn-facebook" href="#" ng-click="facebookLogin()">'+
+        '<i class="fa fa-facebook"></i> Sign in with Facebook</a>';
 
     directive.link = function (scope, iElement, iAttrs) {
-
-        // We need to wait for FB to be available, before we can call it.
-        function renderWithFacebook(tries) {
-            if (isNaN(+tries)) {
-              tries = 10;
-            }
-
-            if (tries > 0) {
-                $timeout(function() {
-                    if (FB) {
-                        // tell facebook to render the login button
-                        FB.XFBML.parse(iElement[0].parent);
-                    } else {
-                        renderWithFacebook(--tries);
-                    }
-                }, 100);
-            }
-        }
-        renderWithFacebook(10);
+        scope.facebookLogin = function () {
+          FB.login(function(response) {
+             oauthFactory.onFacebookStatusChange(response);
+          }, {scope: 'email'});
+        };
     };
         
     return directive;
@@ -75,10 +61,6 @@ angular.module('eaApp').factory('oauthFactory', ['AuthenticationService', '$loca
             cookie:true,
             xfbml:true,
             version: 'v2.2'
-        });
-        
-        FB.Event.subscribe('auth.statusChange', function(response) {
-            oauthFactory.onFacebookStatusChange(response);
         });
     };
 
