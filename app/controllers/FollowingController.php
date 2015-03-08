@@ -112,12 +112,25 @@ class FollowingController extends BaseController
      */
     private function addSeenEpisodesToSeries($series, $userid)
     {
+        $seenPerSeries = Seen::whereIn('series_id', $series->modelKeys())
+            ->where('user_id', '=', $userid)
+            ->where('season', '>', 0)
+            ->groupBy('series_id')
+            ->get(['series_id', DB::raw('count(*) as seen')])
+            ->keyBy('series_id');
+
+        $episodesPerSeries = Episode::whereIn('series_id', $series->modelKeys())
+            ->where('season', '>', 0)
+            ->where('airdate', '<', new DateTime('today'))
+            ->groupBy('series_id')
+            ->get(['series_id', DB::raw('count(*) as episodes')])
+            ->keyBy('series_id');
+
         foreach ($series as $s) {
-            $s->seen_episodes = Seen::where('series_id', $s->id)->where('user_id', $userid)->where('season', '>', 0)->count();
-            $s->unseen_episodes = Episode::where('series_id', '=', $s->id)
-                ->where('season', '>', 0)
-                ->where('airdate', '<', new DateTime('today'))
-                ->count() - $s->seen_episodes;
+            $s->seen_episodes = isset($seenPerSeries[$s->id]) ? $seenPerSeries[$s->id]->seen : 0;
+            $s->unseen_episodes = (
+                isset($episodesPerSeries[$s->id]) ? $episodesPerSeries[$s->id]->episodes : 0
+            ) - $s->seen_episodes;
         }
     }
 
