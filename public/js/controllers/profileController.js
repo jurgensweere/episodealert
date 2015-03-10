@@ -63,6 +63,7 @@
                             if ($scope.seen) {
                                 if ($scope.profileSeries[i].unseen_episodes <= 0) {
                                     $scope.profileSeries.splice(i, 1);
+                                    continue;
                                 }
                             }
 
@@ -70,6 +71,7 @@
                             if (!$scope.ended) {
                                 if ($scope.profileSeries[i].status === "Ended") {
                                     $scope.profileSeries.splice(i, 1);
+                                    continue;
                                 }
                             }
 
@@ -77,6 +79,7 @@
                             if (!$scope.archive) {
                                 if ($scope.profileSeries[i].archive) {
                                     $scope.profileSeries.splice(i, 1);
+                                    continue;
                                 }
                             }
                         }
