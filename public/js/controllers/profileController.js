@@ -61,7 +61,7 @@
 
                             //check and remove series that don't have unseen episodes
                             if ($scope.seen) {
-                                if ($scope.profileSeries[i].unseen_episodes === 0) {
+                                if ($scope.profileSeries[i].unseen_episodes <= 0) {
                                     $scope.profileSeries.splice(i, 1);
                                 }
                             }
