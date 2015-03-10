@@ -190,7 +190,7 @@ class ProfileController extends BaseController
         return Response::json([
             'following' => $followingAmount,
             'unseen' => $unseenAmount,
-            'followmorethan' => round($peopleFollowingLess / $userAmount)
+            'followmorethan' => round($peopleFollowingLess / $userAmount * 100)
         ]);
     }
 }
