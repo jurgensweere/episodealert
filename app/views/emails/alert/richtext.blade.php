@@ -26,7 +26,7 @@
                         <li style="list-style:none; margin-bottom: 8px; margin-let:0px">                            
                             <strong><% $episode['series'] %></strong>
                             <br/>
-                            <a href="<% $base_url; %>/series/<% $unique_name; %>" style="color:#8ab839">S<% $episode['season'] %>E<% $episode['number'] %> <% $episode['name'] %></a>
+                            <a href="<% $base_url; %>/series/<% $episode['unique_name']; %>" style="color:#8ab839">S<% $episode['season'] %>E<% $episode['number'] %> <% $episode['name'] %></a>
                         </li>
                         @endforeach                                                       
                     </ul>

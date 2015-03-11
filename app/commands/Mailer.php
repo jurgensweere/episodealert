@@ -73,6 +73,7 @@ class Mailer extends Command
 
                 foreach ($yesterdayEpisode as $episode) {
                     array_push($userEpisodesList, ['series' => $f->name,
+                                                   'unique_name' => $f->unique_name,
                                                    'season' => $episode->season,
                                                    'number' => $episode->episode,
                                                    'name' => $episode->name]);
@@ -92,7 +93,6 @@ class Mailer extends Command
                     'username' => $mailname,
                     'email' => $user->email,
                     'base_url' => URL::to('/'),
-                    'unique_name' => $f->unique_name,
                     'user_id' => $user->id
                 );
 
