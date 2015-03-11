@@ -7,8 +7,11 @@
         {
             if (newValue !== oldValue) {
 
-                $location.path("/search/" + newValue);
+                if ($location.path() != '/search') {
+                    $location.path('/search');
+                }
 
+                $location.search('query', newValue);
             }
         });
 

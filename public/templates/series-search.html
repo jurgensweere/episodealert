@@ -2,10 +2,10 @@
     {{ flash }}
 </div>
 
-<div ng-controller="SeriesSearchCtrl">
+<div>
   <h1>Search results</h1>
   <p ng-show="results == 0">Nothing found, try these instead:</p>
-  
+
   <ul class="series-search series-search-adjust">
     <li ng-repeat="series in searchResult" class="animation">
         <div onLoad="followButton='true'" ng-include src="'templates/partial/_series-small.html'" >

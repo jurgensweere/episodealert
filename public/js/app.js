@@ -28,9 +28,10 @@
                 controller: 'SeriesCtrl'
             })
 
-            .when('/search/:searchquery', {
+            .when('/search', {
                 templateUrl: 'templates/series-search.html',
-                controller: 'SeriesSearchCtrl'
+                controller: 'SeriesSearchCtrl',
+                reloadOnSearch: false
             })
 
             .when('/login', {

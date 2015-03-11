@@ -1,23 +1,33 @@
 (function() {
     angular.module('eaApp').controller('SeriesSearchCtrl', function($scope, $rootScope, $routeParams, seriesFactory) {
 
-        // Extract search term from route parameters
-        var query = $routeParams.searchquery;
+        // Catch changing search terms and cancel changing the entire page
+        $scope.$on('$routeUpdate', function(event, next) {
+            // Search parameter changed
+            doSearch(next.params.query);
+        });
 
-        // Put query back in text box if we're just loading the page now from a direct link?
+        // Extract search term from route parameters
+        var query = $routeParams.query;
+
+        // Put query back in text box if we're just loading the page now from a direct link
         if (!$rootScope.mainPageQuery) {
             $rootScope.mainPageQuery = query;
         }
 
-        // Execute search
-        searchFor(query).success(function(series) {
-            $scope.results = series.length;
-            $scope.searchResult = series;
+        doSearch(query);
 
-            if (series.length === 0) {
-                showNoResults();
-            }
-        });
+        function doSearch(query) {
+            // Execute search
+            searchFor(query).success(function(series) {
+                $scope.results = series.length;
+                $scope.searchResult = series;
+
+                if (series.length === 0) {
+                    showNoResults();
+                }
+            });
+        }
 
         /**
          * Search for series.
