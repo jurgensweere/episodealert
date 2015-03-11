@@ -128,7 +128,7 @@
 
     $(document).on('click',function(e) {
         if (!$(e.target).is('.navbar-collapse *'))
-            $('.collapse').collapse('hide');
+            $('.collapse.in').collapse('hide');
     });
 
 </script>
