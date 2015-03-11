@@ -48,7 +48,6 @@
                 }
             };
 
-
             /* filter out the series */
             function filterSeries() {
 
@@ -62,8 +61,9 @@
 
                             //check and remove series that don't have unseen episodes
                             if ($scope.seen) {
-                                if ($scope.profileSeries[i].unseen_episodes === 0) {
+                                if ($scope.profileSeries[i].unseen_episodes <= 0) {
                                     $scope.profileSeries.splice(i, 1);
+                                    continue;
                                 }
                             }
 
@@ -71,6 +71,7 @@
                             if (!$scope.ended) {
                                 if ($scope.profileSeries[i].status === "Ended") {
                                     $scope.profileSeries.splice(i, 1);
+                                    continue;
                                 }
                             }
 
@@ -78,6 +79,7 @@
                             if (!$scope.archive) {
                                 if ($scope.profileSeries[i].archive) {
                                     $scope.profileSeries.splice(i, 1);
+                                    continue;
                                 }
                             }
                         }
@@ -87,7 +89,6 @@
 
             /** init **/
             getFollowingSeries();
-            getUnseenAmount();
 
             /** Load the series that this user is following */
             function getFollowingSeries() {
@@ -101,18 +102,6 @@
                         //flash(response.flash);
                     });
             }
-
-            /** Load the total unseen count */
-            function getUnseenAmount() {
-                seriesFactory.getUnseenAmount()
-                    .success(function (response) {
-                        $scope.unseenAmount = response.unseenepisodes;
-                    })
-                    .error(function (response) {
-                       //flash(response.flash);
-                    });
-            }
-
         }
     );
 })();

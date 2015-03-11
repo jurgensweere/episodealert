@@ -10,8 +10,8 @@ class SeriesService
 {
     /**
      * Mark a single episode as seen
-     * @param Episode $episode 
-     * @param User $user 
+     * @param Episode $episode
+     * @param User $user
      * @return Collection
      */
     public function setSeenSingleEpisode(Episode $episode, User $user) {
@@ -39,7 +39,7 @@ class SeriesService
 
     /**
      * Mark an episode as unseen
-     * @param Episode $episode 
+     * @param Episode $episode
      * @param User $user
      * @return array
      */
@@ -54,27 +54,33 @@ class SeriesService
 
     /**
      * Mark all episodes up and until the given one as seen
-     * @param Episode $episode 
-     * @param User $user 
+     * @param Episode $episode
+     * @param User $user
      * @return Collection
      */
-    public function setSeenUntilEpisode(Episode $episode, User $user) {
+    public function setSeenUntilEpisode(Episode $episode, User $user)
+    {
         // Grab all the episodes we need to mark as seen
-        $episodes = Episode::leftJoin('seen', function ($join) use ($episode, $user) {
+        $query = Episode::leftJoin('seen', function ($join) use ($episode, $user) {
                 $join->on('seen.episode_id', '=', 'episode.id');
                 $join->on('seen.user_id', '=', DB::raw($user->id));
             })
             ->where('episode.series_id', '=', $episode->series_id)
-            ->where(function($query) use ($episode){
+            ->where(function($query) use ($episode) {
                 $query->where('episode.season', '<', $episode->season)
-                    ->orWhere(function($query) use ($episode){
+                    ->orWhere(function($query) use ($episode) {
                         $query->where('episode.season', '=', $episode->season);
                         $query->where('episode.episode', '<=', $episode->episode);
                     });
             })
-            ->whereNull('seen.id')
-            ->get(array('episode.*'));
+            ->whereNull('seen.id');
 
+        // Ignore Specials, unless user presses "Until here" in the specials season
+        if ($episode->season > 0) {
+            $query->where('episode.season', '>', 0);
+        }
+
+        $episodes = $query->get(array('episode.*'));
         $collection = new Collection;
 
         // create the seen records
@@ -95,7 +101,7 @@ class SeriesService
 
     /**
      * Mark all episodes as unseen up and until the given one
-     * @param Episode $episode 
+     * @param Episode $episode
      * @param User $user
      */
     public function setUnseenUntilEpisode(Episode $episode, User $user) {
@@ -117,8 +123,8 @@ class SeriesService
 
     /**
      * Mark an entire season seen
-     * @param Episode $episode 
-     * @param User $user 
+     * @param Episode $episode
+     * @param User $user
      * @return Collection
      */
     public function setSeenSeason(Episode $episode, User $user) {
@@ -152,7 +158,7 @@ class SeriesService
 
     /**
      * Mark an entire season unseen
-     * @param Episode $episode 
+     * @param Episode $episode
      * @param User $user
      */
     public function setUnseenSeason(Episode $episode, User $user) {

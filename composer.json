@@ -7,7 +7,7 @@
 		"laravel/framework": "4.2.*",
 		"google/apiclient": "1.0.*@beta",
 		"facebook/php-sdk-v4" : "4.0.*",
-		"roumen/sitemap": "~2.4",
+		"roumen/sitemap": "2.4.15",
 		"nutsweb/laravel-prerender": "dev-master"
 	},
 	"autoload": {
