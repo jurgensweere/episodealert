@@ -120,11 +120,11 @@
       * dirty hack because twitter bootstrap mobile first responsive
       * framework does not support closing the mobile menu on click for SPA's
     */    
-    $(document).on('click','.navbar-collapse.in',function(e) {
-        if( $(e.target).is('a') ) {
-            $(this).collapse('hide');
-        }
-    });  
+   $(document).on('click',function(e) {
+        if (!$(e.target).is('.navbar-collapse *'))
+            $('.collapse').collapse('hide');
+            $('.collapse.in').collapse('hide');
+    });
     
     /* 
      * this was supposed to close the menu but triggers all 
