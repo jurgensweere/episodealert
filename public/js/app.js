@@ -28,7 +28,7 @@
                 controller: 'SeriesCtrl'
             })
 
-            .when('/search/', {
+            .when('/search/:searchquery', {
                 templateUrl: 'templates/series-search.html',
                 controller: 'SeriesSearchCtrl'
             })
@@ -88,7 +88,7 @@
             // you can use this in anywhere using $scope.hello();
         };
 
-        
+
 
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
 
@@ -305,7 +305,7 @@
             getTitle: function () {
                 return title;
             },
-            
+
             setTitle: function (newTitle) {
                 title = newTitle;
             },
@@ -313,15 +313,15 @@
             getMetaDescription: function () {
                 return metaDescription;
             },
-            
+
             setMetaDescription: function (newDescription) {
                 metaDescription = newDescription;
             },
-            
+
             getImage : function () {
                 return image;
             },
-            
+
             setImage : function (newImage) {
                 image = newImage;
             }
