@@ -5,6 +5,7 @@ use DB;
 use Log;
 use EA\models\Series;
 use EA\models\Episode;
+use DateTime;
 
 class TvdbJob
 {
@@ -39,6 +40,9 @@ class TvdbJob
             return;
         }
 
+        $today = new DateTime;
+        $today = $today->format('Y-m-d');
+        
         // Update Series data
         $series->name = $data['name'];
         $series->description = $data['description'];
@@ -107,10 +111,11 @@ class TvdbJob
         }else{
             $poster = false;
         }
-
-        if($poster){
+        
+        if($poster){    
             $series->poster_image = $series->unique_name.".jpg";
             $series->poster_image_converted = 1;
+
             $series->save();
         }
     }
