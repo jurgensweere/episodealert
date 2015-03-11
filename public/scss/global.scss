@@ -122,7 +122,7 @@ ul {
     /* for lower resolution laptops the series were falling out of the screen */
     @media(max-height: 740px)
     { 
-        height: 490px; 
+        height: 450px; 
     }
     
     position: relative;
@@ -140,7 +140,7 @@ ul {
         /* for lower resolution laptops the series were falling out of the screen */
         @media(max-height: 740px)
         { 
-            height: 490px; 
+            height: 450px; 
         }        
     }
 }
