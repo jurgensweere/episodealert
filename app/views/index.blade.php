@@ -156,8 +156,6 @@
 <% HTML::script(asset('js/factories/userSettingsFactory.js')) %>
 <% HTML::script(asset('js/factories/alertFactory.js')) %>
 
-<% HTML::script(asset('js/services/searchService.js')) %>
-
 <% HTML::script(asset('js/directives/eaTab.js')) %>
 <% HTML::script(asset('js/directives/eaButtons.js')) %>
 <!-- endbuild -->

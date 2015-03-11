@@ -1,27 +1,33 @@
-(function(){
-    angular.module('eaApp').controller('SeriesSearchCtrl', function($scope, $location, seriesFactory, searchService) {
+(function() {
+    angular.module('eaApp').controller('SeriesSearchCtrl', function($scope, $rootScope, $routeParams, seriesFactory) {
 
-        $scope.mainPageQuery = '';
+        // Extract search term from route parameters
+        var query = $routeParams.searchquery;
 
-        /*
-         * watch the service
-         */
-        $scope.$watch(function() {
-             return searchService.results;
-            },
-            function(newResult, oldResult) {
-                if(newResult !== oldResult) {
-                    if(newResult.length === 0){
-                        showNoResults();
-                    }
-                    $scope.results = newResult.length;
-                    $scope.searchResult = newResult;
-                }
+        // Put query back in text box if we're just loading the page now from a direct link?
+        if (!$rootScope.mainPageQuery) {
+            $rootScope.mainPageQuery = query;
+        }
+
+        // Execute search
+        searchFor(query).success(function(series) {
+            $scope.results = series.length;
+            $scope.searchResult = series;
+
+            if (series.length === 0) {
+                showNoResults();
             }
-        );
+        });
 
         /**
-         * Show a no results page
+         * Search for series.
+         */
+        function searchFor(query) {
+            return seriesFactory.searchSeries(query);
+        }
+
+        /**
+         * Show a no results page.
          */
         function showNoResults() {
             seriesFactory.getTopSeries()
