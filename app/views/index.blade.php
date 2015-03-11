@@ -126,9 +126,14 @@
         }
     });  
     
-    $(document).on('click',function(){
-        $('.collapse').collapse('hide');
-    });    
+    /* 
+     * this was supposed to close the menu but triggers all 
+     * click events on the site for some reason 
+     */
+    
+//    $(document).on('click',function(){
+//        $('.collapse').collapse('hide');
+//    });    
     
 </script>
     
