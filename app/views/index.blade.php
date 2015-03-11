@@ -4,16 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
+
     <meta name="robots" content="index,follow">
     <meta name="keywords" content="tv, series, episode, alert, Reality TV Shows, Comedy TV Shows, Old Television Shows, Reality TV, Comedy TV, TV Shows, Television Shows, Old TV Shows, Action/Adventure, Animation, Children, Comedy, Drama, Science-Fiction, Soap, Talk Shows, Popular Shows, TV Listings, CBS, NBC, Fox, HBO, ABC, CW" />
-    <meta name="description" content="{{ Page.getMetaDescription() ? Page.getMetaDescription() : 'The best source for show and episode info. Keeping you up to date on the latest broadcasts' }}" />  
+    <meta name="description" content="{{ Page.getMetaDescription() ? Page.getMetaDescription() : 'The best source for show and episode info. Keeping you up to date on the latest broadcasts' }}" />
     <meta name="fragment" content="!">
 
     <meta property="og:title" content="{{ Page.getTitle() ? Page.getTitle() : 'Episode-Alert' }}" />
-    <meta property="og:image" content="{{ Page.getImage() }}" />    
-    <meta property="og:description" content="{{ Page.getMetaDescription() ? Page.getMetaDescription() : 'The best source for show and episode info. Keeping you up to date on the latest broadcasts' }}" />  
-    
+    <meta property="og:image" content="{{ Page.getImage() }}" />
+    <meta property="og:description" content="{{ Page.getMetaDescription() ? Page.getMetaDescription() : 'The best source for show and episode info. Keeping you up to date on the latest broadcasts' }}" />
+
     <title ng-bind="Page.getTitle()">Episode-Alert</title>
     <base href="/"/>
 
@@ -25,7 +25,7 @@
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-route.min.js') %>
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-animate.min.js') %>
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-touch.js') %>
-    
+
     <% HTML::script('/js/vendor/ui-bootstrap-0.12.0.js') %>
     <% HTML::script('/js/vendor/_bower.js') %>
 
@@ -70,7 +70,7 @@
                         </li>
                         <li ng-show="!credentials.auth">
                             <a ng-show="!credentials.auth" href="/login">Login</a>
-                        </li>                                        
+                        </li>
                     </ul>
 
                     <p class="navbar-text navbar-right hide-xs hidden-sm" ng-show="credentials.auth">Welcome back, <a href="/profile" class="navbar-link">{{ credentials.username }}</a></p>
@@ -81,10 +81,10 @@
     <div class="ea-alert">
         <alert class="fade-slow" ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()">{{alert.msg}}</alert>
     </div>
-    <!-- 
+    <!--
     <div class="container">
         <div class="row flash-container">
-            <div class="col-md-12 col-lg-12">    
+            <div class="col-md-12 col-lg-12">
                 <flash:messages class="animation" />
             </div>
         </div>
@@ -94,13 +94,13 @@
     </div>
     <div class="container" id="footer">
         <div class="footer row">
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">    
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 Copyright 2015
-            </div>        
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">    
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <a href="/contact">Contact</a> :: <a href="/privacy">Privacy</a>
             </div>
-        </div>    
+        </div>
     </div>
     <div id="spinner">
         <div class="bounce1"></div>
@@ -115,23 +115,24 @@
     var state = '<% $state %>';
     var fbAppId = '<% $fbAppId %>';
     var googleRedirectURI = '<% Config::get('app.url') . '/login' %>';
-    
+
     /**
       * dirty hack because twitter bootstrap mobile first responsive
       * framework does not support closing the mobile menu on click for SPA's
-    */    
+    */
     $(document).on('click','.navbar-collapse.in',function(e) {
         if( $(e.target).is('a') ) {
             $(this).collapse('hide');
         }
-    });  
-    
-    $(document).on('click',function(){
-        $('.collapse').collapse('hide');
-    });    
-    
+    });
+
+    $(document).on('click',function(e) {
+        if (!$(e.target).is('.navbar-collapse *'))
+            $('.collapse').collapse('hide');
+    });
+
 </script>
-    
+
 <!-- build:js -->
 <% HTML::script(asset('js/app.js')) %>
 
@@ -159,9 +160,9 @@
 
 <% HTML::script(asset('js/directives/eaTab.js')) %>
 <% HTML::script(asset('js/directives/eaButtons.js')) %>
-<!-- endbuild -->   
+<!-- endbuild -->
 
-    
+
 </body>
 </html>
 
