@@ -16,17 +16,19 @@ class Episode extends Eloquent
     // appends following to the model when its created, very fancy
     protected $appends = array('seen');
 
-    public function getAirdateAttribute($value){
-    	return $value ? Carbon::parse($value)->format('d-m-Y') : null;
+    public function getAirdateAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('d-m-Y') : null;
     }
 
     /*
      * If user is authorized check if the episode is seen, otherwise return 0
      */
-    public function getSeenAttribute(){
-        if(Auth::user()){
-            return count(Seen::where('episode_id' , $this->id)->where('user_id', Auth::user()->id)->get());
-        }else{
+    public function getSeenAttribute()
+    {
+        if (Auth::user()) {
+            return count(Seen::where('episode_id', $this->id)->where('user_id', Auth::user()->id)->get());
+        } else {
             return false;
         }
     }
