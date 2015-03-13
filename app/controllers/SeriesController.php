@@ -62,10 +62,15 @@ class SeriesController extends BaseController
     {
         // TODO: Make this select top (followed or trending?) series, instead of the first 5
         return Response::json(
-            Series::join('following', 'following.series_id', '=', 'series.id')
-                ->whereNotNull('fanart_image')
-                ->groupBy('following.series_id')
-                ->orderByRaw('count(following.id) desc')
+            Series::join(
+                DB::raw(
+                    '(select series_id, count(*) as count from following
+                    group by series_id
+                    order by count desc
+                    limit 50) bil'), function ($join) {
+                    $join->on('series.id', '=', 'bil.series_id');
+                })
+                ->where('fanart_image_converted', '=', 1)
                 ->orderByRaw('rand()')
                 ->take(5)
                 ->get()
