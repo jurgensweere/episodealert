@@ -21,7 +21,8 @@ use Session;
 
 class AuthController extends BaseController
 {
-    public function register() {
+    public function register()
+    {
 
         // For now, we DO NOT allow creating an account when you have an email registered with google or facebook
         // This makes the login attempt fail
@@ -46,9 +47,9 @@ class AuthController extends BaseController
 
     }
 
-    public function login() {
-        if (Auth::attempt(array('email' => Input::json('email'), 'password' => Input::json('password'))))
-        {
+    public function login()
+    {
+        if (Auth::attempt(array('email' => Input::json('email'), 'password' => Input::json('password')))) {
             return Response::json(array('id' => Auth::user()->id,
                     'accountname' => Auth::user()->accountname,
                     'thirdparty' => Auth::user()->isThirdParty()));
@@ -62,8 +63,7 @@ class AuthController extends BaseController
                 $user->old_password = null;
                 $user->save();
 
-                if (Auth::attempt(array('email' => Input::json('email'), 'password' => Input::json('password'))))
-                {
+                if (Auth::attempt(array('email' => Input::json('email'), 'password' => Input::json('password')))) {
                     return Response::json(array('id' => Auth::user()->id,
                             'accountname' => Auth::user()->accountname,
                             'thirdparty' => Auth::user()->isThirdParty()));
@@ -74,7 +74,8 @@ class AuthController extends BaseController
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         Auth::logout();
         return Response::json(array('flash' => 'Logged out!'));
     }
@@ -83,7 +84,8 @@ class AuthController extends BaseController
      * returns user if there is a session
      */
 
-    public function checkAuth() {
+    public function checkAuth()
+    {
         if (Auth::user()) {
             return Response::json(array('id' => Auth::user()->id,
                     'accountname' => Auth::user()->accountname,
@@ -172,9 +174,9 @@ class AuthController extends BaseController
 
         $authResult = Input::get('authResult');
         $session = new FacebookSession($authResult['accessToken']);
-        $me = (new FacebookRequest(
-            $session, 'GET', '/me'
-        ))->execute()->getGraphObject(GraphUser::className());
+        $me = (
+            new FacebookRequest($session, 'GET', '/me')
+        )->execute()->getGraphObject(GraphUser::className());
 
         // check if this user exists, otherwise create
         $user = User::where('oauthprovider', '=', 'facebook')

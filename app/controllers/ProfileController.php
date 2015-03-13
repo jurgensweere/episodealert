@@ -39,8 +39,8 @@ class ProfileController extends BaseController
             return Response::json(array('flash' => 'You cannot change your password.'), 403);
         }
 
-        Validator::extend('hashmatch', function($attribute, $value, $parameters)
-        {
+        Validator::extend('hashmatch', function ($attribute, $value, $parameters) {
+        
             return Hash::check($value, Auth::user()->$parameters[0]);
         });
 
@@ -52,9 +52,8 @@ class ProfileController extends BaseController
             )
         );
 
-        if ($validator->fails())
-        {
-            return Response::json(array('flash' => 'Error saving password.'), 400);
+        if ($validator->fails()) {
+        return Response::json(array('flash' => 'Error saving password.'), 400);
         }
 
         // change the password.
@@ -81,14 +80,15 @@ class ProfileController extends BaseController
             )
         );
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return Response::json(
-                array(
+            array(
                     'flash' => 'Invalid data.',
                     'accountname' => $user->accountname,
                     'email' => $user->email,
-                ), 400);
+                ),
+                400
+            );
         }
 
         if (!$user->isThirdParty() && !Hash::check(Input::get('password'), Auth::user()->password)) {
@@ -97,7 +97,9 @@ class ProfileController extends BaseController
                     'flash' => 'Incorrect password.',
                     'accountname' => $user->accountname,
                     'email' => $user->email,
-                ), 400);
+                ),
+                400
+            );
         }
 
         $accountname = Input::get('accountname');
@@ -117,7 +119,9 @@ class ProfileController extends BaseController
                 'flash' => 'Your changes have been saved.',
                 'accountname' => $user->accountname,
                 'email' => $user->email,
-            ), 200);
+            ),
+            200
+        );
     }
 
     public function postChangePreferences()
@@ -137,14 +141,15 @@ class ProfileController extends BaseController
             )
         );
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return Response::json(
-                array(
+            array(
                     'flash' => 'Invalid data',
                     'publicfollow' => $user->publicfollow == 1,
                     'alerts' => $user->alerts == 1,
-                ), 400);
+                ),
+            400
+            );
         }
 
         $user->publicfollow = Input::get('publicfollow');
@@ -156,7 +161,8 @@ class ProfileController extends BaseController
                 'flash' => 'Your changes have been saved.',
                 'publicfollow' => $user->publicfollow == 1,
                 'alerts' => $user->alerts == 1,
-            ));
+            )
+        );
     }
 
     public function getStats()
