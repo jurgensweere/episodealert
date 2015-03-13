@@ -14,7 +14,8 @@ class SeriesService
      * @param User $user
      * @return Collection
      */
-    public function setSeenSingleEpisode(Episode $episode, User $user) {
+    public function setSeenSingleEpisode(Episode $episode, User $user)
+    {
         // Did we already see this episode?
         $seen = Seen::where('episode_id', '=', $episode->id)
             ->where('user_id', '=', $user->id)
@@ -43,7 +44,8 @@ class SeriesService
      * @param User $user
      * @return array
      */
-    public function setUnseenSingleEpisode(Episode $episode, User $user) {
+    public function setUnseenSingleEpisode(Episode $episode, User $user)
+    {
         // Simply try to delete the record
         $seen = Seen::where('episode_id', '=', $episode->id)
             ->where('user_id', '=', $user->id)
@@ -64,11 +66,11 @@ class SeriesService
         $query = Episode::leftJoin('seen', function ($join) use ($episode, $user) {
                 $join->on('seen.episode_id', '=', 'episode.id');
                 $join->on('seen.user_id', '=', DB::raw($user->id));
-            })
+        })
             ->where('episode.series_id', '=', $episode->series_id)
-            ->where(function($query) use ($episode) {
+            ->where(function ($query) use ($episode) {
                 $query->where('episode.season', '<', $episode->season)
-                    ->orWhere(function($query) use ($episode) {
+                    ->orWhere(function ($query) use ($episode) {
                         $query->where('episode.season', '=', $episode->season);
                         $query->where('episode.episode', '<=', $episode->episode);
                     });
@@ -104,13 +106,14 @@ class SeriesService
      * @param Episode $episode
      * @param User $user
      */
-    public function setUnseenUntilEpisode(Episode $episode, User $user) {
+    public function setUnseenUntilEpisode(Episode $episode, User $user)
+    {
         // simply delete the seen records
         $query = Seen::where('user_id', '=', $user->id)
             ->where('series_id', '=', $episode->series_id)
-            ->where(function($query) use ($episode){
+            ->where(function ($query) use ($episode) {
                 $query->where('season', '<', $episode->season)
-                    ->orWhere(function($query) use ($episode){
+                    ->orWhere(function ($query) use ($episode) {
                         $query->where('season', '=', $episode->season);
                         $query->where('episode', '<=', $episode->episode);
                     });
@@ -127,12 +130,13 @@ class SeriesService
      * @param User $user
      * @return Collection
      */
-    public function setSeenSeason(Episode $episode, User $user) {
+    public function setSeenSeason(Episode $episode, User $user)
+    {
         // Grab all the episodes we need to mark as seen
         $episodes = Episode::leftJoin('seen', function ($join) use ($episode, $user) {
                 $join->on('seen.episode_id', '=', 'episode.id');
                 $join->on('seen.user_id', '=', DB::raw($user->id));
-            })
+        })
             ->where('episode.series_id', '=', $episode->series_id)
             ->where('episode.season', '=', $episode->season)
             ->whereNull('seen.id')
@@ -161,7 +165,8 @@ class SeriesService
      * @param Episode $episode
      * @param User $user
      */
-    public function setUnseenSeason(Episode $episode, User $user) {
+    public function setUnseenSeason(Episode $episode, User $user)
+    {
         $query = Seen::where('user_id', '=', $user->id)
             ->where('series_id', '=', $episode->series_id)
             ->where('season', '=', $episode->season);

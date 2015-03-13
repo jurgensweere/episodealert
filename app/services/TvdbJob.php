@@ -32,7 +32,7 @@ class TvdbJob
             Log::error("Something went wrong when downloading from TVDB");
             /* temporary fix to continue updating for the migration */
             $series->updated_at = null;
-	        $series->save();
+            $series->save();
             return;
         }
 
@@ -61,11 +61,11 @@ class TvdbJob
         }
         if ($data['category'] != '') {
             $series->category = $data['category'];
-        }else{
-            $series->category = "|Unknown|";	
-        }	
+        } else {
+            $series->category = "|Unknown|";
+        }
 
-        $series->episode_amount = 0; // Default to 0, we will update these values in attachEpisodeData     
+        $series->episode_amount = 0; // Default to 0, we will update these values in attachEpisodeData
 
         // If the series doesn't have a unique name, assign one
         if (empty($series->unique_name)) {
@@ -82,12 +82,12 @@ class TvdbJob
         $this->attachImages($series);
 
         //Find out if there is a special season and save it in series table
-        $firstEpisode = Episode::where('series_id', $series->id )->select('season')->orderBy('season', 'asc')->first();
-        $lastEpisode = Episode::where('series_id', $series->id )->select('season')->orderBy('season', 'desc')->first();
+        $firstEpisode = Episode::where('series_id', $series->id)->select('season')->orderBy('season', 'asc')->first();
+        $lastEpisode = Episode::where('series_id', $series->id)->select('season')->orderBy('season', 'desc')->first();
         $series->season_amount = $lastEpisode ? $lastEpisode->season : 0;
 
-        if($firstEpisode && $firstEpisode->season == 0){
-        	$series->has_specials = 1;
+        if ($firstEpisode && $firstEpisode->season == 0) {
+            $series->has_specials = 1;
         }
 
         $series->save();
@@ -95,14 +95,18 @@ class TvdbJob
         $job->delete();
     }
 
-    public function attachImages($series) {
+    public function attachImages($series)
+    {
         $this->attachSeriesPoster($series);
 
         App::make('tvdb')->getFanartImages($series);
     }
 
-    public function attachSeriesPoster($series){
-        if ($series->poster_image_converted == 1) return;
+    public function attachSeriesPoster($series)
+    {
+        if ($series->poster_image_converted == 1) {
+            return;
+        }
 
         //echo "trying to getSeriesData: " . $series->id;
         //echo "\n";
@@ -112,13 +116,13 @@ class TvdbJob
         //echo $data['id'];
         //echo "\n";
 
-        if($data['poster']!=""){
-            $poster = App::make('tvdb')->getPosterImage($series, $data['poster']);            
-        }else{
+        if ($data['poster']!="") {
+            $poster = App::make('tvdb')->getPosterImage($series, $data['poster']);
+        } else {
             $poster = false;
         }
         
-        if($poster){    
+        if ($poster) {
             $series->poster_image = $series->unique_name.".jpg";
             $series->poster_image_converted = 1;
 
