@@ -36,7 +36,7 @@ class HomeController extends BaseController
         $user = array();
         if (Auth::user()) {
             $user = array('id' => Auth::user()->id,
-                    'username' => Auth::user()->accountname,
+                    'accountname' => Auth::user()->accountname,
                     'thirdparty' => Auth::user()->isThirdParty());
         }
 

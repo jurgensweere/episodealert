@@ -90,11 +90,11 @@ angular.module('eaApp').factory('userSettingService', ['$rootScope', '$http', fu
             );
         },
 
-        saveCredentials: function (username, email, password) {
+        saveCredentials: function (accountname, email, password) {
             return $http.post(
                 '/api/profile/credentials',
                 data = {
-                    username: username,
+                    accountname: accountname,
                     email: email,
                     password: password
                 }

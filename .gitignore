@@ -37,3 +37,4 @@ public/fonts
 public/sitemap.xml
 node_modules/gulp/node_modules/chalk/node_modules/.bin/strip-ansi
 .brackets.json
+public/js/vendor/_bower.min.js

@@ -337,7 +337,7 @@
     app.controller("LoginCtrl", function ($route, $scope, $rootScope, $location, AuthenticationService) {
 
         $scope.credentials = {
-            username: "",
+            email: "",
             password: ""
         };
 
@@ -356,7 +356,6 @@
 
     app.controller('RegisterCtrl', function ($route, $scope, $location, AuthenticationService) {
         $scope.credentials = {
-            username: "",
             password: "",
             email: ""
         };

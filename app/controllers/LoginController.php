@@ -45,7 +45,7 @@ class LoginController extends BaseController
         $validator = Validator::make(
             Input::get(),
             array(
-                'username' => 'required|alpha_num|max:100|unique:user,accountname',
+                'accountname' => 'required|alpha_num|max:100|unique:user,accountname',
                 'email' => 'required|email|unique:user',
                 'password' => 'required|confirmed|min:8',
             )
@@ -58,7 +58,7 @@ class LoginController extends BaseController
         $user = User::create(
             array(
                 'accountname' => '',
-                'username' => Input::get('username'),
+                'accountname' => Input::get('accountname'),
                 'email' => Input::get('email'),
                 'password' => md5(Input::get('password')),
                 'role' => User::ROLE_MEMBER,

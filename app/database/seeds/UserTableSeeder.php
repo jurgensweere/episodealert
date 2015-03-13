@@ -11,7 +11,6 @@ class UserTableSeeder extends Seeder
         User::create(array(
             'accountname' => 'episodealert',
             'password' => Hash::make('kaas123'),
-            'username' => 'episodealert',
             'email' => 'episodealert@gmail.com',
             'registered' => '1',
             'publicfollow' => '1',
@@ -23,8 +22,7 @@ class UserTableSeeder extends Seeder
         User::create(array(
             'accountname' => 'admin',
             'password' => Hash::make('admin'),
-            'username' => 'admin',
-            'email' => '',
+            'email' => 'admin@episode-alert.com',
             'registered' => '1',
             'publicfollow' => '1',
             'showonlyrunning' => '1',

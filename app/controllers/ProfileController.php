@@ -22,7 +22,6 @@ class ProfileController extends BaseController
         unset($user->oauthprovider);
         unset($user->oauthid);
         unset($user->password);
-        unset($user->username);
         unset($user->remember_token);
 
         return Response::json($user);
@@ -77,7 +76,7 @@ class ProfileController extends BaseController
         $validator = Validator::make(
             Input::all(),
             array(
-                'username' => 'min:4|max:20',
+                'accountname' => 'min:4|max:20',
                 'email' => 'email',
             )
         );
@@ -87,7 +86,7 @@ class ProfileController extends BaseController
             return Response::json(
                 array(
                     'flash' => 'Invalid data',
-                    'username' => $user->accountname,
+                    'accountname' => $user->accountname,
                     'email' => $user->email,
                 ), 400);
         }
@@ -96,16 +95,16 @@ class ProfileController extends BaseController
             return Response::json(
                 array(
                     'flash' => 'Incorrect password',
-                    'username' => $user->accountname,
+                    'accountname' => $user->accountname,
                     'email' => $user->email,
                 ), 400);
         }
 
-        $username = Input::get('username');
+        $accountname = Input::get('accountname');
         $email = Input::get('email');
 
-        if (strlen(trim($username)) > 0) {
-            $user->accountname = $username;
+        if (strlen(trim($accountname)) > 0) {
+            $user->accountname = $accountname;
         }
 
         if (strlen(trim($email)) > 0) {
@@ -116,7 +115,7 @@ class ProfileController extends BaseController
         return Response::json(
             array(
                 'flash' => 'Saved',
-                'username' => $user->accountname,
+                'accountname' => $user->accountname,
                 'email' => $user->email,
             ), 200);
     }

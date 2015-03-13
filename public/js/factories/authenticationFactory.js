@@ -1,4 +1,4 @@
-angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $location, $http, SessionService, $window, ActionCache, FollowingQueue) {
+angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $location, $http, SessionService, $window, ActionCache, FollowingQueue, alertService) {
 
     var cacheSession = function (response) {
         SessionService.set('authenticated', true);
@@ -6,7 +6,7 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
 
     var setUserInfo = function (response) {
         $rootScope.credentials.auth = true;
-        $rootScope.credentials.username = response.username;
+        $rootScope.credentials.accountname = response.accountname;
         $rootScope.credentials.id = response.id;
         $rootScope.credentials.thirdparty = response.thirdparty;
     };
@@ -18,7 +18,7 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
 
     var unSetUserInfo = function () {
         $rootScope.credentials.auth = null;
-        $rootScope.credentials.username = null;
+        $rootScope.credentials.accountname = null;
         $rootScope.credentials.id = null;
         $rootScope.credentials.thirdparty = null;
     };
@@ -28,18 +28,21 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
     };
 
     var loginError = function (response) {
-        //flash('danger', 'Login error');
+        alertService.add('warning', response.flash, 5000);
     };
 
     var loginMessage = function (response) {
+        alertService.add('success', 'Login success', 5000);
         //flash('success', 'Login success');
     };
 
     var registerMessage = function (response) {
+        alertService.add('success', response.flash, 5000);
         //flash('success', response.flash);
     };
 
     var registerError = function (response) {
+        alertService.add('warning', response.flash, 5000);
         //flash('danger', response.flash);
     };
 

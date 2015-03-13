@@ -10,7 +10,7 @@
 
             userSettingService.getUserData()
                 .success(function (data) {
-                    $scope.cred.username = data.accountname;
+                    $scope.cred.accountname = data.accountname;
                     $scope.cred.email = data.email;
                     $scope.preferences.alerts = data.alerts == 1;
                     $scope.preferences.publicfollow = data.publicfollow == 1;
@@ -34,11 +34,11 @@
             };
 
             $scope.saveCredentials = function() {
-                userSettingService.saveCredentials($scope.cred.username, $scope.cred.email, $scope.cred.password)
+                userSettingService.saveCredentials($scope.cred.accountname, $scope.cred.email, $scope.cred.password)
                     .success(function (msg) {
                         $scope.cred = msg;
                         // Update name in the rest of the app
-                        $rootScope.credentials.username = msg.username;
+                        $rootScope.credentials.accountname = msg.accountname;
                         //flash('success', msg.flash);
                     })
                     .error(function (error) {

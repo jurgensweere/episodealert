@@ -23,13 +23,15 @@ class AuthController extends BaseController
 {
     public function register() {
 
-        $usernameCheck  = User::where('username', Input::get('username'))->count();
+        // For now, we DO NOT allow creating an account when you have an email registered with google or facebook
+        // This makes the login attempt fail
+        $emailcheck = User::where('email', Input::get('email'))
+            ->count();
 
-        if (!$usernameCheck) {
+        if (!$emailcheck) {
             $user = User::create(
                 array(
-                    'accountname' => Input::get('username'),
-                    'username' => Input::get('username'),
+                    'accountname' => Input::get('email'),
                     'email' => Input::get('email'),
                     'password' => Hash::make(Input::get('password')),
                     'role' => User::ROLE_MEMBER,
@@ -39,20 +41,20 @@ class AuthController extends BaseController
 
             return Response::json(array('flash' => 'Thanks for registering'));          
         } else {
-            return Response::json(array('flash' => 'Username allready in use'), 500);
+            return Response::json(array('flash' => 'Email already in use'), 500);
         }
 
     }
 
     public function login() {
-        if (Auth::attempt(array('username' => Input::json('username'), 'password' => Input::json('password'))))
+        if (Auth::attempt(array('email' => Input::json('email'), 'password' => Input::json('password'))))
         {
             return Response::json(array('id' => Auth::user()->id,
-                    'username' => Auth::user()->accountname,
+                    'accountname' => Auth::user()->accountname,
                     'thirdparty' => Auth::user()->isThirdParty()));
         } else {
             // it might be possible, this is a user with an old password.
-            $user = User::where('username', '=', Input::json('username'))
+            $user = User::where('email', '=', Input::json('email'))
                 ->where('old_password', '=', md5(Input::json('password')))
                 ->first();
             if ($user) {
@@ -60,15 +62,15 @@ class AuthController extends BaseController
                 $user->old_password = null;
                 $user->save();
 
-                if (Auth::attempt(array('username' => Input::json('username'), 'password' => Input::json('password'))))
+                if (Auth::attempt(array('email' => Input::json('email'), 'password' => Input::json('password'))))
                 {
                     return Response::json(array('id' => Auth::user()->id,
-                            'username' => Auth::user()->accountname,
+                            'accountname' => Auth::user()->accountname,
                             'thirdparty' => Auth::user()->isThirdParty()));
                 }
             }
 
-            return Response::json(array('flash' => 'Invalid username or password'), 500);
+            return Response::json(array('flash' => 'Invalid email or password'), 500);
         }
     }
 
@@ -84,7 +86,7 @@ class AuthController extends BaseController
     public function checkAuth() {
         if (Auth::user()) {
             return Response::json(array('id' => Auth::user()->id,
-                    'username' => Auth::user()->accountname,
+                    'accountname' => Auth::user()->accountname,
                     'thirdparty' => Auth::user()->isThirdParty()));
         } else {
             return Response::json(array('flash' => 'Not authorized'), 500);
@@ -135,7 +137,6 @@ class AuthController extends BaseController
                         'accountname' => $me->name,
                         'oauthprovider' => 'google',
                         'oauthid' => $me->id,
-                        'username' => '',
                         'email' => $me->email,
                         'password' => '',
                         'role' => User::ROLE_MEMBER,
@@ -157,7 +158,7 @@ class AuthController extends BaseController
 
         // This no longer werkz
         return Response::json(array('id' => Auth::user()->id,
-                    'username' => Auth::user()->accountname,
+                    'accountname' => Auth::user()->accountname,
                     'thirdparty' => Auth::user()->isThirdParty()));
     }
 
@@ -186,7 +187,6 @@ class AuthController extends BaseController
                     'accountname' => $me->getName(),
                     'oauthprovider' => 'facebook',
                     'oauthid' => $me->getId(),
-                    'username' => '',
                     'email' => $me->getEmail(),
                     'password' => '',
                     'role' => User::ROLE_MEMBER,
@@ -198,7 +198,7 @@ class AuthController extends BaseController
         Auth::login($user);
 
         return Response::json(array('id' => Auth::user()->id,
-                    'username' => Auth::user()->accountname,
+                    'accountname' => Auth::user()->accountname,
                     'thirdparty' => Auth::user()->isThirdParty()));
     }
 }

@@ -22,7 +22,6 @@ class TestDataSeeder extends Seeder{
 			User::create(array(
 	            'accountname' => $faker->firstName,
 	            'password' => Hash::make('test'),
-	            'username' => $faker->userName,
 	            'email' => $faker->email,
 	            'registered' => '1',
 	            'publicfollow' => '1',
