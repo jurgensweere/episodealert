@@ -124,7 +124,7 @@ class SeriesController extends BaseController
     public function getEpisodeGuide()
     {
         if (!Auth::user()) {
-            return Response::json(array('flash' => 'You need to log in to view your personal guide'), 403);
+            return Response::json(array('flash' => 'You need to log in to view your personal guide.'), 401);
         }
 
         $seriesFollowed = Series::join('following', 'following.series_id', '=', 'series.id')
@@ -222,10 +222,10 @@ class SeriesController extends BaseController
                     $seen = $service->setSeenSeason($episode, Auth::user());
                     return Response::json(array('seen' => $seen->lists('episode_id')));
             }
-            return Response::json(array('seen' => 'Unknown operation'), 500);
+            return Response::json(array('seen' => 'Unknown operation.'), 400);
 
         } else {
-            return Response::json(array('seen' => 'Unauthorized'), 500);
+            return Response::json(array('seen' => 'You need to log in first.'), 401);
         }
 
     }
@@ -247,9 +247,9 @@ class SeriesController extends BaseController
                     $episodeIds = $service->setUnseenSeason($episode, Auth::user());
                     return Response::json(array('unseen' => $episodeIds));
             }
-            return Response::json(array('unseen' => 'Unknown operation'), 500);
+            return Response::json(array('unseen' => 'Unknown operation.'), 400);
         } else {
-            return Response::json(array('unseen' => 'fail unauthorized'), 500);
+            return Response::json(array('unseen' => 'You need to log in first.'), 401);
         }
     }
 
@@ -272,9 +272,9 @@ class SeriesController extends BaseController
         }
         return Response::json(
             array(
-                'error' => 'fail unauthorized'
+                'error' => 'You need to log in first.'
             ),
-            500
+            401
         );
     }
 
@@ -295,7 +295,7 @@ class SeriesController extends BaseController
 
             return Response::json(array('unseenepisodes' => $unseenAmountOfEpisodes, 'season' => $season_number));
         } else {
-            return Response::json(array('error' => 'fail unauthorized'), 500);
+            return Response::json(array('error' => 'You need to log in first.'), 401);
         }
     }
 
@@ -325,7 +325,7 @@ class SeriesController extends BaseController
 
             return Response::json($seasonObject);
         } else {
-            return Response::json(array('error' => 'fail unauthorized'), 500);
+            return Response::json(array('error' => 'You need to log in first.'), 401);
 
         }
     }

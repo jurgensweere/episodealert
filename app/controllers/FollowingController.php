@@ -30,16 +30,16 @@ class FollowingController extends BaseController
                 if($following->save()){
                     $user->following = Following::where('user_id', '=', $user->id)->count();
                     $user->save();
-                    return Response::json(array('follow' => 'success'));
+                    return Response::json(array('follow' => 'Success.'));
                 }else{
-                    return Response::json(array('follow' => 'fail to save'));
+                    return Response::json(array('follow' => 'A server error occurred, please try again.'), 500);
                 }
             }else{
-                return Response::json(array('follow' => 'allready following'));
+                return Response::json(array('follow' => 'You are already following this series.'), 409);
             }
 
         }else{
-            return Response::json(array('follow' => 'fail unauthorized'));
+            return Response::json(array('follow' => 'You need to log in first.'), 401);
         }
 
     }
@@ -56,11 +56,11 @@ class FollowingController extends BaseController
             if($unfollow){
                 $user->following = Following::where('user_id', '=', $user->id)->count();
                 $user->save();
-                return Response::json(array('follow' => 'unfollow'));
+                return Response::json(array('follow' => 'Success.'));
             }
         }else{
 
-            return Response::json(array('follow' => 'fail unauthorized'), 500);
+            return Response::json(array('follow' => 'You need to log in first.'), 401);
 
         }
 
@@ -103,7 +103,7 @@ class FollowingController extends BaseController
 
             return Response::json($series);
         } else {
-            return Response::json(array('flash' => 'Unauthorized, please login'));
+            return Response::json(array('flash' => 'You need to log in first.'), 401);
         }
     }
 

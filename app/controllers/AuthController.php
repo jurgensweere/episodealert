@@ -39,9 +39,9 @@ class AuthController extends BaseController
                 )
             );
 
-            return Response::json(array('flash' => 'Thanks for registering'));          
+            return Response::json(array('flash' => 'Thanks for registering!'));
         } else {
-            return Response::json(array('flash' => 'Email already in use'), 500);
+            return Response::json(array('flash' => 'Email already in use.'), 400);
         }
 
     }
@@ -70,13 +70,13 @@ class AuthController extends BaseController
                 }
             }
 
-            return Response::json(array('flash' => 'Invalid email or password'), 500);
+            return Response::json(array('flash' => 'Invalid email or password.'), 400);
         }
     }
 
     public function logout() {
         Auth::logout();
-        return Response::json(array('flash' => 'Loggout Out!'));
+        return Response::json(array('flash' => 'Logged out!'));
     }
 
     /*
@@ -89,7 +89,7 @@ class AuthController extends BaseController
                     'accountname' => Auth::user()->accountname,
                     'thirdparty' => Auth::user()->isThirdParty()));
         } else {
-            return Response::json(array('flash' => 'Not authorized'), 500);
+            return Response::json(array('flash' => 'Not authorized.'), 401);
         }
     }
 
@@ -150,7 +150,7 @@ class AuthController extends BaseController
                 $user->save();
             }
         }
-      
+
         Auth::login($user);
 
         // We need to redirect here
@@ -194,7 +194,7 @@ class AuthController extends BaseController
                 )
             );
         }
-        
+
         Auth::login($user);
 
         return Response::json(array('id' => Auth::user()->id,
