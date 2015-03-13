@@ -40,6 +40,8 @@ class AuthController extends BaseController
                 )
             );
 
+            Auth::login($user);
+
             return Response::json(array('flash' => 'Thanks for registering!'));
         } else {
             return Response::json(array('flash' => 'Email already in use.'), 400);

@@ -52,8 +52,14 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
 
     return {
         register: function (credentials) {
+            var self = this;
             var register = $http.post('api/auth/register', credentials);
             register.success(registerMessage);
+            register.success(function() {
+                self.check().success(function() {
+                    $location.path('/profile');
+                });
+            });
             register.error(registerError);
             return register;
         },
