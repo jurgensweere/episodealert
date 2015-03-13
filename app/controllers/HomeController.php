@@ -49,6 +49,7 @@ class HomeController extends BaseController
                 'state' => $state,
                 'app_name' => 'Episode-Alert',
                 'fbAppId' => Config::get('app.facebook.appid'),
+                'gaTrackingID' => Config::get('app.google.trackingid'),
             )
         );
     }
