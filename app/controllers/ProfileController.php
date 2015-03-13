@@ -171,23 +171,14 @@ class ProfileController extends BaseController
         // get unseen amount from following controller
         $unseenAmount = (new SeriesController)->getUnseenEpisodes()->getData()->unseenepisodes;
 
-        // get number of followed series
-        $followingAmount = $user->following()->count();
-
         // find out the number of people who follow less series
-        $followingByUser = User::leftJoin('following as f', 'f.user_id', '=', 'user.id')
-            ->select(['user.id', DB::raw('count(f.id) as following')])
-            ->groupBy('user.id');
-
-        $peopleFollowingLess = DB::table(DB::raw('(' . $followingByUser->toSql() . ') as sub'))
-            ->where('sub.following', '<', $followingAmount)
-            ->count('sub.id');
+        $peopleFollowingLess = User::where('following', '<', $user->following)->count();
 
         // total number of users
         $userAmount = User::count();
 
         return Response::json([
-            'following' => $followingAmount,
+            'following' => $user->following,
             'unseen' => $unseenAmount,
             'followmorethan' => round($peopleFollowingLess / $userAmount * 100)
         ]);
