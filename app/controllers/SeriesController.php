@@ -61,8 +61,8 @@ class SeriesController extends BaseController
             Series::join('following', 'following.series_id', '=', 'series.id')
                 ->whereNotNull('fanart_image')
                 ->groupBy('following.series_id')
-                ->orderBy(DB::raw('count(following.id)'), 'desc')
-                ->orderBy(DB::raw('rand()'))
+                ->orderByRaw('count(following.id) desc')
+                ->orderByRaw('rand()')
                 ->take(5)
                 ->get()
         );
