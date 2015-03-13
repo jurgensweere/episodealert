@@ -30,6 +30,9 @@ class TvdbJob
         $data = App::make('tvdb')->getSerieData($series->id, true);
         if (!is_array($data)) {
             Log::error("Something went wrong when downloading from TVDB");
+            /* temporary fix to continue updating for the migration */
+            $series->updated_at = null;
+	        $series->save();
             return;
         }
 
@@ -58,7 +61,10 @@ class TvdbJob
         }
         if ($data['category'] != '') {
             $series->category = $data['category'];
-        }  
+        }else{
+            $series->category = "|Unknown|";	
+        }	
+
         $series->episode_amount = 0; // Default to 0, we will update these values in attachEpisodeData     
 
         // If the series doesn't have a unique name, assign one

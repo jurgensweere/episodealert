@@ -573,11 +573,16 @@ li.disabled{
         right: 0;
         position: absolute;
         text-align: center;
+        opacity: 1;
         p {
             font-size: 100%;
             background-color: rgba($secondary-color, 0.5);
         }
         
+    }
+    
+    .archived {
+        opacity: 0.5;
     }
 
     .badge {
@@ -603,6 +608,7 @@ li.disabled{
     }
 
     .extra-info {
+        position: relative;
         padding: 10px 0px 15px 10px;
         text-align: left;
         background-color: $primary-color;
@@ -966,8 +972,17 @@ li.disabled{
     }
 }
 
-.btn--following {
+/* have to refactor the entire button situation, using important is just horrible */
+.btn-small {
+    border: none !important;
+    padding: 0px !important;
+    background: none !important;
+}
 
+.btn-small--archive {
+    top: 12%;
+    position: absolute;
+    right: 5%;
 }
 
 .navbar-default {
