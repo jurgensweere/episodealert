@@ -81,8 +81,7 @@ class Sitemap extends Command
         $series = Series::orderBy('updated_at', 'desc')->get();
 
         // add every post to the sitemap
-        foreach ($series as $s)
-        {
+        foreach ($series as $s) {
             $sitemap->add(URL::to('series/' . $s->unique_name), $s->updated_at->format('c'), '0.5', 'monthly');
         }
 
