@@ -28,21 +28,21 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
     };
 
     var loginError = function (response) {
-        alertService.add('warning', response.flash, 5000);
+        alertService.add(response.flash, { type : 'warning', location: 'top', time : 10000 });
     };
 
     var loginMessage = function (response) {
-        alertService.add('success', 'Login success', 5000);
+        alertService.add('Login success', { type : 'success', location: 'top', time : 10000 });
         //flash('success', 'Login success');
     };
 
     var registerMessage = function (response) {
-        alertService.add('success', response.flash, 5000);
+        alertService.add(response.flash, { type : 'success', location: 'top', time : 10000 });
         //flash('success', response.flash);
     };
 
     var registerError = function (response) {
-        alertService.add('warning', response.flash, 5000);
+        alertService.add(response.flash, { type : 'warning', location: 'top', time : 10000 });
         //flash('danger', response.flash);
     };
 
