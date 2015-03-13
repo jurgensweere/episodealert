@@ -14,39 +14,40 @@ use DateTime;
  * making it possible to update all series in the database
  */
 
-class SeriesAll extends Command {
+class SeriesAll extends Command
+{
 
-	/**
-	 * The console command name.
-	 *
-	 * @var string
-	 */
-	protected $name = 'series:all';
+    /**
+     * The console command name.
+     *
+     * @var string
+     */
+    protected $name = 'series:all';
 
-	/**
-	 * The console command description.
-	 *
-	 * @var string
-	 */
-	protected $description = 'Command description.';
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Command description.';
 
-	/**
-	 * Create a new command instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-	}
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	/**
-	 * Execute the console command.
-	 *
-	 * @return mixed
-	 */
-	public function fire()
-	{
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function fire()
+    {
         $today = new DateTime;
         $today = $today->format('Y-m-d');
         
@@ -65,28 +66,27 @@ class SeriesAll extends Command {
             $i++;
             /* show something in the console to keep track of progress */
             echo "\n".$i;
-            Queue::push('EA\TvdbJob@updateSingleSeries', array('tvdbid' => $s->id));    
+            Queue::push('EA\TvdbJob@updateSingleSeries', array('tvdbid' => $s->id));
         }
-	}
+    }
 
-	/**
-	 * Get the console command arguments.
-	 *
-	 * @return array
-	 */
-	protected function getArguments()
-	{
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
         return [];
-	}
+    }
 
-	/**
-	 * Get the console command options.
-	 *
-	 * @return array
-	 */
-	protected function getOptions()
-	{
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
         return [];
-	}
-
+    }
 }

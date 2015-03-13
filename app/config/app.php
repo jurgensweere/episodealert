@@ -204,6 +204,10 @@ return array(
 	'facebook' => array (
 		'appid'				=> '1518239795106587',
 		'appsecret'			=> 'INSERTSECRET',
+	),
+
+	'google' => array (
+		'trackingid'		=> 'UA-12386450-1',
 	)
 
 );

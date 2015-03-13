@@ -16,7 +16,7 @@ class ProfileController extends BaseController
         $user = Auth::user();
         // you can only change the password, if you are logged in
         if (!$user) {
-            return Response::json(array('flash' => 'You need to log in'), 403);
+            return Response::json(array('flash' => 'You need to log in first.'), 401);
         }
 
         unset($user->oauthprovider);
@@ -32,15 +32,15 @@ class ProfileController extends BaseController
         $user = Auth::user();
         // you can only change the password, if you are logged in
         if (!$user) {
-            return Response::json(array('flash' => 'You need to log in to change password'), 403);
+            return Response::json(array('flash' => 'You need to log in to change password.'), 401);
         }
         // you can only change the password, if you're not logged in via 3rd party
         if ($user->isThirdParty()) {
-            return Response::json(array('flash' => 'You cannot change your password'), 403);
+            return Response::json(array('flash' => 'You cannot change your password.'), 403);
         }
 
-        Validator::extend('hashmatch', function($attribute, $value, $parameters)
-        {
+        Validator::extend('hashmatch', function ($attribute, $value, $parameters) {
+        
             return Hash::check($value, Auth::user()->$parameters[0]);
         });
 
@@ -52,16 +52,15 @@ class ProfileController extends BaseController
             )
         );
 
-        if ($validator->fails())
-        {
-            return Response::json(array('flash' => 'Error saving password'), 400);
+        if ($validator->fails()) {
+        return Response::json(array('flash' => 'Error saving password.'), 400);
         }
 
         // change the password.
         $user->password = Hash::make(Input::get('password'));
         $user->save();
 
-        return Response::json(array('flash' => 'Password Saved'), 200);
+        return Response::json(array('flash' => 'Password Saved'));
     }
 
     public function postChangeCredentials()
@@ -70,7 +69,7 @@ class ProfileController extends BaseController
 
         // you can only change name or email, if you are logged in
         if (!$user) {
-            return Response::json(array('flash' => 'You need to log in.'), 403);
+            return Response::json(array('flash' => 'You need to log in first.'), 401);
         }
 
         $validator = Validator::make(
@@ -81,23 +80,26 @@ class ProfileController extends BaseController
             )
         );
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return Response::json(
-                array(
-                    'flash' => 'Invalid data',
+            array(
+                    'flash' => 'Invalid data.',
                     'accountname' => $user->accountname,
                     'email' => $user->email,
-                ), 400);
+                ),
+                400
+            );
         }
 
         if (!$user->isThirdParty() && !Hash::check(Input::get('password'), Auth::user()->password)) {
             return Response::json(
                 array(
-                    'flash' => 'Incorrect password',
+                    'flash' => 'Incorrect password.',
                     'accountname' => $user->accountname,
                     'email' => $user->email,
-                ), 400);
+                ),
+                400
+            );
         }
 
         $accountname = Input::get('accountname');
@@ -114,10 +116,12 @@ class ProfileController extends BaseController
 
         return Response::json(
             array(
-                'flash' => 'Saved',
+                'flash' => 'Your changes have been saved.',
                 'accountname' => $user->accountname,
                 'email' => $user->email,
-            ), 200);
+            ),
+            200
+        );
     }
 
     public function postChangePreferences()
@@ -126,7 +130,7 @@ class ProfileController extends BaseController
 
         // you can only change name or email, if you are logged in
         if (!$user) {
-            return Response::json(array('flash' => 'You need to log in.'), 403);
+            return Response::json(array('flash' => 'You need to log in first.'), 401);
         }
 
         $validator = Validator::make(
@@ -137,14 +141,15 @@ class ProfileController extends BaseController
             )
         );
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return Response::json(
-                array(
+            array(
                     'flash' => 'Invalid data',
                     'publicfollow' => $user->publicfollow == 1,
                     'alerts' => $user->alerts == 1,
-                ), 400);
+                ),
+            400
+            );
         }
 
         $user->publicfollow = Input::get('publicfollow');
@@ -153,10 +158,11 @@ class ProfileController extends BaseController
 
         return Response::json(
             array(
-                'flash' => 'Saved',
+                'flash' => 'Your changes have been saved.',
                 'publicfollow' => $user->publicfollow == 1,
                 'alerts' => $user->alerts == 1,
-            ), 200);
+            )
+        );
     }
 
     public function getStats()
@@ -165,7 +171,7 @@ class ProfileController extends BaseController
 
         // you can only change name or email, if you are logged in
         if (!$user) {
-            return Response::json(array('flash' => 'You need to log in.'), 403);
+            return Response::json(array('flash' => 'You need to log in first.'), 401);
         }
 
         // get unseen amount from following controller

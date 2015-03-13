@@ -49,7 +49,7 @@ class Mailer extends Command
     {
         $yesterday = new DateTime;
         $yesterday->sub(new DateInterval('P1D'));
-        $yesterday = $yesterday->format('Y-m-d');   
+        $yesterday = $yesterday->format('Y-m-d');
         
         $today = new DateTime;
         $today = $today->format('Y-m-d');
@@ -78,10 +78,10 @@ class Mailer extends Command
                                                    'number' => $episode->episode,
                                                    'name' => $episode->name]);
                 }
-            } 
+            }
             
-            if(count($following) > 0){
-                $mailname = $user->accountname;                
+            if (count($following) > 0) {
+                $mailname = $user->accountname;
             
                 $data = array(
                     'episodelist' => $userEpisodesList,
@@ -91,14 +91,14 @@ class Mailer extends Command
                     'user_id' => $user->id
                 );
 
-                if(count($userEpisodesList) > 0) {
+                if (count($userEpisodesList) > 0) {
                     Queue::push('EA\MailJob@sendAlertEmail', $data);
                 }
             }
             
             $user->last_notified = new DateTime;
-            $user->save();            
-        }        
+            $user->save();
+        }
         
         
 //        $this->info("Mailer: Start Scheduling emails.");

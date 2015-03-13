@@ -21,5 +21,9 @@ return array(
 	'facebook' => array (
 		'appid'				=> '1518254765105090',
 		'appsecret'			=> 'INSERTSECRET',
+	),
+
+	'google' => array (
+		'trackingid'		=> 'UA-12386450-2',
 	)
 );
