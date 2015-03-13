@@ -14,52 +14,51 @@ use Input;
 
 class FollowingController extends BaseController
 {
-    public function follow($series_id){
+    public function follow($series_id)
+    {
 
-        if(Auth::user()){
+        if (Auth::user()) {
             $user = Auth::user();
 
             $followingCheck = Following::where('series_id', $series_id)->where('user_id', $user->id)->count();
 
-            if(!$followingCheck){
-
+            if (!$followingCheck) {
                 $following = new Following;
                 $following->series_id = $series_id;
                 $following->user_id = $user->id;
 
-                if($following->save()){
+                if ($following->save()) {
                     $user->following = Following::where('user_id', '=', $user->id)->count();
                     $user->save();
                     return Response::json(array('follow' => 'Success.'));
-                }else{
+                } else {
                     return Response::json(array('follow' => 'A server error occurred, please try again.'), 500);
                 }
-            }else{
+            } else {
                 return Response::json(array('follow' => 'You are already following this series.'), 409);
             }
 
-        }else{
+        } else {
             return Response::json(array('follow' => 'You need to log in first.'), 401);
         }
 
     }
 
-    public function unfollow($series_id){
-        if(Auth::user()){
-
+    public function unfollow($series_id)
+    {
+        if (Auth::user()) {
             $user = Auth::user();
             $unfollow = Following::where('series_id', $series_id)->where('user_id', $user->id)->delete();
 
             //Delete seen information on unfollow
             Seen::where('user_id', Auth::user()->id)->where('series_id', '=', $series_id)->delete();
 
-            if($unfollow){
+            if ($unfollow) {
                 $user->following = Following::where('user_id', '=', $user->id)->count();
                 $user->save();
                 return Response::json(array('follow' => 'Success.'));
             }
-        }else{
-
+        } else {
             return Response::json(array('follow' => 'You need to log in first.'), 401);
 
         }
@@ -91,7 +90,7 @@ class FollowingController extends BaseController
             self::addSeenEpisodesToSeries($series, $user->id);
 
             if (filter_var(Input::get('seen', 'false'), FILTER_VALIDATE_BOOLEAN)) {
-                $series = $series->filter(function($series) {
+                $series = $series->filter(function ($series) {
                     if ($series->unseen_episodes > 0) {
                         return true;
                     }
@@ -181,15 +180,19 @@ class FollowingController extends BaseController
             $airdate = date('Y-m-d');
             $latest = Episode::where('series_id', '=', $s->id)
                 ->where('airdate', '<=', DB::raw(
-                    sprintf("IFNULL(
+                    sprintf(
+                        "IFNULL(
                         (SELECT airdate
                         FROM episode
                         WHERE series_id = %s
                         AND airdate > '%s'
                         ORDER BY season asc, episode asc
                         LIMIT 1), '%s')",
-                        $s->id, $airdate, $airdate)
-                    ))
+                        $s->id,
+                        $airdate,
+                        $airdate
+                    )
+                ))
                 ->orderBy('season', 'desc')
                 ->orderBy('episode', 'desc')
                 ->take(2)
@@ -231,5 +234,4 @@ class FollowingController extends BaseController
                 ));
         return Response::json($series);
     }
-
 }

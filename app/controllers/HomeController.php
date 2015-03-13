@@ -42,7 +42,8 @@ class HomeController extends BaseController
 
         // Set the client ID, token state, and application name in the HTML while
         // serving it.
-        return View::make('index',
+        return View::make(
+            'index',
             array(
                 'user' => $user,
                 'clientId' => $config->$key->client_id,
@@ -54,7 +55,8 @@ class HomeController extends BaseController
         );
     }
 
-    public function showTestPage(){
+    public function showTestPage()
+    {
         //print_r(Auth::user());
 
         //self::resize_image('public/img/poster/lo/lost.jpg', 'public/img/poster/lo/lost_small.jpg', 50, 0.3);
@@ -70,7 +72,5 @@ class HomeController extends BaseController
 
         //$tv->getPosterImage($series, 'kaas');
 
-    }  
-
-
+    }
 }

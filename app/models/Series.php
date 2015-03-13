@@ -32,12 +32,13 @@ class Series extends Eloquent
     /*
      * If user is authorized check if the series is followed, otherwise return 0
      */
-    public function getFollowingAttribute(){
-    	if(Auth::user()){
-    		return count(Following::where('series_id' , $this->id)->where('user_id', Auth::user()->id)->get());
-    	}else{
-    		return false;
-    	}
+    public function getFollowingAttribute()
+    {
+        if (Auth::user()) {
+            return count(Following::where('series_id', $this->id)->where('user_id', Auth::user()->id)->get());
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -116,6 +117,6 @@ class Series extends Eloquent
 
     public function getImageShortHand()
     {
-        return substr($this->unique_name, 0,2);
+        return substr($this->unique_name, 0, 2);
     }
 }

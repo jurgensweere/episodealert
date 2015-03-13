@@ -10,20 +10,20 @@ class MailJob
 {
     public function sendAlertEmail($job, $data)
     {
-             
-        Mail::send(array('emails.alert.richtext', 'emails.alert.text'), $data, function($message) use ($data)
-        {
+
+        Mail::send(array('emails.alert.richtext', 'emails.alert.text'), $data, function ($message) use ($data) {
+
             $message->to($data['email'], $data['username'])
                 ->from('alerts@episode-alert.com')
                 ->subject("New Episode Alert");
         });
-        
+
         $job->delete();
-        
-        
+
+
 //        $following = Following::find(intval($data['following_id']));
 //        $episode = Episode::find(intval($data['episode_id']));
-//        
+//
 //        if ($following == null) {
 //            Log::info("MailJob.sendAlertEmail: Invalid Following Id");
 //            $job->delete();
@@ -40,7 +40,7 @@ class MailJob
 //            'episodeDescription' => $episode->description,
 //            'username' => $following->user->accountname,
 //        );
-//        
+//
 //        Mail::send(array('emails.alert.richtext', 'emails.alert.text'), $data, function($message) use ($following)
 //        {
 //            $message->to($following->user->email, $following->user->accountname)
@@ -54,5 +54,4 @@ class MailJob
 //
 //        $job->delete();
     }
-    
 }
