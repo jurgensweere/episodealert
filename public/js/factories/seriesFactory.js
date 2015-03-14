@@ -14,7 +14,7 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
     };
 
     /**
-     * Get random selection of Top Series 
+     * Get random selection of Top Series
      *
      * @return {array} List of series
      */
@@ -75,7 +75,7 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
      */
     seriesFactory.unfollowSeries = function(series_id) {
         return $http.get('/api/unfollow/' + series_id);
-    };    
+    };
 
     /**
      * Get a list of series followed by user
@@ -91,7 +91,7 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
             ended: includeEnded,
             archive: includeArchive
         }});
-    };    
+    };
 
     /**
      * Get a list of episodes by series

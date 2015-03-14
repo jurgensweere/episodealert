@@ -1,6 +1,6 @@
 /*
  * 'Overwrite' for the ui-bootstrap tabs to add extra unseen content to the tab. Could not find a more clean way to add this.
- * Usage : series-detail (eatabset, eatab) 
+ * Usage : series-detail (eatabset, eatab)
  *
  */
 
@@ -47,7 +47,7 @@ angular.module('ui.bootstrap.tabs', [])
   $scope.$on('$destroy', function() {
     destroyed = true;
   });
-  
+
 }])
 
 

@@ -7,7 +7,7 @@
             $scope.loadingGenre = false;
             $scope.series = [];
             var skip = 0;
-            
+
             $scope.getGenreInLowerCase = function (selectedGenre) {
                 return selectedGenre.toLowerCase();
             };
@@ -49,7 +49,7 @@
             if($routeParams.genre) {
                 var genre = $routeParams.genre;
                 $scope.selectedGenre = genre;
-                $scope.getByGenre();           
+                $scope.getByGenre();
             }
 
             $scope.allGenres = getAllGenres();

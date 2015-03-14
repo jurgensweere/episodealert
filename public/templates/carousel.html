@@ -2,9 +2,9 @@
     <p>episode alert <img src="img/logo-71x50.png" alt="Episode Alert" /></p>
 </div>
 <div class="row splash-fanart">
-    <div ng-repeat="series in series" 
+    <div ng-repeat="series in series"
         ng-show="currentSeries==series.id"
-        class="fanart-background" 
+        class="fanart-background"
         style="background-image: url('{{ series.poster_image | createFanartUrl : series.unique_name }}');">
     </div>
     <span class="splash-fanart-fade"></span>

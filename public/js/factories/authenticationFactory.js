@@ -12,7 +12,7 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
     };
 
     var executeCachedActions = function () {
-        //Execute any cache actions that 
+        //Execute any cache actions that
         FollowingQueue.executeActions();
     };
 

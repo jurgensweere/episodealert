@@ -1,5 +1,5 @@
 	(function () {
-    
+
     angular.module('eaApp').controller('SeriesCtrl',
         function($scope, $routeParams, $filter, seriesFactory, AuthenticationService, Page) {
 
@@ -33,7 +33,7 @@
                 var loadUnseen = getUnseenAmountBySeries($scope.series.id, $scope.series.season_amount);
                 loadUnseen.success(function(unseen){
                     for( var i = 0; i < unseen.length; i++){
-                        var index = i + 1; 
+                        var index = i + 1;
                         $scope.seasons[index].unseen = unseen[i];
                     }
                 });
@@ -50,10 +50,10 @@
                 var loadUnseen = getUnseenAmountBySeries($scope.series.id, $scope.series.season_amount);
                 loadUnseen.success(function(unseen){
                     for( var i = 0; i < unseen.length; i++){
-                        var index = i + 1; 
+                        var index = i + 1;
                         $scope.seasons[index].unseen = unseen[i];
                     }
-                }); 
+                });
             };
 
 			//watcher to check if the initial episodes have been loaded
@@ -63,11 +63,11 @@
 					var loadUnseen = getUnseenAmountBySeries($scope.series.id, $scope.series.season_amount);
 	   				loadUnseen.success(function(unseen){
 	   					for( var i = 0; i < unseen.length; i++){
-	   						var index = i + 1; 
+	   						var index = i + 1;
 	   						//$scope.series.has_specials ? i + 1 : i;
 	   						$scope.seasons[index].unseen = unseen[i];
 	   					}
-	   				});			    	
+	   				});
 
 			    }
 			});
@@ -96,7 +96,7 @@
 	    	function getUnseenAmountBySeries(series_id, seasonsAmount){
 	    		var unseenBySeries = seriesFactory.getUnseenSeasonsBySeries(series_id, seasonsAmount);
 	    		return unseenBySeries;
-	    	}	    	
+	    	}
 
 	    	function getEpisodesBySeason(series_id, seasonNumber){
 	    		var episodesBySeason = seriesFactory.getEpisodesBySeason(series_id, seasonNumber);
@@ -117,7 +117,7 @@
 
 			/* functions */
 			function buildSeasonObject(numberOfSeasons, hasSpecials, activeSeason){
-        
+
 				var seasons = [];
 
 				if(hasSpecials){

@@ -1,14 +1,14 @@
 (function(){
     angular.module('eaApp')
     .directive('seenButton', ['seriesFactory', function(seriesFactory) {
-        return { 
-            restrict: 'E', 
+        return {
+            restrict: 'E',
             scope: {
                 episode: '=',
                 seenResponse: '&onSeenResponse',
                 unseenResponse: '&onUnseenResponse'
             },
-            template: 
+            template:
                 '<div class="ea-seen-button" ng-if="episode.aired > 0">'+
                 '    <button class="btn seen-button seen-button--season hidden-xs" ng-click="toggleSeason(episode)">entire season</button>' +
                 '    <button class="btn seen-button seen-button--untill hidden-xs" ng-click="toggleUntil(episode)">until here</button>' +
@@ -21,7 +21,7 @@
                         unseenServiceCall(episode, 'single');
                     } else {
                         seenServiceCall(episode, 'single');
-                    }            
+                    }
                 };
 
                 /** Toggle a episodes (un)seen until here */
@@ -30,7 +30,7 @@
                         unseenServiceCall(episode, 'until');
                     } else {
                         seenServiceCall(episode, 'until');
-                    }  
+                    }
                 };
 
                 /** Toggle a season (un)seen */
@@ -39,7 +39,7 @@
                         unseenServiceCall(episode, 'season');
                     } else {
                         seenServiceCall(episode, 'season');
-                    }  
+                    }
                 };
 
                 /**
@@ -56,7 +56,7 @@
                         .error(function (error) {
                             //flash(error.seen);
                         });
-                }      
+                }
 
                 /**
                  * Set an episode to 'unseen'
@@ -67,7 +67,7 @@
                 function unseenServiceCall(episode, mode) {
                     seriesFactory.setUnseenEpisode(episode.id, mode)
                         .success(function (response) {
-                            scope.unseenResponse({response: response});                        
+                            scope.unseenResponse({response: response});
                         })
                         .error(function (error) {
                             //flash(response.unseen);
@@ -109,11 +109,11 @@
             scope.mouseOut = function (series) {
                 if (series.following) {
                     scope.buttonLabel = 'Following';
-                }  
+                }
             };
 
             scope.toggleFollowing = function (series) {
-                if (series.following) {                       
+                if (series.following) {
                     unfollowServiceCall(series);
                 } else {
                     if(AuthenticationService.isLoggedIn()){
@@ -121,22 +121,22 @@
                     }else{
                         //Save the action in the cache
                         var functionToQueue = function(){
-                            followServiceCall(series);    
+                            followServiceCall(series);
                         };
 
                         //Add the function call to the action cache, will be called after user logs in
                         FollowingQueue.addFollowing(series.id);
 
-                        //add alert info 
+                        //add alert info
                         //alertService.add('success', 'je moet wel inloggen');
                         //alertService.add('info', 'om lekker');
                         alertService.add('Please register or login to follow this show and continue to your profile', { type : 'warning', location: 'top', time : 20000 });
                         //alertService.add('danger', 'te volgen');
-                            
+
                         //Redirect to login or registration
                         $location.path("/login");
-                        
-                        //Set a message to be shown 
+
+                        //Set a message to be shown
                         //TODO: implement decent actions (ui-bootstrap)
                     }
                 }

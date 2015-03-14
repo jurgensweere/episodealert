@@ -28,7 +28,7 @@ angular.module('eaApp').factory('oauthFactory', ['AuthenticationService', '$loca
           }, {scope: 'email'});
         };
     };
-        
+
     return directive;
 }])
 .directive('googleLogin', ['$window', '$timeout', function ($window, $timeout) {
@@ -39,14 +39,14 @@ angular.module('eaApp').factory('oauthFactory', ['AuthenticationService', '$loca
       transclude: true,
       replace: true };
 
-    directive.template = 
+    directive.template =
       '<a class="btn btn-block btn-social btn-google-plus" '+
       'href="https://accounts.google.com/o/oauth2/auth' +
       '?scope=email' +
-      '&state=' + $window.state + 
-      '&redirect_uri=' + $window.googleRedirectURI + 
+      '&state=' + $window.state +
+      '&redirect_uri=' + $window.googleRedirectURI +
       '&response_type=code&' +
-      '&client_id=' + $window.clientId + 
+      '&client_id=' + $window.clientId +
       '&access_type=offline'+
       '&openid.realm=' + $window.googleRedirectURI +
       '"><i class="fa fa-google-plus"></i> Sign in with Google</a>';
@@ -72,4 +72,3 @@ angular.module('eaApp').factory('oauthFactory', ['AuthenticationService', '$loca
        fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 }]);
-        

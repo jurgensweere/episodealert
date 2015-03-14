@@ -1,5 +1,5 @@
 (function(){
-    angular.module('eaApp').controller('ProfileSettingsCtrl', 
+    angular.module('eaApp').controller('ProfileSettingsCtrl',
         function($scope, $rootScope, userSettingService, Page) {
 
 			Page.setTitle('Settings | Episode Alert');

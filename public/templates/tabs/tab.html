@@ -1,5 +1,5 @@
 <li ng-class="{active: active, disabled: disabled}">
   	<a ng-click="select()" tab-heading-transclude> {{ heading }} </a>
-	<span ng-if="unseen == 0" class="seen-badge badge animate-if"><span class="glyphicon glyphicon-ok"></span></span> 
+	<span ng-if="unseen == 0" class="seen-badge badge animate-if"><span class="glyphicon glyphicon-ok"></span></span>
 	<span ng-if="unseen < 999 && unseen > 0" class="badge animate-if"> {{ unseen }}  </span>
 </li>

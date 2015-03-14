@@ -11,7 +11,7 @@
                         $scope.buttonLabel = 'Follow';
                     }
                 }
-            });          
+            });
 
             $scope.mouseOver = function(series) {
                 if (series.following) {
@@ -22,12 +22,12 @@
             $scope.mouseOut = function(series) {
                 if (series.following) {
                     $scope.buttonLabel = 'Following';
-                }           
+                }
             };
 
             $scope.toggleFollowing = function(series) {
-                if (series.following) {   
-                    unfollowServiceCall(series);              
+                if (series.following) {
+                    unfollowServiceCall(series);
                 } else {
                     followServiceCall(series);
                 }
@@ -53,7 +53,7 @@
                 seriesFactory.followSeries(series.id)
                     .success(function (response) {
                         //flash(response.follow);
-              
+
                         series.following = 1;
                     })
                     .error(function (error) {
