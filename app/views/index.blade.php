@@ -70,7 +70,10 @@
                         </li>
                         <li ng-show="!credentials.auth">
                             <a ng-show="!credentials.auth" href="/login">Login</a>
-                        </li>                                        
+                        </li>
+                        <li ng-show="!credentials.auth">
+                            <a ng-show="!credentials.auth" href="/register">Register</a>
+                        </li>                           
                     </ul>
 
                     <p class="navbar-text navbar-right hide-xs hidden-sm" ng-show="credentials.auth">Welcome back, <a href="/profile" class="navbar-link">{{ credentials.accountname }}</a></p>
