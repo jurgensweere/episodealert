@@ -1,18 +1,55 @@
-<h1>Register an account</h1>
-<div id="register" class="row">
-  <div class="col-xs-6 col-sm-6 col-md-6">
-    <form ng-submit="login()">
-      <fieldset class="radius">
-        <div class="form-group">
-            <input type="email" class="form-control" name="email" placeholder="email" ng-model="credentials.email" required/>
-        </div>        
-        <div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="password" ng-model="credentials.password" required/>
+<div class="registration">
+    
+    <div class="row splash-brand ng-scope spacer-md">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <p>episode alert <img src="img/logo-71x50.png" alt="Episode Alert">
+            </p>
         </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-default">Register</button>
+    </div>
+    
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-6 col-md-6 spacer-sm">
+            <h1>Never miss an episode again!</h1>
+            <ul class="spacer-sm">
+                <li>
+                    Follow your shows
+                </li>
+                <li>
+                    Keep track of everything in your profile
+                </li>
+                <li>
+                    Mark episodes as seen
+                </li>
+            </ul>
+
+            <h1>One click social registration</h1>
+            <div ng-controller="LoginCtrl">
+                <div class="spacer-sm">
+                    <google-login></google-login>
+                </div>
+                <div>
+                    <facebook-login></facebook-login>
+                </div>               
+            </div>
+
         </div>
-      </fieldset>
-    </form>
-  </div>
+        
+        <div class="col-xs-12 col-sm-6 col-md-6 spacer-sm">
+            <h1>Or register manualy</h1>
+            <form class="spacer-sm" ng-submit="login()">
+                <fieldset class="radius">
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="email" ng-model="credentials.email" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="password" ng-model="credentials.password" required/>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default">Register</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 </div>

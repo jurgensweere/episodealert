@@ -15,6 +15,18 @@ $lighter-text-shadow: #0F0F0F;
 $lighter-text: #e7e7e7;
 $font-family: "Open Sans", sans-serif;
 
+
+.registration{
+    h1{
+        color: $bright-highlight;
+    }
+    ul{
+        padding-left:30px;
+        font-size: 1.3em;
+    }
+    
+}
+
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
 body {
@@ -22,6 +34,23 @@ body {
     color: #fff;
     font-family: $font-family;
     overflow-y: scroll;
+}
+
+/* spacers */
+
+.spacer-lg{
+    padding-top: 40px;    
+    padding-bottom: 40px;
+}
+
+.spacer-md{
+    padding-top: 30px;    
+    padding-bottom: 30px;
+}
+
+.spacer-sm{
+    padding-top: 15px;    
+    padding-bottom: 15px;  
 }
 
 /* reset some defaults */
@@ -241,6 +270,8 @@ h1 {
     }
 
 }
+
+
 
 .footer{
     font-size: 80%;
@@ -1026,11 +1057,15 @@ li.disabled{
     .navbar-text > a:hover{
         color: $highlight-color;
     }
+    
     .navbar-nav > li > a {
         color: #fff;
         text-transform: uppercase;
         top: 2px;
         height: 46px;
+        
+        @media(max-width: $screen-md-min){ padding-right:0px; padding-left:5px;}
+        @media(max-width: $screen-lg-min){ padding-right:14px; padding-left:5px;}
     }
 
     .navbar-nav > li > a:hover,
