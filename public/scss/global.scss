@@ -118,6 +118,10 @@ ul {
     z-index: -9999;*/
 }
 
+.form-control-feedback{
+    color: #000000;
+}
+
 .ea-alert{
     bottom: 20px;
     right: 20px;
@@ -957,6 +961,8 @@ li.disabled{
     	}
 
     	li > a {
+            text-shadow: none;
+            text-decoration: none;
     		padding: 12px 16px 12px 16px;
     		margin-right: 1px;
     		border: none;

@@ -28,14 +28,19 @@
             <h1>Or login with e-mail / password</h1>
             <form ng-submit="login()" class="spacer-sm">
                 <fieldset class="radius">
-                    <div class="form-group">
+                    <div class="form-group has-feedback">
                         <input type="text" class="form-control" name="email" placeholder="email" ng-model="credentials.email" required/>
+                        <i class="form-control-feedback has-feedback-left glyphicon glyphicon-envelope"></i>
                      </div>
-                    <div class="form-group">
+                    <div class="form-group has-feedback">
                         <input type="password" class="form-control" name="password" placeholder="password" ng-model="credentials.password" required/>
+                        <i class="form-control-feedback has-feedback-left glyphicon glyphicon-lock"></i>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-default">Log In</button>
+                        <button type="submit" class="btn btn-default">
+                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 
+                            Log In
+                        </button>
                     </div>
                 </fieldset>
             </form>
