@@ -43,6 +43,10 @@
                 templateUrl: 'templates/auth/register.html',
                 controller: 'RegisterCtrl'
             })
+            
+            .when('/passwordreset', {
+                templateUrl: 'templates/auth/passwordreset.html'
+            })            
 
             .when('/profile', {
                 templateUrl: 'templates/profile.html',
