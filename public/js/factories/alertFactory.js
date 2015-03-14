@@ -6,7 +6,7 @@ angular.module('eaApp').factory('alertService', ['$timeout', function($timeout) 
   alertFactory.add = function(msg, options) {
       
       var type = options.type || 'warning';
-      var location = options.location || 'toast' 
+      var location = options.location || 'toast';
       var time = options.time || 5000;
       
       $timeout(function(){
