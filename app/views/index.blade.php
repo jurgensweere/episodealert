@@ -81,9 +81,13 @@
             </div>
         </nav>
     </div>
-    <div class="ea-alert-top">
-        <alert class="fade-slow" ng-repeat="alert in alerts | filter: { location: 'top' }" location="{{alert.location}}" type="{{alert.type}}" close="alert.close()">{{alert.msg}}</alert>
-    </div>    
+
+    <div class="container">
+        <div class="ea-alert-top row">
+            <alert class="fade-slow" ng-repeat="alert in alerts | filter: { location: 'top' }" location="{{alert.location}}" type="{{alert.type}}" close="alert.close()">               {{alert.msg}}
+            </alert>
+        </div>    
+    </div>
     
     <div class="ea-alert">
         <alert class="fade-slow" ng-repeat="alert in alerts | filter: { location: 'toast' }" location="{{alert.location}}" type="{{alert.type}}" close="alert.close()">{{alert.msg}}</alert>

@@ -78,7 +78,7 @@
     }]);
 
     // We can add some stuff to the rootscope here
-    app.run(function ($rootScope, $location, $window, AuthenticationService) {
+    app.run(function ($rootScope, $location, $window, AuthenticationService, alertService) {
         $rootScope.credentials = {};
         AuthenticationService.pageLoadInit();
 
@@ -93,14 +93,13 @@
             // you can use this in anywhere using $scope.hello();
         };
 
-
-
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
 
             for (var i = 0, max = routesThatRequireAuth.length; i < max; i++) {
                 if (($location.path() === routesThatRequireAuth[i]) && (!AuthenticationService.isLoggedIn())) {
 
                     $rootScope.$evalAsync(function () {
+                        alertService.add('You need to login to use this page', { type : 'warning', location : 'top', time: 1000000 });
                         $location.path('/login');
                     });
                 }

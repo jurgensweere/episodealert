@@ -27,6 +27,12 @@ $font-family: "Open Sans", sans-serif;
     
 }
 
+.password-reset{
+    form{
+        width: 45%;
+    }
+}
+
 .login{
     h1{
         color: $bright-highlight;
@@ -36,6 +42,10 @@ $font-family: "Open Sans", sans-serif;
             width: 50%;
         }
     }
+    .password-reset{
+        font-size: 1em;
+        padding-left: 17px;
+    }    
     form{
         width: 75%;
     }
@@ -116,6 +126,10 @@ ul {
     height: auto;
     list-style-type: none;
     z-index: 10000000;
+    
+    .close{
+        opacity: 1;
+    }
 
     .alert{
         margin-bottom: 5px;
@@ -126,6 +140,14 @@ ul {
     
     .top{
         
+    }
+}
+
+.ea-alert-top{
+    margin-top: 10px;
+    
+    .close{
+        opacity: 1;
     }
 }
 
