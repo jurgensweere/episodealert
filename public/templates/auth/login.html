@@ -1,30 +1,44 @@
-<div class="login row">
-    <div class="col-xs-12 col-sm-6 col-md-4">
-        <h1>Login</h1>
-
-        <form ng-submit="login()">
-            <fieldset class="radius">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="email" placeholder="email" ng-model="credentials.email" required/>
-                 </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="password" placeholder="password" ng-model="credentials.password" required/>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-default">Log In</button>
-                </div>
-            </fieldset>
-        </form>
-
-        <a href="/register">Register</a> <a href="/passwordreset">Forgot password?</a>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-2">
-        <h1>Login with:</h1>
-        <div ng-controller="LoginCtrl">
-            <google-login></google-login>
-            <br/>
-            <facebook-login></facebook-login>
+<div class="login">
+    
+    <div class="row splash-brand ng-scope spacer-sm">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <p>episode alert <img src="img/logo-71x50.png" alt="Episode Alert">
+            </p>
         </div>
     </div>
     
+    <div class="row register">
+       <div class="col-xs-12 col-sm-12 col-md-12 spacer-sm col-sm-offset-4">
+           Didn't register yet? <a href="/register">Register here!</a>
+        </div>
+    </div>
+    
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-6 col-md-6 spacer-sm social-login">
+            <h1>Login through social account</h1>
+            <div ng-controller="LoginCtrl" class="spacer-sm">
+                <google-login class="btn-lg"></google-login>
+                <br/>
+                <facebook-login></facebook-login>
+            </div>
+        </div>
+        
+        <div class="col-xs-12 col-sm-6 col-md-6 spacer-sm">
+            <h1>Or login with e-mail / password</h1>
+            <form ng-submit="login()" class="spacer-sm">
+                <fieldset class="radius">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="email" placeholder="email" ng-model="credentials.email" required/>
+                     </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="password" ng-model="credentials.password" required/>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default">Log In</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 </div>

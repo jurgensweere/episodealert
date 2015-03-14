@@ -18,7 +18,7 @@ angular.module('eaApp').factory('oauthFactory', ['AuthenticationService', '$loca
 .directive('facebookLogin', ['$timeout', 'oauthFactory', function($timeout, oauthFactory) {
     var directive = { restrict: 'E' };
     directive.template =
-        '<a class="btn btn-block btn-social btn-facebook" href="#" ng-click="facebookLogin()">'+
+        '<a class="btn btn-lg btn-block btn-social btn-facebook" href="#" ng-click="facebookLogin()">'+
         '<i class="fa fa-facebook"></i> Sign in with Facebook</a>';
 
     directive.link = function (scope, iElement, iAttrs) {

@@ -27,6 +27,23 @@ $font-family: "Open Sans", sans-serif;
     
 }
 
+.login{
+    h1{
+        color: $bright-highlight;
+    }
+    .social-login{
+        a{
+            width: 50%;
+        }
+    }
+    form{
+        width: 75%;
+    }
+    .register{
+        font-size: 1.4em;
+    }
+}
+
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
 body {
