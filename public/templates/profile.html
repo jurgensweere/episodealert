@@ -35,5 +35,13 @@
 				<div onLoad="followButton='false'" ng-include src="'templates/partial/_series-profile.html'" />
 		    </li>
 		 </ul>
+        <div ng-if="profileTopSeries.length > 0" class="series-browse">
+            <h2>You are not followin any series at the moment, how about these?</h2>
+            <ul class="series-search list-inline" infinite-scroll="getByGenre()" infinite-scroll-disabled='loadingGenre' infinite-scroll-distance='1'>
+                <li ng-repeat="series in profileTopSeries">
+                    <div onLoad="followButton='true'" ng-include src="'templates/partial/_series-small.html'" >
+                </li>
+             </ul>
+        </div>
 	</div>
 </div>

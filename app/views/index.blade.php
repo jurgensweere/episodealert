@@ -164,6 +164,7 @@
 <% HTML::script(asset('js/controllers/searchBoxController.js')) %>
 <% HTML::script(asset('js/controllers/mainPageController.js')) %>
 <% HTML::script(asset('js/controllers/contactController.js')) %>
+<% HTML::script(asset('js/controllers/passwordResetController.js')) %>
 
 <% HTML::script(asset('js/factories/authenticationFactory.js')) %>
 <% HTML::script(asset('js/factories/seriesFactory.js')) %>
@@ -189,4 +190,5 @@
 
 </body>
 </html>
+
 

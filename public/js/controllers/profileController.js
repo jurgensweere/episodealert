@@ -1,6 +1,6 @@
 (function () {
     angular.module('eaApp').controller('ProfileCtrl',
-        function ($scope, seriesFactory, userSettingService, Page) {
+        function ($scope, seriesFactory, userSettingService, alertService, Page) {
 
             Page.setTitle('Profile | Episode Alert');
             var series = [];
@@ -10,6 +10,7 @@
             $scope.archive = userSettingService.getProfileArchive();
             $scope.ended = userSettingService.getProfileEnded();
             $scope.seen = userSettingService.getProfileSeen(); // exclude seen?
+            $scope.profileTopSeries = {};
 
             $scope.toggleArchiveSetting = function () {
                 userSettingService.setProfileArchive(!$scope.archive);
@@ -29,7 +30,6 @@
                 filterSeries();
             };
 
-
             $scope.toggleArchive = function (series) {
                 if (series.archive) {
                     seriesFactory.restoreSeries(series.id)
@@ -47,6 +47,10 @@
                         );
                 }
             };
+
+
+            /** init **/
+            getFollowingSeries();
 
             /* filter out the series */
             function filterSeries() {
@@ -87,13 +91,13 @@
                 }
             }
 
-            /** init **/
-            getFollowingSeries();
-
             /** Load the series that this user is following */
             function getFollowingSeries() {
                 seriesFactory.getFollowingSeries(false, true, true)
                     .success(function (response) {
+                        if(response.length === 0){
+                            getTopSeries();
+                        }
                         $scope.profileSeries = response;
                         series = response;
                         filterSeries();
@@ -102,6 +106,18 @@
                         //flash(response.flash);
                     });
             }
+
+            /** Load the top series to show case */
+            function getTopSeries(){
+                seriesFactory.getTopSeries()
+                    .success(function (series) {
+                       $scope.profileTopSeries = series;
+                    })
+                    .error(function (error) {
+                        //$scope.status = 'error error error beep beep;
+                    });
+            }
+
         }
     );
 })();
