@@ -17,6 +17,8 @@
                 Page.setImage(window.location.origin + "/" + $filter('createImageUrl')(series.poster_image, series.unique_name));
 
    				$scope.series = series;
+                $scope.series_image = $filter('createImageUrl')(series.poster_image, series.unique_name);
+                $scope.banner_image = $filter('createBannerUrl')(series.poster_image, series.unique_name);
    				$scope.seasons = buildSeasonObject(series.season_amount, series.has_specials, series.last_seen_season);
 
 			});
