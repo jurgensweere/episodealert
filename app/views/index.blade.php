@@ -150,6 +150,7 @@
 
 <!-- build:js -->
 <% HTML::script(asset('js/app.js')) %>
+<% HTML::script(asset('js/app.routes.js')) %>
 
 <% HTML::script(asset('js/controllers/carouselController.js')) %>
 <% HTML::script(asset('js/controllers/seriesDetailController.js')) %>

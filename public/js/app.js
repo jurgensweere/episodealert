@@ -1,102 +1,18 @@
 /*jshint loopfunc: true */
 (function () {
-    var app = angular.module('eaApp', ['ngRoute', 'ngTouch', 'ngAnimate', 'ui.bootstrap', 'infinite-scroll']);
+    var app = angular.module('eaApp', ['ngRoute', 'ngTouch', 'ngAnimate', 'ui.bootstrap', 'infinite-scroll', 'app.routes']);
 
-    // Configure All routing
-    app.config(['$routeProvider', '$locationProvider',
-                function ($routeProvider, $locationProvider) {
 
-            $locationProvider.html5Mode(true);
-
-            $routeProvider.when('/trending', {
-                templateUrl: 'templates/carousel.html',
-                controller: 'CarouselCtrl'
-            })
-
-            .when('/series', {
-                templateUrl: 'templates/series-list.html',
-                controller: 'SeriesListCtrl'
-            })
-
-            .when('/series/genre/:genre', {
-                templateUrl: 'templates/series-browse.html',
-                controller: 'SeriesListCtrl'
-            })
-
-            .when('/series/:seriesname', {
-                templateUrl: 'templates/series-detail.html',
-                controller: 'SeriesCtrl'
-            })
-
-            .when('/search', {
-                templateUrl: 'templates/series-search.html',
-                controller: 'SeriesSearchCtrl',
-                reloadOnSearch: false
-            })
-
-            .when('/login', {
-                templateUrl: 'templates/auth/login.html',
-                controller: 'LoginCtrl'
-            })
-
-            .when('/register', {
-                templateUrl: 'templates/auth/register.html',
-                controller: 'RegisterCtrl'
-            })
-
-            .when('/passwordreset', {
-                templateUrl: 'templates/auth/passwordreset.html'
-            })
-
-            .when('/password/reset/:token', {
-                templateUrl: 'templates/auth/passwordresetconfirm.html',
-                controller: 'PasswordResetCtrl'
-            })
-
-            .when('/profile', {
-                templateUrl: 'templates/profile.html',
-                controller: 'ProfileCtrl'
-            })
-
-            .when('/profile/settings', {
-                templateUrl: 'templates/profile/settings.html',
-                controller: 'ProfileSettingsCtrl'
-            })
-
-            .when('/profile/guide', {
-                templateUrl: 'templates/guide.html',
-                controller: 'GuideCtrl'
-            })
-
-            .when('/contact', {
-                templateUrl: 'templates/contact.html',
-                controller: 'ContactCtrl'
-            })
-
-            .when('/privacy', {
-                templateUrl: 'templates/privacy.html'
-            })
-
-            .otherwise({
-                redirectTo: '/trending'
-            });
-    }]);
-
-    // We can add some stuff to the rootscope here
+    // Init
     app.run(function ($rootScope, $location, $window, AuthenticationService, alertService) {
         $rootScope.credentials = {};
         AuthenticationService.pageLoadInit();
 
         // Add routes that required auth from the front-end
-        var routesThatRequireAuth = ['/profile', '/profile/settings'];
+        var routesThatRequireAuth = ['/profile', '/profile/settings', '/profile/guide', '/profile/settings'];
 
         // check if a user is logged in at the backend
         AuthenticationService.check();
-
-        $rootScope.hello = function () {
-            //console.log('hello');
-            // you can use this in anywhere using $scope.hello();
-        };
 
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
 
@@ -104,7 +20,7 @@
                 if (($location.path() === routesThatRequireAuth[i]) && (!AuthenticationService.isLoggedIn())) {
 
                     $rootScope.$evalAsync(function () {
-                        alertService.add('You need to login to use this page', { type : 'warning', location : 'top', time: 1000000 });
+                        alertService.add('You need to login to go to ' + $location.path(), { type : 'warning', location : 'top', time: 10000 });
                         $location.path('/login');
                     });
                 }
