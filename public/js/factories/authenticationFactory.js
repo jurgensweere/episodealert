@@ -112,6 +112,12 @@ angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $
             facebookSignIn.success(executeCachedActions);
             facebookSignIn.error(registerError);
             return facebookSignIn;
+        },
+        remindPassword: function (email) {
+            return $http.post('/api/password/reminder', {email: email});
+        },
+        newPassword: function(email, pw, pw_confirm, token) {
+            return $http.post('/api/password/reset', {email: email, password: pw, password_confirmation: pw_confirm, token: token});
         }
     };
 });

@@ -48,6 +48,11 @@
                 templateUrl: 'templates/auth/passwordreset.html'
             })
 
+            .when('/password/reset/:token', {
+                templateUrl: 'templates/auth/passwordresetconfirm.html',
+                controller: 'PasswordResetCtrl'
+            })
+
             .when('/profile', {
                 templateUrl: 'templates/profile.html',
                 controller: 'ProfileCtrl'

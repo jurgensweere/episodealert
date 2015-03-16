@@ -40,6 +40,9 @@ Route::group(
             Route::post('auth/oauth/facebook', 'AuthController@callbackFacebookOAuth');
             Route::get('profile/following', 'FollowingController@getFollowingSeries');
 
+            Route::post('password/reminder', 'RemindersController@postRemind');
+            Route::post('password/reset', 'RemindersController@postReset');
+
             Route::get('auth/expiry', function(){
                 return Response::json(array('flash' => 'Session expired'), 401);
             });

@@ -1,12 +1,15 @@
 <?php namespace EA\controllers;
 
+use BaseController;
 use Password;
 use Input;
 use Lang;
 use Redirect;
 use App;
+use Response;
+use Hash;
 
-class RemindersController extends Controller {
+class RemindersController extends BaseController {
 
     /**
      * Handle a POST request to remind a user of their password.
@@ -15,27 +18,17 @@ class RemindersController extends Controller {
      */
     public function postRemind()
     {
-        switch ($response = Password::remind(Input::only('email')))
+        switch ($response = Password::remind(Input::only('email'), function ($message) {
+            $message->subject('Password Reminder');
+            $message->from('noreply@episode-alert.com');
+        }))
         {
             case Password::INVALID_USER:
-                return Redirect::back()->with('error', Lang::get($response));
+                return Response::json(array('flash' => Lang::get($response)), 404);
 
             case Password::REMINDER_SENT:
-                return Redirect::back()->with('status', Lang::get($response));
+                return Response::json(array('flash' => Lang::get($response)));
         }
-    }
-
-    /**
-     * Display the password reset view for the given token.
-     *
-     * @param  string  $token
-     * @return Response
-     */
-    public function getReset($token = null)
-    {
-        if (is_null($token)) App::abort(404);
-
-        return View::make('password.reset')->with('token', $token);
     }
 
     /**
@@ -61,10 +54,10 @@ class RemindersController extends Controller {
             case Password::INVALID_PASSWORD:
             case Password::INVALID_TOKEN:
             case Password::INVALID_USER:
-                return Redirect::back()->with('error', Lang::get($response));
+                return Response::json(array('flash' => Lang::get($response)), 404);
 
             case Password::PASSWORD_RESET:
-                return Redirect::to('/');
+                return Response::json(array('flash' => Lang::get($response)));
         }
     }
 
