@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
 @import 'bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
 @import 'scss/bootstrap-social';
 
@@ -24,7 +25,7 @@ $font-family: "Open Sans", sans-serif;
         padding-left:30px;
         font-size: 1.3em;
     }
-    
+
 }
 
 .password-reset{
@@ -45,7 +46,7 @@ $font-family: "Open Sans", sans-serif;
     .password-reset{
         font-size: 1em;
         padding-left: 17px;
-    }    
+    }
     form{
         width: 75%;
     }
@@ -54,30 +55,31 @@ $font-family: "Open Sans", sans-serif;
     }
 }
 
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
 
 body {
     background-color: $background-color;
     color: #fff;
     font-family: $font-family;
+    font-weight: 400;
     overflow-y: scroll;
 }
 
 /* spacers */
 
 .spacer-lg{
-    padding-top: 40px;    
+    padding-top: 40px;
     padding-bottom: 40px;
 }
 
 .spacer-md{
-    padding-top: 30px;    
+    padding-top: 30px;
     padding-bottom: 30px;
 }
 
 .spacer-sm{
-    padding-top: 15px;    
-    padding-bottom: 15px;  
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 /* reset some defaults */
@@ -130,7 +132,7 @@ ul {
     height: auto;
     list-style-type: none;
     z-index: 10000000;
-    
+
     .close{
         opacity: 1;
     }
@@ -141,15 +143,15 @@ ul {
             color: rgb(0, 100, 0);
         }
     }
-    
+
     .top{
-        
+
     }
 }
 
 .ea-alert-top{
     margin-top: 10px;
-    
+
     .close{
         opacity: 1;
     }
@@ -250,6 +252,7 @@ ul {
 }
 
 .container--navbar {
+    font-weight: 300;
     background-color: #252525;
     @media(min-width: $screen-sm-min){ padding: 12px 0px 12px 20px; }
 
@@ -273,7 +276,7 @@ h1 {
 
 .info-text-top {
 
-    padding: 3px 60px 15px 60px;
+    padding: 3px 60px 20px 60px;
     @media(max-width: $screen-xs-max){ padding: 3px 20px 15px 20px; }
     //background-color: $background-color;
 
@@ -849,6 +852,7 @@ li.disabled{
 .episode-list {
 	font-size: 110%;
 	width: 100%;
+    margin-top: 15px;
 
 	td {
 		padding: 3px 10px 3px 10px;
@@ -907,6 +911,15 @@ li.disabled{
 }
 
 .series-detail {
+
+    .series-left{
+        padding-right: 5px;
+    }
+
+    .info-text-top {
+        padding: 3px 60px 30px 60px;
+    }
+
     h1 {
         text-shadow: 2px 2px $lighter-text-shadow;
         display: inline-block;
@@ -953,7 +966,6 @@ li.disabled{
 
     .nav-tabs {
     	border: none;
-    	height: 60px;
     	font-size: 130%;
 
     	a {
@@ -993,7 +1005,7 @@ li.disabled{
 .series-details-extra {
 	background-color: $primary-color;
 	margin: 0 0px 40px 0px;
-    @media(min-width: $screen-md-min){ margin: 0px 15px 40px -15px;}
+    @media(min-width: $screen-md-min){ margin: 20px 15px 40px -15px;}
 	padding: 10px;
 
 	dt {
@@ -1081,6 +1093,7 @@ li.disabled{
         text-transform: uppercase;
         color: $light-text;
         padding-top: 15px;
+        font-size: 21px;
 
         a {
             color: $light-text;
@@ -1093,6 +1106,8 @@ li.disabled{
 
     .navbar-text {
         color: #fff;
+        margin-top: 18px;
+        margin-bottom: 10px;
     }
 
     .navbar-link {
@@ -1102,15 +1117,16 @@ li.disabled{
     .navbar-text > a:hover{
         color: $highlight-color;
     }
-    
+
     .navbar-nav > li > a {
         color: #fff;
         text-transform: uppercase;
         top: 2px;
         height: 46px;
-        
+        font-size: 15px;
+
         @media(max-width: $screen-md-min){ padding-right:0px; padding-left:5px;}
-        @media(max-width: $screen-lg-min){ padding-right:14px; padding-left:5px;}
+        @media(max-width: $screen-lg-min){ padding-right:8px; padding-left:5px;}
     }
 
     .navbar-nav > li > a:hover,
