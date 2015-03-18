@@ -84,8 +84,9 @@ class TvdbJob
         //Find out if there is a special season and save it in series table
         $firstEpisode = Episode::where('series_id', $series->id)->select('season')->orderBy('season', 'asc')->first();
         $lastEpisode = Episode::where('series_id', $series->id)->select('season')->orderBy('season', 'desc')->first();
-        $series->season_amount = $lastEpisode ? $lastEpisode->season : 0;
-
+        $totalSeasons = Episode::where('series_id', $series->id)->groupBy('season')->get();
+        $series->season_amount = count($totalSeasons);
+        
         if ($firstEpisode && $firstEpisode->season == 0) {
             $series->has_specials = 1;
         }
