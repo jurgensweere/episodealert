@@ -281,6 +281,7 @@
     app.controller('RegisterCtrl', function ($route, $scope, $location, AuthenticationService) {
         $scope.credentials = {
             password: "",
+            password_confirmation: "",
             email: ""
         };
 

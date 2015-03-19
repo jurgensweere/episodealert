@@ -26,27 +26,36 @@ class AuthController extends BaseController
 
         // For now, we DO NOT allow creating an account when you have an email registered with google or facebook
         // This makes the login attempt fail
-        $emailcheck = User::where('email', Input::get('email'))
-            ->count();
 
-        if (!$emailcheck) {
-            $user = User::create(
+
+        $validator = Validator::make(
+            Input::all(),
+            array(
+                'password' => 'required|min:6|confirmed',
+                'email' => 'required|email|unique:user'
+            )
+        );
+
+        if ($validator->fails()) {
+            return Response::json(
                 array(
-                    'accountname' => Input::get('email'),
-                    'email' => Input::get('email'),
-                    'password' => Hash::make(Input::get('password')),
-                    'role' => User::ROLE_MEMBER,
-                    'publicfollow' => 0,
-                )
-            );
-
-            Auth::login($user);
-
-            return Response::json(array('flash' => 'Thanks for registering!'));
-        } else {
-            return Response::json(array('flash' => 'Email already in use.'), 400);
+                    'flash' => $validator->messages()
+            ), 400);
         }
 
+        $user = User::create(
+            array(
+                'accountname' => Input::get('email'),
+                'email' => Input::get('email'),
+                'password' => Hash::make(Input::get('password')),
+                'role' => User::ROLE_MEMBER,
+                'publicfollow' => 0,
+            )
+        );
+
+        Auth::login($user);
+
+        return Response::json(array('flash' => 'Thanks for registering!'));
     }
 
     public function login()
