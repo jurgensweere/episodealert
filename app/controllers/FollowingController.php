@@ -97,8 +97,8 @@ class FollowingController extends BaseController
                 });
             }
 
-            self::addCurrentEpisode($series, $user->id);
-            self::addLatestEpisodes($series);
+            //self::addCurrentEpisode($series, $user->id);
+            //self::addLatestEpisodes($series);
 
             return Response::json($series);
         } else {
