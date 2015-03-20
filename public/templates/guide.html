@@ -14,7 +14,7 @@
         </div>
     </div> -->
 
-    <div class="row guide-filters">
+    <!--div class="row guide-filters">
         Filters
         <button class="btn btn--guide-filter" ng-class="{active: unseen}" ng-click="toggleUnseen()">
             <span ng-show="unseen == true" class="glyphicon glyphicon-ok" />
@@ -26,39 +26,21 @@
             <span ng-show="upcoming == false" class="glyphicon glyphicon-plus" />
             upcoming
         </button>
-        <!-- I Have no idea yet, what these filters should do.
-        <button class="btn btn--guide-filter"><span class="glyphicon glyphicon-ok" />this week</button>
+        <!-- I Have no idea yet, what these filters should do. -->
+        <!--button class="btn btn--guide-filter"><span class="glyphicon glyphicon-ok" />this week</button>
         <button class="btn btn--guide-filter active"><span class="glyphicon glyphicon-ok" />this month</button>
         <button class="btn btn--guide-filter"><span class="glyphicon glyphicon-plus" />next season</button>
-        -->
-    </div>
+        
+    </div-->
     <div class="row guide-series">
         <ul class="series-guide">
-            <li ng-repeat="series in guide">
-                <h2>{{ ::series.name }}</h2>
-                <div class="unseen-episodes row" ng-show="series.unseen.length">
-                    <div class="col-md-3 col-xs-12"><p ng-show="series.unseen_total"><strong>Unseen episodes</strong></p><p class="hidden-xs hidden-sm" ng-show="series.unseen_total">{{ ::series.unseen_total }} episodes available</p></div>
-                    <div class="col-md-9 col-xs-12">
-                        <div class="unseen-episode row" ng-repeat="episode in series.unseen">
-                            <div class="col-md-2 col-xs-2">S{{ ::episode.season }}E{{ ::episode.episode }}</div>
-                            <div class="col-md-3 col-xs-4">{{ ::episode.name }}</div>
-                            <div class="col-md-1 hidden-xs hidden-sm"><span class="glyphicon glyphicon-download-alt" /></div>
-                            <div class="col-md-3 col-xs-3">{{ ::episode.airdate }}</div>
-                            <div class="col-md-3 col-xs-3"><seen-button episode="episode" on-seen-response="onSeen(episode, response)" on-unseen-response="onUnseen(episode, response)"></seen-button></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="unaired-episodes row" ng-show="series.unaired.length">
-                    <div class="col-md-3 col-xs-12"><p><strong>Upcoming episodes</strong></p></div>
-                    <div class="col-md-9 col-xs-12">
-                        <div class="unaired-episode row" ng-repeat="episode in series.unaired">
-                            <div class="col-md-2 col-xs-2">S{{ ::episode.season }}E{{ ::episode.episode }}</div>
-                            <div class="col-md-3 col-xs-4 ">{{ ::episode.name }}</div>
-                            <div class="col-md-1 hidden-xs hidden-sm"></div>
-                            <div class="col-md-3 col-xs-3 ">{{ ::episode.airdate }}</div>
-                            <div class="col-md-3 col-xs-3"></div>
-                        </div>
-                    </div>
+            <li ng-repeat="episode in guide" class="unseen-episodes row">
+                <div class="col-md-2 col-xs-2">{{ ::episode.seriesName }}</div>
+                <div class="col-md-2 col-xs-2">S{{ ::episode.season }}E{{ ::episode.episode }}</div>
+                <div class="col-md-3 col-xs-3">{{ ::episode.name }}</div>
+                <div class="col-md-3 col-xs-3">{{ ::episode.airdate }}</div>
+                <div class="col-md-2 col-xs-2">
+                    <seen-button episode="episode" on-seen-response="onSeen(episode, response)" on-unseen-response="onUnseen(episode, response)"></seen-button>
                 </div>
             </li>
          </ul>

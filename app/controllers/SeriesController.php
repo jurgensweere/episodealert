@@ -139,6 +139,24 @@ class SeriesController extends BaseController
             return Response::json(array('flash' => 'You need to log in to view your personal guide.'), 401);
         }
 
+        $includeUpcoming = filter_var(Input::get('upcoming', 'true'), FILTER_VALIDATE_BOOLEAN);
+        $includeUnseen = filter_var(Input::get('unseen', 'true'), FILTER_VALIDATE_BOOLEAN);
+
+        $currentEpisodes = Episode::join('series', 'series.id', '=', 'episode.series_id')
+            ->join('following', function ($join) {
+                $join->on('following.series_id', '=', 'episode.series_id')
+                    ->where('following.user_id', '=', Auth::user()->id);
+                })
+            ->where('episode.airdate', '>=', DB::raw('date_sub(curdate(), interval 4 day)'))
+            ->where('episode.airdate', '<=', DB::raw('date_add(curdate(), interval 4 day)'))
+            ->orderBy('episode.airdate', 'asc')
+            ->orderBy('episode.season', 'asc')
+            ->orderBy('episode.episode', 'asc')
+            ->get(array('episode.*', 'series.name as seriesName'));
+
+        return Response::json($currentEpisodes);
+
+/* OLD, SLOW, GUIDE THING
         $seriesFollowed = Series::join('following', 'following.series_id', '=', 'series.id')
             ->where('following.user_id', '=', auth::user()->id)
             ->orderBy('following.updated_at', 'desc')
@@ -194,6 +212,7 @@ class SeriesController extends BaseController
         };
 
         return Response::json($seriesFollowed);
+        */
     }
 
 
