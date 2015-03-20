@@ -3,7 +3,17 @@ angular.module('eaApp').factory('alertService', ['$timeout', function($timeout) 
   var alerts = [];
   var alertFactory = {};
 
-  alertFactory.add = function(msg, options) {
+  alertFactory.add = function (msg, options) {
+    if (typeof msg === 'string') {
+      return this.addSingle(msg, options);
+    }
+    angular.forEach(msg, function(errors, field) {
+      angular.forEach(errors, function(error, key) {
+        alertFactory.addSingle(error, options);
+      });
+    });
+  };
+  alertFactory.addSingle = function(msg, options) {
 
       var type = options.type || 'warning';
       var location = options.location || 'toast';
