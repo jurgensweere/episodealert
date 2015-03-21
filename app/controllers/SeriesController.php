@@ -96,7 +96,7 @@ class SeriesController extends BaseController
 
     public function search($query)
     {
-        return Response::json(Series::where('name', 'like', '%' . $query . '%')->take(50)->get());
+        return Response::json(Series::where('name', 'like', '%' . $query . '%')->take(200)->get());
     }
 
     public function getEpisodesBySeason($series_id, $season)
