@@ -401,14 +401,14 @@ h1 {
 //    }
 
     table{
-        background-color: $primary-color;
+        background-color: $background-color;
 
         td{
             border:none !important; //important sucks
         }
 
         tr:nth-of-type(odd){
-           background-color: $secondary-color;
+           background-color: lighten( $background-color, 2% );
         }
     }
 
