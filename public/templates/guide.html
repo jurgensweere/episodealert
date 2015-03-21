@@ -61,7 +61,7 @@
                 {{ ::episode.seriesName }}
             </td>
             <td>
-                S{{ ::episode.season }}E{{ ::episode.episode | numberFixedLen:2 }}
+                S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}
             </td>
             <td>
                 {{ ::episode.name }}
