@@ -10,7 +10,7 @@
 
         $scope.clickSearchButton = function () {
             doSearch($scope.mainPageQuery);
-        }
+        };
 
         function doSearch(query){
             if ($location.path() != '/search') {
