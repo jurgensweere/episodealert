@@ -1,10 +1,6 @@
 ## Episode Alert source
 
-The old website: [Episode-Alert](http://www.episode-alert.com).
-
-Beta version of this site: http://supersecretbeta.episode-alert.com
-
-Login with "test/test". Enjoy!
+The website: [Episode-Alert](http://www.episode-alert.com).
 
 ## Installation
 
@@ -16,17 +12,17 @@ Login with "test/test". Enjoy!
 * [Grunt](http://gruntjs.com/)
 * [Compass](http://compass-style.org/)
 
-### Prerequisites backend: 
+### Prerequisites backend:
 * [PHP]
 * [MySQL] and create a database and configure it in laravel
 * [Composer](https://getcomposer.org/)
 
 ### Installation for backend laravel ( execute in / )
-``` 
+```
   config /app/config/local/app.php
-  composer update 
+  composer update
   php artisan migrate
-``` 
+```
 ### Installation for frontend ( execute in /public )
 
 ```
@@ -40,7 +36,7 @@ Login with "test/test". Enjoy!
 ### Work
 
 ```
-  
+
   'grunt watch' to watch for changes -or-
   'gulp watch' to watch for changes
   'php artisan serve' to start a webserver in root of the project (or you can install apache)
