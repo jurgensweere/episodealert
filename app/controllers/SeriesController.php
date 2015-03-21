@@ -367,19 +367,4 @@ class SeriesController extends BaseController
 
         }
     }
-
-    public function setSeenSeason()
-    {
-
-    }
-
-    public function unsetSeenSeason()
-    {
-
-    }
-
-    public function setSeenUntilEpisodeNumber()
-    {
-
-    }
 }
