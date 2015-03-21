@@ -1,5 +1,5 @@
 (function() {
-    angular.module('eaApp').controller('SeriesSearchCtrl', function($scope, $rootScope, $routeParams, seriesFactory) {
+    angular.module('eaApp').controller('SeriesSearchCtrl', function($scope, $routeParams, seriesFactory) {
 
         // Catch changing search terms and cancel changing the entire page
         $scope.$on('$routeUpdate', function(event, next) {
@@ -11,8 +11,8 @@
         var query = $routeParams.query;
 
         // Put query back in text box if we're just loading the page now from a direct link
-        if (!$rootScope.mainPageQuery) {
-            $rootScope.mainPageQuery = query;
+        if (!$scope.mainPageQuery) {
+           $scope.mainPageQuery = query;
         }
 
         doSearch(query);
