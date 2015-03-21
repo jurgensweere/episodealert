@@ -53,11 +53,11 @@
                     </a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <form class="navbar-form navbar-left" role="search">
+                    <form class="navbar-form navbar-left" role="search" ng-controller="SearchBoxCtrl as search">
                         <div class="input-group">
-                            <input ng-controller="SearchBoxCtrl" type="text" class="form-control form-control-search" placeholder="Search" ng-model="mainPageQuery" ng-model-options="{ debounce: 300 }" />
+                            <input type="text" class="form-control form-control-search" placeholder="Search" ng-model="mainPageQuery" ng-model-options="{ debounce: 300 }" />
                             <span class="input-group-btn">
-                                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                                <button type="submit" class="btn btn-default" ng-click="search.go()"><span class="glyphicon glyphicon-search"></span></button>
                             </span>
                         </div>
                     </form>
