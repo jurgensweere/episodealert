@@ -48,8 +48,8 @@ Route::group(
             });
 
             //Following (has to go behind auth)
-            Route::get('follow/{series_id}', 'FollowingController@follow');
-            Route::get('unfollow/{series_id}', 'FollowingController@unfollow');
+            Route::get('follow/{series}', 'FollowingController@follow');
+            Route::get('unfollow/{series}', 'FollowingController@unfollow');
             Route::post('series/archive/{series}', 'FollowingController@postArchive');
             Route::post('series/restore/{series}', 'FollowingController@postRestore');
 

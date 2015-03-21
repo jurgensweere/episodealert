@@ -14,22 +14,24 @@ use Input;
 
 class FollowingController extends BaseController
 {
-    public function follow($series_id)
+    public function follow(Series $series)
     {
 
         if (Auth::user()) {
             $user = Auth::user();
 
-            $followingCheck = Following::where('series_id', $series_id)->where('user_id', $user->id)->count();
+            $followingCheck = Following::where('series_id', $series->id)->where('user_id', $user->id)->count();
 
             if (!$followingCheck) {
                 $following = new Following;
-                $following->series_id = $series_id;
+                $following->series_id = $series->id;
                 $following->user_id = $user->id;
 
                 if ($following->save()) {
                     $user->following = Following::where('user_id', '=', $user->id)->count();
                     $user->save();
+                    $series->trend = Following::where('series_id', '=', $series->id)->count();
+                    $series->save();
                     return Response::json(array('follow' => 'Success.'));
                 } else {
                     return Response::json(array('follow' => 'A server error occurred, please try again.'), 500);
@@ -44,18 +46,20 @@ class FollowingController extends BaseController
 
     }
 
-    public function unfollow($series_id)
+    public function unfollow(Series $series)
     {
         if (Auth::user()) {
             $user = Auth::user();
-            $unfollow = Following::where('series_id', $series_id)->where('user_id', $user->id)->delete();
+            $unfollow = Following::where('series_id', $series->id)->where('user_id', $user->id)->delete();
 
             //Delete seen information on unfollow
-            Seen::where('user_id', Auth::user()->id)->where('series_id', '=', $series_id)->delete();
+            Seen::where('user_id', Auth::user()->id)->where('series_id', '=', $series->id)->delete();
 
             if ($unfollow) {
                 $user->following = Following::where('user_id', '=', $user->id)->count();
                 $user->save();
+                $series->trend = Following::where('series_id', '=', $series->id)->count();
+                $series->save();
                 return Response::json(array('follow' => 'Success.'));
             }
         } else {
