@@ -30,19 +30,64 @@
         <!--button class="btn btn--guide-filter"><span class="glyphicon glyphicon-ok" />this week</button>
         <button class="btn btn--guide-filter active"><span class="glyphicon glyphicon-ok" />this month</button>
         <button class="btn btn--guide-filter"><span class="glyphicon glyphicon-plus" />next season</button>
-        
+
     </div-->
+
+    <h1>Recent Episodes</h1>
+
+    <div class="row guide-filters">test</div>
+
+    <table class="table">
+        <tr>
+            <th>
+                Air Date
+            </th>
+            <th>
+                Series
+            </th>
+            <th>
+                Episode
+            </th>
+            <th>
+                Episode title
+            </th>
+            <th>
+                Seen
+            </th>
+        </tr>
+        <tr ng-repeat="episode in guide">
+            <td>
+                {{ ::episode.airdate }}
+            </td>
+            <td>
+                {{ ::episode.seriesName }}
+            </td>
+            <td>
+                S{{ ::episode.season }}E{{ ::episode.episode | numberFixedLen:2 }}
+            </td>
+            <td>
+                {{ ::episode.name }}
+            </td>
+
+            <td>
+                <seen-button episode="episode" on-seen-response="onSeen(episode, response)" on-unseen-response="onUnseen(episode, response)"></seen-button>
+            </td>
+        </tr>
+    </table>
+<!--
+
     <div class="row guide-series">
         <ul class="series-guide">
             <li ng-repeat="episode in guide" class="unseen-episodes row">
                 <div class="col-md-2 col-xs-2">{{ ::episode.seriesName }}</div>
-                <div class="col-md-2 col-xs-2">S{{ ::episode.season }}E{{ ::episode.episode }}</div>
-                <div class="col-md-3 col-xs-3">{{ ::episode.name }}</div>
-                <div class="col-md-3 col-xs-3">{{ ::episode.airdate }}</div>
+                <div class="col-md-2 col-xs-2">S{{ ::episode.season }}E{{ ::episode.episode | numberFixedLen:2 }}</div>
+                <div class="col-md-4 col-xs-4">{{ ::episode.name }}</div>
+                <div class="col-md-2 col-xs-2">{{ ::episode.airdate }}</div>
                 <div class="col-md-2 col-xs-2">
                     <seen-button episode="episode" on-seen-response="onSeen(episode, response)" on-unseen-response="onUnseen(episode, response)"></seen-button>
                 </div>
             </li>
          </ul>
     </div>
+-->
 </div>
