@@ -23,6 +23,11 @@
 			archived
 		</button>
 
+        <button class="btn btn-profile--toggle" ng-class="smallview" ng-click="toggleSmallView()">
+            <span ng-show="smallview == true" class="glyphicon glyphicon-th-large" />
+            <span ng-show="smallview == false" class="glyphicon glyphicon-th" />
+        </button>
+
 		<!-- Dunno how to implement these filters:
 		<button class="btn btn--profile-filter"><span class="glyphicon glyphicon-plus" />favorite</button>
 		<button class="btn btn--profile-filter"><span class="glyphicon glyphicon-plus" />2014</button>
@@ -31,7 +36,7 @@
 	</div>
 	<div class="row profile-series">
 		<ul class="series-profile">
-		    <li ng-repeat="series in profileSeries| orderBy:'archive'" class="fade fadein">
+		    <li ng-repeat="series in profileSeries| orderBy:'archive'" class="fade fadein" ng-class="{'small-view': smallview}">
 				<div onLoad="followButton='false'" ng-include src="'templates/partial/_series-profile.html'" />
 		    </li>
 		 </ul>

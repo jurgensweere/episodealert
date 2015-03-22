@@ -355,6 +355,14 @@ h1 {
             @media(max-width: $screen-xs-max) { margin-left: 6px; }
         }
 
+        .btn-profile--toggle{
+            font-size: 150%;
+            background-color: $primary-color;
+            height: 30px;
+            margin-top: -4px;
+            float: right;
+        }
+
         .btn:focus {
           outline: none;
         }
@@ -660,6 +668,20 @@ li.disabled{
         position: relative;
     }
 
+    .small-view{
+        @media(max-width: $screen-xs-max){ width: 100%; }
+        @media(min-width: $screen-sm-min){ width: 25%; }
+        @media(min-width: $screen-md-min){ width: 16.6%; }
+        @media(min-width: $screen-lg-min){ width: 16.6%; }
+
+        a{
+            font-size: 90% !important;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+
     .following-button {
         margin-top: 10px;
     }
@@ -762,6 +784,8 @@ li.disabled{
             text-align: center;
         }
     }
+
+
 
     img {
     }
@@ -1088,9 +1112,7 @@ li.disabled{
 }
 
 .btn-small--archive {
-    top: 12%;
-    position: absolute;
-    right: 5%;
+
 }
 
 .navbar-default {

@@ -9,6 +9,10 @@ angular.module('eaApp').factory('userSettingService', ['$rootScope', '$http', fu
                 ended : true,
             },
 
+            userToggleSettings:{
+                smallview : false
+            },
+
             userGuideSettings : {
                 seen: true,
                 upcoming: true
@@ -17,6 +21,20 @@ angular.module('eaApp').factory('userSettingService', ['$rootScope', '$http', fu
 
         init : function () {
             service.restoreState();
+        },
+
+        setProfileSmallView : function ( smallview ) {
+            service.model.userToggleSettings.smallview = smallview;
+            service.saveState();
+        },
+
+        getProfileSmallView : function () {
+            if(service.model.userToggleSettings == undefined){
+                //add it to the model after state is restored and its missing
+                service.model.userToggleSettings = {};
+                service.model.userToggleSettings.smallview = false;
+            }
+            return service.model.userToggleSettings.smallview;
         },
 
         getProfileArchive : function () {

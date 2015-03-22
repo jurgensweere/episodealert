@@ -10,7 +10,13 @@
             $scope.archive = userSettingService.getProfileArchive();
             $scope.ended = userSettingService.getProfileEnded();
             $scope.seen = userSettingService.getProfileSeen(); // exclude seen?
+            $scope.smallview = userSettingService.getProfileSmallView();
             $scope.profileTopSeries = {};
+
+            $scope.toggleSmallView = function () {
+                userSettingService.setProfileSmallView(!$scope.smallview);
+                $scope.smallview = !$scope.smallview;
+            };
 
             $scope.toggleArchiveSetting = function () {
                 userSettingService.setProfileArchive(!$scope.archive);
@@ -47,7 +53,6 @@
                         );
                 }
             };
-
 
             /** init **/
             getFollowingSeries();
