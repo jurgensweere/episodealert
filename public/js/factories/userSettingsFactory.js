@@ -29,7 +29,7 @@ angular.module('eaApp').factory('userSettingService', ['$rootScope', '$http', fu
         },
 
         getProfileSmallView : function () {
-            if(service.model.userToggleSettings == undefined){
+            if(service.model.userToggleSettings === undefined){
                 //add it to the model after state is restored and its missing
                 service.model.userToggleSettings = {};
                 service.model.userToggleSettings.smallview = false;
