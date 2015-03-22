@@ -58,7 +58,7 @@
                 {{ ::episode.airdate }}
             </td>
             <td>
-                {{ ::episode.seriesName }}
+                <a href="/series/{{ ::episode.unique_name }}">{{ ::episode.seriesName }}</a>
             </td>
             <td>
                 S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}
