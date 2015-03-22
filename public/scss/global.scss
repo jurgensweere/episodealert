@@ -277,7 +277,7 @@ h1 {
 .info-text-top {
 
     padding: 3px 60px 20px 60px;
-    @media(max-width: $screen-xs-max){ padding: 3px 20px 15px 20px; }
+    @media(max-width: $screen-xs-max){ padding: 3px 0px 0px 0px; }
     //background-color: $background-color;
 
     p {
@@ -331,6 +331,22 @@ h1 {
     }
 
 }
+
+.calendar-carousel{
+    text-align: center;
+
+
+    h2{
+
+    }
+
+    li{
+        text-align: center;
+        list-style-type: none;
+    }
+
+}
+
 
 .profile, .guide {
     .profile-filters, .guide-filters {
@@ -955,11 +971,14 @@ li.disabled{
 
     .info-text-top {
         padding: 3px 60px 30px 60px;
+        @media(max-width: $screen-xs-max){ padding: 5px 0px 5px 20px; }
     }
 
     h1 {
+        @media(max-width: $screen-xs-max){ padding-bottom: 10px; }
         text-shadow: 2px 2px $lighter-text-shadow;
         display: inline-block;
+        margin-right: 10px;
     }
 
     li {
@@ -980,8 +999,8 @@ li.disabled{
 
     .following-button {
         color: $bright-highlight;
-        margin-top: -10px;
-        margin-left: 10px;
+        position: relative;
+        top: -4px;
     }
 
     .seasons{
