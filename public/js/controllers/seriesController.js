@@ -62,6 +62,9 @@
 			$scope.$watch('episodesDoneLoading',function() {
 			    if($scope.series && authorized){
 
+                    if($scope.series.has_specials){
+                        $scope.series.season_amount = $scope.series.season_amount - 1;
+                    }
 					var loadUnseen = getUnseenAmountBySeries($scope.series.id, $scope.series.season_amount);
 	   				loadUnseen.success(function(unseen){
 	   					for( var i = 0; i < unseen.length; i++){
@@ -121,6 +124,10 @@
 			function buildSeasonObject(numberOfSeasons, hasSpecials, activeSeason){
 
 				var seasons = [];
+
+                if(hasSpecials){
+                    numberOfSeasons = numberOfSeasons - 1;
+                }
 
 				if(hasSpecials){
 					seasons.push({ number : 0, title : 'Specials', active : false, unseen : 999 });
