@@ -50,15 +50,15 @@ class Mailer extends Command
         $yesterday = new DateTime;
         $yesterday->sub(new DateInterval('P1D'));
         $yesterday = $yesterday->format('Y-m-d');
-        
+
         $today = new DateTime;
         $today = $today->format('Y-m-d');
-        
+
         //TODO:get users that have not been updated today!
         $users = User::where('alerts', '=', 1)
             ->where('last_notified', '<', $today)
             ->orWhereNull('last_notified')
-            ->take(100)->get();
+            ->take(45)->get();
 
         foreach ($users as $user) {
             $userEpisodesList = array();
@@ -79,10 +79,10 @@ class Mailer extends Command
                                                    'name' => $episode->name]);
                 }
             }
-            
+
             if (count($following) > 0) {
                 $mailname = $user->accountname;
-            
+
                 $data = array(
                     'episodelist' => $userEpisodesList,
                     'username' => $mailname,
@@ -95,12 +95,12 @@ class Mailer extends Command
                     Queue::push('EA\MailJob@sendAlertEmail', $data);
                 }
             }
-            
+
             $user->last_notified = new DateTime;
             $user->save();
         }
-        
-        
+
+
 //        $this->info("Mailer: Start Scheduling emails.");
 //
 //        $yesterday = new DateTime;
@@ -137,7 +137,7 @@ class Mailer extends Command
     protected function getArguments()
     {
         return array(
-            
+
         );
     }
 
