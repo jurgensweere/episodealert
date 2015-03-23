@@ -7,9 +7,9 @@
              * Scope
              */
 
-            $scope.yesterdayEpisodes;
-            $scope.todayEpisodes;
-            $scope.tomorrowEpisodes;
+            $scope.yesterdayEpisodes = null;
+            $scope.todayEpisodes = null;
+            $scope.tomorrowEpisodes = null;
 
             /*
              * Prototype that adds a possibility to add or subtract days from a date
@@ -19,7 +19,7 @@
                 var dat = new Date(this.valueOf());
                 dat.setDate(dat.getDate() + days);
                 return dat;
-            }
+            };
 
             var date = new Date();
             var format = 'yyyy-MM-dd';
@@ -27,11 +27,6 @@
             var todayDate = $filter('date')(date, format);
             var yesterdayDate = $filter('date')(date.addDays(-1), format);
             var tomorrowDate = $filter('date')(date.addDays(1), format);
-
-            console.log(yesterdayDate);
-            console.log(todayDate);
-            console.log(tomorrowDate);
-
 
             /** Load the series that this user is following */
             function getTodayEpisodes() {
