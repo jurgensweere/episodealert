@@ -143,7 +143,8 @@
         'showyoubot',
         'outbrain',
         'pinterest',
-        'developers.google.com/+/web/snippet'
+        'developers.google.com/+/web/snippet',
+        'SlackBot'
     ],
 
 ];
