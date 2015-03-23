@@ -69,6 +69,11 @@
                 controller: 'GuideCtrl'
             })
 
+            .when('/profile/calendar', {
+                templateUrl: 'templates/calendar.html',
+                controller: 'CalendarCtrl'
+            })
+
             .when('/contact', {
                 templateUrl: 'templates/contact.html',
                 controller: 'ContactCtrl'

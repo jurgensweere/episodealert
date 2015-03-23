@@ -1,0 +1,31 @@
+<div class="calendar-carousel">
+    <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4">
+            <h2>Yesterday</h2></h1>
+            <ul>
+                <li ng-repeat="episode in yesterdayEpisodes">
+                    {{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4">
+            <h2>Today</h2></h1>
+            <ul>
+                <li ng-repeat="episode in todayEpisodes">
+                    {{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4">
+            <h2>Tomorrow</h2></h1>
+            <ul>
+                <li ng-repeat="episode in tomorrowEpisodes">
+                    {{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    </div>
+</div>

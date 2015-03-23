@@ -170,6 +170,17 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
 
     seriesFactory.restoreSeries = function (series_id) {
         return $http.post(urlBase + 'restore/' + series_id);
+    }
+
+    /**
+     * Get episodes for a user by date
+     *
+     * @param {string} date '2015-03-20'
+     * @return {string} episode list
+     */
+
+    seriesFactory.getEpisodesForUserByDate = function (date) {
+        return $http.get(urlBase + 'episodesperdate/' + date);
     };
 
     return seriesFactory;

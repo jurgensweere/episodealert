@@ -157,7 +157,7 @@ class SeriesController extends BaseController
             ->orderBy('episode.airdate', 'asc')
             ->orderBy('episode.season', 'asc')
             ->orderBy('episode.episode', 'asc')
-            ->get(array('episode.*', 'series.name as seriesName', DB::raw(sprintf("case when airdate < '%s' then 1 else 0 end as aired", date('Y-m-d')))));
+            ->get(array('episode.*', 'series.name as seriesName', 'series.unique_name', DB::raw(sprintf("case when airdate < '%s' then 1 else 0 end as aired", date('Y-m-d')))));
 
         return Response::json($currentEpisodes);
 
@@ -367,4 +367,29 @@ class SeriesController extends BaseController
 
         }
     }
+
+
+    /*
+     * Get episodes for specific day for a user
+     */
+
+    public function getEpisodesForUserPerDate($date){
+        if (Auth::user()) {
+            $episodes = Episode::join('series', 'series.id', '=', 'episode.series_id')
+                ->join('following', function ($join) {
+                $join->on('following.series_id', '=', 'episode.series_id')
+                    ->where('following.user_id', '=', Auth::user()->id);
+                })
+            ->where('episode.airdate', '=', $date)
+            ->orderBy('episode.airdate', 'asc')
+            ->orderBy('episode.season', 'asc')
+            ->orderBy('episode.episode', 'asc')
+            ->get(array('episode.*', 'series.name as seriesName', DB::raw(sprintf("case when airdate < '%s' then 1 else 0 end as aired", date('Y-m-d')))));
+
+            return Response::json($episodes);
+        } else {
+            return Response::json(array('flash' => 'Yo have to login to view your calendar'), 401);
+        }
+    }
+
 }

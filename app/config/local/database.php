@@ -23,7 +23,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => '127.0.0.1',
-			'database'  => 'episode-alert',
+			'database'  => 'staba_ea',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',
