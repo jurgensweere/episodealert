@@ -33,6 +33,15 @@ The website: [Episode-Alert](http://www.episode-alert.com).
   grunt build or gulp build
 ```
 
+### Running the test
+
+```
+  npm install karma-cli -g
+  to run e2e tests configure karma.e2e.conf.js to use the proper url of application
+  karma start test/karma.e2e.conf.js
+  karma start test/karma.unit.conf.js
+```
+
 ### Work
 
 ```
@@ -44,3 +53,4 @@ The website: [Episode-Alert](http://www.episode-alert.com).
   'php artisan sitemap:generate' generate a sitemap
   'php artisan mailer:batch' to send alert emails
 ```
+
