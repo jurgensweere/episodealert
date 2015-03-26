@@ -335,6 +335,9 @@ h1 {
 .calendar-carousel{
     text-align: center;
     position: relative;
+    @media(max-width: $screen-xs-max){
+        top: -70px;
+    }
 
     li{
         background-color: rgba(0,0,0,0.8);
@@ -343,6 +346,14 @@ h1 {
         border-radius: 8px;
         z-index: 1;
         border: 2px solid lighten( $bright-highlight, 30% );
+
+        @media(max-width: $screen-xs-max){
+            font-size: 80%;
+            border: none;
+            margin: 0px;
+            border: 1px solid lighten( $bright-highlight, 30% );
+            padding: 0px;
+        }
     }
 
     i{
@@ -353,7 +364,9 @@ h1 {
     }
 
     h2{
-
+        @media(max-width: $screen-xs-max){
+            font-size: 120%;
+        }
     }
 
     li{
