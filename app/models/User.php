@@ -11,6 +11,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface
     use UserTrait, RemindableTrait;
 
     const ROLE_MEMBER = 'member';
+    const ROLE_TRUSTED = 'trusted';
+    const ROLE_ADMIN = 'admin';
 
     /**
      * The database table used by the model.

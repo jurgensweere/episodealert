@@ -46,6 +46,12 @@ Route::filter('auth.basic', function () {
     return Auth::basic();
 });
 
+Route::filter('auth.admin', function () {
+    if (Auth::guest() || Auth::user()->role != EA\models\User::ROLE_ADMIN) {
+        return Response::make('Unauthorized', 401);
+    }
+});
+
 /*
 |--------------------------------------------------------------------------
 | Guest Filter

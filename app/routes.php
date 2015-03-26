@@ -26,71 +26,69 @@ Route::group(
         Route::get('/testpage', 'HomeController@showTestPage');
         Route::get('/login', 'LoginController@processLogin');
 
+        Route::get('/admin', array('before' => 'auth.admin', 'uses' => 'AdminController@showAdminPage'));
+
         Route::group(array('prefix' => 'api'), function () {
 
             //Auth
             Route::post('auth/register', 'AuthController@register');
             Route::post('auth/login', 'AuthController@login');
-
     		Route::get('auth/check', 'AuthController@checkAuth');
-
             Route::get('auth/logout', 'AuthController@logout');
+            Route::post('password/reminder', 'RemindersController@postRemind');
+            Route::post('password/reset', 'RemindersController@postReset');
+
             Route::post('auth/oauth/google', 'AuthController@callbackGoogleOAuth');
             Route::post('auth/oauth/google/logout', 'AuthController@logoutGoogleOAuth');
             Route::post('auth/oauth/facebook', 'AuthController@callbackFacebookOAuth');
-            Route::get('profile/following', 'FollowingController@getFollowingSeries');
 
-            Route::post('password/reminder', 'RemindersController@postRemind');
-            Route::post('password/reset', 'RemindersController@postReset');
+            // Public API calls
+            Route::get('series/top', 'SeriesController@top');
+
+            // Series
+            Route::get('series/trending', 'SeriesController@trending');
+            Route::get('series/genre/{genre}/{skip?}', 'SeriesController@getByGenre');
+            Route::get('series/search/{query}', 'SeriesController@search');
+            Route::get('series/browse', 'SeriesController@getAllCategories');
+            Route::get('series/episodes/{uniqueName}', 'SeriesController@getEpisodes');
+            Route::get('series/episodesbyseason/{series_id}/{season}', 'SeriesController@getEpisodesBySeason');
+            Route::get('series/{uniqueName}', 'SeriesController@getSeries');
+
+            // Private API calls which require a user
+            Route::group(array('before' => 'auth'), function () {
+                Route::get('profile/following', 'FollowingController@getFollowingSeries');
+
+                // Series
+                Route::get('series/guide', 'SeriesController@getEpisodeGuide');
+                Route::get('series/episodesperdate/{date}', 'SeriesController@getEpisodesForUserPerDate');
+                Route::get('series/unseenamount', 'SeriesController@getUnseenEpisodes');
+                Route::get('series/unseenamountbyseason/{series_id}/{season}', 'SeriesController@getUnseenEpisodesPerSeason');
+                Route::get('series/unseenamountbyseries/{series_id}/{seasons}', 'SeriesController@getUnseenEpisodesPerSeries');
+
+                // Following
+                Route::get('follow/{series}', 'FollowingController@follow');
+                Route::get('unfollow/{series}', 'FollowingController@unfollow');
+                Route::post('series/archive/{series}', 'FollowingController@postArchive');
+                Route::post('series/restore/{series}', 'FollowingController@postRestore');
+
+                //Seen
+                Route::post('series/seen/{episode}', 'SeriesController@setSeenEpisode');
+                Route::post('series/unseen/{episode}', 'SeriesController@unsetSeenEpisode');
+
+                // Profile
+                Route::get('profile', 'ProfileController@getUserData');
+                Route::get('profile/stats', 'ProfileController@getStats');
+                Route::post('profile/password', 'ProfileController@postChangePassword');
+                Route::post('profile/credentials', 'ProfileController@postChangeCredentials');
+                Route::post('profile/preferences', 'ProfileController@postChangePreferences');
+            });
+
+
 
             Route::get('auth/expiry', function(){
                 return Response::json(array('flash' => 'Session expired'), 401);
             });
-
-            //Following (has to go behind auth)
-            Route::get('follow/{series}', 'FollowingController@follow');
-            Route::get('unfollow/{series}', 'FollowingController@unfollow');
-            Route::post('series/archive/{series}', 'FollowingController@postArchive');
-            Route::post('series/restore/{series}', 'FollowingController@postRestore');
-
-            //Series
-            Route::get('series/top', 'SeriesController@top');\
-            Route::get('series/trending', 'SeriesController@trending');
-            Route::get('series/guide', 'SeriesController@getEpisodeGuide');
-            Route::get('series/episodesperdate/{date}', 'SeriesController@getEpisodesForUserPerDate');
-            Route::get('series/search/{query}', 'SeriesController@search');
-            Route::get('series/genre/{genre}/{skip?}', 'SeriesController@getByGenre');
-            Route::get('series/browse', 'SeriesController@getAllCategories');
-            Route::get('series/episodes/{uniqueName}', 'SeriesController@getEpisodes');
-            Route::get('series/episodesbyseason/{series_id}/{season}', 'SeriesController@getEpisodesBySeason');
-            Route::get('series/unseenamount', 'SeriesController@getUnseenEpisodes');
-            Route::get('series/unseenamountbyseason/{series_id}/{season}', 'SeriesController@getUnseenEpisodesPerSeason');
-            Route::get('series/unseenamountbyseries/{series_id}/{seasons}', 'SeriesController@getUnseenEpisodesPerSeries');
-            Route::get('series/{uniqueName}', 'SeriesController@getSeries');
-
-            //Seen
-            Route::post('series/seen/{episode}', 'SeriesController@setSeenEpisode');
-            Route::post('series/unseen/{episode}', 'SeriesController@unsetSeenEpisode');
-
-            // Profile
-            Route::get('profile', 'ProfileController@getUserData');
-            Route::get('profile/stats', 'ProfileController@getStats');
-            Route::post('profile/password', 'ProfileController@postChangePassword');
-            Route::post('profile/credentials', 'ProfileController@postChangeCredentials');
-            Route::post('profile/preferences', 'ProfileController@postChangePreferences');
-
-
         });
-
-        // Route::get('/contact', 'HomeController@showContact');
-        // Route::get('/privacy', 'HomeController@showPrivacy');
-        // Route::get('/about', 'HomeController@showAbout');
-
-        // Route::get('/login', 'LoginController@showLogin');
-        // Route::get('/login/passwordreset', 'LoginController@showPasswordReset');
-        // Route::post('/login/passwordreset', 'LoginController@submitPasswordReset');
-        // Route::get('/login/register', 'LoginController@showRegister');
-        // Route::post('/login/register', 'LoginController@submitRegister');
     }
 );
 
