@@ -22,7 +22,7 @@
                 dayOffset = dayOffset - 3;
                 setDays();
                 loadDays();
-            }
+            };
 
             $scope.clickNextDaysButton = function(){
                 $scope.yesterdayEpisodes = null;
@@ -31,12 +31,12 @@
                 dayOffset = dayOffset + 3;
                 setDays();
                 loadDays();
-            }
+            };
 
             $scope.init = function(){
                 //setDays();
                 loadDays();
-            }
+            };
 
 
             /*
