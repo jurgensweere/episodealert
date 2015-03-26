@@ -34,7 +34,6 @@
             };
 
             $scope.init = function(){
-                //setDays();
                 loadDays();
             };
 

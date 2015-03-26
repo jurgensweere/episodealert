@@ -17,7 +17,7 @@
                         <h2>{{ dayTwoName }}</h2>
                         </h1>
                         <ul>
-                            <li ng-repeat="episode in yesterdayEpisodes" class="fade">
+                            <li ng-repeat="episode in todayEpisodes" class="fade">
                                <a href="/series/{{ ::episode.unique_name }}">{{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}</a>
                             </li>
                         </ul>
@@ -26,7 +26,7 @@
                         <h2>{{ dayThreeName }}</h2>
                         </h1>
                         <ul>
-                            <li ng-repeat="episode in yesterdayEpisodes" class="fade">
+                            <li ng-repeat="episode in tomorrowEpisodes" class="fade">
                                <a href="/series/{{ ::episode.unique_name }}">{{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}</a>
                             </li>
                         </ul>
