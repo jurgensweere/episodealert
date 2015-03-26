@@ -1,31 +1,40 @@
-<div class="calendar-carousel">
+<div class="calendar-carousel" ng-init="init()">
     <div class="row">
-        <div class="col-xs-4 col-sm-4 col-md-4">
-            <h2>Yesterday</h2></h1>
-            <ul>
-                <li ng-repeat="episode in yesterdayEpisodes">
-                    {{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}
-                </li>
-            </ul>
-        </div>
-        <div class="col-xs-4 col-sm-4 col-md-4">
-            <h2>Today</h2></h1>
-            <ul>
-                <li ng-repeat="episode in todayEpisodes">
-                    {{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}
-                </li>
-            </ul>
-        </div>
-        <div class="col-xs-4 col-sm-4 col-md-4">
-            <h2>Tomorrow</h2></h1>
-            <ul>
-                <li ng-repeat="episode in tomorrowEpisodes">
-                    {{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}
-                </li>
-            </ul>
-        </div>
-    </div>
+        <div class="col-xs-2 col-sm-1 col-md-1"><i ng-click="clickPreviousDaysButton()" class="fa fa-angle-left"></i></div>
+            <div class="col-xs-8 col-sm-10 col-md-10">
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-4">
+                        <h2>{{ dayOneName }}</h2>
+                        </h1>
+                        <ul>
+                            <li ng-repeat="episode in yesterdayEpisodes" class="fade">
+                               <a href="/series/{{ ::episode.unique_name }}">{{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4">
+                        <h2>{{ dayTwoName }}</h2>
+                        </h1>
+                        <ul>
+                            <li ng-repeat="episode in todayEpisodes" class="fade">
+                                <a href="">{{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4">
+                        <h2>{{ dayThreeName }}</h2>
+                        </h1>
+                        <ul>
+                            <li ng-repeat="episode in tomorrowEpisodes" class="fade">
+                                <a href="">{{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
 
+            </div>
+        <div class="col-xs-2 col-sm-1 col-md-1 text-left"><i ng-click="clickNextDaysButton()" class="fa fa-angle-right"></i></div>
     </div>
 </div>

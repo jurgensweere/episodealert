@@ -7,9 +7,37 @@
              * Scope
              */
 
+            $scope.dayOneName = 'Yesterday';
+            $scope.dayTwoName = 'Today';
+            $scope.dayThreeName = 'Tomorrow';
+
             $scope.yesterdayEpisodes = null;
             $scope.todayEpisodes = null;
             $scope.tomorrowEpisodes = null;
+
+            $scope.clickPreviousDaysButton = function(){
+                $scope.yesterdayEpisodes = null;
+                $scope.todayEpisodes = null;
+                $scope.tomorrowEpisodes = null;
+                dayOffset = dayOffset - 3;
+                setDays();
+                loadDays();
+            }
+
+            $scope.clickNextDaysButton = function(){
+                $scope.yesterdayEpisodes = null;
+                $scope.todayEpisodes = null;
+                $scope.tomorrowEpisodes = null;
+                dayOffset = dayOffset + 3;
+                setDays();
+                loadDays();
+            }
+
+            $scope.init = function(){
+                //setDays();
+                loadDays();
+            }
+
 
             /*
              * Prototype that adds a possibility to add or subtract days from a date
@@ -21,16 +49,48 @@
                 return dat;
             };
 
-            var date = new Date();
+            var dayOffset = 0;
+            var referenceDate = new Date();
             var format = 'yyyy-MM-dd';
+            var day1Date = $filter('date')(referenceDate.addDays(dayOffset), format);
+            var day2Date = $filter('date')(referenceDate.addDays(-1 + dayOffset), format);
+            var day3Date = $filter('date')(referenceDate.addDays(1 + dayOffset), format);
 
-            var todayDate = $filter('date')(date, format);
-            var yesterdayDate = $filter('date')(date.addDays(-1), format);
-            var tomorrowDate = $filter('date')(date.addDays(1), format);
+
+            /* set the dates that need to be collected */
+            function setDays(){
+                day1Date = $filter('date')(referenceDate.addDays(dayOffset), format);
+                day2Date = $filter('date')(referenceDate.addDays(-1 + dayOffset), format);
+                day3Date = $filter('date')(referenceDate.addDays(1 + dayOffset), format);
+
+                if(dayOffset === 0){
+                    $scope.dayOneName = 'Yesterday';
+                    $scope.dayTwoName = 'Today';
+                    $scope.dayThreeName = 'Tomorrow';
+                }else{
+                    if(dayOffset < 0){
+                        $scope.dayOneName = String((dayOffset - 1)).replace('-', '') + ' days ago';
+                        $scope.dayTwoName = String(dayOffset).replace('-', '') + ' days ago';
+                        $scope.dayThreeName = String((dayOffset + 1)).replace('-', '') + ' days ago';
+                    }else{
+                        $scope.dayOneName = 'in ' + (dayOffset - 1) + ' days';
+                        $scope.dayTwoName = 'in ' + dayOffset + ' days';
+                        $scope.dayThreeName = 'in ' + (dayOffset + 1) + ' days';
+                    }
+                }
+
+            }
+
+            /* change reference date */
+            function loadDays(){
+                getTodayEpisodes();
+                getTomorrowEpisodes();
+                getYesterdayEpisodes();
+            }
 
             /** Load the series that this user is following */
             function getTodayEpisodes() {
-                seriesFactory.getEpisodesForUserByDate(todayDate)
+                seriesFactory.getEpisodesForUserByDate(day1Date)
                     .success(function (response) {
                         $scope.todayEpisodes = response;
                     })
@@ -40,7 +100,7 @@
             }
 
             function getYesterdayEpisodes() {
-                seriesFactory.getEpisodesForUserByDate(yesterdayDate)
+                seriesFactory.getEpisodesForUserByDate(day2Date)
                     .success(function (response) {
                         $scope.yesterdayEpisodes = response;
                     })
@@ -50,7 +110,7 @@
             }
 
             function getTomorrowEpisodes() {
-                seriesFactory.getEpisodesForUserByDate(tomorrowDate)
+                seriesFactory.getEpisodesForUserByDate(day3Date)
                     .success(function (response) {
                         $scope.tomorrowEpisodes = response;
                     })
@@ -59,9 +119,7 @@
                     });
             }
 
-            getTodayEpisodes();
-            getTomorrowEpisodes();
-            getYesterdayEpisodes();
+
 
         }
     );

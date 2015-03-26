@@ -334,7 +334,23 @@ h1 {
 
 .calendar-carousel{
     text-align: center;
+    position: relative;
 
+    li{
+        background-color: rgba(0,0,0,0.8);
+        margin: 8px;
+        padding: 4px;
+        border-radius: 8px;
+        z-index: 1;
+        border: 2px solid lighten( $bright-highlight, 30% );
+    }
+
+    i{
+        cursor: pointer;
+        position: absolute;
+        top: 1em;
+        font-size: 5em;
+    }
 
     h2{
 
@@ -346,7 +362,6 @@ h1 {
     }
 
 }
-
 
 .profile, .guide {
     .profile-filters, .guide-filters {

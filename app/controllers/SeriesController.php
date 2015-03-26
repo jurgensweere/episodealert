@@ -384,7 +384,7 @@ class SeriesController extends BaseController
             ->orderBy('episode.airdate', 'asc')
             ->orderBy('episode.season', 'asc')
             ->orderBy('episode.episode', 'asc')
-            ->get(array('episode.*', 'series.name as seriesName', DB::raw(sprintf("case when airdate < '%s' then 1 else 0 end as aired", date('Y-m-d')))));
+            ->get(array('episode.*', 'series.name as seriesName', 'series.unique_name as unique_name', DB::raw(sprintf("case when airdate < '%s' then 1 else 0 end as aired", date('Y-m-d')))));
 
             return Response::json($episodes);
         } else {

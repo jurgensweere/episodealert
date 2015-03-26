@@ -1,6 +1,7 @@
-<div class="row splash-brand">
+<div ng-if="!credentials.auth" class="row splash-brand">
     <p>episode alert <img src="img/logo-71x50.png" alt="Episode Alert" /></p>
 </div>
+
 <div class="row splash-fanart">
     <div ng-repeat="series in series"
         ng-show="currentSeries==series.id"
@@ -9,7 +10,50 @@
     </div>
     <span class="splash-fanart-fade"></span>
 
-    <div class="marketing">
+    <!--calendar-->
+    <div ng-if="credentials.auth" ng-controller="CalendarCtrl" class="calendar-carousel" ng-init="init()">
+        <div class="row">
+            <div class="col-xs-2 col-sm-1 col-md-1"><i ng-click="clickPreviousDaysButton()" class="fa fa-angle-left"></i></div>
+                <div class="col-xs-8 col-sm-10 col-md-10">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 col-md-4">
+                            <h2>{{ dayOneName }}</h2>
+                            </h1>
+                            <ul>
+                                <li ng-repeat="episode in yesterdayEpisodes" class="fade">
+                                   <a href="/series/{{ ::episode.unique_name }}">{{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4">
+                            <h2>{{ dayTwoName }}</h2>
+                            </h1>
+                            <ul>
+                                <li ng-repeat="episode in todayEpisodes" class="fade">
+                                    <a href="">{{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4">
+                            <h2>{{ dayThreeName }}</h2>
+                            </h1>
+                            <ul>
+                                <li ng-repeat="episode in tomorrowEpisodes" class="fade">
+                                    <a href="">{{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 text-left"><i ng-click="clickNextDaysButton()" class="fa fa-angle-right"></i></div>
+        </div>
+    </div>
+    <!--calendar-->
+
+    <div ng-if="!credentials.auth" class="marketing">
         <div class="col-xs-4 col-md-4">
             <h1>Follow</h1>
             <p>Find your favorite<br/>TV Series</p>
