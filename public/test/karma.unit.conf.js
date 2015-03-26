@@ -12,7 +12,7 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
 
-    
+
     // list of files / patterns to load in the browser
     files: [
         //frameworks files / test tools
@@ -20,7 +20,7 @@ module.exports = function(config) {
         'http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-route.js',
         'http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-animate.js',
         'http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-touch.js',
-        
+
         'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular-mocks.js',
 
         //project files
@@ -59,20 +59,16 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
 
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
-      
-    proxies:{
-        '/' : 'http://localhost:8000/'
-    },  
-      
+
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
-      
+
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false
