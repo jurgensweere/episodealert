@@ -42,33 +42,41 @@ class UpdateSeries extends Command
      */
     public function fire()
     {
-        $lastUpdateTime = Settings::whereKey('lastUpdateTime')->pluck('value');
-        if ($lastUpdateTime == 0) {
-            $lastUpdateTime = time() - 1 * 24 * 60 * 60;
-        }
+        $series_id = $this->argument('id');
 
-        // Debug
-        //Queue::push('EA\TvdbJob@updateSingleSeries', array('tvdbid' => 258743));
-        //exit;
-
-        $data = App::make('tvdb')->getSeriesUpdates($lastUpdateTime);
-        
-        if ($data) {
-            $lastUpdateTime = $data->Time;
-            Settings::store('lastUpdateTime', $lastUpdateTime);
-
-            $series_count = $data ? count($data->Series) : 0;
-            $this->info("UpdateSeries: $series_count series downloaded from thetvdb.com");
-
-            if ($series_count > 0) {
-                foreach ($data->Series as $series_id) {
-                    Queue::push('EA\TvdbJob@updateSingleSeries', array('tvdbid' => $series_id->__toString()));
-                }
+        if($series_id){
+            $this->info("UpdateSingleSeries: $series_id");
+            Queue::push('EA\TvdbJob@updateSingleSeries', array('tvdbid' => $series_id));
+        }else{
+            
+            $lastUpdateTime = Settings::whereKey('lastUpdateTime')->pluck('value');
+            if ($lastUpdateTime == 0) {
+                $lastUpdateTime = time() - 1 * 24 * 60 * 60;
             }
-        } else {
-            $this->info("UpdateSeries: Error while downloading Series data from TVDB");
+
+            // Debug
+            //Queue::push('EA\TvdbJob@updateSingleSeries', array('tvdbid' => 258743));
+            //exit;
+
+            $data = App::make('tvdb')->getSeriesUpdates($lastUpdateTime);
+
+            if ($data) {
+                $lastUpdateTime = $data->Time;
+                Settings::store('lastUpdateTime', $lastUpdateTime);
+
+                $series_count = $data ? count($data->Series) : 0;
+                $this->info("UpdateSeries: $series_count series downloaded from thetvdb.com");
+
+                if ($series_count > 0) {
+                    foreach ($data->Series as $series_id) {
+                        Queue::push('EA\TvdbJob@updateSingleSeries', array('tvdbid' => $series_id->__toString()));
+                    }
+                }
+            } else {
+                $this->info("UpdateSeries: Error while downloading Series data from TVDB");
+            }
+            $this->info("UpdateSeries: Done.");
         }
-        $this->info("UpdateSeries: Done.");
     }
 
     /**
@@ -79,8 +87,9 @@ class UpdateSeries extends Command
     protected function getArguments()
     {
         return array(
-            
+            array('id', InputArgument::OPTIONAL, 'heil'),
         );
+        
     }
 
     /**
