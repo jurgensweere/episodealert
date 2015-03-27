@@ -89,6 +89,8 @@ class TvdbJob
         
         if ($firstEpisode && $firstEpisode->season == 0) {
             $series->has_specials = 1;
+        } else {
+            $series->has_specials = 0;
         }
 
         $series->save();
