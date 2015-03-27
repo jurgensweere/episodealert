@@ -176,6 +176,7 @@
 
 <% HTML::script(asset('js/directives/eaTab.js')) %>
 <% HTML::script(asset('js/directives/eaButtons.js')) %>
+<% HTML::script(asset('js/directives/calendarCarousel/calendarCarousel.js')) %>
 <!-- endbuild -->
 
     <script>

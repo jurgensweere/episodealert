@@ -1,0 +1,40 @@
+<div class="calendar-carousel" ng-init="calendar.init()">
+    <div class="row">
+        <div class="col-xs-2 col-sm-1 col-md-1"><i ng-click="calendar.clickPreviousDaysButton()" class="fa fa-angle-left"></i></div>
+            <div class="col-xs-8 col-sm-10 col-md-10">
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-4">
+                        <h2>{{ ::calendar.dayOneName }}</h2>
+                        </h1>
+                        <ul>
+                            <li ng-repeat="episode in calendar.yesterdayEpisodes" class="fade">
+                               <a href="/series/{{ ::episode.unique_name }}">{{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4">
+                        <h2>{{ ::calendar.dayTwoName }}</h2>
+                        </h1>
+                        <ul>
+                            <li ng-repeat="episode in calendar.todayEpisodes" class="fade">
+                               <a href="/series/{{ ::episode.unique_name }}">{{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4">
+                        <h2>{{ ::calendar.dayThreeName }}</h2>
+                        </h1>
+                        <ul>
+                            <li ng-repeat="episode in calendar.tomorrowEpisodes" class="fade">
+                               <a href="/series/{{ ::episode.unique_name }}">{{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+        <div class="col-xs-2 col-sm-1 col-md-1 text-left"><i ng-click="calendar.clickNextDaysButton()" class="fa fa-angle-right"></i></div>
+    </div>
+</div>
