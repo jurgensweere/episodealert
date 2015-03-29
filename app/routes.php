@@ -30,30 +30,6 @@ Route::group(
 
         Route::group(array('prefix' => 'api'), function () {
 
-            //Auth
-            Route::post('auth/register', 'AuthController@register');
-            Route::post('auth/login', 'AuthController@login');
-    		Route::get('auth/check', 'AuthController@checkAuth');
-            Route::get('auth/logout', 'AuthController@logout');
-            Route::post('password/reminder', 'RemindersController@postRemind');
-            Route::post('password/reset', 'RemindersController@postReset');
-
-            Route::post('auth/oauth/google', 'AuthController@callbackGoogleOAuth');
-            Route::post('auth/oauth/google/logout', 'AuthController@logoutGoogleOAuth');
-            Route::post('auth/oauth/facebook', 'AuthController@callbackFacebookOAuth');
-
-            // Public API calls
-            Route::get('series/top', 'SeriesController@top');
-
-            // Series
-            Route::get('series/trending', 'SeriesController@trending');
-            Route::get('series/genre/{genre}/{skip?}', 'SeriesController@getByGenre');
-            Route::get('series/search/{query}', 'SeriesController@search');
-            Route::get('series/browse', 'SeriesController@getAllCategories');
-            Route::get('series/episodes/{uniqueName}', 'SeriesController@getEpisodes');
-            Route::get('series/episodesbyseason/{series_id}/{season}', 'SeriesController@getEpisodesBySeason');
-            Route::get('series/{uniqueName}', 'SeriesController@getSeries');
-
             // Private API calls which require a user
             Route::group(array('before' => 'auth'), function () {
                 Route::get('profile/following', 'FollowingController@getFollowingSeries');
@@ -83,7 +59,29 @@ Route::group(
                 Route::post('profile/preferences', 'ProfileController@postChangePreferences');
             });
 
+            //Auth
+            Route::post('auth/register', 'AuthController@register');
+            Route::post('auth/login', 'AuthController@login');
+    		Route::get('auth/check', 'AuthController@checkAuth');
+            Route::get('auth/logout', 'AuthController@logout');
+            Route::post('password/reminder', 'RemindersController@postRemind');
+            Route::post('password/reset', 'RemindersController@postReset');
 
+            Route::post('auth/oauth/google', 'AuthController@callbackGoogleOAuth');
+            Route::post('auth/oauth/google/logout', 'AuthController@logoutGoogleOAuth');
+            Route::post('auth/oauth/facebook', 'AuthController@callbackFacebookOAuth');
+
+            // Public API calls
+            Route::get('series/top', 'SeriesController@top');
+
+            // Series
+            Route::get('series/trending', 'SeriesController@trending');
+            Route::get('series/genre/{genre}/{skip?}', 'SeriesController@getByGenre');
+            Route::get('series/search/{query}', 'SeriesController@search');
+            Route::get('series/browse', 'SeriesController@getAllCategories');
+            Route::get('series/episodes/{uniqueName}', 'SeriesController@getEpisodes');
+            Route::get('series/episodesbyseason/{series_id}/{season}', 'SeriesController@getEpisodesBySeason');
+            Route::get('series/{uniqueName}', 'SeriesController@getSeries');
 
             Route::get('auth/expiry', function(){
                 return Response::json(array('flash' => 'Session expired'), 401);
