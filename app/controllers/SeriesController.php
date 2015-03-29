@@ -140,10 +140,6 @@ class SeriesController extends BaseController
      */
     public function getEpisodeGuide()
     {
-        if (!Auth::user()) {
-            return Response::json(array('flash' => 'You need to log in to view your personal guide.'), 401);
-        }
-
         $includeUpcoming = filter_var(Input::get('upcoming', 'true'), FILTER_VALIDATE_BOOLEAN);
         $includeUnseen = filter_var(Input::get('unseen', 'true'), FILTER_VALIDATE_BOOLEAN);
 
@@ -244,51 +240,41 @@ class SeriesController extends BaseController
 
     public function setSeenEpisode(Episode $episode)
     {
-        if (Auth::user()) {
-            $mode = Input::get('mode', Seen::MODE_SINGLE); // which mode to use?
+        $mode = Input::get('mode', Seen::MODE_SINGLE); // which mode to use?
 
-            $service = App::make('series');
+        $service = App::make('series');
 
-            switch ($mode) {
-                case Seen::MODE_SINGLE:
-                    $seen = $service->setSeenSingleEpisode($episode, Auth::user());
-                    return Response::json(array('seen' => $seen->lists('episode_id')));
-                case Seen::MODE_UNTIL:
-                    $seen = $service->setSeenUntilEpisode($episode, Auth::user());
-                    return Response::json(array('seen' => $seen->lists('episode_id')));
-                case Seen::MODE_SEASON:
-                    $seen = $service->setSeenSeason($episode, Auth::user());
-                    return Response::json(array('seen' => $seen->lists('episode_id')));
-            }
-            return Response::json(array('seen' => 'Unknown operation.'), 400);
-
-        } else {
-            return Response::json(array('seen' => 'You need to log in first.'), 401);
+        switch ($mode) {
+            case Seen::MODE_SINGLE:
+                $seen = $service->setSeenSingleEpisode($episode, Auth::user());
+                return Response::json(array('seen' => $seen->lists('episode_id')));
+            case Seen::MODE_UNTIL:
+                $seen = $service->setSeenUntilEpisode($episode, Auth::user());
+                return Response::json(array('seen' => $seen->lists('episode_id')));
+            case Seen::MODE_SEASON:
+                $seen = $service->setSeenSeason($episode, Auth::user());
+                return Response::json(array('seen' => $seen->lists('episode_id')));
         }
-
+        return Response::json(array('seen' => 'Unknown operation.'), 400);
     }
 
     public function unsetSeenEpisode(Episode $episode)
     {
-        if (Auth::user()) {
-            $mode = Input::get('mode', Seen::MODE_SINGLE); // which mode to use?
-            $service = App::make('series');
+        $mode = Input::get('mode', Seen::MODE_SINGLE); // which mode to use?
+        $service = App::make('series');
 
-            switch ($mode) {
-                case Seen::MODE_SINGLE:
-                    $episodeIds = $service->setUnseenSingleEpisode($episode, Auth::user());
-                    return Response::json(array('unseen' => $episodeIds));
-                case Seen::MODE_UNTIL:
-                    $episodeIds = $service->setUnseenUntilEpisode($episode, Auth::user());
-                    return Response::json(array('unseen' => $episodeIds));
-                case Seen::MODE_SEASON:
-                    $episodeIds = $service->setUnseenSeason($episode, Auth::user());
-                    return Response::json(array('unseen' => $episodeIds));
-            }
-            return Response::json(array('unseen' => 'Unknown operation.'), 400);
-        } else {
-            return Response::json(array('unseen' => 'You need to log in first.'), 401);
+        switch ($mode) {
+            case Seen::MODE_SINGLE:
+                $episodeIds = $service->setUnseenSingleEpisode($episode, Auth::user());
+                return Response::json(array('unseen' => $episodeIds));
+            case Seen::MODE_UNTIL:
+                $episodeIds = $service->setUnseenUntilEpisode($episode, Auth::user());
+                return Response::json(array('unseen' => $episodeIds));
+            case Seen::MODE_SEASON:
+                $episodeIds = $service->setUnseenSeason($episode, Auth::user());
+                return Response::json(array('unseen' => $episodeIds));
         }
+        return Response::json(array('unseen' => 'Unknown operation.'), 400);
     }
 
     /**
@@ -297,23 +283,15 @@ class SeriesController extends BaseController
      */
     public function getUnseenEpisodes()
     {
-        if (Auth::user()) {
-            $totalEpisodes = DB::table('following')
-                ->join('episode', 'episode.series_id', '=', 'following.series_id')
-                ->where('following.user_id', '=', Auth::user()->id)
-                ->where('episode.season', '>', 0)
-                ->where('episode.airdate', '<', new DateTime('today'))
-                ->count();
-            $totalSeen = Seen::where('user_id', Auth::user()->id)->where('season', '>', 0)->count();
+        $totalEpisodes = DB::table('following')
+            ->join('episode', 'episode.series_id', '=', 'following.series_id')
+            ->where('following.user_id', '=', Auth::user()->id)
+            ->where('episode.season', '>', 0)
+            ->where('episode.airdate', '<', new DateTime('today'))
+            ->count();
+        $totalSeen = Seen::where('user_id', Auth::user()->id)->where('season', '>', 0)->count();
 
-            return Response::json(array('unseenepisodes' => $totalEpisodes - $totalSeen));
-        }
-        return Response::json(
-            array(
-                'error' => 'You need to log in first.'
-            ),
-            401
-        );
+        return Response::json(array('unseenepisodes' => $totalEpisodes - $totalSeen));
     }
 
     /*
@@ -324,17 +302,13 @@ class SeriesController extends BaseController
      */
     public function getUnseenEpisodesPerSeason($series_id, $season_number)
     {
-        if (Auth::user()) {
-            $user_id = Auth::user()->id;
-            $totalAmountofEpisodes = Episode::where('series_id', $series_id)->where('season', $season_number)->count();
-            $seenAmount = Seen::where('series_id', $series_id)->where('user_id', $user_id)->where('season', $season_number)->count();
+        $user_id = Auth::user()->id;
+        $totalAmountofEpisodes = Episode::where('series_id', $series_id)->where('season', $season_number)->count();
+        $seenAmount = Seen::where('series_id', $series_id)->where('user_id', $user_id)->where('season', $season_number)->count();
 
-            $unseenAmountOfEpisodes = $totalAmountofEpisodes - $seenAmount;
+        $unseenAmountOfEpisodes = $totalAmountofEpisodes - $seenAmount;
 
-            return Response::json(array('unseenepisodes' => $unseenAmountOfEpisodes, 'season' => $season_number));
-        } else {
-            return Response::json(array('error' => 'You need to log in first.'), 401);
-        }
+        return Response::json(array('unseenepisodes' => $unseenAmountOfEpisodes, 'season' => $season_number));
     }
 
     /*
@@ -343,29 +317,23 @@ class SeriesController extends BaseController
 
     public function getUnseenEpisodesPerSeries($series_id, $seasons_amount)
     {
-        if (Auth::user()) {
-            $seasonObject = array();
-            $user_id = Auth::user()->id;
+        $seasonObject = array();
+        $user_id = Auth::user()->id;
 
+        for ($i=1; $i <= $seasons_amount; $i++) {
+            $totalAmountofEpisodes = Episode::where('series_id', $series_id)
+                ->where('season', $i)
+                ->whereNotNull('airdate')
+                ->where('airdate', '<', new DateTime('today'))
+                ->count();
 
-            for ($i=1; $i <= $seasons_amount; $i++) {
-                $totalAmountofEpisodes = Episode::where('series_id', $series_id)
-                    ->where('season', $i)
-                    ->whereNotNull('airdate')
-                    ->where('airdate', '<', new DateTime('today'))
-                    ->count();
+            $seenAmount = Seen::where('series_id', $series_id)->where('user_id', $user_id)->where('season', $i)->count();
 
-                $seenAmount = Seen::where('series_id', $series_id)->where('user_id', $user_id)->where('season', $i)->count();
-
-                $unseenAmountOfEpisodes = $totalAmountofEpisodes - $seenAmount;
-                array_push($seasonObject, $unseenAmountOfEpisodes);
-            }
-
-            return Response::json($seasonObject);
-        } else {
-            return Response::json(array('error' => 'You need to log in first.'), 401);
-
+            $unseenAmountOfEpisodes = $totalAmountofEpisodes - $seenAmount;
+            array_push($seasonObject, $unseenAmountOfEpisodes);
         }
+
+        return Response::json($seasonObject);
     }
 
 
@@ -373,23 +341,20 @@ class SeriesController extends BaseController
      * Get episodes for specific day for a user
      */
 
-    public function getEpisodesForUserPerDate($date){
-        if (Auth::user()) {
-            $episodes = Episode::join('series', 'series.id', '=', 'episode.series_id')
-                ->join('following', function ($join) {
-                $join->on('following.series_id', '=', 'episode.series_id')
-                    ->where('following.user_id', '=', Auth::user()->id);
-                })
-            ->where('episode.airdate', '=', $date)
-            ->orderBy('episode.airdate', 'asc')
-            ->orderBy('episode.season', 'asc')
-            ->orderBy('episode.episode', 'asc')
-            ->get(array('episode.*', 'series.name as seriesName', 'series.unique_name as unique_name', DB::raw(sprintf("case when airdate < '%s' then 1 else 0 end as aired", date('Y-m-d')))));
+    public function getEpisodesForUserPerDate($date)
+    {
+        $episodes = Episode::join('series', 'series.id', '=', 'episode.series_id')
+            ->join('following', function ($join) {
+            $join->on('following.series_id', '=', 'episode.series_id')
+                ->where('following.user_id', '=', Auth::user()->id);
+            })
+        ->where('episode.airdate', '=', $date)
+        ->orderBy('episode.airdate', 'asc')
+        ->orderBy('episode.season', 'asc')
+        ->orderBy('episode.episode', 'asc')
+        ->get(array('episode.*', 'series.name as seriesName', 'series.unique_name as unique_name', DB::raw(sprintf("case when airdate < '%s' then 1 else 0 end as aired", date('Y-m-d')))));
 
-            return Response::json($episodes);
-        } else {
-            return Response::json(array('flash' => 'Yo have to login to view your calendar'), 401);
-        }
+        return Response::json($episodes);
     }
 
 }

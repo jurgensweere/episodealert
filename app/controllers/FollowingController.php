@@ -16,57 +16,44 @@ class FollowingController extends BaseController
 {
     public function follow(Series $series)
     {
+        $user = Auth::user();
 
-        if (Auth::user()) {
-            $user = Auth::user();
+        $followingCheck = Following::where('series_id', $series->id)->where('user_id', $user->id)->count();
 
-            $followingCheck = Following::where('series_id', $series->id)->where('user_id', $user->id)->count();
+        if (!$followingCheck) {
+            $following = new Following;
+            $following->series_id = $series->id;
+            $following->user_id = $user->id;
 
-            if (!$followingCheck) {
-                $following = new Following;
-                $following->series_id = $series->id;
-                $following->user_id = $user->id;
-
-                if ($following->save()) {
-                    $user->following = Following::where('user_id', '=', $user->id)->count();
-                    $user->save();
-                    $series->trend = Following::where('series_id', '=', $series->id)->count();
-                    $series->save();
-                    return Response::json(array('follow' => 'Success.'));
-                } else {
-                    return Response::json(array('follow' => 'A server error occurred, please try again.'), 500);
-                }
-            } else {
-                return Response::json(array('follow' => 'You are already following this series.'), 409);
-            }
-
-        } else {
-            return Response::json(array('follow' => 'You need to log in first.'), 401);
-        }
-
-    }
-
-    public function unfollow(Series $series)
-    {
-        if (Auth::user()) {
-            $user = Auth::user();
-            $unfollow = Following::where('series_id', $series->id)->where('user_id', $user->id)->delete();
-
-            //Delete seen information on unfollow
-            Seen::where('user_id', Auth::user()->id)->where('series_id', '=', $series->id)->delete();
-
-            if ($unfollow) {
+            if ($following->save()) {
                 $user->following = Following::where('user_id', '=', $user->id)->count();
                 $user->save();
                 $series->trend = Following::where('series_id', '=', $series->id)->count();
                 $series->save();
                 return Response::json(array('follow' => 'Success.'));
+            } else {
+                return Response::json(array('follow' => 'A server error occurred, please try again.'), 500);
             }
         } else {
-            return Response::json(array('follow' => 'You need to log in first.'), 401);
-
+            return Response::json(array('follow' => 'You are already following this series.'), 409);
         }
+    }
 
+    public function unfollow(Series $series)
+    {
+        $user = Auth::user();
+        $unfollow = Following::where('series_id', $series->id)->where('user_id', $user->id)->delete();
+
+        //Delete seen information on unfollow
+        Seen::where('user_id', Auth::user()->id)->where('series_id', '=', $series->id)->delete();
+
+        if ($unfollow) {
+            $user->following = Following::where('user_id', '=', $user->id)->count();
+            $user->save();
+            $series->trend = Following::where('series_id', '=', $series->id)->count();
+            $series->save();
+            return Response::json(array('follow' => 'Success.'));
+        }
     }
 
     /*
@@ -75,39 +62,35 @@ class FollowingController extends BaseController
     public function getFollowingSeries()
     {
         $user = Auth::user();
-        if ($user) {
-            $query = Following::where('user_id', $user->id)
-                ->select('following.archive', 'series.*')
-                ->join('series', 'following.series_id', '=', 'series.id');
+        $query = Following::where('user_id', $user->id)
+            ->select('following.archive', 'series.*')
+            ->join('series', 'following.series_id', '=', 'series.id');
 
-            if (!filter_var(Input::get('archive', 'true'), FILTER_VALIDATE_BOOLEAN)) {
-                $query->where('following.archive', '=', 0);
-            }
-            if (!filter_var(Input::get('ended', 'true'), FILTER_VALIDATE_BOOLEAN)) {
-                $query->where('series.status', '!=', 'Ended');
-            }
-
-            $series = $query
-                ->orderBy('following.archive', 'asc')
-                ->get();
-
-            self::addSeenEpisodesToSeries($series, $user->id);
-
-            if (filter_var(Input::get('seen', 'false'), FILTER_VALIDATE_BOOLEAN)) {
-                $series = $series->filter(function ($series) {
-                    if ($series->unseen_episodes > 0) {
-                        return true;
-                    }
-                });
-            }
-
-            //self::addCurrentEpisode($series, $user->id);
-            //self::addLatestEpisodes($series);
-
-            return Response::json($series);
-        } else {
-            return Response::json(array('flash' => 'You need to log in first.'), 401);
+        if (!filter_var(Input::get('archive', 'true'), FILTER_VALIDATE_BOOLEAN)) {
+            $query->where('following.archive', '=', 0);
         }
+        if (!filter_var(Input::get('ended', 'true'), FILTER_VALIDATE_BOOLEAN)) {
+            $query->where('series.status', '!=', 'Ended');
+        }
+
+        $series = $query
+            ->orderBy('following.archive', 'asc')
+            ->get();
+
+        self::addSeenEpisodesToSeries($series, $user->id);
+
+        if (filter_var(Input::get('seen', 'false'), FILTER_VALIDATE_BOOLEAN)) {
+            $series = $series->filter(function ($series) {
+                if ($series->unseen_episodes > 0) {
+                    return true;
+                }
+            });
+        }
+
+        //self::addCurrentEpisode($series, $user->id);
+        //self::addLatestEpisodes($series);
+
+        return Response::json($series);
     }
 
     /*
