@@ -90,6 +90,13 @@ var bowerConcatTask = function(env) {
         'beta': './dist/beta',
         'live': './dist/production',
     }
+    
+    gulp.src('./js/vendor/ui-bootstrap*.js')
+        .pipe(uglify())
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest(basepath[env] + '/js/vendor'))
 
     gulp.src(mainBowerFiles())
         // Concat all js files
@@ -112,17 +119,10 @@ var bowerConcatTask = function(env) {
         .pipe(fontFilter)
         .pipe(gulp.dest(basepath[env] + '/fonts/bootstrap'));
 
-    if (env == 'live') {
-        gulp.src('./templates/**')
-            .pipe(gulp.dest(basepath[env] + '/templates'));
-        // Not sure what the purpose here is, as it should be in _bower.js
-        //gulp.src('./js/vendor/ui-bootstrap*.js')
-        //    .pipe(uglify())
-        //    .pipe(rename({
-        //        suffix: '.min'
-        //    }))
-        //    .pipe(gulp.dest(basepath[env] + '/js/vendor'))
-    }
+        if (env == 'live') {
+            gulp.src('./templates/**')
+                .pipe(gulp.dest(basepath[env] + '/templates'));
+        }
 };
 
 var buildHtmlTask = function (env) {
@@ -134,7 +134,9 @@ var buildHtmlTask = function (env) {
     
     gulp.src(paths.html)
         .pipe(htmlreplace({
-            'js' : '/dist/' + env + '/js/ea.min.js'
+            'js' : '/dist/' + env + '/js/ea.min.js',
+            'libs' : ['/dist/' + env + '/js/vendor/_bower.min.js',
+                     '/dist/' + env + '/js/vendor/ui-bootstrap-0.12.0.min.js']
         }))
         .pipe(gulp.dest(path[env]));
     
