@@ -20,6 +20,8 @@ class TestDataSeeder extends Seeder{
 		foreach(range(1, $amountOfUsers) as $index){
 
 			User::create(array(
+				'old_accountname' => '',
+            	'old_password' => '',
 	            'accountname' => $faker->firstName,
 	            'password' => Hash::make('test'),
 	            'email' => $faker->email,
