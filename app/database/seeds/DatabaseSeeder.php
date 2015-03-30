@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call('SeriesTableSeeder');
     	$this->call('EpisodeTableSeeder');
 		$this->call('FollowingTableSeeder');
+		$this->call('SeenTableSeeder');
 	}
 }

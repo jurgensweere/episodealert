@@ -2,6 +2,7 @@
 
 use Artisan;
 use Mail;
+use EA\models\User;
 
 class TestCase extends \Illuminate\Foundation\Testing\TestCase
 {
@@ -45,5 +46,11 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
     public function teardownDb()
     {
         Artisan::call('migrate:reset');
+    }
+
+    public function beAdmin()
+    {
+        $user = User::find(1);
+        $this->be($user);
     }
 }

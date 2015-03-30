@@ -79,7 +79,7 @@ Route::group(
             Route::get('series/genre/{genre}/{skip?}', 'SeriesController@getByGenre');
             Route::get('series/search/{query}', 'SeriesController@search');
             Route::get('series/browse', 'SeriesController@getAllCategories');
-            Route::get('series/episodes/{uniqueName}', 'SeriesController@getEpisodes');
+            Route::get('series/episodes/{series_id}', 'SeriesController@getEpisodes');
             Route::get('series/episodesbyseason/{series_id}/{season}', 'SeriesController@getEpisodesBySeason');
             Route::get('series/{uniqueName}', 'SeriesController@getSeries');
 

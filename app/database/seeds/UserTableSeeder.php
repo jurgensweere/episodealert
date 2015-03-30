@@ -9,6 +9,7 @@ class UserTableSeeder extends Seeder
         DB::table('user')->delete();
 
         User::create(array(
+            'id' => 2,
             'old_accountname' => '',
             'old_password' => '',
             'accountname' => 'episodealert',
@@ -18,10 +19,10 @@ class UserTableSeeder extends Seeder
             'publicfollow' => '1',
             'showonlyrunning' => '1',
             'role' => 'admin'
-        ));        
-
+        ));
 
         User::create(array(
+            'id' => 1,
             'old_accountname' => '',
             'old_password' => '',
             'accountname' => 'admin',
@@ -31,7 +32,6 @@ class UserTableSeeder extends Seeder
             'publicfollow' => '1',
             'showonlyrunning' => '1',
             'role' => 'admin'
-        ));      
-
+        ));
     }
 }
