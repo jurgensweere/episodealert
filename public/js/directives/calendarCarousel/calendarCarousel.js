@@ -8,7 +8,7 @@
             controller: calendarController,
             controllerAs: 'calendar',
             templateUrl: '/js/directives/calendarCarousel/calendarCarousel.tpl.html',
-        }
+        };
     }]);
 
     function calendarController($filter, seriesFactory) {

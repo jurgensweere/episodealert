@@ -25,9 +25,11 @@
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-route.min.js') %>
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-animate.min.js') %>
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-touch.js') %>
-
-    <% HTML::script('/js/vendor/ui-bootstrap-0.12.0.js') %>
+    
+    <!-- build:libs -->
     <% HTML::script('/js/vendor/_bower.js') %>
+    <% HTML::script('/js/vendor/ui-bootstrap-0.12.0.js') %>        
+    <!-- endbuild -->
 
 </head>
 <body>
@@ -136,15 +138,6 @@
             $(this).collapse('hide');
         }
     });
-
-    /*
-     * this was supposed to close the menu but triggers all
-     * click events on the site for some reason
-     */
-
-//    $(document).on('click',function(){
-//        $('.collapse').collapse('hide');
-//    });
 
 </script>
 
