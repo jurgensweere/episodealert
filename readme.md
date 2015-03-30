@@ -1,3 +1,6 @@
+[![Build Status](https://api.travis-ci.org/castor385/episodealert.svg)]
+
+
 ## Episode Alert source
 
 The website: [Episode-Alert](http://www.episode-alert.com).
