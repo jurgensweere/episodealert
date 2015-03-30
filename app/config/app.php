@@ -124,6 +124,7 @@ return array(
 		'EA\EaServiceProvider',
 		'Roumen\Sitemap\SitemapServiceProvider',
 		'Nutsweb\LaravelPrerender\LaravelPrerenderServiceProvider',
+		'Orangehill\Iseed\IseedServiceProvider',
 	),
 
 	/*

@@ -1,7 +1,10 @@
-<?php
+<?php namespace EA\tests;
 
-class TestCase extends Illuminate\Foundation\Testing\TestCase {
+use Artisan;
+use Mail;
 
+class TestCase extends \Illuminate\Foundation\Testing\TestCase
+{
     /**
      * Creates the application.
      *

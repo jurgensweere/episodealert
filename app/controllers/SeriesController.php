@@ -61,6 +61,7 @@ class SeriesController extends BaseController
     public function top()
     {
         // TODO: Make this select top (followed or trending?) series, instead of the first 5
+        // use trend in series, is faster.
         $topSeries = 
             Series::join(
                 DB::raw(

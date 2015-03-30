@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call('UserTableSeeder');
         $this->call('SeriesTableSeeder');
-
-        //$this->call('TestDataSeeder');
-    }
+    	$this->call('EpisodeTableSeeder');
+		$this->call('FollowingTableSeeder');
+	}
 }
