@@ -4,9 +4,8 @@
         return {
             restrict: 'E',
             scope: {
-                episode: '=',
-                seenResponse: '&onSeenResponse',
-                unseenResponse: '&onUnseenResponse'
+                series : '=',
+                episode: '='
             },
             template:
                 '<div class="ea-seen-button" ng-if="episode.aired > 0">'+
@@ -51,12 +50,40 @@
                 function seenServiceCall(episode, mode) {
                     seriesFactory.setSeenEpisode(episode.id, mode)
                         .success(function (response) {
-                            scope.seenResponse({response: response});
+                        
+                            if(mode === 'single'){
+                                scope.episode.seen = 1;
+                            }                        
+
+                            if(mode !== 'single'){
+                                
+                                angular.forEach(scope.series.season_object[episode.season].content, function(episode, key) {
+                                    if (response.seen.indexOf(episode.id) > -1) {
+                                        episode.seen = 1;
+                                    }
+                                });
+
+                                //After the episode is succesfully set to seen, we should request an update on the unseen object
+                                var loadUnseen = getUnseenAmountBySeries(scope.series.id, scope.series.season_amount);
+                                loadUnseen.success(function(unseen){
+                                    for( var i = 0; i < unseen.length; i++){
+                                        var index = i + 1;
+                                        scope.series.season_object[index].unseen = unseen[i];
+                                    }
+                                });
+                            }
+                        
+                            //scope.seenResponse({response: response});
                         })
                         .error(function (error) {
                             //flash(error.seen);
                         });
                 }
+                
+                function getUnseenAmountBySeries(series_id, seasonsAmount){
+                    var unseenBySeries = seriesFactory.getUnseenSeasonsBySeries(series_id, seasonsAmount);
+                    return unseenBySeries;
+                }                
 
                 /**
                  * Set an episode to 'unseen'
@@ -67,7 +94,28 @@
                 function unseenServiceCall(episode, mode) {
                     seriesFactory.setUnseenEpisode(episode.id, mode)
                         .success(function (response) {
-                            scope.unseenResponse({response: response});
+                        
+                            if(mode === 'single'){
+                                scope.episode.seen = 0;
+                            }
+
+                            if(mode !== 'single'){
+                                angular.forEach(scope.series.season_object[episode.season].content, function(episode, key) {
+                                    if (response.unseen.indexOf(episode.id) > -1) {
+                                        episode.seen = 0;
+                                    }
+                                });
+
+                                //After the episode is succesfully set to unseen, we should request an update on the unseen object
+                                var loadUnseen = getUnseenAmountBySeries(scope.series.id, scope.series.season_amount);
+                                loadUnseen.success(function(unseen){
+                                    for( var i = 0; i < unseen.length; i++){
+                                        var index = i + 1;
+                                        scope.series.season_object[index].unseen = unseen[i];
+                                    }
+                                });
+                            }
+                        
                         })
                         .error(function (error) {
                             //flash(response.unseen);

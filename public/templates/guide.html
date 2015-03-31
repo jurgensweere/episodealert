@@ -4,35 +4,6 @@
         <div ng-controller="ProfileHeaderCtrl" ng-include src="'templates/partial/_profile-header.html'" />
     </div>
 
-    <!--
-    <div class="row info-top" style="background-image: url('{{ series.poster_image | createFanartUrl : series.unique_name }}');">
-        <div class="fanart-fade">
-            <div class="info-text-top">
-                <h1>Episode Guide</h1>
-                <p class="hidden-xs hidden-sm">{{ series.description }}</p>
-            </div>
-        </div>
-    </div> -->
-
-    <!--div class="row guide-filters">
-        Filters
-        <button class="btn btn--guide-filter" ng-class="{active: unseen}" ng-click="toggleUnseen()">
-            <span ng-show="unseen == true" class="glyphicon glyphicon-ok" />
-            <span ng-show="unseen == false" class="glyphicon glyphicon-plus" />
-            unseen
-        </button>
-        <button class="btn btn--guide-filter" ng-class="{active: upcoming}" ng-click="toggleUpcoming()">
-            <span ng-show="upcoming == true" class="glyphicon glyphicon-ok" />
-            <span ng-show="upcoming == false" class="glyphicon glyphicon-plus" />
-            upcoming
-        </button>
-        <!-- I Have no idea yet, what these filters should do. -->
-        <!--button class="btn btn--guide-filter"><span class="glyphicon glyphicon-ok" />this week</button>
-        <button class="btn btn--guide-filter active"><span class="glyphicon glyphicon-ok" />this month</button>
-        <button class="btn btn--guide-filter"><span class="glyphicon glyphicon-plus" />next season</button>
-
-    </div-->
-
     <h1>Recent Episodes</h1>
 
     <table class="table table-striped">
@@ -68,24 +39,9 @@
             </td>
 
             <td>
-                <seen-button episode="episode" on-seen-response="onSeen(episode, response)" on-unseen-response="onUnseen(episode, response)"></seen-button>
+                <seen-button episode="episode"></seen-button>
             </td>
         </tr>
     </table>
-<!--
 
-    <div class="row guide-series">
-        <ul class="series-guide">
-            <li ng-repeat="episode in guide" class="unseen-episodes row">
-                <div class="col-md-2 col-xs-2">{{ ::episode.seriesName }}</div>
-                <div class="col-md-2 col-xs-2">S{{ ::episode.season }}E{{ ::episode.episode | numberFixedLen:2 }}</div>
-                <div class="col-md-4 col-xs-4">{{ ::episode.name }}</div>
-                <div class="col-md-2 col-xs-2">{{ ::episode.airdate }}</div>
-                <div class="col-md-2 col-xs-2">
-                    <seen-button episode="episode" on-seen-response="onSeen(episode, response)" on-unseen-response="onUnseen(episode, response)"></seen-button>
-                </div>
-            </li>
-         </ul>
-    </div>
--->
 </div>
