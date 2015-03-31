@@ -37,7 +37,10 @@ class SeriesController extends BaseController
      */
     private function getLastSeenSeason($series_id, $user_id)
     {
-        $lastSeenSeason = Seen::where('user_id', $user_id)->where('series_id', '=', $series_id)->orderBy('season', 'desc')->first();
+        $lastSeenSeason = Seen::where('user_id', $user_id)
+            ->where('series_id', '=', $series_id)
+            ->orderBy('season', 'desc')
+            ->first();
         if (count($lastSeenSeason) > 0) {
             return $lastSeenSeason->season;
         } else {
@@ -61,22 +64,35 @@ class SeriesController extends BaseController
     public function top()
     {
         // TODO: Make this select top (followed or trending?) series, instead of the first 5
-        return Response::json(
+        // use trend in series, is faster.
+        $topSeries =
             Series::join(
                 DB::raw(
                     '(select series_id, count(*) as count from following
                     group by series_id
                     order by count desc
-                    limit 50) bil'), function ($join) {
+                    limit 50) bil'
+                ),
+                function ($join) {
                     $join->on('series.id', '=', 'bil.series_id');
-                })
-                ->where('fanart_image_converted', '=', 1)
-                ->orderByRaw('rand()')
-                ->take(5)
-                ->get()
-        );
+                }
+            )
+            ->where('fanart_image_converted', '=', 1)
+            ->get()
+            ->random(5);
+
+        $array = array();
+        if (count($topSeries) > 0) {
+            $array = array_values($topSeries);
+        }
+
+        return Response::json($array);
     }
 
+    /**
+     * THIS FUNCTION DOES NOT APPEAR TO BE USED
+     * @return type
+     */
     public function trending()
     {
         //most followed series in the past 15 days
@@ -101,7 +117,7 @@ class SeriesController extends BaseController
                 ->orderBy('trend', 'desc')
                 ->take(200)
                 ->get()
-            );
+        );
     }
 
     public function getEpisodesBySeason($series_id, $season)
@@ -110,7 +126,17 @@ class SeriesController extends BaseController
             ->where('season', $season)
             ->orderBy('season', 'asc')
             ->orderBy('episode', 'asc')
-            ->select(array('episode.*', DB::raw(sprintf("case when airdate < '%s' then 1 else 0 end as aired", date('Y-m-d')))))
+            ->select(
+                array(
+                    'episode.*',
+                    DB::raw(
+                        sprintf(
+                            "case when airdate < '%s' then 1 else 0 end as aired",
+                            date('Y-m-d')
+                        )
+                    )
+                )
+            )
             ->get();
 
         return Response::json($episodes);
@@ -147,13 +173,25 @@ class SeriesController extends BaseController
             ->join('following', function ($join) {
                 $join->on('following.series_id', '=', 'episode.series_id')
                     ->where('following.user_id', '=', Auth::user()->id);
-                })
+            })
             ->where('episode.airdate', '>=', DB::raw('date_sub(curdate(), interval 4 day)'))
             ->where('episode.airdate', '<=', DB::raw('date_add(curdate(), interval 4 day)'))
             ->orderBy('episode.airdate', 'asc')
             ->orderBy('episode.season', 'asc')
             ->orderBy('episode.episode', 'asc')
-            ->get(array('episode.*', 'series.name as seriesName', 'series.unique_name', DB::raw(sprintf("case when airdate < '%s' then 1 else 0 end as aired", date('Y-m-d')))));
+            ->get(
+                array(
+                    'episode.*',
+                    'series.name as seriesName',
+                    'series.unique_name',
+                    DB::raw(
+                        sprintf(
+                            "case when airdate < '%s' then 1 else 0 end as aired",
+                            date('Y-m-d')
+                        )
+                    )
+                )
+            );
 
         return Response::json($currentEpisodes);
 
@@ -219,7 +257,8 @@ class SeriesController extends BaseController
 
     /*
      * Get episodes of series by series->id and from the latest season
-     * Check if the serie is a following one, then find the season from the last seen episode and return all episodes from that season.
+     * Check if the serie is a following one, then find the season from the last seen 
+     * episode and return all episodes from that season.
      * Else return episodes from season 1 by default
      */
     private function getEpisodesFromLatestSeason($id)
@@ -231,7 +270,12 @@ class SeriesController extends BaseController
 
     private function getEpisodesFromGivenSeason($id, $season)
     {
-        return Response::json(Episode::where('series_id', $id)->where('season', $season)->orderBy('episode', 'asc')->get());
+        return Response::json(
+            Episode::where('series_id', $id)
+                ->where('season', $season)
+                ->orderBy('episode', 'asc')
+                ->get()
+        );
     }
 
     /*
@@ -304,7 +348,10 @@ class SeriesController extends BaseController
     {
         $user_id = Auth::user()->id;
         $totalAmountofEpisodes = Episode::where('series_id', $series_id)->where('season', $season_number)->count();
-        $seenAmount = Seen::where('series_id', $series_id)->where('user_id', $user_id)->where('season', $season_number)->count();
+        $seenAmount = Seen::where('series_id', $series_id)
+            ->where('user_id', $user_id)
+            ->where('season', $season_number)
+            ->count();
 
         $unseenAmountOfEpisodes = $totalAmountofEpisodes - $seenAmount;
 
@@ -327,7 +374,10 @@ class SeriesController extends BaseController
                 ->where('airdate', '<', new DateTime('today'))
                 ->count();
 
-            $seenAmount = Seen::where('series_id', $series_id)->where('user_id', $user_id)->where('season', $i)->count();
+            $seenAmount = Seen::where('series_id', $series_id)
+                ->where('user_id', $user_id)
+                ->where('season', $i)
+                ->count();
 
             $unseenAmountOfEpisodes = $totalAmountofEpisodes - $seenAmount;
             array_push($seasonObject, $unseenAmountOfEpisodes);
@@ -345,16 +395,27 @@ class SeriesController extends BaseController
     {
         $episodes = Episode::join('series', 'series.id', '=', 'episode.series_id')
             ->join('following', function ($join) {
-            $join->on('following.series_id', '=', 'episode.series_id')
-                ->where('following.user_id', '=', Auth::user()->id);
+                $join->on('following.series_id', '=', 'episode.series_id')
+                    ->where('following.user_id', '=', Auth::user()->id);
             })
         ->where('episode.airdate', '=', $date)
         ->orderBy('episode.airdate', 'asc')
         ->orderBy('episode.season', 'asc')
         ->orderBy('episode.episode', 'asc')
-        ->get(array('episode.*', 'series.name as seriesName', 'series.unique_name as unique_name', DB::raw(sprintf("case when airdate < '%s' then 1 else 0 end as aired", date('Y-m-d')))));
+        ->get(
+            array(
+                'episode.*',
+                'series.name as seriesName',
+                'series.unique_name as unique_name',
+                DB::raw(
+                    sprintf(
+                        "case when airdate < '%s' then 1 else 0 end as aired",
+                        date('Y-m-d')
+                    )
+                )
+            )
+        );
 
         return Response::json($episodes);
     }
-
 }
