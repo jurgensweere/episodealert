@@ -7,25 +7,24 @@
 			var unique_name = $routeParams.seriesname;
 
 			/* Execute on load */
-			var loadProfileSeries = getSeries(unique_name);
+			//var loadProfileSeries = getSeries(unique_name);
             var authorized = AuthenticationService.isLoggedIn();
 
-			loadProfileSeries.success(function(series){
+            var serieTest = seriesFactory.getSeriesDetail(unique_name);
 
-        		Page.setTitle(series.name + ' | Episode Alert');
+            serieTest.then(function(series) {
+
+                Page.setTitle(series.name + ' | Episode Alert');
         		Page.setMetaDescription('Find the latest on ' + series.name + ', including season and episode information.');
-                Page.setImage(window.location.origin + "/" + $filter('createImageUrl')(series.poster_image, series.unique_name));
+                Page.setImage(window.location.origin + "/" + series.poster_image);
 
-   				$scope.series = series;
-                $scope.series_image = $filter('createImageUrl')(series.poster_image, series.unique_name, 'large');
-                $scope.banner_image = $filter('createBannerUrl')(series.poster_image, series.unique_name);
-   				$scope.seasons = buildSeasonObject(series.season_amount, series.has_specials, series.last_seen_season);
+                $scope.series = series;
+            });
 
-			});
 
             $scope.onSeen = function (episode, response) {
                 // Mark episodes as seen from response
-                angular.forEach($scope.seasons[episode.season].content, function(episode, key) {
+                angular.forEach($scope.series.season_object[episode.season].content, function(episode, key) {
                     if (response.seen.indexOf(episode.id) > -1) {
                         episode.seen = 1;
                     }
@@ -36,13 +35,13 @@
                 loadUnseen.success(function(unseen){
                     for( var i = 0; i < unseen.length; i++){
                         var index = i + 1;
-                        $scope.seasons[index].unseen = unseen[i];
+                        $scope.series.season_object[index].unseen = unseen[i];
                     }
                 });
             };
 
             $scope.onUnseen = function (episode, response) {
-                angular.forEach($scope.seasons[episode.season].content, function(episode, key) {
+                angular.forEach($scope.series.season_object[episode.season].content, function(episode, key) {
                     if (response.unseen.indexOf(episode.id) > -1) {
                         episode.seen = 0;
                     }
@@ -53,7 +52,7 @@
                 loadUnseen.success(function(unseen){
                     for( var i = 0; i < unseen.length; i++){
                         var index = i + 1;
-                        $scope.seasons[index].unseen = unseen[i];
+                        $scope.series.season_object[index].unseen = unseen[i];
                     }
                 });
             };
@@ -70,7 +69,7 @@
 	   					for( var i = 0; i < unseen.length; i++){
 	   						var index = i + 1;
 	   						//$scope.series.has_specials ? i + 1 : i;
-	   						$scope.seasons[index].unseen = unseen[i];
+	   						$scope.series.season_object[index].unseen = unseen[i];
 	   					}
 	   				});
 
@@ -82,7 +81,7 @@
         		var episodes = getEpisodesBySeason(series_id, seasonNumber);
 
   				episodes.success(function(episodes){
-					$scope.seasons[seasonNumber].content = episodes;
+					$scope.series.season_object[seasonNumber].content = episodes;
 					$scope.episodesDoneLoading = true;
 				});
 			};
@@ -119,30 +118,6 @@
 					}
 				);
 			}
-
-			/* functions */
-			function buildSeasonObject(numberOfSeasons, hasSpecials, activeSeason){
-
-				var seasons = [];
-
-                if(hasSpecials){
-                    numberOfSeasons = numberOfSeasons - 1;
-                }
-
-				if(hasSpecials){
-					seasons.push({ number : 0, title : 'Specials', active : false, unseen : 999 });
-				}else{
-					seasons.push({ number : 0, title : 'Specials', active : false, unseen : 999, disabled: true });
-				}
-
-				for (var i = 1; i <= numberOfSeasons; i++) {
-					seasons.push( { number : i, title : i, active : false, unseen : 999 } );
-				}
-
-        		seasons[activeSeason].active = true;
-
-				return seasons;
-			 }
 
       }
     );
