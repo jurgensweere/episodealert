@@ -7,12 +7,10 @@
 			var unique_name = $routeParams.seriesname;
 
 			/* Execute on load */
-			//var loadProfileSeries = getSeries(unique_name);
             var authorized = AuthenticationService.isLoggedIn();
+            var series = seriesFactory.getSeriesDetail(unique_name);
 
-            var serieTest = seriesFactory.getSeriesDetail(unique_name);
-
-            serieTest.then(function(series) {
+            series.then(function(series) {
 
                 Page.setTitle(series.name + ' | Episode Alert');
         		Page.setMetaDescription('Find the latest on ' + series.name + ', including season and episode information.');
