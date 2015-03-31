@@ -1,5 +1,7 @@
 <?php namespace EA\tests;
 
+use Route;
+
 class SeriesControllerTest extends TestCase
 {
     public function testGetTopSeries()
@@ -206,6 +208,8 @@ class SeriesControllerTest extends TestCase
 
     public function testSetSeenEpisodeNotLoggedIn()
     {
+        Route::enableFilters();
+
         $crawler = $this->client->request('POST', '/api/series/seen/85753');
         $response = $this->client->getResponse();
 
@@ -218,7 +222,7 @@ class SeriesControllerTest extends TestCase
 
         $crawler = $this->client->request('POST', '/api/series/seen/85753');
         $response = $this->client->getResponse();
-        $data = $respones->getData();
+        $data = $response->getData();
 
         $this->assertTrue($response->isOk());
         $this->assertInstanceOf('\Illuminate\Http\JsonResponse', $response);
