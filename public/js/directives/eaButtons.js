@@ -51,11 +51,11 @@
                     seriesFactory.setSeenEpisode(episode.id, mode)
                         .success(function (response) {
                         
-                            if(mode === 'single'){
+                            if(!scope.series){
                                 scope.episode.seen = 1;
                             }                        
 
-                            if(mode !== 'single'){
+                            if(scope.series){
                                 
                                 angular.forEach(scope.series.season_object[episode.season].content, function(episode, key) {
                                     if (response.seen.indexOf(episode.id) > -1) {
@@ -95,11 +95,11 @@
                     seriesFactory.setUnseenEpisode(episode.id, mode)
                         .success(function (response) {
                         
-                            if(mode === 'single'){
+                            if(!scope.series){
                                 scope.episode.seen = 0;
                             }
 
-                            if(mode !== 'single'){
+                            if(scope.series){
                                 angular.forEach(scope.series.season_object[episode.season].content, function(episode, key) {
                                     if (response.unseen.indexOf(episode.id) > -1) {
                                         episode.seen = 0;
