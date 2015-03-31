@@ -1,7 +1,54 @@
-angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
+angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', function($http, filter, $q) {
 
     var urlBase = '/api/series/';
     var seriesFactory = {};
+
+    /*
+     * Get all series details
+     */
+
+    seriesFactory.getSeriesDetail = function (uniqueName){
+        //collect the series from the database
+        var series = getSeries(uniqueName);
+        var deferred = $q.defer();
+
+        //Build the series object
+        series.success(function(series){
+            series.poster_image = filter('createImageUrl')(series.poster_image, series.unique_name, 'large');
+            series.banner_image = filter('createBannerUrl')(series.banner_image, series.unique_name);
+            series.season_object = buildSeasonObject(series.season_amount, series.has_specials, series.last_seen_season);
+
+            deferred.resolve(series);
+        }).error(function(){
+            deferred.reject('error');
+        });
+
+        return deferred.promise;
+    };
+
+
+    function buildSeasonObject(numberOfSeasons, hasSpecials, activeSeason){
+
+        var seasons = [];
+
+        if(hasSpecials){
+            numberOfSeasons = numberOfSeasons - 1;
+        }
+
+        if(hasSpecials){
+            seasons.push({ number : 0, title : 'Specials', active : false, unseen : 999 });
+        }else{
+            seasons.push({ number : 0, title : 'Specials', active : false, unseen : 999, disabled: true });
+        }
+
+        for (var i = 1; i <= numberOfSeasons; i++) {
+            seasons.push( { number : i, title : i, active : false, unseen : 999 } );
+        }
+
+        seasons[activeSeason].active = true;
+
+        return seasons;
+     }
 
     /**
      * Get a series by unique name
@@ -9,7 +56,7 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
      * @param {string} uniqueName   Unique identifying series name
      * @return {Series}
      */
-    seriesFactory.getSeries = function (uniqueName) {
+    function getSeries (uniqueName) {
         return $http.get(urlBase + uniqueName);
     };
 
@@ -83,14 +130,7 @@ angular.module('eaApp').factory('seriesFactory', ['$http', function($http) {
      * @return {array}  List of series followed, including amount of (un)seen episodes
      */
     seriesFactory.getFollowingSeries = function(excludeSeen, includeEnded, includeArchive) {
-        excludeSeen = typeof excludeSeen !== 'undefined' ? excludeSeen : false;
-        includeEnded = typeof includeEnded !== 'undefined' ? includeEnded : true;
-        includeArchive = typeof includeArchive !== 'undefined' ? includeArchive : true;
-        return $http.get('/api/profile/following', {params: {
-            seen: excludeSeen,
-            ended: includeEnded,
-            archive: includeArchive
-        }});
+        return $http.get('/api/profile/following');
     };
 
     /**

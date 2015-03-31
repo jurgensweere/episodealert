@@ -10,8 +10,8 @@
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-4 series-left">
-            <img class="img-responsive hidden-xs hidden-sm" ng-src="{{ series_image }}">
-            <img class="img-responsive hidden-md hidden-lg" ng-src="{{ banner_image }}">
+            <img class="img-responsive hidden-xs hidden-sm" ng-src="{{ series.poster_image }}">
+            <img class="img-responsive hidden-md hidden-lg" ng-src="{{ series.banner_image }}">
             <div class="series-details-extra">
                 <dl>
                     <dt> First aired </dt>
@@ -28,7 +28,7 @@
         <!-- some spacing added through the offset -->
         <div class="col-xs-12 col-sm-12 col-md-8 seasons">
             <eatabset>
-                <eatab select="loadSeason(series.id, season.number)" ng-repeat="season in seasons" heading="{{ ::season.title}}" active="season.active" disabled="season.disabled" ng-init="loadUnseenForSeason(series.id, season.number)" unseen="{{season.unseen}}">
+                <eatab select="loadSeason(series.id, season.number)" ng-repeat="season in series.season_object" heading="{{ ::season.title}}" active="season.active" disabled="season.disabled" ng-init="loadUnseenForSeason(series.id, season.number)" unseen="{{season.unseen}}">
                     <table class="episode-list">
                         <tr ng-repeat="episode in season.content" ng-class="episode.seen ? 'seen' : 'unseen'">
                             <td class="number">
