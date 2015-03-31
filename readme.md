@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.org/castor385/episodealert.svg)]
+[![Build Status](https://travis-ci.org/castor385/episodealert.svg?branch=master)](https://travis-ci.org/castor385/episodealert)
 
 
 ## Episode Alert source
@@ -21,11 +21,20 @@ The website: [Episode-Alert](http://www.episode-alert.com).
 * [Composer](https://getcomposer.org/)
 
 ### Installation for backend laravel ( execute in / )
+
 ```
   config /app/config/local/app.php
   composer update
   php artisan migrate
 ```
+
+### Running tests
+
+```
+  phpunit
+  (to run PHP unittests)
+```
+
 ### Installation for frontend ( execute in /public )
 
 ```
@@ -48,7 +57,6 @@ The website: [Episode-Alert](http://www.episode-alert.com).
 ### Work
 
 ```
-
   'grunt watch' to watch for changes -or-
   'gulp watch' to watch for changes
   'php artisan serve' to start a webserver in root of the project (or you can install apache)
