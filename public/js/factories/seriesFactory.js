@@ -2,31 +2,12 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
 
     var urlBase = '/api/series/';
     var seriesFactory = {};
-
+    
+    
     /*
-     * Get all series details
+     * Private functions
      */
-
-    seriesFactory.getSeriesDetail = function (uniqueName){
-        //collect the series from the database
-        var series = getSeries(uniqueName);
-        var deferred = $q.defer();
-
-        //Build the series object
-        series.success(function(series){
-            series.poster_image = filter('createImageUrl')(series.poster_image, series.unique_name, 'large');
-            series.banner_image = filter('createBannerUrl')(series.banner_image, series.unique_name);
-            series.season_object = buildSeasonObject(series.season_amount, series.has_specials, series.last_seen_season);
-
-            deferred.resolve(series);
-        }).error(function(){
-            deferred.reject('error');
-        });
-
-        return deferred.promise;
-    };
-
-
+    
     function buildSeasonObject(numberOfSeasons, hasSpecials, activeSeason){
 
         var seasons = [];
@@ -58,6 +39,33 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
      */
     function getSeries (uniqueName) {
         return $http.get(urlBase + uniqueName);
+    };
+    
+    /*
+     * Exposed api functions
+     */ 
+
+    /*
+     * Get all series details
+     */
+
+    seriesFactory.getSeriesDetail = function (uniqueName){
+        //collect the series from the database
+        var series = getSeries(uniqueName);
+        var deferred = $q.defer();
+
+        //Build the series object
+        series.success(function(series){
+            series.poster_image = filter('createImageUrl')(series.poster_image, series.unique_name, 'large');
+            series.banner_image = filter('createBannerUrl')(series.banner_image, series.unique_name);
+            series.season_object = buildSeasonObject(series.season_amount, series.has_specials, series.last_seen_season);
+
+            deferred.resolve(series);
+        }).error(function(){
+            deferred.reject('error');
+        });
+
+        return deferred.promise;
     };
 
     /**
@@ -129,7 +137,7 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
      *
      * @return {array}  List of series followed, including amount of (un)seen episodes
      */
-    seriesFactory.getFollowingSeries = function(excludeSeen, includeEnded, includeArchive) {
+    seriesFactory.getFollowingSeries = function() {
         return $http.get('/api/profile/following');
     };
 

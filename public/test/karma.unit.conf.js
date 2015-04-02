@@ -27,6 +27,10 @@ module.exports = function(config) {
         '../js/*.js',
         '../js/**/*.js',
 
+        //test data
+        { pattern: 'unit/testdata/*.json', included: false },
+        'unit/testdata/*.js',
+        
         //tests
         'unit/**/*.js'
     ],

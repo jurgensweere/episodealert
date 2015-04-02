@@ -1,4 +1,5 @@
-angular.module('eaApp').factory("AuthenticationService", function ($rootScope, $location, $http, SessionService, $window, ActionCache, FollowingQueue, alertService) {
+angular.module('eaApp').factory("AuthenticationService", 
+                                function ($rootScope, $location, $http, SessionService, $window, ActionCache, FollowingQueue, alertService) {
 
     var cacheSession = function (response) {
         SessionService.set('authenticated', true);

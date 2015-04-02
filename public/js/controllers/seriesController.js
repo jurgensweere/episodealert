@@ -40,12 +40,24 @@
 
 			/* scope */
 			$scope.loadSeason = function(series_id, seasonNumber){
-        		var episodes = getEpisodesBySeason(series_id, seasonNumber);
-
+                var episodes = getEpisodesBySeason(series_id, seasonNumber);
+                console.log('loadSeason');
+                
+                episodes.then(function(data){
+                    console.log('then wot mate');    
+                })
+                 
+                episodes.error(function(){
+                    console.log('error');
+                })
+                
   				episodes.success(function(episodes){
+                    
+                    console.log('success!!!!');
 					$scope.series.season_object[seasonNumber].content = episodes;
 					$scope.episodesDoneLoading = true;
 				});
+                
 			};
 
 	    	/* service calls */
@@ -56,7 +68,6 @@
 
 	    	function getEpisodesBySeason(series_id, seasonNumber){
 	    		var episodesBySeason = seriesFactory.getEpisodesBySeason(series_id, seasonNumber);
-
 	    		return episodesBySeason;
 	    	}
 
