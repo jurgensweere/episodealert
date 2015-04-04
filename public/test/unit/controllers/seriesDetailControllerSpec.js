@@ -5,7 +5,6 @@ describe('Series Controller', function () {
 
     beforeEach(function () {
 
-
         // Inject the angular services
         inject(function ($controller, $httpBackend, $rootScope, $q) {
 
@@ -15,36 +14,8 @@ describe('Series Controller', function () {
 
             scope = $rootScope.$new();
 
-            var mockedAuthService = {
-                isLoggedIn : function(){
-                    return true;
-                }
-            }
-
-            //Mocked series factory
-            var mockedSeriesFactory = {
-
-                getEpisodesBySeason : function(){
-                    var deferred = $q.defer();
-                    deferred.resolve(seriesDetailEpisodeList);
-                    return deferred.promise;
-                },
-
-                getUnseenSeasonsBySeries : function (){
-                    var deferred = $q.defer();
-                    deferred.resolve(seriesDetailTestUnseenAmount);
-                    return deferred.promise;
-                },
-
-                getSeriesDetail : function(unique_name) {
-                    var deferred = $q.defer();
-                    deferred.resolve(seriesDetailTestData);
-                    return deferred.promise;
-                }
-
-            };
-
-            $controller('SeriesCtrl', { $scope : scope, seriesFactory : mockedSeriesFactory, AuthenticationService : mockedAuthService });
+            // Render controller with mocked data
+            $controller('SeriesCtrl', { $scope : scope, seriesFactory : loadMockedSeriesFactory($q), AuthenticationService : loadMockedAuthService() });
 
         });
     });
