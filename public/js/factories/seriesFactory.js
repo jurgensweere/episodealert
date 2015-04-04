@@ -2,14 +2,14 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
 
     var urlBase = '/api/series/';
     var seriesFactory = {};
-    
-    
+
+
     /*
      * Private functions
      */
-    
+
     function buildSeasonObject(numberOfSeasons, hasSpecials, activeSeason){
-        
+
         var seasons = [];
 
         if(hasSpecials){
@@ -39,12 +39,12 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
      */
     function getSeries (uniqueName) {
         return $http.get(urlBase + uniqueName);
-    };
-    
+    }
+
     function getUnseenSeasonsBySeries (series_id, seasons_amount){
         return $http.get(urlBase + 'unseenamountbyseries/' + series_id + '/' + seasons_amount);
-    };
-    
+    }
+
     /**
      * Get a list of episodes by series and season
      *
@@ -55,47 +55,47 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
 
     function getEpisodesBySeason (series_id, season){
     	return $http.get('/api/series/episodesbyseason/' + series_id + '/' + season);
-    };    
-    
+    }
+
     /*
      * Exposed api functions
-     */ 
-    
+     */
+
     seriesFactory.getEpisodesBySeason = function (series_id, season){
         var episodeBySeason = getEpisodesBySeason(series_id, season);
         var deferred = $q.defer();
-        
+
         episodeBySeason.success(function(response){
             deferred.resolve(response);
         }).error(function(){
             deferred.reject('error');
         });
-        
-        return deferred.promise;        
-    };        
-    
-    
+
+        return deferred.promise;
+    };
+
+
     seriesFactory.getUnseenSeasonsBySeries = function (series_id, seasons_amount){
         var unseenBySeries = getUnseenSeasonsBySeries(series_id, seasons_amount);
         var deferred = $q.defer();
-        
+
         unseenBySeries.success(function(response){
             deferred.resolve(response);
         }).error(function(){
             deferred.reject('error');
         });
-        
+
         return deferred.promise;
     };
 
     /*
      * Get all series details
      */
- 
+
     seriesFactory.getSeriesDetail = function (uniqueName){
         //collect the series from the database
         var series = getSeries(uniqueName);
-        
+
         var deferred = $q.defer();
 
         //Build the series object
