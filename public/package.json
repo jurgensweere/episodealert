@@ -29,6 +29,7 @@
     "karma-chrome-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.5",
     "karma-ng-scenario": "^0.1.0",
+    "karma-phantomjs-launcher": "^0.1.4",
     "main-bower-files": "^2.5.0"
   }
 }

@@ -9,7 +9,7 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
      */
     
     function buildSeasonObject(numberOfSeasons, hasSpecials, activeSeason){
-
+        
         var seasons = [];
 
         if(hasSpecials){
@@ -41,17 +41,61 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
         return $http.get(urlBase + uniqueName);
     };
     
+    function getUnseenSeasonsBySeries (series_id, seasons_amount){
+        return $http.get(urlBase + 'unseenamountbyseries/' + series_id + '/' + seasons_amount);
+    };
+    
+    /**
+     * Get a list of episodes by series and season
+     *
+     * @param {int} series_id   ID of series to get episodes for
+     * @param {int} season      season number to get episodes for
+     * @return {array}          List of Episodes
+     */
+
+    function getEpisodesBySeason (series_id, season){
+    	return $http.get('/api/series/episodesbyseason/' + series_id + '/' + season);
+    };    
+    
     /*
      * Exposed api functions
      */ 
+    
+    seriesFactory.getEpisodesBySeason = function (series_id, season){
+        var episodeBySeason = getEpisodesBySeason(series_id, season);
+        var deferred = $q.defer();
+        
+        episodeBySeason.success(function(response){
+            deferred.resolve(response);
+        }).error(function(){
+            deferred.reject('error');
+        });
+        
+        return deferred.promise;        
+    };        
+    
+    
+    seriesFactory.getUnseenSeasonsBySeries = function (series_id, seasons_amount){
+        var unseenBySeries = getUnseenSeasonsBySeries(series_id, seasons_amount);
+        var deferred = $q.defer();
+        
+        unseenBySeries.success(function(response){
+            deferred.resolve(response);
+        }).error(function(){
+            deferred.reject('error');
+        });
+        
+        return deferred.promise;
+    };
 
     /*
      * Get all series details
      */
-
+ 
     seriesFactory.getSeriesDetail = function (uniqueName){
         //collect the series from the database
         var series = getSeries(uniqueName);
+        
         var deferred = $q.defer();
 
         //Build the series object
@@ -151,17 +195,6 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
     	return $http.get('/api/series/episodes/' + series_id);
     };
 
-    /**
-     * Get a list of episodes by series and season
-     *
-     * @param {int} series_id   ID of series to get episodes for
-     * @param {int} season      season number to get episodes for
-     * @return {array}          List of Episodes
-     */
-    seriesFactory.getEpisodesBySeason = function (series_id, season){
-    	return $http.get('/api/series/episodesbyseason/' + series_id + '/' + season);
-    };
-
     // seen
     /**
      * Mark an episode as seen
@@ -206,10 +239,6 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
      */
     seriesFactory.getUnseenAmountBySeason = function (series_id, season_number){
         return $http.get(urlBase + 'unseenamountbyseason/' + series_id + '/' + season_number);
-    };
-
-    seriesFactory.getUnseenSeasonsBySeries = function (series_id, seasons_amount){
-        return $http.get(urlBase + 'unseenamountbyseries/' + series_id + '/' + seasons_amount);
     };
 
     seriesFactory.archiveSeries = function (series_id) {

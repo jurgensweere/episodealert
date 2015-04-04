@@ -12,14 +12,15 @@ describe("E2E: Testing Pages", function(seriesFactory) {
         $httpBackend.flush();
     
         $httpBackend.expect('GET', '/api/series/lost')
-            .respond(200, seriesDetailTestData);
+            .respond(200, factorySeriesDetailTestData);
 
-        // Call the service
+        // Call the service 
+     
         var series = seriesFactory.getSeriesDetail('lost');
         
         // Check all the values of the series returned
         series.then(function(series){
-            
+
             expect(series.id).toBe(73739);
             expect(series.unique_name).toBe('lost');
             expect(series.name).toBe('Lost');  
@@ -37,13 +38,13 @@ describe("E2E: Testing Pages", function(seriesFactory) {
             expect(series.category).toBe('|Action|Adventure|Drama|Science-Fiction|');
             expect(series.status).toBe('Ended');
             expect(series.popular).toBe(false);
-            expect(series.trend).toBe(274);
+            expect(series.trend).toBe(1);
             expect(series.season_amount).toBe(7);
             expect(series.episode_amount).toBe(120);
             expect(series.has_specials).toBe(true);
             expect(series.specials_amount).toBe(29);
-            expect(series.created_at).toBe('2015-03-09 09:04:23');
-            expect(series.updated_at).toBe('2015-03-29 17:56:51');
+            expect(series.created_at).toBe('2015-04-02 12:59:18');
+            expect(series.updated_at).toBe('2015-04-02 12:59:44');
             expect(series.last_seen_season).toBe(6);
             expect(series.following).toBe(1);
             

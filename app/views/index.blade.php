@@ -146,7 +146,6 @@
 <% HTML::script(asset('js/app.routes.js')) %>
 
 <% HTML::script(asset('js/controllers/carouselController.js')) %>
-<% HTML::script(asset('js/controllers/seriesDetailController.js')) %>
 <% HTML::script(asset('js/controllers/seriesListController.js')) %>
 <% HTML::script(asset('js/controllers/seriesController.js')) %>
 <% HTML::script(asset('js/controllers/seriesSearchController.js')) %>

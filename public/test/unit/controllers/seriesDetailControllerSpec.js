@@ -1,48 +1,88 @@
-describe('MyCtrl', function () {
-
+describe('Series Controller', function () {
     var scope, ctrl;
 
     beforeEach(module('eaApp'));
 
-    beforeEach(inject(function ($controller, $rootScope, $httpBackend, $q) {
-        q = $q;
-        rootScope = $rootScope;
-        httpBackend = $httpBackend;
-        scope = $rootScope.$new();
-        ctrl = $controller('SeriesCtrl', {
-            $scope: scope,
-            $routeParams: {seriesname: 'lost'}
-        });
-        
-        // Fake login
-        $httpBackend.expect('GET', 'api/auth/check')
-                .respond(200, '[{"id":2,"accountname":"arnobats@gmail.com","thirdparty":false}]')        
-        
-
-    }));
-
-    it('test things in series controller', function () {
-        httpBackend.expect('GET', '/api/series/lost').respond(200, seriesDetailTestData);        
+    beforeEach(function () {
     
-        httpBackend.flush();        
-        //console.log(scope.series);
+ 
+        // Inject the angular services
+        inject(function ($controller, $httpBackend, $rootScope, $q) {
+            
+            // Fake login
+            $httpBackend.expect('GET', 'api/auth/check')
+                .respond(200, '[{"id":2,"accountname":"arnobats@gmail.com","thirdparty":false}]')     
         
-        httpBackend.expect('GET', '/api/series/episodesbyseason/73739/1').respond(200, seriesDetailEpisodeList);
-        var deferred = q.defer();
-        spyOn(scope, "loadSeason").and.returnValue(deferred.promise);
+            scope = $rootScope.$new();
+
+            //Mocked series factory
+            var mockedSeriesFactory = {
+                
+                getEpisodesBySeason : function(){
+                    var deferred = $q.defer();
+                    deferred.resolve(seriesDetailEpisodeList);
+                    return deferred.promise;                      
+                },
+                
+                getUnseenSeasonsBySeries : function (){
+                    var deferred = $q.defer();
+                    deferred.resolve(seriesDetailTestUnseenAmount);
+                    return deferred.promise;                       
+                },
         
-        scope.loadSeason(73739, 1);
-        deferred.reject({});        
-        //var deferredSuccess = q.defer();
-        //spyOn(scope, 'loadSeason').andReturn(deferredSuccess.promise);   
-        
-        expect(scope.loadSeason).toHaveBeenCalled();        
-        expect(scope.episodesDoneLoading).toBe(1);
-         
-        scope.$digest();
-        //scope.$apply();
-        //rootScope.$digest();
-        //rootScope.$apply();
+                getSeriesDetail : function(unique_name) {
+                    var deferred = $q.defer();
+                    deferred.resolve(seriesDetailTestData);
+                    return deferred.promise;                    
+                }
+                
+            };
+            
+            $controller('SeriesCtrl', {$scope: scope, seriesFactory: mockedSeriesFactory});
+            
+        });
     });
+    
+    it('Should load the series Lost', function () {
+        
+        scope.$digest();
+
+        expect(scope.series.season_object[6].active).toEqual(true);
+        expect(scope.series.name).toEqual('Lost');
+
+    });
+  
+
+    it('Should load the episode list for season 6', function () {
+
+        scope.loadSeason(73739, 6);
+        
+        scope.$digest();
+        
+        expect(scope.series.season_object[0].content).toBeUndefined();
+        expect(scope.series.season_object[1].content).toBeUndefined(); 
+        expect(scope.series.season_object[2].content).toBeUndefined();   
+        expect(scope.series.season_object[3].content).toBeUndefined();
+        expect(scope.series.season_object[4].content).toBeUndefined();
+        expect(scope.series.season_object[5].content).toBeUndefined();       
+        expect(scope.series.season_object[6].content.length).toEqual(18);
+        
+    });
+
+    
+    it('Should have 0 unseen episodes', function () {
+        // baby jeebus why is this randomly failing        
+
+        scope.$digest();  
+        
+        expect(scope.series.season_object[1].unseen).toEqual('0');
+        expect(scope.series.season_object[2].unseen).toEqual('0');
+        expect(scope.series.season_object[3].unseen).toEqual('0');
+        expect(scope.series.season_object[4].unseen).toEqual('0');
+        expect(scope.series.season_object[5].unseen).toEqual('0');
+        expect(scope.series.season_object[6].unseen).toEqual('0');  
+
+    });      
+   
 
 });
