@@ -197,12 +197,6 @@ ul {
     @media(min-width: $screen-md-min){ height: 740px; }
     @media(min-width: $screen-lg-min){ height: 740px; }
 
-    /* for lower resolution laptops the series were falling out of the screen */
-    @media(max-height: 740px)
-    {
-        height: 450px;
-    }
-
     position: relative;
     margin-top: 50px;
     .fanart-background {
@@ -214,12 +208,6 @@ ul {
         @media(min-width: $screen-sm-min){ height: 740px; }
         @media(min-width: $screen-md-min){ height: 740px; }
         @media(min-width: $screen-lg-min){ height: 740px; }
-
-        /* for lower resolution laptops the series were falling out of the screen */
-        @media(max-height: 740px)
-        {
-            height: 450px;
-        }
     }
 }
 .fanart-background.ng-hide-add, .fanart-background.ng-hide-remove {
@@ -684,7 +672,8 @@ li.disabled{
     background-color: $background-color;
     display: inline-block;
     @media(max-width: $screen-xs-max){ height: 100px; padding: 1px; }
-    @media(min-width: $screen-sm-min){ height: 320px; padding: 4px; }
+    @media(min-width: $screen-sm-min){ height: 210px; padding: 4px; }    
+    @media(min-width: $screen-md-min){ height:320px; padding: 4px; }
 }
 
 .badge {
