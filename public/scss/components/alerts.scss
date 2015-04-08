@@ -1,0 +1,32 @@
+.ea-alert{
+    bottom: 20px;
+    right: 20px;
+    position: fixed;
+    width: 310px;
+    height: auto;
+    list-style-type: none;
+    z-index: 10000000;
+
+    .close{
+        opacity: 1;
+    }
+
+    .alert{
+        margin-bottom: 5px;
+        .alert-success{
+            color: rgb(0, 100, 0);
+        }
+    }
+
+    .top{
+
+    }
+}
+
+.ea-alert-top{
+    margin-top: 10px;
+
+    .close{
+        opacity: 1;
+    }
+}
