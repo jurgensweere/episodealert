@@ -53,7 +53,7 @@
 					$scope.series.season_object[seasonNumber].content = response;
 					$scope.episodesDoneLoading = true;
 
-                })
+                });
 
 			};
 
