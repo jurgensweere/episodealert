@@ -186,6 +186,18 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
     };
 
     /**
+     * Save the order of the series in your profile
+     */
+    seriesFactory.saveFollowingOrder = function(series) {
+        var orderedList = [];
+        for (var i = 0; i <= series.length - 1; i++) {
+            orderedList.push(series[i].id);
+        }
+
+        return $http.post('/api/profile/order', {order: orderedList});
+    };
+
+    /**
      * Get a list of episodes by series
      *
      * @param {int} series_id   ID of series to get episodes for

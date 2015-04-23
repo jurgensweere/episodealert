@@ -12,6 +12,7 @@
             $scope.seen = userSettingService.getProfileSeen(); // exclude seen?
             $scope.smallview = userSettingService.getProfileSmallView();
             $scope.profileTopSeries = {};
+            $scope.profileSeries = {};
 
             $scope.toggleSmallView = function () {
                 userSettingService.setProfileSmallView(!$scope.smallview);
@@ -52,6 +53,20 @@
                             }
                         );
                 }
+            };
+
+            $scope.dragControlListeners = {
+                accept: function (sourceItemHandleScope, destSortableScope) {
+                    //override to determine drag is allowed or not. default is true.
+                    return true;
+                },
+                itemMoved: function (event) {
+                    //Do what you want
+                },
+                orderChanged: function(event) {
+                    seriesFactory.saveFollowingOrder($scope.profileSeries);
+                }
+                //containment: '#board'//optional param.
             };
 
             /** init **/

@@ -74,6 +74,7 @@ class FollowingController extends BaseController
         }
 
         $series = $query
+            ->orderBy('following.sort', 'asc')
             ->orderBy('following.archive', 'asc')
             ->get();
 

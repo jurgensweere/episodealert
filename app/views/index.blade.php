@@ -27,8 +27,8 @@
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-touch.js') %>
     
     <!-- build:libs -->
-    <% HTML::script('/js/vendor/_bower.js') %>
-    <% HTML::script('/js/vendor/ui-bootstrap-0.12.0.js') %>        
+    <% HTML::script('/js/vendor/_bower.min.js') %>
+    <% HTML::script('/js/vendor/ui-bootstrap-0.12.0.js') %>
     <!-- endbuild -->
 
 </head>
@@ -169,6 +169,7 @@
 <% HTML::script(asset('js/directives/eaTab.js')) %>
 <% HTML::script(asset('js/directives/eaButtons.js')) %>
 <% HTML::script(asset('js/directives/calendarCarousel/calendarCarousel.js')) %>
+<% HTML::script(asset('js/directives/ng-sortable.js')) %>
 <!-- endbuild -->
 
     <script>

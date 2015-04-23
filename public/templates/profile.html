@@ -35,8 +35,9 @@
 		-->
 	</div>
 	<div class="row profile-series">
-		<ul class="series-profile">
-		    <li ng-repeat="series in profileSeries| orderBy:'archive'" class="fade fadein" ng-class="{'small-view': smallview}">
+		<ul class="series-profile" as-sortable="dragControlListeners" ng-model="profileSeries">
+		    <li ng-repeat="series in profileSeries" as-sortable-item class="fade fadein" ng-class="{'small-view': smallview}">
+		    	<div as-sortable-item-handle class="hidden-xs"><i class="fa fa-arrows-alt"></i></div>
 				<div onLoad="followButton='false'" ng-include src="'templates/partial/_series-profile.html'" />
 		    </li>
 		 </ul>

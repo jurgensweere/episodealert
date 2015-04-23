@@ -328,6 +328,50 @@ h1 {
     }
 }
 
+.as-sortable-item, .as-sortable-placeholder {
+    display: block;
+}
+
+.as-sortable-item {
+    -ms-touch-action: none;
+    touch-action: none;
+}
+
+.as-sortable-item-handle {
+    cursor: move;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    padding: 8px;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.as-sortable-placeholder {
+}
+
+.as-sortable-drag {
+    position: absolute;
+    pointer-events: none;
+    z-index: 9999;
+    .as-sortable-item {
+        width: 100% !important;
+    }
+}
+
+.as-sortable-hidden {
+    display: none !important;
+}
+
+.as-sortable-un-selectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .guide {
 //    li {
 //        list-style: none;
@@ -722,12 +766,7 @@ li.disabled{
         list-style: none;
         display: inline-block;
         margin-bottom: 15px;
-        // TODO: Maybe we should use the SASS version of bootstrap?
-        //@media(max-width: $screen-xs-max){}
-        //@media(min-width: $screen-sm-min){}  /* deprecated: @screen-tablet, or @screen-sm */
-        //@media(min-width: $screen-md-min){}  /* deprecated: @screen-desktop, or @screen-md */
-        //@media(min-width: $screen-lg-min){}  /* deprecated: @screen-lg-desktop, or @screen-lg */
-
+        position: relative;
         div {
             text-align: center;
         }

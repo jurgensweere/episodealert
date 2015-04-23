@@ -54,6 +54,7 @@ Route::group(
                 // Profile
                 Route::get('profile', 'ProfileController@getUserData');
                 Route::get('profile/stats', 'ProfileController@getStats');
+                Route::post('profile/order', 'ProfileController@postOrder');
                 Route::post('profile/password', 'ProfileController@postChangePassword');
                 Route::post('profile/credentials', 'ProfileController@postChangeCredentials');
                 Route::post('profile/preferences', 'ProfileController@postChangePreferences');
@@ -62,7 +63,7 @@ Route::group(
             //Auth
             Route::post('auth/register', 'AuthController@register');
             Route::post('auth/login', 'AuthController@login');
-    		Route::get('auth/check', 'AuthController@checkAuth');
+            Route::get('auth/check', 'AuthController@checkAuth');
             Route::get('auth/logout', 'AuthController@logout');
             Route::post('password/reminder', 'RemindersController@postRemind');
             Route::post('password/reset', 'RemindersController@postReset');
@@ -83,7 +84,7 @@ Route::group(
             Route::get('series/episodesbyseason/{series_id}/{season}', 'SeriesController@getEpisodesBySeason');
             Route::get('series/{uniqueName}', 'SeriesController@getSeries');
 
-            Route::get('auth/expiry', function(){
+            Route::get('auth/expiry', function () {
                 return Response::json(array('flash' => 'Session expired'), 401);
             });
         });
@@ -95,7 +96,8 @@ Route::group(
 // =============================================
 // all routes that are not home or api will be redirected to the frontend
 // this allows angular to route them
-App::missing(function($exception)
-{
-    return App::make('EA\controllers\HomeController')->showWelcome();
-});
+App::missing(
+    function ($exception) {
+        return App::make('EA\controllers\HomeController')->showWelcome();
+    }
+);

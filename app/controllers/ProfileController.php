@@ -4,6 +4,7 @@ use Auth;
 use BaseController;
 use DB;
 use EA\models\User;
+use EA\models\Following;
 use Hash;
 use Input;
 use Response;
@@ -25,6 +26,23 @@ class ProfileController extends BaseController
         unset($user->remember_token);
 
         return Response::json($user);
+    }
+
+    public function postOrder()
+    {
+        $sortOrder = Input::get('order');
+        $seriesOrder = array_flip($sortOrder);
+
+        $following = Following::where('user_id', '=', Auth::user()->id)
+            ->whereIn('series_id', $sortOrder)
+            ->get();
+
+        foreach ($following as $series) {
+            if (array_key_exists($series->series_id, $seriesOrder)) {
+                $series->sort = $seriesOrder[$series->series_id];
+                $series->save();
+            }
+        }
     }
 
     public function postChangePassword()
@@ -53,7 +71,7 @@ class ProfileController extends BaseController
         );
 
         if ($validator->fails()) {
-        return Response::json(array('flash' => 'Error saving password.'), 400);
+            return Response::json(array('flash' => 'Error saving password.'), 400);
         }
 
         // change the password.
@@ -82,7 +100,7 @@ class ProfileController extends BaseController
 
         if ($validator->fails()) {
             return Response::json(
-            array(
+                array(
                     'flash' => 'Invalid data.',
                     'accountname' => $user->accountname,
                     'email' => $user->email,
