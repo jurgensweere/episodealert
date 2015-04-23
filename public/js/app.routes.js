@@ -83,6 +83,10 @@
                 templateUrl: 'templates/privacy.html'
             })
 
+            .when('/testing', {
+                templateUrl: 'templates/testpage.html'
+            })            
+
             .otherwise({
                 redirectTo: '/trending'
             });

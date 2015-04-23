@@ -64,6 +64,8 @@ var watchTask = function (env) {
     livereload.listen();
     gulp.watch(paths.js, ['jshint:' + env]);
     gulp.watch(paths.scss, ['sass:' + env]);
+    gulp.watch('./scss/**/*.scss');
+    gulp.watch('./scss/*.scss', ['sass:' + env]);
 }
 
 var sassTask = function (env) {

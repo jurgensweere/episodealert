@@ -6,6 +6,7 @@
 /* Components */
 @import 'scss/components/calendar-carousel';
 @import 'scss/components/alerts';
+@import 'scss/buttons';
 
 @CHARSET "ISO-8859-1";
 
@@ -144,7 +145,7 @@ ul {
             font-size: 120%;
             border: 2px solid #00ff90;
             color: #00ff90;
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 3px 10px 4px 8px;
         }
     }
@@ -267,6 +268,9 @@ h1 {
 
 
 .footer{
+    margin-top: 20px;
+    margin-bottom: 5px;
+
     font-size: 80%;
     div{
         color: $lighter-text;
@@ -314,7 +318,7 @@ h1 {
           outline: none;
         }
 
-        .active {
+        .btn-profile--active {
             color: $bright-highlight;
         }
 
@@ -707,10 +711,23 @@ li.disabled{
         border: 4px solid orange;
         border-radius: 20px;
         box-shadow: 0 0 1em lighten(orange, 20%);
+        @media(max-width: $screen-xs-max){
+            box-shadow: 0 0 0.25em lighten(orange, 20%); 
+            border: 3px solid orange;
+            font-size: 140%;
+            right: 2%;
+        }             
+
     }
+
     .seen-badge{
         border: 4px solid $bright-highlight;
         box-shadow: 0 0 1em lighten($bright-highlight, 20%);
+        @media(max-width: $screen-xs-max){
+            box-shadow: 0 0 0.25em lighten($bright-highlight, 20%); 
+            border: 3px solid $bright-highlight;
+            font-size: 120%;
+        }      
     }
 
     p {
@@ -818,7 +835,7 @@ li.disabled{
 	font-size: 120%;
 	border: 2px solid $bright-highlight;
 	color: $bright-highlight;
-	border-radius: 2px;
+	border-radius: 20px;
 	padding: 3px 10px 4px 8px;
 }
 
@@ -939,12 +956,20 @@ li.disabled{
 
 .series-detail {
 
+    .tab-content{
+        padding: 7px 5px 15px 9px;
+
+        @media(max-width: $screen-xs-max){
+            padding: 0px;
+        }
+    }
+
     .series-left{
         padding-right: 5px;
     }
 
     .info-text-top {
-        padding: 3px 60px 30px 60px;
+        padding: 3px 35px 30px 35px;
         @media(max-width: $screen-xs-max){ padding: 5px 0px 5px 20px; }
     }
 
@@ -983,7 +1008,7 @@ li.disabled{
     }
 
     .btn{
-        border-radius: 2px;
+        border-radius: 20px;
     }
 
     .btn:hover{
@@ -1036,7 +1061,7 @@ li.disabled{
 	background-color: $primary-color;
 	margin: 0 0px 40px 0px;
     @media(min-width: $screen-md-min){ margin: 20px 15px 40px -15px;}
-	padding: 10px;
+	padding: 20px;
 
 	dt {
 		float: left;
