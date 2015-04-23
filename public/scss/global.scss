@@ -345,6 +345,7 @@ h1 {
     padding: 8px;
     z-index: 1;
     background-color: rgba(0,0,0,0.5);
+    display: none;
 }
 
 .as-sortable-placeholder {
@@ -771,7 +772,9 @@ li.disabled{
             text-align: center;
         }
     }
-
+    li:hover .as-sortable-item-handle {
+        display: block;
+    }
 
 
     img {
