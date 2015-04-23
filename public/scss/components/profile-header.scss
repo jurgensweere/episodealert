@@ -1,0 +1,44 @@
+/*
+ *  Styles for the header you see on top of all the profile pages
+ */
+
+.info-text-top {
+
+    padding: 3px 60px 20px 60px;
+    @media(max-width: $screen-xs-max){ padding: 3px 0px 0px 0px; }
+    //background-color: $background-color;
+
+    p {
+        line-height: 180%;
+    }
+
+    h1 {
+        @media(max-width: $screen-xs-max) { font-size: 100%; }
+    }
+}
+
+.profile-sub-navigation{
+    display: inline-block;
+    font-size:150%;
+    top: 2px;
+    margin: 0px 10px 0px 10px;
+    @media(max-width: $screen-xs-max)
+    {
+        font-size: 100%;
+    }
+    
+    .setting{
+        color: $bright-highlight;
+        cursor: pointer;
+
+    }
+
+    .setting.active{
+        color: $highlight-color;;
+    }
+
+    .setting:hover{
+        color: $highlight-color;
+    }
+
+}

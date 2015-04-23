@@ -6,9 +6,73 @@
 /* Components */
 @import 'scss/components/calendar-carousel';
 @import 'scss/components/alerts';
+@import 'scss/components/profile';
+@import 'scss/components/profile-header';
+@import 'scss/components/trending';
+@import 'scss/components/series-detail';
+
+/* Shared */
 @import 'scss/buttons';
+@import 'scss/animations';
 
 @CHARSET "ISO-8859-1";
+
+body {
+    background-color: $background-color;
+    color: #fff;
+    font-family: $font-family;
+    font-weight: 400;
+    overflow-y: scroll;
+}
+
+// usage; description of series, profile welcome, other info
+h1 {
+    font-size: 200%;
+    margin: 0px;
+    line-height: 150%;
+    display: inline-block;
+}
+
+/* reset some defaults */
+button:focus,
+button:active {
+    outline: none !important;
+}
+
+a {
+    color: $bright-highlight;
+}
+
+a:hover, a:focus {
+    color: $bright-highlight;
+}
+
+p {
+    margin: 0 0 0px;
+}
+
+ul {
+    padding-left:  0px;
+}
+
+/* spacers */
+.spacer-lg{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.spacer-md{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.spacer-sm{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/* overwrite for angular-ui-bootstrap */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 .registration{
     h1{
@@ -46,71 +110,6 @@
     .register{
         font-size: 1.4em;
     }
-}
-
-
-
-body {
-    background-color: $background-color;
-    color: #fff;
-    font-family: $font-family;
-    font-weight: 400;
-    overflow-y: scroll;
-}
-
-/* spacers */
-
-.spacer-lg{
-    padding-top: 40px;
-    padding-bottom: 40px;
-}
-
-.spacer-md{
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-
-.spacer-sm{
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-/* reset some defaults */
-
-button:focus,
-button:active {
-    outline: none !important;
-}
-
-a {
-    color: $bright-highlight;
-}
-
-a:hover, a:focus {
-    color: $bright-highlight;
-}
-
-p {
-    margin: 0 0 0px;
-}
-
-ul {
-    padding-left:  0px;
-}
-
-/* overwrite for angular-ui-bootstrap */
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
-
-/* background image test for serie details */
-
-.background-container {
-/*    background: url(http://localhost/img/fanart/ch/chuck.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    opacity: 0.1;
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    z-index: -9999;*/
 }
 
 .form-control-feedback{
@@ -151,50 +150,6 @@ ul {
     }
 }
 
-.splash-fanart {
-    @media(max-width: $screen-xs-max){ height: 405px; }
-    @media(min-width: $screen-sm-min){ height: 740px; }
-    @media(min-width: $screen-md-min){ height: 740px; }
-    @media(min-width: $screen-lg-min){ height: 740px; }
-
-    position: relative;
-    margin-top: 50px;
-    .fanart-background {
-        position: absolute;
-        background-size: cover;
-        background-position: center bottom;
-        width: 100%;
-        @media(max-width: $screen-xs-max){ height: 405px; }
-        @media(min-width: $screen-sm-min){ height: 740px; }
-        @media(min-width: $screen-md-min){ height: 740px; }
-        @media(min-width: $screen-lg-min){ height: 740px; }
-    }
-}
-.fanart-background.ng-hide-add, .fanart-background.ng-hide-remove {
-  /* this is required as of 1.3x to properly
-     apply all styling in a show/hide animation */
-  transition: 0s linear all;
-}
-
-.fanart-background.ng-hide-add-active,
-.fanart-background.ng-hide-remove-active {
-  /* the transition is defined in the active class */
-  transition: 1s linear all;
-}
-
-.fanart-background.ng-hide-add { opacity: 1; }
-.fanart-background.ng-hide-add.ng-hide-add-active { opacity: 0; }
-.fanart-background.ng-hide-remove { opacity: 0; }
-.fanart-background.ng-hide-remove.ng-hide-remove-active { opacity: 1; }
-
-.splash-fanart-fade {
-    width: 100%;
-    height: 100%;
-    background: transparent url('/img/fanart-fade.png') repeat;
-    display: block;
-    position: absolute;
-}
-
 .ea-content {
 	min-height: 600px;
 }
@@ -208,64 +163,6 @@ ul {
         margin-right: 10px;
     }
 }
-
-//remove padding from the container
-.container {
-
-}
-
-// usage; description of series, profile welcome, other info
-h1 {
-    font-size: 200%;
-    margin: 0px;
-    line-height: 150%;
-    display: inline-block;
-}
-
-.info-text-top {
-
-    padding: 3px 60px 20px 60px;
-    @media(max-width: $screen-xs-max){ padding: 3px 0px 0px 0px; }
-    //background-color: $background-color;
-
-    p {
-        line-height: 180%;
-    }
-
-    h1 {
-        @media(max-width: $screen-xs-max) { font-size: 100%; }
-    }
-}
-
-.profile-settings{
-    display: inline-block;
-    font-size:150%;
-    top: 2px;
-    margin: 0px 10px 0px 10px;
-    @media(max-width: $screen-xs-max)
-    {
-        font-size: 100%;
-    }
-
-
-
-    .setting{
-        color: $bright-highlight;
-        cursor: pointer;
-
-    }
-
-    .setting.active{
-        color: $highlight-color;;
-    }
-
-    .setting:hover{
-        color: $highlight-color;
-    }
-
-}
-
-
 
 .footer{
     margin-top: 20px;
@@ -283,127 +180,7 @@ h1 {
 
 }
 
-.profile, .guide {
-    .profile-filters, .guide-filters {
-        height: 40px;
-        padding: 5px 0px 5px 20px;
-        @media(max-width: $screen-xs-max){ padding: 5px 0px 5px 0px; }
-        background-color: $primary-color;
-
-        span {
-            padding-right:5px;
-        }
-
-        .btn {
-            margin-left: 10px;
-            font-size: 75%;
-            background-color: #1a1a1a;
-            border-radius: 0px;
-            text-transform: uppercase;
-            color: #fff;
-
-            /* make all filter buttons fit on one line on iPhone 5 */
-            @media(max-width: $screen-xs-max) { margin-left: 6px; }
-        }
-
-        .btn-profile--toggle{
-            font-size: 150%;
-            background-color: $primary-color;
-            height: 30px;
-            margin-top: -4px;
-            float: right;
-        }
-
-        .btn:focus {
-          outline: none;
-        }
-
-        .btn-profile--active {
-            color: $bright-highlight;
-        }
-
-        .btn:hover {
-            color: $bright-highlight;
-        }
-    }
-
-    .profile-series {
-        background-color: $background-color;
-    }
-}
-
-.as-sortable-item, .as-sortable-placeholder {
-    display: block;
-}
-
-.as-sortable-item {
-    -ms-touch-action: none;
-    touch-action: none;
-}
-
-.as-sortable-item-handle {
-    cursor: move;
-    position: absolute;
-    top: 0;
-    left: 10px;
-    padding: 8px;
-    z-index: 1;
-    background-color: rgba(0,0,0,0.5);
-    display: none;
-}
-
-.as-sortable-placeholder {
-}
-
-.as-sortable-drag {
-    position: absolute;
-    pointer-events: none;
-    z-index: 9999;
-    .as-sortable-item {
-        width: 100% !important;
-    }
-}
-
-.as-sortable-hidden {
-    display: none !important;
-}
-
-.as-sortable-un-selectable {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
 .guide {
-//    li {
-//        list-style: none;
-//        h2 {
-//            color: #14B6CC;
-//            font-weight: bold;
-//            font-size: 16px;
-//            margin: 10px 0;
-//            padding: 8px;
-//        }
-//        .unseen-episode, .unaired-episode, .unseen-episodes p, .unaired-episodes p {
-//            padding: 3px;
-//        }
-//        .unseen-episode, .unseen-episodes, .unaired-episodes {
-//            color: $lighter-text;
-//        }
-//        .unaired-episode {
-//            color: #666;
-//        }
-//        .unseen-episodes, .unaired-episodes {
-//            border-top: 1px solid #333;
-//        }
-//        .unaired-episodes {
-//            margin-bottom: 30px;
-//        }
-//    }
-
     table{
         background-color: $background-color;
 
@@ -415,229 +192,10 @@ h1 {
            background-color: lighten( $background-color, 2% );
         }
     }
-
-}
-
-/* ng animation */
-
-/* if animation */
-.animate-if {
-
-}
-
-.animate-if.ng-enter, .animate-if.ng-leave {
-  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-}
-
-.animate-if.ng-enter,
-.animate-if.ng-leave.ng-leave-active {
-    transform: scale(0,0);
-    opacity: 0;
-    display: block !important;
-}
-
-.animate-if.ng-leave,
-.animate-if.ng-enter.ng-enter-active {
-    transform: scale(1,1);
-    opacity: 1;
-}
-/* end if animation */
-
-/* After the transition this will be the only class remaining */
-.fadein {
-  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.35s;
-  -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.35s;
-  -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.35s;
-  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.35s;
-  opacity: 1; /* Default value but added for clarity */
-}
-
-/* Initial state when showing */
-.fadein.ng-hide-remove {
-    transform: scale(0,0);
-    opacity: 0;
-    display: block !important;
-}
-
-/* Will transition towards this state */
-.fadein.ng-hide-remove.ng-hide-remove-active {
-    transform: scale(1,1);
-    opacity: 1;
-}
-
-/* fade used for main content */
-.fade {
-    top: 0;
-    left: 0;
-    right: 0;
-    opacity: 1;
-}
-
-.fade.ng-enter{
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
-.fade.ng-leave{
-    display: none;
-}
-
-.fade.ng-enter {
-    opacity: 0;
-}
-.fade.ng-enter-active {
-    opacity: 1;
-}
-.fade.ng-leave {
-    opacity: 1;
-}
-.fade.ng-leave-active {
-    opacity: 0;
-}
-
-.fade-slow {
-    top: 0;
-    left: 0;
-    right: 0;
-    opacity: 1;
-}
-.fade-slow.ng-enter,
-.fade-slow.ng-leave{
-    -webkit-transition: all 1.25s ease;
-    -moz-transition: all 1.25s ease;
-    -o-transition: all 1.25s ease;
-    transition: all 1.25s ease;
-}
-.fade-slow.ng-enter {
-    opacity: 0;
-}
-.fade-slow.ng-enter-active {
-    opacity: 1;
-}
-.fade-slow.ng-leave {
-    opacity: 1;
-}
-.fade-slow.ng-leave-active {
-    opacity: 0;
-}
-
-.flash-container {
-    background-color: $background-color;
-}
-
-#flash-messages {
-    list-style-type: none;
-}
-
-#spinner {
-    display: none;
-    position: absolute;
-    top: 100px;
-    left: 50%;
-    width: 70px;
-    text-align: center;
-
-    div {
-        width: 18px;
-        height: 18px;
-        background-color: #333;
-
-        border-radius: 100%;
-        display: inline-block;
-        -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
-        animation: bouncedelay 1.4s infinite ease-in-out;
-        /* Prevent first frame from flickering when animation starts */
-        -webkit-animation-fill-mode: both;
-        animation-fill-mode: both;
-    }
-    .bounce1 {
-        -webkit-animation-delay: -0.32s;
-        animation-delay: -0.32s;
-    }
-    .bounce2 {
-        -webkit-animation-delay: -0.16s;
-        animation-delay: -0.16s;
-    }
-}
-
-@-webkit-keyframes bouncedelay {
-  0%, 80%, 100% { -webkit-transform: scale(0.0) }
-  40% { -webkit-transform: scale(1.0) }
-}
-
-@keyframes bouncedelay {
-  0%, 80%, 100% {
-    transform: scale(0.0);
-    -webkit-transform: scale(0.0);
-  } 40% {
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
-  }
-}
-
-.animation .ng-enter,
-.animation .ng-show {
-  -webkit-transition:0.5s linear all;
-  transition:0.5s linear all;
-}
-
-.animation .ng-leave,
-.animation .ng-hide {
-  -webkit-transition:0s linear all;
-  transition:0s linear all;
-}
-
-.animation .ng-enter,
-.animation .ng-show,
-.animation .ng-leave.ng-leave-active,
-.animation .ng-hide.ng-hide-active {
-  opacity:0;
-}
-.animation .ng-leave,
-.animation .ng-hide,
-.animation .ng-enter.ng-enter-active,
-.animation .ng-show.ng-show-active {
-  opacity:1;
-}
-
-.splash-brand {
-    @media(max-width: $screen-xs-max){ font-size: 34px; }
-    @media(min-width: $screen-sm-min){ font-size: 42px; }
-    @media(min-width: $screen-md-min){ font-size: 52px; }
-    @media(min-width: $screen-lg-min){ font-size: 52px; }
-    font-size: 52px;
-    text-align: center;
-}
-
-.marketing {
-    top: -50px;
-    text-align: center;
-    position: absolute;
-    width: 100%;
-
-    h1 {
-        @media(max-width: $screen-xs-max){ font-size: 24px; }
-        @media(min-width: $screen-sm-min){ font-size: 30px; }
-    }
-
-    p {
-        @media(max-width: $screen-xs-max){ font-size: 12px; }
-        @media(min-width: $screen-sm-min){ font-size: 18px; }
-    }
 }
 
 li.disabled{
     display: none;
-}
-
-.poster {
-    background-color: $background-color;
-    display: inline-block;
-    @media(max-width: $screen-xs-max){ height: 100px; padding: 1px; }
-    @media(min-width: $screen-sm-min){ height: 210px; padding: 4px; }    
-    @media(min-width: $screen-md-min){ height:320px; padding: 4px; }
 }
 
 .badge {
@@ -650,214 +208,12 @@ li.disabled{
     border-radius: 15px;
     z-index: 1;
 }
+
 .seen-badge{
     border: 2px solid $bright-highlight;
 }
 
-.series-profile,
-.series-search {
-    text-align: left;
-    margin: auto;
-    padding-top: 15px;
-
-    a {
-        display: block;
-        position: relative;
-    }
-
-    .small-view{
-        @media(max-width: $screen-xs-max){ width: 100%; }
-        @media(min-width: $screen-sm-min){ width: 25%; }
-        @media(min-width: $screen-md-min){ width: 16.6%; }
-        @media(min-width: $screen-lg-min){ width: 16.6%; }
-
-        a{
-            font-size: 90% !important;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-        }
-    }
-
-    .following-button {
-        margin-top: 10px;
-    }
-
-    .archive {
-        top: 5%;
-        left: 0;
-        right: 0;
-        position: absolute;
-        text-align: center;
-        opacity: 1;
-        p {
-            font-size: 100%;
-            background-color: rgba($secondary-color, 0.5);
-        }
-
-    }
-
-    .archived {
-        opacity: 0.5;
-    }
-
-    .badge {
-        bottom: 5%;
-        right: 5%;
-        left: auto;
-        top: auto;
-        font-size: 180%;
-        padding: 3px 10px 4px 8px;
-        border: 4px solid orange;
-        border-radius: 20px;
-        box-shadow: 0 0 1em lighten(orange, 20%);
-        @media(max-width: $screen-xs-max){
-            box-shadow: 0 0 0.25em lighten(orange, 20%); 
-            border: 3px solid orange;
-            font-size: 140%;
-            right: 2%;
-        }             
-
-    }
-
-    .seen-badge{
-        border: 4px solid $bright-highlight;
-        box-shadow: 0 0 1em lighten($bright-highlight, 20%);
-        @media(max-width: $screen-xs-max){
-            box-shadow: 0 0 0.25em lighten($bright-highlight, 20%); 
-            border: 3px solid $bright-highlight;
-            font-size: 120%;
-        }      
-    }
-
-    p {
-        font-size: 85%;
-        padding:  4px 0px 4px 0px;
-        text-shadow: 1px 1px $lighter-text-shadow;
-    }
-
-    .extra-info {
-        position: relative;
-        padding: 10px 0px 15px 10px;
-        text-align: left;
-        background-color: $primary-color;
-        height: 100px;
-
-        a {
-            font-size: 110%;
-        }
-
-    }
-
-    .follow-wrapper {
-        background-color: $secondary-color;
-        height: 60px;
-    }
-
-    .extra-info-episodes {
-        padding: 5px 0px 15px 10px;
-        text-align: left;
-        background-color: $secondary-color;
-        height: 100px;
-        text-shadow: 1px 1px $lighter-text-shadow;
-
-        button {
-            background-color: rgba(0,0,0,0.5);
-            font-size: 120%;
-            border: 2px solid $bright-highlight;
-            color: $bright-highlight;
-            border-radius: 2px;
-            padding: 3px 10px 4px 8px;
-            right: 5%;
-        }
-        button:hover {
-            color: white;
-        }
-    }
-
-    li {
-        @media(max-width: $screen-xs-max){ width: 100%; }
-        @media(min-width: $screen-sm-min){ width: 33%; }
-        @media(min-width: $screen-md-min){ width: 25%; }
-        @media(min-width: $screen-lg-min){ width: 25%; }
-        padding: 0px 10px 0px 10px;
-        list-style: none;
-        display: inline-block;
-        margin-bottom: 15px;
-        position: relative;
-        div {
-            text-align: center;
-        }
-    }
-    li:hover .as-sortable-item-handle {
-        display: block;
-    }
-
-
-    img {
-    }
-
-}
-
-.series-search-adjust {
-    .extra-info {
-        padding: 10px 0px 15px 0px;
-        text-align: center;
-        background-color: $primary-color;
-        height: 60px;
-
-        a {
-            font-size: 110%;
-        }
-    }
-
-    .extra-info-episodes {
-        padding: 5px 0px 15px 10px;
-        text-align: left;
-        background-color: $secondary-color;
-        height: 30px;
-        text-shadow: 1px 1px $lighter-text-shadow;
-    }
-
-    li {
-        margin-top: 30px;
-        @media(max-width: $screen-xs-max){ width: 100%; }
-        @media(min-width: $screen-sm-min){ width: 50%; }
-        @media(min-width: $screen-md-min){ width: 33%; }
-        @media(min-width: $screen-lg-min){ width: 20%; }
-    }
-}
-
-/* following button */
-
-.following-button {
-	background-color: rgba(0,0,0,0.5);
-	font-size: 120%;
-	border: 2px solid $bright-highlight;
-	color: $bright-highlight;
-	border-radius: 20px;
-	padding: 3px 10px 4px 8px;
-}
-
-.notfollowing {
-  border: 2px solid #33B37B !important;
-  color: #33B37B !important;
-}
-
-.notfollowing:hover {
-  border: 2px solid #00ff90 !important;
-  color: #00ff90 !important;
-}
-
-.following-button:hover,
-.following-button:focus {
-	color: $bright-highlight;
-}
-
-
-
 /* seen button */
-
 .seen-button {
     color: $bright-highlight;
     background-color: rgba(0, 0, 0, 0.8);
@@ -893,56 +249,6 @@ li.disabled{
     left: -79px;
 }
 
-.episode-list {
-	font-size: 110%;
-	width: 100%;
-    margin-top: 15px;
-
-	td {
-		padding: 3px 10px 3px 10px;
-        vertical-align: top;
-	}
-
-    tr.seen {
-        color: #666;
-    }
-
-	.number {
-		width:5%;
-		padding-left:20px;
-	}
-
-	.title {
-        cursor: pointer;
-		width: 67%;
-	}
-
-    .description{
-        margin-top: 10px;
-        margin-bottom: 10px;
-        color: $light-text;
-    }
-
-    .title-row:hover .description-info{
-        display: inline-block;
-    }
-
-    .description-info{
-        display: none;
-    }
-
-	.airdate {
-        color: #666;
-        font-size: 70%;
-        @media(min-width: $screen-md-min){ text-align: right; font-size: 100%; color: inherit;}
-	}
-
-	.seen-column {
-        text-align: right;
-		width: 13%;
-	}
-}
-
 .series-browse{
    .series{
     position: relative;
@@ -952,127 +258,6 @@ li.disabled{
     }
 
    }
-}
-
-.series-detail {
-
-    .tab-content{
-        padding: 7px 5px 15px 9px;
-
-        @media(max-width: $screen-xs-max){
-            padding: 0px;
-        }
-    }
-
-    .series-left{
-        padding-right: 5px;
-    }
-
-    .info-text-top {
-        padding: 3px 35px 30px 35px;
-        @media(max-width: $screen-xs-max){ padding: 5px 0px 5px 20px; }
-    }
-
-    h1 {
-        @media(max-width: $screen-xs-max){ padding-bottom: 10px; }
-        text-shadow: 2px 2px $lighter-text-shadow;
-        display: inline-block;
-        margin-right: 10px;
-    }
-
-    li {
-        padding: 0px 0px 0px 0px;
-        list-style: none;
-    }
-
-    img {
-        @media(min-width: $screen-md-min){ margin-left: -15px;}
-    }
-
-    p, dl {
-        text-shadow: 1px 1px $lighter-text-shadow;
-    }
-
-    .badge {
-    }
-
-    .following-button {
-        color: $bright-highlight;
-        position: relative;
-        top: -4px;
-    }
-
-    .seasons{
-        padding-left: 0;
-        background-color: $primary-color;
-    }
-
-    .btn{
-        border-radius: 20px;
-    }
-
-    .btn:hover{
-        color: #FFF;
-    }
-
-    .btn:focus{
-        color: $bright-highlight;
-    }
-
-    .nav-tabs {
-    	border: none;
-    	font-size: 130%;
-
-    	a {
-    		border-radius: 0px;
-    	}
-
-    	li > a {
-            text-shadow: none;
-            text-decoration: none;
-    		padding: 12px 16px 12px 16px;
-    		margin-right: 1px;
-    		border: none;
-    		color: #8A8A8A;
-    		background-color: #363636;
-    	}
-
-    	li > a:hover {
-    		color: #FFF;
-    		border: none;
-    	}
-
-    	.active > a {
-    		color: #FFF;
-    		border: none;
-    		background-color: #252525;
-    	}
-
-    	.active > a:hover {
-    		color: #FFF;
-    		border: none;
-    		cursor: pointer;
-    		background-color: #252525;
-    	}
-    }
-}
-
-.series-details-extra {
-	background-color: $primary-color;
-	margin: 0 0px 40px 0px;
-    @media(min-width: $screen-md-min){ margin: 20px 15px 40px -15px;}
-	padding: 20px;
-
-	dt {
-		float: left;
-		clear: both;
-        margin-right: 10px;
-	}
-
-	dl {
-		margin-bottom: 0px;
-	}
-
 }
 
 .series-genres {
@@ -1090,47 +275,6 @@ li.disabled{
     a.highlight {
         color: orange;
     }
-}
-
-.splash-posters {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-
-    .series {
-        cursor: pointer;
-        width: 20%;
-        display: inline-block;
-        text-align: center;
-        position: relative;
-        padding-bottom: 20px;
-
-        span {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            background-color: $dark-color;
-            height: 12px;
-            left: 0;
-        }
-
-        .active {
-            color: $bright-highlight;
-            background-color: $bright-highlight;
-        }
-    }
-}
-
-/* have to refactor the entire button situation, using important is just horrible */
-.btn-small {
-    border: none !important;
-    padding: 0px !important;
-    background: none !important;
-}
-
-.btn-small--archive {
-
 }
 
 .navbar-default {
@@ -1218,4 +362,3 @@ li.disabled{
     -webkit-box-shadow: none;
     box-shadow: none;
 }
-

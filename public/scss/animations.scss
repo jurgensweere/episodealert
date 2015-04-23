@@ -1,0 +1,183 @@
+ /* ng animation */
+
+/* if animation */
+.animate-if {
+
+}
+
+.animate-if.ng-enter, .animate-if.ng-leave {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+    transform: scale(0,0);
+    opacity: 0;
+    display: block !important;
+}
+
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+    transform: scale(1,1);
+    opacity: 1;
+}
+/* end if animation */
+
+/* After the transition this will be the only class remaining */
+.fadein {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.35s;
+  -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.35s;
+  -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.35s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.35s;
+  opacity: 1; /* Default value but added for clarity */
+}
+
+/* Initial state when showing */
+.fadein.ng-hide-remove {
+    transform: scale(0,0);
+    opacity: 0;
+    display: block !important;
+}
+
+/* Will transition towards this state */
+.fadein.ng-hide-remove.ng-hide-remove-active {
+    transform: scale(1,1);
+    opacity: 1;
+}
+
+/* fade used for main content */
+.fade {
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 1;
+}
+
+.fade.ng-enter{
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.fade.ng-leave{
+    display: none;
+}
+
+.fade.ng-enter {
+    opacity: 0;
+}
+.fade.ng-enter-active {
+    opacity: 1;
+}
+.fade.ng-leave {
+    opacity: 1;
+}
+.fade.ng-leave-active {
+    opacity: 0;
+}
+
+.fade-slow {
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 1;
+}
+.fade-slow.ng-enter,
+.fade-slow.ng-leave{
+    -webkit-transition: all 1.25s ease;
+    -moz-transition: all 1.25s ease;
+    -o-transition: all 1.25s ease;
+    transition: all 1.25s ease;
+}
+.fade-slow.ng-enter {
+    opacity: 0;
+}
+.fade-slow.ng-enter-active {
+    opacity: 1;
+}
+.fade-slow.ng-leave {
+    opacity: 1;
+}
+.fade-slow.ng-leave-active {
+    opacity: 0;
+}
+
+.flash-container {
+    background-color: $background-color;
+}
+
+#flash-messages {
+    list-style-type: none;
+}
+
+#spinner {
+    display: none;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    width: 70px;
+    text-align: center;
+
+    div {
+        width: 18px;
+        height: 18px;
+        background-color: #333;
+
+        border-radius: 100%;
+        display: inline-block;
+        -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+        animation: bouncedelay 1.4s infinite ease-in-out;
+        /* Prevent first frame from flickering when animation starts */
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+    .bounce1 {
+        -webkit-animation-delay: -0.32s;
+        animation-delay: -0.32s;
+    }
+    .bounce2 {
+        -webkit-animation-delay: -0.16s;
+        animation-delay: -0.16s;
+    }
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
+.animation .ng-enter,
+.animation .ng-show {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+}
+
+.animation .ng-leave,
+.animation .ng-hide {
+  -webkit-transition:0s linear all;
+  transition:0s linear all;
+}
+
+.animation .ng-enter,
+.animation .ng-show,
+.animation .ng-leave.ng-leave-active,
+.animation .ng-hide.ng-hide-active {
+  opacity:0;
+}
+.animation .ng-leave,
+.animation .ng-hide,
+.animation .ng-enter.ng-enter-active,
+.animation .ng-show.ng-show-active {
+  opacity:1;
+}

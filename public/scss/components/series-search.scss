@@ -1,0 +1,28 @@
+ .series-search-adjust {
+    .extra-info {
+        padding: 10px 0px 15px 0px;
+        text-align: center;
+        background-color: $primary-color;
+        height: 60px;
+
+        a {
+            font-size: 110%;
+        }
+    }
+
+    .extra-info-episodes {
+        padding: 5px 0px 15px 10px;
+        text-align: left;
+        background-color: $secondary-color;
+        height: 30px;
+        text-shadow: 1px 1px $lighter-text-shadow;
+    }
+
+    li {
+        margin-top: 30px;
+        @media(max-width: $screen-xs-max){ width: 100%; }
+        @media(min-width: $screen-sm-min){ width: 50%; }
+        @media(min-width: $screen-md-min){ width: 33%; }
+        @media(min-width: $screen-lg-min){ width: 20%; }
+    }
+}

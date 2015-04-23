@@ -129,7 +129,7 @@
         var directive = { restrict: 'E', replace: true, transclude: true };
         directive.template =
             '<button' +
-            ' class="btn following-button"' +
+            ' class="ea-btn ea-btn--follow"' +
             ' ng-class="series.following ? \'following\' : \'notfollowing\'"' +
             ' ng-show="series"' +
             ' ng-mouseover="mouseOver(series)"' +

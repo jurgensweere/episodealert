@@ -45,6 +45,9 @@ module.exports = function(config) {
     preprocessors: {
     },
 
+    // Sometimes phantomJS is randomly super slow, to not have the test crash increase the timeout
+    captureTimeout: 60000,
+    browserNoActivityTimeout : 60000,
 
     // test results reporter to use
     // possible values: 'dots', 'progress'

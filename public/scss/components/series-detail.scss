@@ -1,0 +1,165 @@
+.series-detail {
+
+    .tab-content{
+        padding: 7px 5px 15px 9px;
+
+        @media(max-width: $screen-xs-max){
+            padding: 0px;
+        }
+    }
+
+    .series-left{
+        padding-right: 5px;
+    }
+
+    .info-text-top {
+        padding: 3px 35px 30px 35px;
+        @media(max-width: $screen-xs-max){ padding: 5px 0px 5px 20px; }
+    }
+
+    h1 {
+        @media(max-width: $screen-xs-max){ padding-bottom: 10px; }
+        text-shadow: 2px 2px $lighter-text-shadow;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    li {
+        padding: 0px 0px 0px 0px;
+        list-style: none;
+    }
+
+    img {
+        @media(min-width: $screen-md-min){ margin-left: -15px;}
+    }
+
+    p, dl {
+        text-shadow: 1px 1px $lighter-text-shadow;
+    }
+
+    .ea-btn--follow {
+      top: -2px;
+      position: relative;
+    }
+
+    .seasons{
+        padding-left: 0;
+        background-color: $primary-color;
+    }
+
+    .btn{
+        border-radius: 20px;
+    }
+
+    .btn:hover{
+        color: #FFF;
+    }
+
+    .btn:focus{
+        color: $bright-highlight;
+    }
+
+    .nav-tabs {
+    	border: none;
+    	font-size: 130%;
+
+    	a {
+    		border-radius: 0px;
+    	}
+
+    	li > a {
+            text-shadow: none;
+            text-decoration: none;
+    		padding: 12px 16px 12px 16px;
+    		margin-right: 1px;
+    		border: none;
+    		color: #8A8A8A;
+    		background-color: #363636;
+    	}
+
+    	li > a:hover {
+    		color: #FFF;
+    		border: none;
+    	}
+
+    	.active > a {
+    		color: #FFF;
+    		border: none;
+    		background-color: #252525;
+    	}
+
+    	.active > a:hover {
+    		color: #FFF;
+    		border: none;
+    		cursor: pointer;
+    		background-color: #252525;
+    	}
+    }
+}
+
+.series-details-extra {
+	background-color: $primary-color;
+	margin: 0 0px 40px 0px;
+    @media(min-width: $screen-md-min){ margin: 20px 15px 40px -15px;}
+	padding: 20px;
+
+	dt {
+		float: left;
+		clear: both;
+        margin-right: 10px;
+	}
+
+	dl {
+		margin-bottom: 0px;
+	}
+}
+
+.episode-list {
+	font-size: 110%;
+	width: 100%;
+    margin-top: 15px;
+
+	td {
+		padding: 3px 10px 3px 10px;
+        vertical-align: top;
+	}
+
+    tr.seen {
+        color: #666;
+    }
+
+	.number {
+		width:5%;
+		padding-left:20px;
+	}
+
+	.title {
+        cursor: pointer;
+		width: 67%;
+	}
+
+    .description{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        color: $light-text;
+    }
+
+    .title-row:hover .description-info{
+        display: inline-block;
+    }
+
+    .description-info{
+        display: none;
+    }
+
+	.airdate {
+        color: #666;
+        font-size: 70%;
+        @media(min-width: $screen-md-min){ text-align: right; font-size: 100%; color: inherit;}
+	}
+
+	.seen-column {
+        text-align: right;
+		width: 13%;
+	}
+}

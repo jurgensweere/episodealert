@@ -1,0 +1,111 @@
+/*
+ * Styles for the trending page
+ */ 
+
+.splash-fanart {
+    @media(max-width: $screen-xs-max){ height: 405px; }
+    @media(min-width: $screen-sm-min){ height: 740px; }
+    @media(min-width: $screen-md-min){ height: 740px; }
+    @media(min-width: $screen-lg-min){ height: 740px; }
+
+    position: relative;
+    margin-top: 50px;
+    .fanart-background {
+        position: absolute;
+        background-size: cover;
+        background-position: center bottom;
+        width: 100%;
+        @media(max-width: $screen-xs-max){ height: 405px; }
+        @media(min-width: $screen-sm-min){ height: 740px; }
+        @media(min-width: $screen-md-min){ height: 740px; }
+        @media(min-width: $screen-lg-min){ height: 740px; }
+    }
+}
+.fanart-background.ng-hide-add, .fanart-background.ng-hide-remove {
+  /* this is required as of 1.3x to properly
+     apply all styling in a show/hide animation */
+  transition: 0s linear all;
+}
+
+.fanart-background.ng-hide-add-active,
+.fanart-background.ng-hide-remove-active {
+  /* the transition is defined in the active class */
+  transition: 1s linear all;
+}
+
+.fanart-background.ng-hide-add { opacity: 1; }
+.fanart-background.ng-hide-add.ng-hide-add-active { opacity: 0; }
+.fanart-background.ng-hide-remove { opacity: 0; }
+.fanart-background.ng-hide-remove.ng-hide-remove-active { opacity: 1; }
+
+.splash-fanart-fade {
+    width: 100%;
+    height: 100%;
+    background: transparent url('/img/fanart-fade.png') repeat;
+    display: block;
+    position: absolute;
+} 
+
+.splash-brand {
+    @media(max-width: $screen-xs-max){ font-size: 34px; }
+    @media(min-width: $screen-sm-min){ font-size: 42px; }
+    @media(min-width: $screen-md-min){ font-size: 52px; }
+    @media(min-width: $screen-lg-min){ font-size: 52px; }
+    font-size: 52px;
+    text-align: center;
+}
+
+.marketing {
+    top: -50px;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+
+    h1 {
+        @media(max-width: $screen-xs-max){ font-size: 24px; }
+        @media(min-width: $screen-sm-min){ font-size: 30px; }
+    }
+
+    p {
+        @media(max-width: $screen-xs-max){ font-size: 12px; }
+        @media(min-width: $screen-sm-min){ font-size: 18px; }
+    }
+}
+
+.poster {
+    background-color: $background-color;
+    display: inline-block;
+    @media(max-width: $screen-xs-max){ height: 100px; padding: 1px; }
+    @media(min-width: $screen-sm-min){ height: 210px; padding: 4px; }    
+    @media(min-width: $screen-md-min){ height:320px; padding: 4px; }
+}
+
+.splash-posters {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+
+    .series {
+        cursor: pointer;
+        width: 20%;
+        display: inline-block;
+        text-align: center;
+        position: relative;
+        padding-bottom: 20px;
+
+        span {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: $dark-color;
+            height: 12px;
+            left: 0;
+        }
+
+        .active {
+            color: $bright-highlight;
+            background-color: $bright-highlight;
+        }
+    }
+}

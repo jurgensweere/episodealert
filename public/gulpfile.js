@@ -11,6 +11,8 @@ var gulpFilter = require('gulp-filter');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var htmlreplace = require('gulp-html-replace');
+var karma = require('karma').server;
+
 
 var paths = {
   js: ['./js/**/*.js', '!./js/vendor/**/*.js', '!./js/**/*.min.js'],
@@ -37,6 +39,13 @@ environments.forEach(function (environment) {
         jshintTask(environment);
     });
 
+    gulp.task('test', function (done) {
+      karma.start({
+        configFile: __dirname + '/test/karma.unit.conf.js',
+        singleRun: true
+      }, done);
+    });    
+
     gulp.task('watch:' + environment, function() {
         watchTask(environment);
     });
@@ -52,6 +61,7 @@ environments.forEach(function (environment) {
         }
     );
 });
+
 // Define default fallback
 gulp.task('default', ['default:dev']);
 gulp.task('sass', ['sass:dev']);
@@ -64,7 +74,7 @@ var watchTask = function (env) {
     livereload.listen();
     gulp.watch(paths.js, ['jshint:' + env]);
     gulp.watch(paths.scss, ['sass:' + env]);
-    gulp.watch('./scss/**/*.scss');
+    gulp.watch('./scss/**/*.scss', ['sass:' + env]);
     gulp.watch('./scss/*.scss', ['sass:' + env]);
 }
 

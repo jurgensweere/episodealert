@@ -1,0 +1,252 @@
+.profile {
+    .profile-filters{
+        height: 40px;
+        padding: 5px 0px 5px 20px;
+        @media(max-width: $screen-xs-max){ padding: 5px 0px 5px 0px; }
+        background-color: $primary-color;
+
+        span {
+            padding-right:5px;
+        }
+
+        //TOOD: replace by generic filter toggle
+        .btn {
+            margin-left: 10px;
+            font-size: 75%;
+            background-color: #1a1a1a;
+            border-radius: 0px;
+            text-transform: uppercase;
+            color: #fff;
+
+            /* make all filter buttons fit on one line on iPhone 5 */
+            @media(max-width: $screen-xs-max) { margin-left: 6px; }
+        }
+
+        .btn-profile--toggle{
+            font-size: 150%;
+            background-color: $primary-color;
+            height: 30px;
+            margin-top: -4px;
+            float: right;
+        }
+
+        .btn:focus {
+          outline: none;
+        }
+
+        .btn-profile--active {
+            color: $bright-highlight;
+        }
+
+        .btn:hover {
+            color: $bright-highlight;
+        }
+    }
+
+    .profile-series {
+        background-color: $background-color;
+    }
+}
+
+/*
+ * Series in the profile
+ */
+
+ //TODO: Make the series style more generic and make adjustments in profile/search where needed
+.series-profile,
+.series-search {
+    text-align: left;
+    margin: auto;
+    padding-top: 15px;
+
+    a {
+        display: block;
+        position: relative;
+    }
+
+    .small-view{
+        @media(max-width: $screen-xs-max){ width: 100%; }
+        @media(min-width: $screen-sm-min){ width: 25%; }
+        @media(min-width: $screen-md-min){ width: 16.6%; }
+        @media(min-width: $screen-lg-min){ width: 16.6%; }
+
+        a{
+            font-size: 90% !important;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+
+    .following-button {
+        margin-top: 10px;
+    }
+
+    .archive {
+        top: 5%;
+        left: 0;
+        right: 0;
+        position: absolute;
+        text-align: center;
+        opacity: 1;
+        p {
+            font-size: 100%;
+            background-color: rgba($secondary-color, 0.5);
+        }
+
+    }
+
+    .archived {
+        opacity: 0.5;
+    }
+
+    .badge {
+        bottom: 5%;
+        right: 5%;
+        left: auto;
+        top: auto;
+        font-size: 180%;
+        padding: 3px 10px 4px 8px;
+        border: 4px solid orange;
+        border-radius: 20px;
+        box-shadow: 0 0 1em lighten(orange, 20%);
+        @media(max-width: $screen-xs-max){
+            box-shadow: 0 0 0.25em lighten(orange, 20%); 
+            border: 3px solid orange;
+            font-size: 140%;
+            right: 2%;
+        }             
+
+    }
+
+    /* have to refactor the entire button situation, using important is just horrible */
+    .btn-small {
+        border: none !important;
+        padding: 0px !important;
+        background: none !important;
+    }       
+
+    .seen-badge{
+        border: 4px solid $bright-highlight;
+        box-shadow: 0 0 1em lighten($bright-highlight, 20%);
+        @media(max-width: $screen-xs-max){
+            box-shadow: 0 0 0.25em lighten($bright-highlight, 20%); 
+            border: 3px solid $bright-highlight;
+            font-size: 120%;
+        }      
+    }
+
+    p {
+        font-size: 85%;
+        padding:  4px 0px 4px 0px;
+        text-shadow: 1px 1px $lighter-text-shadow;
+    }
+
+    .extra-info {
+        position: relative;
+        padding: 10px 0px 15px 10px;
+        text-align: left;
+        background-color: $primary-color;
+        height: 100px;
+
+        a {
+            font-size: 110%;
+        }
+
+    }
+
+    .follow-wrapper {
+        background-color: $secondary-color;
+        height: 60px;
+    }
+
+    .extra-info-episodes {
+        padding: 5px 0px 15px 10px;
+        text-align: left;
+        background-color: $secondary-color;
+        height: 100px;
+        text-shadow: 1px 1px $lighter-text-shadow;
+
+        button {
+            background-color: rgba(0,0,0,0.5);
+            font-size: 120%;
+            border: 2px solid $bright-highlight;
+            color: $bright-highlight;
+            border-radius: 2px;
+            padding: 3px 10px 4px 8px;
+            right: 5%;
+        }
+        button:hover {
+            color: white;
+        }
+    }
+
+    li {
+        @media(max-width: $screen-xs-max){ width: 100%; }
+        @media(min-width: $screen-sm-min){ width: 33%; }
+        @media(min-width: $screen-md-min){ width: 25%; }
+        @media(min-width: $screen-lg-min){ width: 25%; }
+        padding: 0px 10px 0px 10px;
+        list-style: none;
+        display: inline-block;
+        margin-bottom: 15px;
+        position: relative;
+        div {
+            text-align: center;
+        }
+    }
+    li:hover .as-sortable-item-handle {
+        display: block;
+    }
+
+
+    img {
+    }
+
+}
+
+/* Sorttable styles used in profile to be able to sort items */
+.as-sortable-item, .as-sortable-placeholder {
+    display: block;
+}
+
+.as-sortable-item {
+    -ms-touch-action: none;
+    touch-action: none;
+}
+
+.as-sortable-item-handle {
+    cursor: move;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    padding: 8px;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+}
+
+.as-sortable-placeholder {
+}
+
+.as-sortable-drag {
+    position: absolute;
+    pointer-events: none;
+    z-index: 9999;
+    .as-sortable-item {
+        width: 100% !important;
+    }
+}
+
+.as-sortable-hidden {
+    display: none !important;
+}
+
+.as-sortable-un-selectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
