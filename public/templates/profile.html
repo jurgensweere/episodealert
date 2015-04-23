@@ -7,17 +7,17 @@
 	</div>
 	<div class="row profile-filters">
 		<span class="hidden-xs">Filters </span>
-		<button class="btn btn--profile-filter" ng-class="{active: seen}" ng-click="toggleUnseen()">
+		<button class="btn btn--profile-filter" ng-class="{'btn-profile--active': seen}" ng-click="toggleUnseen()">
 			<span ng-show="seen == true" class="glyphicon glyphicon-ok" />
 			<span ng-show="seen == false" class="glyphicon glyphicon-plus" />
 			unseen
 		</button>
-		<button class="btn btn--profile-filter" ng-class="{active: !ended}" ng-click="toggleEnded()">
+		<button class="btn btn--profile-filter" ng-class="{'btn-profile--active': !ended}" ng-click="toggleEnded()">
 			<span ng-show="ended == true" class="glyphicon glyphicon-plus" />
 			<span ng-show="ended == false" class="glyphicon glyphicon-ok" />
 			continuing
 		</button>
-		<button class="btn btn--profile-filter" ng-class="{active: archive}" ng-click="toggleArchiveSetting()">
+		<button class="btn btn--profile-filter" ng-class="{'btn-profile--active': archive}" ng-click="toggleArchiveSetting()">
 			<span ng-show="archive == true" class="glyphicon glyphicon-ok" />
 			<span ng-show="archive == false" class="glyphicon glyphicon-plus" />
 			archived
