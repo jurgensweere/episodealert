@@ -101,15 +101,14 @@
     }
 
     .badge {
-        bottom: 5%;
+        bottom: 4%;
         right: 5%;
         left: auto;
         top: auto;
-        font-size: 180%;
-        padding: 3px 10px 4px 8px;
-        border: 4px solid orange;
+        font-size: 100%;
+        padding: 3px 8px 4px 7px;
+        border: 2px solid orange;
         border-radius: 20px;
-        box-shadow: 0 0 1em lighten(orange, 20%);
         @media(max-width: $screen-xs-max){
             box-shadow: 0 0 0.25em lighten(orange, 20%); 
             border: 3px solid orange;
@@ -144,10 +143,10 @@
 
     .extra-info {
         position: relative;
-        padding: 10px 0px 15px 10px;
+        padding: 14px 5px 13px 15px;
         text-align: left;
         background-color: $primary-color;
-        height: 100px;
+        height: 40;
 
         a {
             font-size: 110%;

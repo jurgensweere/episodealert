@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600,700);
 @import 'bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
 @import 'scss/bootstrap-social';
 @import 'scss/variables';
@@ -162,8 +163,12 @@ ul {
     p{
         margin-right: 10px;
     }
-}
 
+
+}
+.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand{
+    margin-left: -5px;
+}
 .footer{
     margin-top: 20px;
     margin-bottom: 5px;
@@ -219,7 +224,6 @@ li.disabled{
     background-color: rgba(0, 0, 0, 0.8);
     font-size: 90%;
     border: none;
-    border-radius: 2px;
     padding: 3px 8px 4px 8px;
 }
 
@@ -240,13 +244,13 @@ li.disabled{
 .seen-button--season{
     display: none;
     position: absolute;
-    left: -183px;
+    left: -154px;
 }
 
 .seen-button--untill{
     display: none;
     position: absolute;
-    left: -79px;
+    left: -67px;
 }
 
 .series-browse{
