@@ -14,6 +14,23 @@
     function calendarController($filter, seriesFactory) {
         var calendar = this;
 
+        /*
+         * Prototype that adds a possibility to add or subtract days from a date
+         */
+
+        Date.prototype.addDays = function (days) {
+            var dat = new Date(this.valueOf());
+            dat.setDate(dat.getDate() + days);
+            return dat;
+        };
+
+        calendar.dayOffset = 0;
+        var referenceDate = new Date();        
+        var format = 'yyyy-MM-dd';
+        var day1Date = $filter('date')(referenceDate.addDays(calendar.dayOffset), format);
+        var day2Date = $filter('date')(referenceDate.addDays(-1 + calendar.dayOffset), format);
+        var day3Date = $filter('date')(referenceDate.addDays(1 + calendar.dayOffset), format);
+
         calendar.dayOneName = 'Yesterday';
         calendar.dayTwoName = 'Today';
         calendar.dayThreeName = 'Tomorrow';
@@ -26,7 +43,7 @@
             calendar.yesterdayEpisodes = null;
             calendar.todayEpisodes = null;
             calendar.tomorrowEpisodes = null;
-            dayOffset = dayOffset - 3;
+            calendar.dayOffset = calendar.dayOffset - 3;
             setDays();
             loadDays();
         };
@@ -35,7 +52,7 @@
             calendar.yesterdayEpisodes = null;
             calendar.todayEpisodes = null;
             calendar.tomorrowEpisodes = null;
-            dayOffset = dayOffset + 3;
+            calendar.dayOffset = calendar.dayOffset + 3;
             setDays();
             loadDays();
         };
@@ -44,44 +61,25 @@
             loadDays();
         };
 
-
-        /*
-         * Prototype that adds a possibility to add or subtract days from a date
-         */
-
-        Date.prototype.addDays = function (days) {
-            var dat = new Date(this.valueOf());
-            dat.setDate(dat.getDate() + days);
-            return dat;
-        };
-
-        var dayOffset = 0;
-        var referenceDate = new Date();
-        var format = 'yyyy-MM-dd';
-        var day1Date = $filter('date')(referenceDate.addDays(dayOffset), format);
-        var day2Date = $filter('date')(referenceDate.addDays(-1 + dayOffset), format);
-        var day3Date = $filter('date')(referenceDate.addDays(1 + dayOffset), format);
-
-
         /* set the dates that need to be collected */
         function setDays() {
-            day1Date = $filter('date')(referenceDate.addDays(dayOffset), format);
-            day2Date = $filter('date')(referenceDate.addDays(-1 + dayOffset), format);
-            day3Date = $filter('date')(referenceDate.addDays(1 + dayOffset), format);
+            day1Date = $filter('date')(referenceDate.addDays(calendar.dayOffset), format);
+            day2Date = $filter('date')(referenceDate.addDays(-1 + calendar.dayOffset), format);
+            day3Date = $filter('date')(referenceDate.addDays(1 + calendar.dayOffset), format);
 
-            if (dayOffset === 0) {
+            if (calendar.dayOffset === 0) {
                 calendar.dayOneName = 'Yesterday';
                 calendar.dayTwoName = 'Today';
                 calendar.dayThreeName = 'Tomorrow';
             } else {
-                if (dayOffset < 0) {
-                    calendar.dayOneName = String((dayOffset - 1)).replace('-', '') + ' days ago';
-                    calendar.dayTwoName = String(dayOffset).replace('-', '') + ' days ago';
-                    calendar.dayThreeName = String((dayOffset + 1)).replace('-', '') + ' days ago';
+                if (calendar.dayOffset < 0) {
+                    calendar.dayOneName = String((calendar.dayOffset - 1)).replace('-', '') + ' days ago';
+                    calendar.dayTwoName = String(calendar.dayOffset).replace('-', '') + ' days ago';
+                    calendar.dayThreeName = String((calendar.dayOffset + 1)).replace('-', '') + ' days ago';
                 } else {
-                    calendar.dayOneName = 'in ' + (dayOffset - 1) + ' days';
-                    calendar.dayTwoName = 'in ' + dayOffset + ' days';
-                    calendar.dayThreeName = 'in ' + (dayOffset + 1) + ' days';
+                    calendar.dayOneName = 'in ' + (calendar.dayOffset - 1) + ' days';
+                    calendar.dayTwoName = 'in ' + calendar.dayOffset + ' days';
+                    calendar.dayThreeName = 'in ' + (calendar.dayOffset + 1) + ' days';
                 }
             }
 

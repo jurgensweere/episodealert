@@ -22,9 +22,17 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
             seasons.push({ number : 0, title : 'Specials', active : false, unseen : 999, disabled: true });
         }
 
-        for (var i = 1; i <= numberOfSeasons; i++) {
-            seasons.push( { number : i, title : i, active : false, unseen : 999 } );
+        //TODO: refactor and if many seasons add 'seasons' to active only or the first one
+        if (numberOfSeasons < 7){
+            for (var i = 1; i <= numberOfSeasons; i++) {
+                seasons.push( { number : i, title : 'Season ' + i, active : false, unseen : 999 } );
+            }
+        }else{
+            for (var i = 1; i <= numberOfSeasons; i++) {
+                seasons.push( { number : i, title : i, active : false, unseen : 999 } );
+            }
         }
+
 
         seasons[activeSeason].active = true;
 

@@ -9,8 +9,8 @@
             },
             template:
                 '<div class="ea-seen-button" ng-if="episode.aired > 0">'+
-                '    <button class="btn seen-button seen-button--season hidden-xs" ng-click="toggleSeason(episode)">entire season</button>' +
-                '    <button class="btn seen-button seen-button--untill hidden-xs" ng-click="toggleUntil(episode)">until here</button>' +
+                '    <button class="btn seen-button seen-button--season hidden-xs" ng-click="toggleSeason(episode)">Entire season</button>' +
+                '    <button class="btn seen-button seen-button--untill hidden-xs" ng-click="toggleUntil(episode)">Until here</button>' +
                 '    <button class="btn seen-button seen-button--episode" ng-click="toggleEpisode(episode)">{{ episode.seen ? \'Seen\' : \'Not seen\' }}</button>' +
                 '</div>',
             link: function(scope, element, attrs) {
@@ -65,7 +65,7 @@
 
                                 //After the episode is succesfully set to seen, we should request an update on the unseen object
                                 var loadUnseen = getUnseenAmountBySeries(scope.series.id, scope.series.season_amount);
-                                loadUnseen.success(function(unseen){
+                                loadUnseen.then(function(unseen){
                                     for( var i = 0; i < unseen.length; i++){
                                         var index = i + 1;
                                         scope.series.season_object[index].unseen = unseen[i];
@@ -108,7 +108,7 @@
 
                                 //After the episode is succesfully set to unseen, we should request an update on the unseen object
                                 var loadUnseen = getUnseenAmountBySeries(scope.series.id, scope.series.season_amount);
-                                loadUnseen.success(function(unseen){
+                                loadUnseen.then(function(unseen){
                                     for( var i = 0; i < unseen.length; i++){
                                         var index = i + 1;
                                         scope.series.season_object[index].unseen = unseen[i];
