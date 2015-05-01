@@ -6,6 +6,7 @@
             var series = [];
 
             /** scope **/
+            $scope.touchdevice = Modernizr.touch;
             $scope.activePage = 'profile';
             $scope.archive = userSettingService.getProfileArchive();
             $scope.ended = userSettingService.getProfileEnded();

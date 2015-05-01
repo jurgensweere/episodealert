@@ -25,6 +25,8 @@
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-route.min.js') %>
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-animate.min.js') %>
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-touch.js') %>
+    <% HTML::script('//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js') %>
+
     
     <!-- build:libs -->
     <% HTML::script('/js/vendor/_bower.min.js') %>
