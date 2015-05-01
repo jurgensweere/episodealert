@@ -1,4 +1,18 @@
 .calendar-carousel{
+
+    //dirty adjustment hack for non mobile
+    @media(min-width: $screen-sm-min){
+        margin-top: -40px;
+    }
+
+    // HiDPI screens
+    @media only screen and (-webkit-min-device-pixel-ratio : 2),
+           only screen and (min-device-pixel-ratio : 2),
+           only screen and (min--moz-device-pixel-ratio: 2) {
+
+        font-size: 90%;
+    }
+
     text-align: center;
     position: relative;
     @media(max-width: $screen-xs-max){
@@ -30,6 +44,8 @@
     }
 
     h2{
+        font-family: $font-header;  
+        
         @media(max-width: $screen-xs-max){
             font-size: 120%;
         }

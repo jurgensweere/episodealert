@@ -62,6 +62,9 @@
     a {
         display: block;
         position: relative;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     .small-view{
@@ -79,9 +82,7 @@
 
         a{
             font-size: 90% !important;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
+
         }
     }
 
@@ -162,10 +163,10 @@
     .extra-info {
         overflow: hidden;
         position: relative;
-        padding: 10px 0px 15px 10px;
+        position: relative;
+        padding: 14px 5px 13px 15px;
         text-align: left;
-        background-color: $primary-color;
-        height: 100px;
+        background-color: #252525;
 
         a {
             font-size: 110%;

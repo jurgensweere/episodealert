@@ -8,6 +8,14 @@
     @media(min-width: $screen-md-min){ height: 740px; }
     @media(min-width: $screen-lg-min){ height: 740px; }
 
+     // HiDPI screens
+        @media only screen and (-webkit-min-device-pixel-ratio : 2),
+               only screen and (min-device-pixel-ratio : 2),
+               only screen and (min--moz-device-pixel-ratio: 2) {
+
+            height: 575px;
+       }
+
     position: relative;
     margin-top: 50px;
     .fanart-background {
@@ -19,6 +27,15 @@
         @media(min-width: $screen-sm-min){ height: 740px; }
         @media(min-width: $screen-md-min){ height: 740px; }
         @media(min-width: $screen-lg-min){ height: 740px; }
+
+     // HiDPI screens
+        @media only screen and (-webkit-min-device-pixel-ratio : 2),
+               only screen and (min-device-pixel-ratio : 2),
+               only screen and (min--moz-device-pixel-ratio: 2) {
+
+            height: 575px;
+       }
+
     }
 }
 .fanart-background.ng-hide-add, .fanart-background.ng-hide-remove {

@@ -13,8 +13,18 @@
     }
 
     .info-text-top {
-        padding: 11px 30px 30px 30px;
+        padding: 3px 30px 30px 30px;
         @media(max-width: $screen-xs-max){ padding: 5px 0px 5px 20px; }
+
+        // HiDPI screens
+        @media only screen and (-webkit-min-device-pixel-ratio : 2),
+               only screen and (min-device-pixel-ratio : 2),
+               only screen and (min--moz-device-pixel-ratio: 2) {
+            
+            margin-top: -10px;
+            padding: 0px 10px 20px 30px;
+        }        
+
     }
 
     h1 {
@@ -25,7 +35,7 @@
         font-size: 160%;
 
         //TODO move to vars
-        font-family: 'Source Sans Pro';
+        font-family: $font-header;
         font-weight: 600;        
     }
 

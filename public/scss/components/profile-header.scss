@@ -4,13 +4,23 @@
 
 .info-text-top {
 
-    padding: 3px 30px 20px 30px;
+    padding: 3px 30px 30px 30px;
     @media(max-width: $screen-xs-max){ padding: 3px 0px 0px 0px; }
     //background-color: $background-color;
+           // HiDPI screens
+        @media only screen and (-webkit-min-device-pixel-ratio : 2),
+           only screen and (min-device-pixel-ratio : 2),
+           only screen and (min--moz-device-pixel-ratio: 2) {
+
+            margin-top: -10px;
+            padding: 0px 10px 20px 30px;
+        }         
 
     p {
         line-height: 180%;
-    }
+
+
+}
 
     h1 {
         @media(max-width: $screen-xs-max) { font-size: 100%; }

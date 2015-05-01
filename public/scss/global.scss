@@ -28,10 +28,15 @@ body {
 
 // usage; description of series, profile welcome, other info
 h1 {
-    font-size: 200%;
-    margin: 0px;
-    line-height: 150%;
+    @media(max-width: $screen-xs-max){ padding-bottom: 10px; }
+    text-shadow: 2px 2px $lighter-text-shadow;
     display: inline-block;
+    margin-right: 10px;
+    font-size: 160%;
+
+    //TODO move to vars
+    font-family: $font-header;
+    font-weight: 600;       
 }
 
 /* reset some defaults */
@@ -308,7 +313,21 @@ li.disabled{
     .navbar-text {
         color: #fff;
         margin-top: 18px;
-        margin-bottom: 10px;
+        margin-bottom: 0px;
+        position: relative;
+        text-align: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        @media(min-width: $screen-md-min){ 
+            max-width: 170px;
+        }
+
+        @media(min-width: $screen-lg-min){ 
+            max-width: 300px;
+        }
+
     }
 
     .navbar-link {
@@ -326,8 +345,13 @@ li.disabled{
         height: 46px;
         font-size: 15px;
 
-        @media(max-width: $screen-md-min){ padding-right:0px; padding-left:5px;}
-        @media(max-width: $screen-lg-min){ padding-right:8px; padding-left:5px;}
+        @media(max-width: $screen-md-min){ 
+            padding-right:0px; padding-left:5px;
+        }
+
+        @media(max-width: $screen-lg-min){ 
+            padding-right:8px; padding-left:5px;
+        }
     }
 
     .navbar-nav > li > a:hover,
