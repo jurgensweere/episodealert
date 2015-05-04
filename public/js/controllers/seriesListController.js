@@ -1,7 +1,7 @@
 (function(){
 
     angular.module('eaApp').controller('SeriesListCtrl',
-        function($scope, $routeParams, seriesFactory, Page) {
+        function($scope, $stateParams, seriesFactory, Page) {
 
             Page.setTitle('Browse Series | Episode Alert');
             $scope.loadingGenre = false;
@@ -46,8 +46,8 @@
                 return new Array("Action", "Adventure", "Animation", "Comedy", "Children", "Crime", "Drama", "Documentary", "Fantasy", "Game Show" , "Horror", "News", "Reality", "Science-Fiction", "Soap", "Sport", "Talk Show", "Western");
             }
 
-            if($routeParams.genre) {
-                var genre = $routeParams.genre;
+            if($stateParams.genre) {
+                var genre = $stateParams.genre;
                 $scope.selectedGenre = genre;
                 $scope.getByGenre();
             }

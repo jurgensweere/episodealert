@@ -1,6 +1,6 @@
 /*jshint loopfunc: true */
 (function () {
-    var app = angular.module('eaApp', ['ngRoute', 'ngTouch', 'ngAnimate', 'ui.bootstrap', 'infinite-scroll', 'ui.sortable', 'app.routes']);
+    var app = angular.module('eaApp', ['ngRoute', 'ngTouch', 'ngAnimate', 'ui.bootstrap', 'infinite-scroll', 'ui.sortable', 'ui.router']);
 
 
     // Init
@@ -273,7 +273,6 @@
         };
     });
 
-
     app.controller("LoginCtrl", function ($route, $scope, $rootScope, $location, AuthenticationService) {
 
         $scope.credentials = {
@@ -307,12 +306,6 @@
             });
         };
 
-    });
-
-    app.controller("HeaderCtrl", function ($scope, $location) {
-        $scope.isActive = function (viewLocation) {
-            return $location.path().indexOf(viewLocation) === 0;
-        };
     });
 
 })();

@@ -1,7 +1,7 @@
 (function(){
 
     angular.module('eaApp').controller('PasswordResetCtrl',
-        function ($scope, $rootScope, $routeParams, $location, AuthenticationService, alertService) {
+        function ($scope, $rootScope, $stateParams, $location, AuthenticationService, alertService) {
 
             $scope.password = '';
             $scope.password_confirmation = '';
@@ -35,7 +35,7 @@
                     $rootScope.credentials.email,
                     $scope.password,
                     $scope.password_confirmation,
-                    $routeParams.token
+                    $stateParams.token
                 );
                 newPassword.error(resetError);
                 newPassword.success(resetSuccess);
