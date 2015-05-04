@@ -80,7 +80,7 @@
                         </li>
                     </ul>
 
-                    <p class="navbar-text navbar-right hide-xs hidden-sm" ng-show="credentials.auth">Welcome back, <a href="/profile" class="navbar-link">{{ credentials.accountname }}</a> </p>
+                    <p class="navbar-text navbar-right hide-xs hidden-sm" ng-show="credentials.auth">Welcome back, <a href="/profile/settings" class="navbar-link">{{ credentials.accountname }} <i class="fa fa-cog"></i></a> </p>
             <!--         <div class="extra-menu">
                         <i class="fa fa-list" ></i>
                     </div> -->
