@@ -1,10 +1,10 @@
 	(function () {
 
     angular.module('eaApp').controller('SeriesCtrl',
-        function($scope, $routeParams, $filter, seriesFactory, AuthenticationService, Page) {
+        function($scope, $stateParams, $filter, seriesFactory, AuthenticationService, Page) {
 
 			/* declaration */
-			var unique_name = $routeParams.seriesname;
+			var unique_name = $stateParams.seriesname;
 
 			/* Execute on load */
             var authorized = AuthenticationService.isLoggedIn();

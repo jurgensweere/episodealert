@@ -22,7 +22,7 @@
 
     <% HTML::script('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js') %>
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js') %>
-    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-route.min.js') %>
+    <% HTML::script('//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.14/angular-ui-router.min.js') %>
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-animate.min.js') %>
     <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-touch.js') %>
     <% HTML::script('//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js') %>
@@ -39,9 +39,9 @@
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 @endif
 <!-- <div class="background-container"></div> -->
-<div id="masterUI" ui-view="master">
+<div id="masterUI">
     <!-- loaded by templates-->
-    <div id="topbarUI" ui-view="topbar">
+    <div id="topbarUI">
         <nav class="navbar navbar-default" role="navigation">
             <div class="container container--navbar">
                 <div class="navbar-header">
@@ -65,22 +65,22 @@
                             </span>
                         </div>
                     </form>
-                    <ul class="nav navbar-nav" ng-controller="HeaderCtrl">
-                        <li ng-class="{ active: isActive('/series')}"><a href="/series/genre/action">Browse</a></li>
-                        <li ng-class="{ active: isActive('/trending')}"><a href="/trending">Trending</a></li>
-                        <li ng-show="credentials.auth" ng-class="{ active: isActive('/profile')}"><a href="/profile">Profile</a></li>
+                    <ul class="nav navbar-nav">
+                        <li ui-sref-active="active"><a ui-sref="browse">Browse</a></li>
+                        <li ui-sref-active="active"><a ui-sref="trending">Trending</a></li>
+                        <li ng-show="credentials.auth" ui-sref-active="active"><a ui-sref="profile">Profile</a></li>
                         <li ng-show="credentials.auth">
                             <a href="#" ng-controller="LoginCtrl" ng-click="logout()">Logout</a>
                         </li>
-                        <li ng-show="!credentials.auth">
-                            <a ng-show="!credentials.auth" href="/login">Login</a>
+                        <li ng-show="!credentials.auth" ui-sref-active="active">
+                            <a ng-show="!credentials.auth" ui-sref="login">Login</a>
                         </li>
-                        <li ng-show="!credentials.auth">
-                            <a ng-show="!credentials.auth" href="/register">Register</a>
+                        <li ng-show="!credentials.auth" ui-sref-active="active">
+                            <a ng-show="!credentials.auth" ui-sref="register">Register</a>
                         </li>
                     </ul>
 
-                    <p class="navbar-text navbar-right hide-xs hidden-sm" ng-show="credentials.auth">Welcome back, <a href="/profile" class="navbar-link">{{ credentials.accountname }}</a> </p>
+                    <p class="navbar-text navbar-right hide-xs hidden-sm" ng-show="credentials.auth">Welcome back, <a href="/profile/settings" class="navbar-link">{{ credentials.accountname }} <i class="fa fa-cog"></i></a> </p>
             <!--         <div class="extra-menu">
                         <i class="fa fa-list" ></i>
                     </div> -->
@@ -108,7 +108,7 @@
         </div>
     </div> -->
     <div id="fb-root"></div>
-    <div id="contentUI" ui-view="content" class="container ea-content fade" ng-view>
+    <div id="contentUI" ui-view class="container ea-content fade">
     </div>
     <div class="container" id="footer">
         <div class="footer row">
@@ -116,7 +116,7 @@
                 Copyright 2015
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <a href="https://www.facebook.com/episodealert" target="_blank">Facebook</a> :: <a href="/contact">Contact</a> :: <a href="/privacy">Privacy</a>
+                <a href="https://www.facebook.com/episodealert" target="_blank">Facebook</a> :: <a ui-sref="contact">Contact</a> :: <a ui-sref="privacy">Privacy</a>
             </div>
         </div>
     </div>

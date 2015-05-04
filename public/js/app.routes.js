@@ -1,94 +1,106 @@
-(function () {
-    'use strict';
+angular.module('eaApp').config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+    
+  $locationProvider.html5Mode(true)
+  $urlRouterProvider.otherwise("/trending");
+  
+  $stateProvider
 
-    angular
-        .module('app.routes', ['ngRoute'])
-        .config(config);
+    .state('browse', {
+        url : '/series/genre/:genre',
+        params : {
+            genre : 'action'
+        },
+        templateUrl : 'templates/series-browse.html',
+        controller : 'SeriesListCtrl'
+    })
 
-    function config($routeProvider, $locationProvider) {
+    .state('profile', {
+        url : '/profile',
+        templateUrl : 'templates/profile.html', 
+        controller : 'ProfileCtrl' 
 
-            $locationProvider.html5Mode(true);
+        // views: {
+        //         '': { 
+        //             templateUrl : 'templates/profile.html', 
+        //             controller : 'ProfileCtrl' 
+        //         },
+        //         'wurst@profile' : {
+        //             templateUrl : 'templates/wurst.html',
+        //             controller : 'WurstCtrl' 
+        //         },
+             
+        //     }
 
-            $routeProvider.when('/trending', {
-                templateUrl: 'templates/carousel.html',
-                controller: 'CarouselCtrl'
-            })
+    })
 
-            .when('/series', {
-                templateUrl: 'templates/series-list.html',
-                controller: 'SeriesListCtrl'
-            })
+    .state('trending', {
+        url : '/trending',
+        templateUrl : 'templates/carousel.html',
+        controller : 'CarouselCtrl'
+    })
 
-            .when('/series/genre/:genre', {
-                templateUrl: 'templates/series-browse.html',
-                controller: 'SeriesListCtrl'
-            })
+    .state('series-detail', {
+        url : '/series/:seriesname',
+        templateUrl : 'templates/series-detail.html',
+        controller : 'SeriesCtrl'
+    })
 
-            .when('/series/:seriesname', {
-                templateUrl: 'templates/series-detail.html',
-                controller: 'SeriesCtrl'
-            })
+    .state('search', {
+        url : '/search?query=',
+        templateUrl : 'templates/series-search.html',
+        controller : 'SeriesSearchCtrl',
+        reloadOnSearch : false
+    })
 
-            .when('/search', {
-                templateUrl: 'templates/series-search.html',
-                controller: 'SeriesSearchCtrl',
-                reloadOnSearch: false
-            })
+    .state('login', {
+        url : '/login',
+        templateUrl : 'templates/auth/login.html',
+        controller : 'LoginCtrl'
+    })
 
-            .when('/login', {
-                templateUrl: 'templates/auth/login.html',
-                controller: 'LoginCtrl'
-            })
+    .state('register', {
+        url : '/register',
+        templateUrl : 'templates/auth/register.html',
+        controller : 'RegisterCtrl'
+    })
 
-            .when('/register', {
-                templateUrl: 'templates/auth/register.html',
-                controller: 'RegisterCtrl'
-            })
+    .state('passwordreset', {
+        url : '/passwordreset',
+        templateUrl : 'templates/auth/passwordreset.html',
+    })
 
-            .when('/passwordreset', {
-                templateUrl: 'templates/auth/passwordreset.html'
-            })
+    .state('passwordreset-confirm', {
+        url : '/password/reset/:token',
+        templateUrl : 'templates/auth/passwordresetconfirm.html',
+        controller : 'PasswordResetCtrl'
+    })
 
-            .when('/password/reset/:token', {
-                templateUrl: 'templates/auth/passwordresetconfirm.html',
-                controller: 'PasswordResetCtrl'
-            })
+    .state('profile-settings', {
+        url : '/profile/settings',
+        templateUrl : 'templates/profile/settings.html',
+        controller : 'ProfileSettingsCtrl'
+    })
 
-            .when('/profile', {
-                templateUrl: 'templates/profile.html',
-                controller: 'ProfileCtrl'
-            })
+    .state('profile-guide', {
+        url : '/profile/guide',
+        templateUrl : 'templates/guide.html',
+        controller : 'GuideCtrl'
+    })
 
-            .when('/profile/settings', {
-                templateUrl: 'templates/profile/settings.html',
-                controller: 'ProfileSettingsCtrl'
-            })
+    .state('contact', {
+        url : '/contact',
+        controller : 'ContactCtrl',
+        templateUrl : 'templates/contact.html'
+    })
 
-            .when('/profile/guide', {
-                templateUrl: 'templates/guide.html',
-                controller: 'GuideCtrl'
-            })
+    .state('privacy', {
+        url : '/privacy',
+        templateUrl : 'templates/privacy.html'
+    })
 
-            .when('/profile/calendar', {
-                templateUrl: 'templates/calendar.html',
-                controller: 'CalendarCtrl'
-            })
+    .state('testing', {
+        url : '/testing',
+        templateUrl : 'templates/testpage.html'
+    })
 
-            .when('/contact', {
-                templateUrl: 'templates/contact.html',
-                controller: 'ContactCtrl'
-            })
-
-            .when('/privacy', {
-                templateUrl: 'templates/privacy.html'
-            })
-
-            .when('/testing', {
-                templateUrl: 'templates/testpage.html'
-            })            
-
-            .otherwise({
-                redirectTo: '/trending'
-            });
-    }
-})();
+});
