@@ -17,9 +17,10 @@ module.exports = function(config) {
     files: [
         //frameworks files / test tools
         'http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js',
-        'http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-route.js',
         'http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-animate.js',
         'http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-touch.js',
+        'http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.14/angular-ui-router.min.js',
+
 
         'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular-mocks.js',
 
