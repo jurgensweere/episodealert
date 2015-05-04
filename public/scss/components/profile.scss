@@ -74,9 +74,9 @@
         @media(min-width: $screen-lg-min){ width: 16.6%; }
 
         // HiDPI screens
-        @media only screen and (-webkit-min-device-pixel-ratio : 2),
-               only screen and (min-device-pixel-ratio : 2),
-               only screen and (min--moz-device-pixel-ratio: 2) {
+        @media only screen and (-webkit-min-device-pixel-ratio : 2) and (min-width: $screen-md-min),
+               only screen and (min-device-pixel-ratio : 2) and (min-width: $screen-md-min),
+               only screen and (min--moz-device-pixel-ratio: 2) and (min-width: $screen-md-min){
             max-width: 12.5%;
         }      
 
@@ -219,9 +219,9 @@
         position: relative;
 
         // HiDPI screens
-        @media only screen and (-webkit-min-device-pixel-ratio : 2),
-               only screen and (min-device-pixel-ratio : 2),
-               only screen and (min--moz-device-pixel-ratio: 2) {
+        @media only screen and (-webkit-min-device-pixel-ratio : 2) and (min-width: $screen-sm-min),
+               only screen and (min-device-pixel-ratio : 2) and (min-width: $screen-sm-min),
+               only screen and (min--moz-device-pixel-ratio: 2) and (min-width: $screen-sm-min){
             max-width: 16.6%;
         }        
 
