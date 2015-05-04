@@ -18,9 +18,7 @@
 
     p {
         line-height: 180%;
-
-
-}
+    }
 
     h1 {
         @media(max-width: $screen-xs-max) { font-size: 100%; }
@@ -29,16 +27,16 @@
 
 .profile-sub-navigation{
     display: inline-block;
-    font-size:150%;
-    top: 2px;
-    margin: 0px 10px 0px 10px;
+    font-size:100%;
+    text-transform: uppercase;
+
     @media(max-width: $screen-xs-max)
     {
         font-size: 100%;
     }
     
-    .setting{
-        color: $bright-highlight;
+    .setting a {
+        color: #fff;
         cursor: pointer;
 
     }
