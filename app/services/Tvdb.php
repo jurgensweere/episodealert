@@ -115,7 +115,9 @@ class Tvdb
      */
     public function getEpisodeId($serieid, $s, $e)
     {
-        $url = $this->tvdbapiurl . $this->api_key . '/series/' . $serieid . '/default/' . $s . '/' . $e . '/' . $this->lang. '.xml';
+        $url = $this->tvdbapiurl . $this->api_key .
+            '/series/' . $serieid .
+            '/default/' . $s . '/' . $e . '/' . $this->lang. '.xml';
 
         $feed = self::downloadUrl($url);
         $xml = simplexml_load_string($feed);
@@ -138,7 +140,7 @@ class Tvdb
     {
 
         $url = 'http://www.thetvdb.com/api/CE185B06BC7B86B8/series/' . $series['id'] .'/banners.xml';
-        
+
         $feed = self::downloadUrl($url);
         $xml = simplexml_load_string($feed);
 
@@ -155,8 +157,8 @@ class Tvdb
                         $fanArtUrl = 'http://www.thetvdb.com/banners/' . $b->BannerPath;
                         $fanArtVignetteUrl = 'http://www.thetvdb.com/banners/' . $b->VignettePath;
 
-                        //todo: before downloading we should probably check if the banner has a certain size. Some banners are just
-                        //posters that wont fit in any design.
+                        //todo: before downloading we should probably check if the banner has a certain size.
+                        //Some banners are just posters that wont fit in any design.
 
                         //download image
                         $ch = curl_init($fanArtUrl);
@@ -167,10 +169,13 @@ class Tvdb
                         curl_close($ch);
 
                         File::makeDirectory($series->getFanartLocation(), 0775, true, true);
-                        $bytes_written = File::put($series->getFanartLocation() . $series['unique_name'] . "_raw.jpg", $rawdata);
+                        $bytes_written = File::put(
+                            $series->getFanartLocation() . $series['unique_name'] . "_raw.jpg",
+                            $rawdata
+                        );
 
                         if ($bytes_written !== false) {
-                            self::compress_image(
+                            self::compressImage(
                                 $series->getFanartLocation() . $series['unique_name'] . "_raw.jpg",
                                 $series->getFanartLocation() . $series['unique_name'] . ".jpg",
                                 40
@@ -198,10 +203,13 @@ class Tvdb
                         curl_close($ch);
 
                         File::makeDirectory($series->getBannerLocation(), 0775, true, true);
-                        $bytes_written = File::put($series->getBannerLocation() . $series['unique_name'] . "_raw.jpg", $rawdata);
+                        $bytes_written = File::put(
+                            $series->getBannerLocation() . $series['unique_name'] . "_raw.jpg",
+                            $rawdata
+                        );
 
                         if ($bytes_written !== false) {
-                            self::compress_image(
+                            self::compressImage(
                                 $series->getBannerLocation() . $series['unique_name'] . "_raw.jpg",
                                 $series->getBannerLocation() . $series['unique_name'] . ".jpg",
                                 40
@@ -254,36 +262,36 @@ class Tvdb
         }
 
         $fp = fopen("public/img/poster/".$posterSubDirectory."/".$seriesPosterFileName, 'w');
-        
+
         fwrite($fp, $rawdata);
 
         $close = fclose($fp);
 
         if ($close) {
-            self::resize_image(
+            self::resizeImage(
                 "public/img/poster/".$posterSubDirectory."/".$seriesPosterFileName,
                 "public/img/poster/".$posterSubDirectory."/".$series['unique_name']."_small.jpg",
                 60,
                 0.3
             );
-            self::resize_image(
+            self::resizeImage(
                 "public/img/poster/".$posterSubDirectory."/".$seriesPosterFileName,
                 "public/img/poster/".$posterSubDirectory."/".$series['unique_name']."_medium.jpg",
                 60,
                 0.5
             );
-            self::resize_image(
+            self::resizeImage(
                 "public/img/poster/".$posterSubDirectory."/".$seriesPosterFileName,
                 "public/img/poster/".$posterSubDirectory."/".$series['unique_name']."_large.jpg",
                 60,
                 1
             );
         }
-        
+
         return $close;
     }
 
-    private function resize_image($source_url, $destination_url, $quality, $percentage)
+    private function resizeImage($source_url, $destination_url, $quality, $percentage)
     {
         list($width, $height) = getimagesize($source_url);
         $newwidth = $width * $percentage;
@@ -296,21 +304,21 @@ class Tvdb
             imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 
             imagejpeg($thumb, $destination_url, $quality);
-            
+
             imagedestroy($thumb);
         }
     }
 
-    private function compress_image($source_url, $destination_url, $quality)
+    private function compressImage($source_url, $destination_url, $quality)
     {
         $info = getimagesize($source_url);
-     
+
         $image = null;
         if ($info['mime'] == 'image/jpeg') {
             $image = @imagecreatefromjpeg($source_url);
         } elseif ($info['mime'] == 'image/gif') $image = @imagecreatefromgif($source_url);
         elseif ($info['mime'] == 'image/png') $image = @imagecreatefrompng($source_url);
-     
+
         //save file
         if ($image) {
             imagejpeg($image, $destination_url, $quality);
@@ -319,7 +327,8 @@ class Tvdb
 
     public function getEpisodeImage($serieid, $s, $e)
     {
-        $url = $this->tvdbapiurl . $this->api_key . '/series/' . $serieid . '/default/' . $s . '/' . $e . '/' . $this->lang. '.xml';
+        $url = $this->tvdbapiurl . $this->api_key . '/series/' . $serieid .
+            '/default/' . $s . '/' . $e . '/' . $this->lang. '.xml';
         $feed = self::downloadUrl($url);
         $xml = simplexml_load_string($feed);
 
@@ -476,7 +485,8 @@ class Tvdb
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); // allow redirects
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // return into a variable
             curl_setopt($ch, CURLOPT_TIMEOUT, $timeout); // times out after 4s
-            //Dit lost problemen op voor episodes, maar waarom weet ik niet. Gzip lijkt wel default in de header te staan
+            //Dit lost problemen op voor episodes, maar waarom weet ik niet.
+            //Gzip lijkt wel default in de header te staan
             //Waar curl niet niet herkende en me de gecodeerde content gaf
             curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
             $data = curl_exec($ch);
@@ -499,7 +509,8 @@ class Tvdb
     public function isEmptySeries($data)
     {
         if ($data['name'] == '') {
-            Log::info("This serie has no name : ". $data['id'] . " d:" .$data['description'] . " imdb:" . $data['imdb_id']);
+            Log::info("This serie has no name : ". $data['id'] .
+                " d:" .$data['description'] . " imdb:" . $data['imdb_id']);
 
             return true;
         }
