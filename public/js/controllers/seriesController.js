@@ -1,7 +1,7 @@
 	(function () {
 
     angular.module('eaApp').controller('SeriesCtrl',
-        function($scope, $stateParams, $filter, seriesFactory, AuthenticationService, Page) {
+        function($scope, $stateParams, $state, $filter, seriesFactory, AuthenticationService, Page) {
 
 			/* declaration */
 			var unique_name = $stateParams.seriesname;

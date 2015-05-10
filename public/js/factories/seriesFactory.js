@@ -10,7 +10,7 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
 
     function buildSeasonObject(numberOfSeasons, hasSpecials, activeSeason){
 
-        var seasons = [];
+        var seasons = [], i;
 
         if(hasSpecials){
             numberOfSeasons = numberOfSeasons - 1;
@@ -24,11 +24,11 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
 
         //TODO: refactor and if many seasons add 'seasons' to active only or the first one
         if (numberOfSeasons < 7){
-            for (var i = 1; i <= numberOfSeasons; i++) {
+            for (i = 1; i <= numberOfSeasons; i++) {
                 seasons.push( { number : i, title : 'Season ' + i, active : false, unseen : 999 } );
             }
         }else{
-            for (var i = 1; i <= numberOfSeasons; i++) {
+            for (i = 1; i <= numberOfSeasons; i++) {
                 seasons.push( { number : i, title : i, active : false, unseen : 999 } );
             }
         }
@@ -63,6 +63,10 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
 
     function getEpisodesBySeason (series_id, season){
     	return $http.get('/api/series/episodesbyseason/' + series_id + '/' + season);
+    }
+
+    function getByGenre (genre, skip){
+        return $http.get(urlBase + 'genre/' + genre + '/' + skip);
     }
 
     /*
@@ -146,8 +150,17 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
      * @return {array}          List of series
      */
     seriesFactory.getByGenre = function (genre, skip) {
+        var deferred = $q.defer();
         skip = typeof skip !== 'undefined' ? skip : 0;
-        return $http.get(urlBase + 'genre/' + genre + '/' + skip);
+        var getByGenreSeries = getByGenre(genre, skip);
+
+        getByGenreSeries.success(function(response){
+            deferred.resolve(response);
+        }).error(function(){
+            deferred.reject('error');
+        });
+
+        return deferred.promise;
     };
 
     /**

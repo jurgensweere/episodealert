@@ -24,20 +24,17 @@
                 $scope.loadingGenre = true;
 
                 seriesFactory.getByGenre($scope.selectedGenre, skip)
-                    .success(function (series) {
+                    .then(function (series) {
                         for (var i = 0; i < series.length - 1; i++) {
                             $scope.series.push(series[i]);
+
                         }
                         skip += series.length;
                         $scope.loadingGenre = false;
                     })
-                    .error(function (error) {
-                        //$scope.status = 'error error error beep beep;
-                        $scope.loadingGenre = false;
-                });
             };
 
-            /**
+            /** 
              * Get all available genres
              *
              * @return {array} List of genres

@@ -5,7 +5,7 @@ angular.module('eaApp').factory('oauthFactory', ['AuthenticationService', '$loca
         switch(response.status) {
             case 'connected':
                 AuthenticationService.facebookSignIn(response.authResponse).success(function(){
-                    $location.path('/profile');
+                    $state.go('profile.series');
                 });
                 break;
             default:

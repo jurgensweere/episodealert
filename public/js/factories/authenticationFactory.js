@@ -1,5 +1,5 @@
 angular.module('eaApp').factory("AuthenticationService", 
-                                function ($rootScope, $location, $http, SessionService, $window, ActionCache, FollowingQueue, alertService) {
+                                function ($rootScope, $state, $location, $http, SessionService, $window, ActionCache, FollowingQueue, alertService) {
 
     var cacheSession = function (response) {
         SessionService.set('authenticated', true);
@@ -58,7 +58,7 @@ angular.module('eaApp').factory("AuthenticationService",
             register.success(registerMessage);
             register.success(function() {
                 self.check().success(function() {
-                    $location.path('/profile');
+                    state.go('profile.series');
                 });
             });
             register.error(registerError);

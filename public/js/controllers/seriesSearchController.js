@@ -5,9 +5,9 @@
         $scope.$on('$locationChangeSuccess', function() {
             // Search parameter changed
             var params = $location.search();
-            var query = params['query'];
+            var query = params.query;
 
-            if (query != ""){
+            if (query !== ""){
                 doSearch(query);    
             }
             
