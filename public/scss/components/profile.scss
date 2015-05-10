@@ -1,5 +1,31 @@
+.profile-sub-navigation{
+    display: inline-block;
+    font-size:100%;
+    margin-left: 15px;
+
+    @media(max-width: $screen-xs-max)
+    {
+        font-size: 100%;
+    }
+    
+    .setting a {
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .setting.active{
+        color: $highlight-color;;
+    }
+
+    .setting:hover{
+        color: $highlight-color;
+    }
+
+}
+
 .profile {
-    .profile-filters{
+
+       .profile-filters{
         height: 40px;
         padding: 5px 0px 5px 20px;
         @media(max-width: $screen-xs-max){ padding: 5px 0px 5px 0px; }

@@ -66,8 +66,9 @@
                         </div>
                     </form>
                     <ul class="nav navbar-nav">
+
                         <li ui-sref-active="active"><a ui-sref="browse">Browse</a></li>
-                        <li ui-sref-active="active"><a ui-sref="trending">Trending</a></li>
+                        <li ui-sref-active="active"><a ui-sref="profile.guide">Guide</a></li>
                         <li ng-show="credentials.auth" ui-sref-active="active"><a ui-sref="profile.series">Profile</a></li>
                         <li ng-show="!credentials.auth" ui-sref-active="active">
                             <a ng-show="!credentials.auth" ui-sref="login">Login</a>

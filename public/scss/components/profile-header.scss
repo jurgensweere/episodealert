@@ -26,28 +26,3 @@
     }
 }
 
-.profile-sub-navigation{
-    display: inline-block;
-    font-size:100%;
-    text-transform: uppercase;
-
-    @media(max-width: $screen-xs-max)
-    {
-        font-size: 100%;
-    }
-    
-    .setting a {
-        color: #fff;
-        cursor: pointer;
-
-    }
-
-    .setting.active{
-        color: $highlight-color;;
-    }
-
-    .setting:hover{
-        color: $highlight-color;
-    }
-
-}

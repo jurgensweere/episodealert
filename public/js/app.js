@@ -4,7 +4,7 @@
 
 
     // Init
-    app.run(function ($rootScope, $location, $window, AuthenticationService, alertService) {
+    app.run(function ($rootScope, $state, $location, $window, AuthenticationService, alertService) {
         $rootScope.credentials = {};
         AuthenticationService.pageLoadInit();
 
@@ -14,19 +14,19 @@
         // check if a user is logged in at the backend
         AuthenticationService.check();
 
-        $rootScope.$on('$stateChangeStart', function (event, next, current) {
+        $rootScope.$on('$stateChangeSuccess', 
+        function(event, toState, toParams, fromState, fromParams){ 
 
             for (var i = 0, max = routesThatRequireAuth.length; i < max; i++) {
                 if (($location.path() === routesThatRequireAuth[i]) && (!AuthenticationService.isLoggedIn())) {
 
                     $rootScope.$evalAsync(function () {
                         alertService.add('You need to login to go to ' + $location.path(), { type : 'warning', location : 'top', time: 10000 });
-                        $location.path('/login');
+                        $state.go('login');
                     });
                 }
             }
-
-        });
+        })
 
         $rootScope.$on('$stateChangeSuccess', function (event, next, current) {
             $window.ga('send', 'pageview', { page: $location.url() });
