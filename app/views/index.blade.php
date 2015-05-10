@@ -21,10 +21,10 @@
     <% HTML::style(asset('css/global.css')) %>
 
     <% HTML::script('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js') %>
-    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js') %>
+    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js') %>
     <% HTML::script('//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.14/angular-ui-router.min.js') %>
-    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-animate.min.js') %>
-    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-touch.js') %>
+    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-animate.min.js') %>
+    <% HTML::script('//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-touch.js') %>
     <% HTML::script('//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js') %>
 
     
@@ -68,19 +68,22 @@
                     <ul class="nav navbar-nav">
                         <li ui-sref-active="active"><a ui-sref="browse">Browse</a></li>
                         <li ui-sref-active="active"><a ui-sref="trending">Trending</a></li>
-                        <li ng-show="credentials.auth" ui-sref-active="active"><a ui-sref="profile">Profile</a></li>
-                        <li ng-show="credentials.auth">
-                            <a href="#" ng-controller="LoginCtrl" ng-click="logout()">Logout</a>
-                        </li>
+                        <li ng-show="credentials.auth" ui-sref-active="active"><a ui-sref="profile.series">Profile</a></li>
                         <li ng-show="!credentials.auth" ui-sref-active="active">
                             <a ng-show="!credentials.auth" ui-sref="login">Login</a>
                         </li>
                         <li ng-show="!credentials.auth" ui-sref-active="active">
                             <a ng-show="!credentials.auth" ui-sref="register">Register</a>
                         </li>
+                        <li ng-show="credentials.auth" ui-sref-active="active" class="hidden-sm hidden-md hidden-lg">
+                            <a ng-show="credentials.auth" ui-sref="profile-settings">Settings</a>
+                        </li>
+                        <li ng-show="credentials.auth">
+                            <a href="#" ng-controller="LoginCtrl" ng-click="logout()">Logout</a>
+                        </li>
                     </ul>
 
-                    <p class="navbar-text navbar-right hide-xs hidden-sm" ng-show="credentials.auth">Welcome back, <a href="/profile/settings" class="navbar-link">{{ credentials.accountname }} <i class="fa fa-cog"></i></a> </p>
+                    <p class="navbar-text navbar-right hidden-xs hidden-sm" ng-show="credentials.auth">Welcome back, <a href="/profile/settings" class="navbar-link">{{ credentials.accountname }} <i class="fa fa-cog"></i></a> </p>
             <!--         <div class="extra-menu">
                         <i class="fa fa-list" ></i>
                     </div> -->
