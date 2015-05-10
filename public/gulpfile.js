@@ -28,7 +28,8 @@ environments.forEach(function (environment) {
     gulp.task('default:' + environment, 
         ['watch:' + environment,
          'sass:' + environment,
-         'jshint:' + environment]
+         'jshint:' + environment,
+         'test']
     );
 
     gulp.task('sass:' + environment, function() {
@@ -72,7 +73,7 @@ gulp.task('watch', ['watch:dev']);
 // Helper functions
 var watchTask = function (env) {
     livereload.listen();
-    gulp.watch(paths.js, ['jshint:' + env]);
+    gulp.watch(paths.js, ['jshint:' + env, 'test']);
     gulp.watch(paths.scss, ['sass:' + env]);
     gulp.watch('./scss/**/*.scss', ['sass:' + env]);
     gulp.watch('./scss/*.scss', ['sass:' + env]);
