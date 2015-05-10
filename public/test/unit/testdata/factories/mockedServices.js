@@ -16,6 +16,12 @@ function loadMockedSeriesFactory($q){
             var deferred = $q.defer();
             deferred.resolve(seriesDetailTestData);
             return deferred.promise;
+        },
+
+        getByGenre : function(genre, skip){
+            var deffered = $q.defer();
+            deffered.resolve(seriesBrowseSeriesList);
+            return deffered.promise;
         }
     }
 }

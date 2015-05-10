@@ -50,7 +50,6 @@ describe('Series Controller', function () {
     it('Should have 0 unseen episodes', function () {
         // baby jeebus why is this randomly failing
 
-        scope.$apply();
         scope.$digest();
 
         expect(scope.series.season_object[1].unseen).toEqual('0');

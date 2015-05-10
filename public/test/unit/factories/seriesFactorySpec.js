@@ -2,12 +2,18 @@ describe("E2E: Testing Pages", function(seriesFactory) {
     
     beforeEach(module('eaApp'));
 
+    // Find solutions for ui-router unit testing issues:
+    // http://stackoverflow.com/questions/23655307/ui-router-interfers-with-httpbackend-unit-test-angular-js/23670198#23670198
+    beforeEach(module(function ($urlRouterProvider) {
+        $urlRouterProvider.otherwise(function(){return false;});
+    }));
+
     it("Should check if the seriesFactory returns a proper series",
       inject(function(seriesFactory, $httpBackend) {
         
         // Fake login
         $httpBackend.expect('GET', 'api/auth/check')
-                .respond(200, '[{"id":2,"accountname":"arnobats@gmail.com","thirdparty":false}]')        
+                .respond(401, '[{"error":2,"accountname":"arnobats@gmail.com","thirdparty": true}]')        
 
         $httpBackend.flush();
     
@@ -29,7 +35,7 @@ describe("E2E: Testing Pages", function(seriesFactory) {
             expect(series.rating).toBe('9.1');
             expect(series.rating_updated).toBe('0000-00-00 00:00:00');
             expect(series.imdb_id).toBe('tt0411008');
-            expect(series.poster_image).toBe('img/poster/lo/lost_large.jpg');               
+            expect(series.poster_image).toBe('img/poster/lo/lost_large.jpg');
             expect(series.poster_image_converted).toBe(true);
             expect(series.fanart_image).toBe('lost.jpg');
             expect(series.fanart_image_converted).toBe(true);
