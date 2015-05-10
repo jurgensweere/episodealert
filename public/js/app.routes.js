@@ -1,6 +1,6 @@
 angular.module('eaApp').config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     
-  $locationProvider.html5Mode(true)
+  $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise("/trending");
   
   $stateProvider
@@ -16,21 +16,19 @@ angular.module('eaApp').config(function($stateProvider, $urlRouterProvider, $loc
 
     .state('profile', {
         url : '/profile',
-        templateUrl : 'templates/profile.html', 
-        controller : 'ProfileCtrl' 
+        templateUrl : 'templates/profile.html',
+     })
 
-        // views: {
-        //         '': { 
-        //             templateUrl : 'templates/profile.html', 
-        //             controller : 'ProfileCtrl' 
-        //         },
-        //         'wurst@profile' : {
-        //             templateUrl : 'templates/wurst.html',
-        //             controller : 'WurstCtrl' 
-        //         },
-             
-        //     }
+    .state('profile.series',{
+        url : '/series',
+        templateUrl : 'templates/profile.series.html',
+        controller : 'ProfileCtrl'
+    })
 
+    .state('profile.guide', {
+        url : '/guide',
+        templateUrl : 'templates/profile.guide.html',
+        controller : 'GuideCtrl'
     })
 
     .state('trending', {
@@ -81,12 +79,6 @@ angular.module('eaApp').config(function($stateProvider, $urlRouterProvider, $loc
         controller : 'ProfileSettingsCtrl'
     })
 
-    .state('profile-guide', {
-        url : '/profile/guide',
-        templateUrl : 'templates/guide.html',
-        controller : 'GuideCtrl'
-    })
-
     .state('contact', {
         url : '/contact',
         controller : 'ContactCtrl',
@@ -101,6 +93,6 @@ angular.module('eaApp').config(function($stateProvider, $urlRouterProvider, $loc
     .state('testing', {
         url : '/testing',
         templateUrl : 'templates/testpage.html'
-    })
+    });
 
 });

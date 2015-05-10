@@ -9,12 +9,12 @@
         AuthenticationService.pageLoadInit();
 
         // Add routes that required auth from the front-end
-        var routesThatRequireAuth = ['/profile', '/profile/settings', '/profile/guide', '/profile/settings'];
+        var routesThatRequireAuth = ['/profile', '/profile/settings', '/profile/guide', '/profile/series'];
 
         // check if a user is logged in at the backend
         AuthenticationService.check();
 
-        $rootScope.$on('$routeChangeStart', function (event, next, current) {
+        $rootScope.$on('$stateChangeStart', function (event, next, current) {
 
             for (var i = 0, max = routesThatRequireAuth.length; i < max; i++) {
                 if (($location.path() === routesThatRequireAuth[i]) && (!AuthenticationService.isLoggedIn())) {
@@ -28,7 +28,7 @@
 
         });
 
-        $rootScope.$on('$routeChangeSuccess', function (event, next, current) {
+        $rootScope.$on('$stateChangeSuccess', function (event, next, current) {
             $window.ga('send', 'pageview', { page: $location.url() });
         });
 
@@ -273,7 +273,7 @@
         };
     });
 
-    app.controller("LoginCtrl", function ($scope, $rootScope, $location, AuthenticationService) {
+    app.controller("LoginCtrl", function ($scope, $state, $location, AuthenticationService) {
 
         $scope.credentials = {
             email: "",
@@ -282,7 +282,7 @@
 
         $scope.login = function () {
             AuthenticationService.login($scope.credentials).success(function () {
-                $location.path('/profile');
+                $state.go('profile.series');
             });
         };
 
