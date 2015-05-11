@@ -44,9 +44,9 @@ class Series extends Eloquent
     /**
      * Creates a unique name for this series and assigns to object.
      *
-     * @param <type> $postfix
+     * @param int|null $duplicateCounter
      */
-    public function assignUniqueName($postfix = '')
+    public function assignUniqueName($duplicateCounter = null)
     {
         $name = $this->name;
         if (strlen($name) == 0) {
@@ -79,7 +79,14 @@ class Series extends Eloquent
         $name = preg_replace("/^[\_]+/", "", $name);
         $name = preg_replace("/[\_]+/", "_", $name);
 
-        $name .= $postfix;
+        // Cycle through postfixes to avoid duplicate names.
+        if ($duplicateCounter !== null) {
+            $name .= "_($year)";
+
+            if ($duplicateCounter > 0) {
+                $name .= '_' . $duplicateCounter;
+            }
+        }
 
         $black_list = array("browse");
         if (in_array($name, $black_list)) {
@@ -88,12 +95,7 @@ class Series extends Eloquent
         $duplicate = Series::whereUniqueName($name)->first();
 
         if ($duplicate && $duplicate->id != $this->id) {
-            if ($postfix == "_($year)") {
-                $postfix .= '_1';
-            } else {
-                $postfix = "_($year)";
-            }
-            return $this->assignUniqueName($postfix);
+            return $this->assignUniqueName($duplicateCounter + 1);
         } else {
             $this->unique_name = $name;
             return $this;
