@@ -1,6 +1,6 @@
 (function(){
 
-    angular.module('eaApp').controller('CarouselCtrl',
+    angular.module('eaApp').controller('TrendingCtrl',
         function($scope, $http, $interval, $filter, seriesFactory, Page) {
 
             Page.setTitle('Episode Alert - Trending');
@@ -69,6 +69,13 @@
                 // Make sure that the interval is destroyed too
                 $scope.stopTimer();
             });
+
+            function getAllGenres() {
+                return new Array("Action", "Adventure", "Animation", "Comedy", "Children", "Crime", "Drama", "Documentary", "Fantasy", "Game Show" , "Horror", "News", "Reality", "Science-Fiction", "Soap", "Sport", "Talk Show", "Western");
+            }
+
+            $scope.allGenres = getAllGenres();
+
         }
     );
 })();

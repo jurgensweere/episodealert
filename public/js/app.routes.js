@@ -33,8 +33,8 @@ angular.module('eaApp').config(function($stateProvider, $urlRouterProvider, $loc
 
     .state('trending', {
         url : '/trending',
-        templateUrl : 'templates/carousel.html',
-        controller : 'CarouselCtrl'
+        templateUrl : 'templates/trending.html',
+        controller : 'TrendingCtrl'
     })
 
     .state('series-detail', {

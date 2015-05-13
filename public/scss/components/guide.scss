@@ -1,0 +1,27 @@
+ .guide {
+    table{
+		@media #{$hidpi-screen}{
+			font-size: 85%;	
+		}
+
+        background-color: $background-color;
+
+        tr{ 
+        	th, td{
+        		border-top: none;
+        		padding-left: 0px;
+        	}
+		}
+        td{
+            border:none !important; //important sucks
+        }
+
+        tr:nth-of-type(even){
+           background-color: lighten( $background-color, 8% );
+        }
+
+        tr:nth-of-type(odd){
+        	background-color: $background-color;
+        }
+    }
+}

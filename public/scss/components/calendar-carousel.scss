@@ -1,10 +1,5 @@
 .calendar-carousel{
-
-    //dirty adjustment hack for non mobile
-    @media(min-width: $screen-sm-min){
-        margin-top: -40px;
-    }
-
+    min-height: 200px;
     // HiDPI screens
     @media only screen and (-webkit-min-device-pixel-ratio : 2),
            only screen and (min-device-pixel-ratio : 2),

@@ -1,0 +1,84 @@
+<div ng-if="!credentials.auth" class="row splash-brand">
+    <p>episode alert <img src="img/logo-71x50.png" alt="Episode Alert" /></p>
+</div>
+<div ng-if="!credentials.auth" class="marketing">
+    <div class="col-xs-4 col-md-4">
+        <h1>Follow</h1>
+        <p>Find your favorite<br/>TV Series</p>
+    </div>
+    <div class="col-xs-4 col-md-4">
+        <h1>Get Notified</h1>
+        <p>Receive email<br/>notifications</p>
+    </div>
+    <div class="col-xs-4 col-md-4">
+        <h1>Keep Track</h1>
+        <p>Remember episodes<br/>you've seen</p>
+    </div>
+</div>
+
+<div class="row splash-fanart">
+    <div ng-repeat="series in series"
+        ng-show="currentSeries==series.id"
+        class="fanart-background"
+        style="background-image: url('{{ series.poster_image | createFanartUrl : series.unique_name }}');">
+    </div>
+
+    <span class="splash-fanart-fade"></span>
+
+    <div class="row">
+        <!-- Trending Series -->
+        <div class="col-md-12 col-lg-12 trending-background-color">
+            <h1>Trending series</h1>   
+            <ul class="splash-posters">
+                <li ng-class="{active: isSelected(series.id)}" class="series" ng-repeat="series in series">
+                    <a href="/series/{{::series.unique_name}}">
+                        <img class="img-responsive poster" ng-src="{{ series.poster_image | createImageUrl : series.unique_name : 'medium' }}" alt="{{ ::series.name }}" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+ 
+    </div>
+
+    <div class="row">
+        <!-- Trending Series -->
+        <div class="col-md-6 col-lg-6 trending-background-color">
+            <h1>Most followed series</h1>     
+            <ul class="splash-posters">
+                <li ng-class="{active: isSelected(series.id)}" class="series" ng-repeat="series in series">
+                    <a href="/series/{{::series.unique_name}}">
+                        <img class="img-responsive poster" ng-src="{{ series.poster_image | createImageUrl : series.unique_name : 'medium' }}" alt="{{ ::series.name }}" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Most followed series -->
+        <div class="col-md-6 col-lg-6 trending-background-color ">
+            <h1>Browse all series</h1>
+            <ul>
+                <li class="genre" ng-repeat="genre in allGenres">
+                    <a href="/series/genre/{{genre}}">{{ ::genre}}</a>
+                </li>
+            </ul>
+        </div> 
+
+
+    </div>    
+
+
+</div>
+
+
+
+
+
+
+
+
+    
+
+
+
+
+</div>

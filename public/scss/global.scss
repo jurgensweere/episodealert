@@ -12,6 +12,7 @@
 @import 'scss/components/trending';
 @import 'scss/components/series-detail';
 @import 'scss/components/browse';
+@import 'scss/components/guide';
 
 /* Shared */
 @import 'scss/buttons';
@@ -60,6 +61,19 @@ p {
 
 ul {
     padding-left:  0px;
+}
+
+.section-header{
+    height: 40px;
+    padding: 8px 0px 10px 15px;
+    @media(max-width: $screen-xs-max){ padding: 5px 0px 5px 0px; }
+    background-color: $primary-color;    
+
+    h2{
+        margin: 0px;
+        padding-top: 2px;
+        font-size: 130%;
+    }
 }
 
 /* spacers */
@@ -159,6 +173,9 @@ ul {
 
 .ea-content {
 	min-height: 600px;
+    @media #{$hidpi-screen}{
+        min-height: 375px;
+    }    
 }
 
 .container--navbar {
@@ -189,20 +206,6 @@ ul {
         text-align: left;
     }
 
-}
-
-.guide {
-    table{
-        background-color: $background-color;
-
-        td{
-            border:none !important; //important sucks
-        }
-
-        tr:nth-of-type(odd){
-           background-color: lighten( $background-color, 2% );
-        }
-    }
 }
 
 li.disabled{
