@@ -79,7 +79,7 @@ class SeriesController extends BaseController
             )
             ->where('fanart_image_converted', '=', 1)
             ->get()
-            ->random(10);
+            ->random(5);
 
         $array = array();
         if (count($topSeries) > 0) {

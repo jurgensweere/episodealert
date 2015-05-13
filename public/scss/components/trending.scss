@@ -99,7 +99,7 @@ ul{
 }
 
 .trending-background-color{
-    height: 250px;
+    min-height: 250px;
     background-color: rgba($background-color, 0.8);
 }
 
@@ -111,12 +111,11 @@ ul{
 .splash-posters {
     bottom: 0;
     width: 100%;
-    white-space: nowrap;
 
     li {
         display: inline-block;
         cursor: pointer;
-        width: 10%;
+        width: 20%;
         list-style: none;
         text-align: center;
         position: relative;
