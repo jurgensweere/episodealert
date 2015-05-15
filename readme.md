@@ -12,7 +12,6 @@ The website: [Episode-Alert](http://www.episode-alert.com).
 * [Git](http://git-scm.com/downloads)
 * [Bower](http://bower.io/)
 * [Ruby](https://www.ruby-lang.org/en/)
-* [Grunt](http://gruntjs.com/)
 * [Compass](http://compass-style.org/)
 
 ### Prerequisites backend:
@@ -42,7 +41,7 @@ The website: [Episode-Alert](http://www.episode-alert.com).
   gem install sass compass
   bower install
   nmp install (Or 'npm install --no-bin-links' if it doenst work on vagrant)
-  grunt build or gulp build
+  gulp build
 ```
 
 ### Running the test
@@ -57,7 +56,6 @@ The website: [Episode-Alert](http://www.episode-alert.com).
 ### Work
 
 ```
-  'grunt watch' to watch for changes -or-
   'gulp watch' to watch for changes
   'php artisan serve' to start a webserver in root of the project (or you can install apache)
   'php artisan series:update'  to start fetching series
