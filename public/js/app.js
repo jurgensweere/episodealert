@@ -34,6 +34,12 @@
 
     });
 
+    app.constant('eaConstants', {
+        'genres' : ["Action", "Adventure", "Animation", "Comedy", "Children", "Crime", "Drama", "Documentary",
+            "Fantasy", "Mystery" ,"Game Show" , "Horror", "News", "Reality", "Science-Fiction", "Soap", "Sport",
+            "Talk Show", "Western", "Mini-Series", "Travel", "Romance"]
+    });
+
     app.config(function ($provide, $httpProvider) {
 
         var logsOutUserOn401 = function ($location, $q, SessionService) {

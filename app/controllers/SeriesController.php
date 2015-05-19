@@ -90,7 +90,6 @@ class SeriesController extends BaseController
     }
 
     /**
-     * THIS FUNCTION DOES NOT APPEAR TO BE USED
      * @return type
      */
     public function trending()
@@ -105,7 +104,7 @@ class SeriesController extends BaseController
                 ->whereNotNull('fanart_image')
                 ->groupBy('following.series_id')
                 ->orderBy(DB::raw('count(following.id)'), 'desc')
-                ->take(10)
+                ->take(5)
                 ->get()
         );
     }

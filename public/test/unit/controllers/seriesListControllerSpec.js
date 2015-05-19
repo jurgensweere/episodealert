@@ -25,7 +25,7 @@ describe('Series List Controller', function () {
         scope.$digest();
 
         expect(scope.series.length).toBe(11);
-        expect(scope.allGenres.length).toBe(18);
+        expect(scope.allGenres.length).toBe(22);
         // console.log(scope.series);
 
 

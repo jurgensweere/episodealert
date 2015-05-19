@@ -5,7 +5,6 @@
 
 			/* declaration */
 			var unique_name = $stateParams.seriesname;
-
 			/* Execute on load */
             var authorized = AuthenticationService.isLoggedIn();
             var series = seriesFactory.getSeriesDetail(unique_name);

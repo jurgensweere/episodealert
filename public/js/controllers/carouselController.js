@@ -1,7 +1,7 @@
 (function(){
 
     angular.module('eaApp').controller('TrendingCtrl',
-        function($scope, $http, $interval, $filter, seriesFactory, Page) {
+        function($scope, $http, $interval, $filter, seriesFactory, Page, eaConstants) {
 
             Page.setTitle('Episode Alert - Trending');
 
@@ -23,6 +23,14 @@
                     }
                 }
             }, 5000);
+
+            /**
+             * Load trending series
+             */
+
+            seriesFactory.getTrending().success(function (response){
+                $scope.trendingSeries = response;
+            });
 
             /** Load the top series to show case */
             seriesFactory.getTopSeries()
@@ -71,7 +79,7 @@
             });
 
             function getAllGenres() {
-                return new Array("Action", "Adventure", "Animation", "Comedy", "Children", "Crime", "Drama", "Documentary", "Fantasy", "Game Show" , "Horror", "News", "Reality", "Science-Fiction", "Soap", "Sport", "Talk Show", "Western");
+                return eaConstants.genres;
             }
 
             $scope.allGenres = getAllGenres();

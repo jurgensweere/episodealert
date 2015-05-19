@@ -41,11 +41,11 @@
     </div>
 
     <div class="row">
-        <!-- Trending Series -->
+        <!-- Most followed in last 15 days -->
         <div class="col-md-6 col-lg-6 trending-background-color">
-            <h1>Most followed series</h1>     
+            <h1>Recent hits</h1>
             <ul class="splash-posters">
-                <li ng-class="{active: isSelected(series.id)}" class="series" ng-repeat="series in series">
+                <li class="series" ng-repeat="series in trendingSeries">
                     <a href="/series/{{::series.unique_name}}">
                         <img class="img-responsive poster" ng-src="{{ series.poster_image | createImageUrl : series.unique_name : 'medium' }}" alt="{{ ::series.name }}" />
                     </a>
@@ -53,7 +53,6 @@
             </ul>
         </div>
 
-        <!-- Most followed series -->
         <div class="col-md-6 col-lg-6 trending-background-color ">
             <h1>Browse all series</h1>
             <ul>

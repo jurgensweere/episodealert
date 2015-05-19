@@ -134,6 +134,16 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
     };
 
     /**
+     * Get trending series for the last 15 days
+     *
+     * @return {array} List of series
+     */
+
+    seriesFactory.getTrending = function() {
+        return $http.get(urlBase + 'trending');
+    };
+
+    /**
      * Get series by search query
      *
      * @param {string} query    Search query
