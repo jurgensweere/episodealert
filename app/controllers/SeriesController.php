@@ -101,7 +101,6 @@ class SeriesController extends BaseController
         return Response::json(
             Series::join('following', 'following.series_id', '=', 'series.id')
                 ->where('following.created_at', '>', $trendingDate)
-                ->whereNotNull('fanart_image')
                 ->groupBy('following.series_id')
                 ->orderBy(DB::raw('count(following.id)'), 'desc')
                 ->take(5)
