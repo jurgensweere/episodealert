@@ -130,7 +130,7 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
      * @return {array} List of series
      */
     seriesFactory.getTopSeries = function () {
-        return $http.get(urlBase + 'top');
+        return $http.get(urlBase + 'top', { cache : true} );
     };
 
     /**
@@ -140,7 +140,7 @@ angular.module('eaApp').factory('seriesFactory', ['$http', '$filter', '$q', func
      */
 
     seriesFactory.getTrending = function() {
-        return $http.get(urlBase + 'trending');
+        return $http.get(urlBase + 'trending', { cache: true } );
     };
 
     /**
