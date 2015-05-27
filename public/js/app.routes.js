@@ -14,21 +14,30 @@ angular.module('eaApp').config(function($stateProvider, $urlRouterProvider, $loc
         controller : 'SeriesListCtrl'
     })
 
+    /*
+     *  Profile
+     */
     .state('profile', {
         url : '/profile',
-        templateUrl : 'templates/profile.html',
+        templateUrl : 'templates/profile/profile.html',
      })
 
     .state('profile.series',{
         url : '/series',
-        templateUrl : 'templates/profile.series.html',
+        templateUrl : 'templates/profile/profile.series.html',
         controller : 'ProfileCtrl'
     })
 
     .state('profile.guide', {
         url : '/guide',
-        templateUrl : 'templates/profile.guide.html',
+        templateUrl : 'templates/profile/profile.guide.html',
         controller : 'GuideCtrl'
+    })
+
+    .state('profile.settings',{
+        url : '/settings',
+        templateUrl : 'templates/profile/profile.settings.html',
+        controller : 'ProfileSettingsCtrl'
     })
 
     .state('trending', {
@@ -71,12 +80,6 @@ angular.module('eaApp').config(function($stateProvider, $urlRouterProvider, $loc
         url : '/password/reset/:token',
         templateUrl : 'templates/auth/passwordresetconfirm.html',
         controller : 'PasswordResetCtrl'
-    })
-
-    .state('profile-settings', {
-        url : '/profile/settings',
-        templateUrl : 'templates/profile/settings.html',
-        controller : 'ProfileSettingsCtrl'
     })
 
     .state('contact', {
