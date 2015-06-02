@@ -26,7 +26,7 @@
                     });
                 }
             }
-        })
+        });
 
         $rootScope.$on('$stateChangeSuccess', function (event, next, current) {
             $window.ga('send', 'pageview', { page: $location.url() });

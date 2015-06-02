@@ -31,7 +31,7 @@
                         }
                         skip += series.length;
                         $scope.loadingGenre = false;
-                    })
+                    });
             };
 
             /** 
