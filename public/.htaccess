@@ -9,7 +9,7 @@
     RewriteRule ^(.*)/$ /$1 [L,R=301]
 
     # Block image hotlinking
-    RewriteCond %{HTTP_REFERER} !^http://(.+\.)?episode-alert\.com/? [NC]
+    RewriteCond %{HTTP_REFERER} !^http://(localhost|(.+\.)?episode-alert\.com/?) [NC]
     RewriteCond %{HTTP_REFERER} !^$
     RewriteRule .*\.(jpe?g|gif|bmp|png)$ http://i.imgur.com/RbGKoYd.gif [L]
 
