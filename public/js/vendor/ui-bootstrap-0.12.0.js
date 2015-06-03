@@ -307,7 +307,7 @@ angular.module('ui.bootstrap.alert', [])
   return {
     restrict:'EA',
     controller:'AlertController',
-    templateUrl:'template/alert/alert.html',
+    templateUrl:'/template/alert/alert.html',
     transclude:true,
     replace:true,
     scope: {
