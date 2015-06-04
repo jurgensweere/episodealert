@@ -178,6 +178,7 @@
 <% HTML::script(asset('js/directives/eaTab.js')) %>
 <% HTML::script(asset('js/directives/eaButtons.js')) %>
 <% HTML::script(asset('js/directives/calendarCarousel/calendarCarousel.js')) %>
+<% HTML::script(asset('js/directives/episodeGuide/episodeGuide.js')) %>
 <% HTML::script(asset('js/directives/ng-sortable.js')) %>
 <!-- endbuild -->
 
