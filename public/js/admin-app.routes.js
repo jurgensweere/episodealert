@@ -1,20 +1,20 @@
 angular.module('eaAdminApp').config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     
   $locationProvider.html5Mode(true);
-  $urlRouterProvider.otherwise("");
+  $urlRouterProvider.otherwise("/index");
   
   $stateProvider
 
-    .state('admin', {
-        url : '',
+    .state('home', {
+        url : '/index',
         templateUrl : '/templates/admin/welcome.html'
     })
-    .state('admin.users', {
+    .state('users', {
         url : '/users',
         templateUrl : '/templates/admin/user-list.html',
         controller : 'AdminUserListCtrl'
     })
-    .state('admin.series', {
+    .state('series', {
         url : '/series',
         templateUrl : '/templates/admin/series-list.html',
         controller : 'AdminSeriesListCtrl'

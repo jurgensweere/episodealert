@@ -26,7 +26,8 @@ Route::group(
         Route::get('/testpage', 'HomeController@showTestPage');
         Route::get('/login', 'LoginController@processLogin');
 
-        Route::get('/admin', array('before' => 'auth.admin', 'uses' => 'AdminController@showAdminPage'));
+        Route::get('/admin', function(){return Redirect::to('/admin/');});
+        Route::get('/admin/', array('before' => 'auth.admin', 'uses' => 'AdminController@showAdminPage'));
 
         Route::group(array('prefix' => 'api'), function () {
 

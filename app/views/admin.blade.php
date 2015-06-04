@@ -39,7 +39,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/admin">
+                    <a class="navbar-brand" href="/admin/index">
                         <!-- <img src="img/logo-56x41.png" alt="Episode Alert" /> -->
                         Episode Alert - ADMIN
                     </a>
@@ -47,8 +47,8 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
 
-                        <li ui-sref-active="active"><a ui-sref="admin.users">Users</a></li>
-                        <li ui-sref-active="active"><a ui-sref="admin.series">Series</a></li>
+                        <li ui-sref-active="active"><a ui-sref="users">Users</a></li>
+                        <li ui-sref-active="active"><a ui-sref="series">Series</a></li>
                     </ul>
                 </div>
             </div>
