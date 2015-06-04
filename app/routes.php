@@ -26,8 +26,10 @@ Route::group(
         Route::get('/testpage', 'HomeController@showTestPage');
         Route::get('/login', 'LoginController@processLogin');
 
-        Route::get('/admin', function(){return Redirect::to('/admin/');});
-        Route::get('/admin/', array('before' => 'auth.admin', 'uses' => 'AdminController@showAdminPage'));
+
+        Route::get('/admin', array('before' => 'auth.admin', 'uses' => 'AdminController@showAdminPage'));
+        Route::get('/admin/{all}', array('before' => 'auth.admin', 'uses' => 'AdminController@showAdminPage'))
+            ->where('all', '.*');
 
         Route::group(array('prefix' => 'api'), function () {
 
@@ -39,8 +41,14 @@ Route::group(
                 Route::get('series/guide', 'SeriesController@getEpisodeGuide');
                 Route::get('series/episodesperdate/{date}', 'SeriesController@getEpisodesForUserPerDate');
                 Route::get('series/unseenamount', 'SeriesController@getUnseenEpisodes');
-                Route::get('series/unseenamountbyseason/{series_id}/{season}', 'SeriesController@getUnseenEpisodesPerSeason');
-                Route::get('series/unseenamountbyseries/{series_id}/{seasons}', 'SeriesController@getUnseenEpisodesPerSeries');
+                Route::get(
+                    'series/unseenamountbyseason/{series_id}/{season}',
+                    'SeriesController@getUnseenEpisodesPerSeason'
+                );
+                Route::get(
+                    'series/unseenamountbyseries/{series_id}/{seasons}',
+                    'SeriesController@getUnseenEpisodesPerSeries'
+                );
 
                 // Following
                 Route::get('follow/{series}', 'FollowingController@follow');
@@ -59,6 +67,11 @@ Route::group(
                 Route::post('profile/password', 'ProfileController@postChangePassword');
                 Route::post('profile/credentials', 'ProfileController@postChangeCredentials');
                 Route::post('profile/preferences', 'ProfileController@postChangePreferences');
+            });
+
+            // Admin api calls
+            Route::group(array('before' => 'auth.admin'), function () {
+                Route::get('/user', 'UserController@getUsers');
             });
 
             //Auth
