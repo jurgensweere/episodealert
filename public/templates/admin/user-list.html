@@ -1,3 +1,28 @@
 <div class="user-list">
-	<h1>Users</h1>
+    <h1>Users</h1>
+    <pagination total-items="totalItems" ng-model="currentPage" maxSize="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination> 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Accountname</th>
+                <th>Email</th>
+                <th>provider</th>
+                <th>alerts</th>
+                <th>created</th>
+                <th>updated</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users">
+                <td>{{ ::user.id }}</td>
+                <td>{{ ::user.accountname }}</td>
+                <td>{{ ::user.email }}</td>
+                <td>{{ ::user.oauthprovider }}</td>
+                <td>{{ ::user.alerts  }}</td>
+                <td>{{ ::user.created_at }}</td>
+                <td>{{ ::user.updated_at }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

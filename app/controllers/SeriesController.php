@@ -416,4 +416,12 @@ class SeriesController extends BaseController
 
         return Response::json($episodes);
     }
+
+    public function getSeriesPaginated()
+    {
+        $series = Series::orderBy('name', 'ASC')
+            ->paginate(15);
+
+        return Response::json($series);
+    }
 }

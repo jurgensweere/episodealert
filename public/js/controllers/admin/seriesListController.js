@@ -1,8 +1,8 @@
 (function(){
-    angular.module('eaAdminApp').controller('AdminUserListCtrl',
-        function($scope, userFactory) {
+    angular.module('eaAdminApp').controller('AdminSeriesListCtrl',
+        function($scope, seriesAdminFactory) {
             
-            $scope.users = [];
+            $scope.series = [];
             $scope.totalItems = 0;
             $scope.currentPage = 1;
             $scope.itemsPerPage = 15;
@@ -13,16 +13,16 @@
             };
 
             $scope.pageChanged = function() {
-                getUsers($scope.currentPage);
+                getSeries($scope.currentPage);
             };
 
             /** init **/
-            getUsers($scope.currentPage);
+            getSeries($scope.currentPage);
 
-            function getUsers(page) {
-                userFactory.getUsers(page)
+            function getSeries(page) {
+                seriesAdminFactory.getSeries(page)
                     .success(function (response) {
-                        $scope.users = response.data;
+                        $scope.series = response.data;
                         $scope.totalItems = response.total;
                         //$scope.currentPage = response.current_page;
                         $scope.itemsPerPage = response.per_page;

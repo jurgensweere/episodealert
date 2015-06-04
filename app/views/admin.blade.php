@@ -26,6 +26,10 @@
 
     <% HTML::script(asset('js/controllers/admin/mainPageController.js')) %>
     <% HTML::script(asset('js/controllers/admin/userListController.js')) %>
+    <% HTML::script(asset('js/controllers/admin/seriesListController.js')) %>
+
+    <% HTML::script(asset('js/factories/userFactory.js')) %>
+    <% HTML::script(asset('js/factories/seriesAdminFactory.js')) %>
 </head>
 <body>
 <div id="masterUI">

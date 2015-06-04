@@ -1,3 +1,26 @@
 <div class="series-list">
 	<h1>Series</h1>
+    <pagination total-items="totalItems" ng-model="currentPage" maxSize="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage" ng-change="pageChanged()"></pagination> 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Unique</th>
+                <th>Episodes</th>
+                <th>Status</th>
+                <th>updated</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="s in series">
+                <td>{{ ::s.id }}</td>
+                <td>{{ ::s.name }}</td>
+                <td>{{ ::s.unique_name }}</td>
+                <td>{{ ::s.episode_amount }}</td>
+                <td>{{ ::s.status }}</td>
+                <td>{{ ::s.updated_at }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

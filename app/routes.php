@@ -72,6 +72,7 @@ Route::group(
             // Admin api calls
             Route::group(array('before' => 'auth.admin'), function () {
                 Route::get('/user', 'UserController@getUsers');
+                Route::get('/admin/series', 'SeriesController@getSeriesPaginated');
             });
 
             //Auth
