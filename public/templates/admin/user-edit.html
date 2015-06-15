@@ -1,0 +1,25 @@
+<div class="user-edit">
+    <h1>Users</h1>
+    
+    <button ng-click="assumeDirectControl()">Assume Direct Control</button>
+
+    <form>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" value="{{user.id}}" readonly="readonly" />
+        </div>
+        <div class="form-group">
+            <label for="accountname">Account Name</label>
+            <input type="text" class="form-control" id="accountname" value="{{user.accountname}}" />
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" value="{{user.email}}" />
+        </div>
+        <div class="form-group">
+            <label for="oauthprovider">Provider</label>
+            <input type="text" class="form-control" id="oauthprovider" value="{{user.oauthprovider}}" readonly="readonly" />
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>

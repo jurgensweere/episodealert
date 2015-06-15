@@ -40,7 +40,9 @@ class AuthController extends BaseController
             return Response::json(
                 array(
                     'flash' => $validator->messages()
-            ), 400);
+                ),
+                400
+            );
         }
 
         $user = User::create(

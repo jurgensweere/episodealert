@@ -14,6 +14,11 @@ angular.module('eaAdminApp').config(function($stateProvider, $urlRouterProvider,
         templateUrl : '/templates/admin/user-list.html',
         controller : 'AdminUserListCtrl'
     })
+    .state('useredit', {
+        url : '/users/:userId',
+        templateUrl : '/templates/admin/user-edit.html',
+        controller : 'AdminUserEditCtrl'
+    })
     .state('series', {
         url : '/series',
         templateUrl : '/templates/admin/series-list.html',

@@ -47,6 +47,11 @@ Route::filter('auth.basic', function () {
 });
 
 Route::filter('auth.admin', function () {
+    if ($prev_admin = Session::get('ADMIN_HERP')) {
+        Auth::login($prev_admin);
+        Session::forget('ADMIN_HERP');
+    }
+        
     if (Auth::guest() || Auth::user()->role != EA\models\User::ROLE_ADMIN) {
         return Response::make('Unauthorized', 401);
     }

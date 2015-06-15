@@ -1,7 +1,14 @@
 <div class="user-list">
     <h1>Users</h1>
-    <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination> 
-    <table class="table">
+    <div class="row">
+        <div class="col-md-4">
+            <input type="text" class="form-control form-control-search" ng-model="query" ng-model-options="{ debounce: 300 }" id="search" placeholder="Search..." />
+        </div>
+        <div class="col-md-8">
+            <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+        </div>
+    </div>
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>ID</th>
@@ -14,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="user in users">
+            <tr ng-repeat="user in users" ui-sref="useredit({userId: user.id})">
                 <td>{{ ::user.id }}</td>
                 <td>{{ ::user.accountname }}</td>
                 <td>{{ ::user.email }}</td>

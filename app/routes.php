@@ -17,6 +17,7 @@ Blade::setEscapedContentTags('<%%', '%%>');
 
 Route::model('episode', 'EA\models\Episode');
 Route::model('series', 'EA\models\Series');
+Route::model('user', 'EA\models\User');
 
 Route::group(
     array('namespace' => 'EA\controllers'),
@@ -72,6 +73,8 @@ Route::group(
             // Admin api calls
             Route::group(array('before' => 'auth.admin'), function () {
                 Route::get('/user', 'UserController@getUsers');
+                Route::get('/user/{user}', 'UserController@getUser');
+                Route::get('/user/{user}/assumedirectcontrol', 'UserController@getAssumeDirectControl');
                 Route::get('/admin/series', 'SeriesController@getSeriesPaginated');
             });
 

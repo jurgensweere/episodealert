@@ -10,7 +10,7 @@ class AdminController extends BaseController
 {
     public function showAdminPage()
     {
-    	return View::make(
+        return View::make(
             'admin',
             array(
             )
