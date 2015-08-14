@@ -1,49 +1,6 @@
 <div class="guide">
 
-    <div class="row section-header">
-        <h2>Recent Episodes</h2>
-    </div>
-
     <episode-guide></episode-guide>
-
-    <table class="table table-striped">
-        <tr>
-            <th>
-                Air Date
-            </th>
-            <th>
-                Series
-            </th>
-            <th>
-                Episode
-            </th>
-            <th>
-                Episode title
-            </th>
-            <th>
-
-            </th>
-        </tr>
-        <tr ng-repeat="episode in guide">
-            <td>
-                {{ ::episode.airdate }}
-            </td>
-            <td>
-                <a href="/series/{{ ::episode.unique_name }}">{{ ::episode.seriesName }}</a>
-            </td>
-            <td>
-                S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}
-            </td>
-            <td>
-                {{ ::episode.name }}
-            </td>
-
-            <td>
-                <seen-button episode="episode"></seen-button>
-            </td>
-        </tr>
-    </table>
-
 
     <div class="row section-header">
         <h2>Your Calendar</h2>

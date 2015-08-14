@@ -15,20 +15,37 @@
     }
 
     li{
+        font-size: 80%;
+        width: 44%;
         background-color: rgba(0,0,0,0.8);
         margin: 8px;
-        padding: 4px;
-        border-radius: 8px;
+        //border-radius: 8px;
         z-index: 1;
-        border: 2px solid lighten( $bright-highlight, 30% );
+        border-bottom: 4px solid darken( $bright-highlight, 35% );
+        float: left;
 
         @media(max-width: $screen-xs-max){
             font-size: 80%;
             border: none;
             margin: 0px;
-            border: 1px solid lighten( $bright-highlight, 30% );
+            border: 1px solid darken( $bright-highlight, 35% );
             padding: 0px;
         }
+      
+        a{
+            padding-bottom: 6px;
+            text-decoration: none;
+            background-color: $primary-color;
+            display: inline-block;
+
+            img{
+                padding: 0px 0px 6px 0px;
+            }
+        }
+    }
+
+    li:hover{
+      border-color: $bright-highlight;
     }
 
     i{

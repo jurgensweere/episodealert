@@ -1,3 +1,22 @@
+<div class="row profile-filters ng-scope">
+    <span class="hidden-xs">Recent Episodes </span>
+    <label class="ea-filter">
+        <input  type="radio" name="weeks" ng-model="guide.numberOfDays" value="3" ng-change="guide.toggleDays()"/>
+        3 days
+    </label>
+    <label class="ea-filter">
+        <input  type="radio" name="weeks" ng-model="guide.numberOfDays" value="7" ng-change="guide.toggleDays()"/>
+        7 days
+    </label>
+    <label class="ea-filter">
+        <input type="radio" name="weeks" ng-model="guide.numberOfDays" value="14" ng-change="guide.toggleDays()"/>
+        2 weeks
+    </label>
+    <label class="ea-filter">
+        <input type="radio" name="weeks" ng-model="guide.numberOfDays" value="21" ng-change="guide.toggleDays()"/>
+        3 weeks
+    </label>
+</div>
 
 <table class="table table-striped">
     <tr>
@@ -17,7 +36,7 @@
 
         </th>
     </tr>
-    <tr ng-repeat="episode in guide.episodes">
+    <tr ng-repeat="episode in guide.episodes" class="fade">
         <td>
             {{ ::episode.airdate }}
         </td>

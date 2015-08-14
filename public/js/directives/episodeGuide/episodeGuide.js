@@ -14,8 +14,16 @@
     function episodeGuide($filter, seriesFactory) {
         var guide = this;
 
-        var loadGuide = function () {
-            seriesFactory.getGuide()
+        guide.episodes = {};
+        guide.numberOfDays = 7;
+
+        guide.toggleDays = function(){
+            guide.episodes = {};
+            loadGuide(guide.numberOfDays);
+        };
+
+        var loadGuide = function (numberOfDays) {
+            seriesFactory.getGuide(numberOfDays)
                 .success(function (response) {
                     guide.episodes = response;
                 })
@@ -24,7 +32,7 @@
                 });
         };
 
-        loadGuide();
+        loadGuide(guide.numberOfDays);
 
     }
 

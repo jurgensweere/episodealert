@@ -4,13 +4,13 @@
 
 .splash-fanart {
 
-    @media(max-width: $screen-xs-max){ height: 405px; }
-    @media(min-width: $screen-sm-min){ height: 740px; }
-    @media(min-width: $screen-md-min){ height: 740px; }
-    @media(min-width: $screen-lg-min){ height: 740px; }
-    @media #{$hidpi-screen}{
-        height: 475px; 
-    }
+    //@media(max-width: $screen-xs-max){ height: 405px; }
+    //@media(min-width: $screen-sm-min){ height: 740px; }
+    //@media(min-width: $screen-md-min){ height: 740px; }
+    //@media(min-width: $screen-lg-min){ height: 740px; }
+    //@media #{$hidpi-screen}{
+    //    height: 475px;
+    //}
     position: relative;
 
     .fanart-background {
@@ -99,7 +99,7 @@ ul{
 }
 
 .trending-background-color{
-    min-height: 250px;
+    //min-height: 250px;
     background-color: rgba($background-color, 0.8);
 }
 

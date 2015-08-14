@@ -9,7 +9,10 @@
                         </h1>
                         <ul>
                             <li ng-repeat="episode in calendar.yesterdayEpisodes" class="fade">
-                               <a href="/series/{{ ::episode.unique_name }}">{{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}</a>
+                                <a href="/series/{{ ::episode.unique_name }}">
+                                    <img class="img-responsive hidden-xs" ng-src="{{ episode.seriesPoster | createImageUrl : episode.unique_name : 'small' }}" alt="{{ episode.seriesName }}" />
+                                    {{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -18,7 +21,10 @@
                         </h1>
                         <ul>
                             <li ng-repeat="episode in calendar.todayEpisodes" class="fade">
-                               <a href="/series/{{ ::episode.unique_name }}">{{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}</a>
+                                <a href="/series/{{ ::episode.unique_name }}">
+                                    <img class="img-responsive hidden-xs" ng-src="{{ episode.seriesPoster | createImageUrl : episode.unique_name : 'small' }}" alt="{{ episode.seriesName }}" />
+                                    {{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -27,7 +33,10 @@
                         </h1>
                         <ul>
                             <li ng-repeat="episode in calendar.tomorrowEpisodes" class="fade">
-                               <a href="/series/{{ ::episode.unique_name }}">{{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}</a>
+                                <a href="/series/{{ ::episode.unique_name }}">
+                                    <img class="img-responsive hidden-xs" ng-src="{{ episode.seriesPoster | createImageUrl : episode.unique_name : 'small' }}" alt="{{ episode.seriesName }}" />
+                                    {{ ::episode.seriesName }} S{{ ::episode.season | numberFixedLen:2 }}E{{ ::episode.episode | numberFixedLen:2 }}
+                                </a>
                             </li>
                         </ul>
                     </div>

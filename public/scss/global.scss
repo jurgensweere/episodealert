@@ -28,6 +28,14 @@ body {
     overflow-y: scroll;
 }
 
+
+#masterUI{
+    //Flexbox
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
 // usage; description of series, profile welcome, other info
 h1 {
     @media(max-width: $screen-xs-max){ padding-bottom: 10px; }
@@ -172,9 +180,10 @@ ul {
 }
 
 .ea-content {
-	min-height: 600px;
+    flex: 1;
+	//min-height: 600px;
     @media #{$hidpi-screen}{
-        min-height: 375px;
+        //min-height: 375px;
     }    
 }
 

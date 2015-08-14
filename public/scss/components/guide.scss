@@ -1,4 +1,9 @@
  .guide {
+
+    input[type="radio"]{
+      margin: 0px 5px 0px 0px;
+    }
+
     table{
 		@media #{$hidpi-screen}{
 			font-size: 85%;	

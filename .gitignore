@@ -40,4 +40,5 @@ node_modules/gulp/node_modules/chalk/node_modules/.bin/strip-ansi
 public/js/vendor/_bower.min.js
 app/database/production.sqlite
 public/js/vendor/ui-bootstrap-0.12.0.min.js
-.idea/*
+app/.idea/*
+.idea

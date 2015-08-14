@@ -162,7 +162,7 @@ class SeriesController extends BaseController
     /**
      * Get unseen episodes for series you follow, as well as upcoming episodes
      */
-    public function getEpisodeGuide()
+    public function getEpisodeGuide($daysInFuture)
     {
         $includeUpcoming = filter_var(Input::get('upcoming', 'true'), FILTER_VALIDATE_BOOLEAN);
         $includeUnseen = filter_var(Input::get('unseen', 'true'), FILTER_VALIDATE_BOOLEAN);
@@ -172,8 +172,8 @@ class SeriesController extends BaseController
                 $join->on('following.series_id', '=', 'episode.series_id')
                     ->where('following.user_id', '=', Auth::user()->id);
             })
-            ->where('episode.airdate', '>=', DB::raw('date_sub(curdate(), interval 4 day)'))
-            ->where('episode.airdate', '<=', DB::raw('date_add(curdate(), interval 4 day)'))
+            ->where('episode.airdate', '>=', DB::raw('date_sub(curdate(), interval 3 day)'))
+            ->where('episode.airdate', '<=', DB::raw('date_add(curdate(), interval ' . $daysInFuture .' day)'))
             ->orderBy('episode.airdate', 'asc')
             ->orderBy('episode.season', 'asc')
             ->orderBy('episode.episode', 'asc')
@@ -404,6 +404,7 @@ class SeriesController extends BaseController
             array(
                 'episode.*',
                 'series.name as seriesName',
+                'series.poster_image as seriesPoster',
                 'series.unique_name as unique_name',
                 DB::raw(
                     sprintf(

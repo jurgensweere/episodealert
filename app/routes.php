@@ -39,7 +39,7 @@ Route::group(
                 Route::get('profile/following', 'FollowingController@getFollowingSeries');
 
                 // Series
-                Route::get('series/guide', 'SeriesController@getEpisodeGuide');
+                Route::get('series/guide/{daysInFuture}', 'SeriesController@getEpisodeGuide');
                 Route::get('series/episodesperdate/{date}', 'SeriesController@getEpisodesForUserPerDate');
                 Route::get('series/unseenamount', 'SeriesController@getUnseenEpisodes');
                 Route::get(
