@@ -168,7 +168,7 @@
         padding: 3px 9px 4px 8px;
         border: 4px solid orange;
         border-radius: 20px;
-        box-shadow: 0 0 1em lighten(orange, 20%);
+        //box-shadow: 0 0 1em lighten(orange, 20%);
         @media(max-width: $screen-xs-max){
             box-shadow: 0 0 0.25em lighten(orange, 20%); 
             border: 3px solid orange;
@@ -196,9 +196,9 @@
 
     .seen-badge{
         border: 4px solid $bright-highlight;
-        box-shadow: 0 0 1em lighten($bright-highlight, 20%);
+        //box-shadow: 0 0 1em lighten($bright-highlight, 20%);
         @media(max-width: $screen-xs-max){
-            box-shadow: 0 0 0.25em lighten($bright-highlight, 20%); 
+            //box-shadow: 0 0 0.25em lighten($bright-highlight, 20%);
             border: 3px solid $bright-highlight;
             font-size: 120%;
         }      
