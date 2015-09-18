@@ -38,24 +38,6 @@
                 filterSeries();
             };
 
-            $scope.toggleArchive = function (series) {
-                if (series.archive) {
-                    seriesFactory.restoreSeries(series.id)
-                        .success(
-                            function (response) {
-                                series.archive = 0;
-                            }
-                        );
-                } else {
-                    seriesFactory.archiveSeries(series.id)
-                        .success(
-                            function (response) {
-                                series.archive = 1;
-                            }
-                        );
-                }
-            };
-
             $scope.dragControlListeners = {
                 accept: function (sourceItemHandleScope, destSortableScope) {
                     //override to determine drag is allowed or not. default is true.

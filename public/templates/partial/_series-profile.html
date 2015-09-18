@@ -9,10 +9,6 @@
 </a>
 <div class="extra-info">
     <a href="/series/{{ ::series.unique_name}}">{{ ::series.name }}</a>
-<!--     <button alt="Toggle archived status of series" class="btn-small btn-small--archive" ng-click="toggleArchive(series)">
-        <span title="Remove this series from archive" alt="Remove this series from archive"  ng-show="series.archive" class="glyphicon glyphicon-floppy-remove"></span>
-        <span title="Archive this series" alt="Archive this series" ng-show="!series.archive" class="glyphicon glyphicon-floppy-disk"></span>
-    </button> -->
 
     <span ng-if="series.current_episode != null">
        <p>Your current episode:</p>

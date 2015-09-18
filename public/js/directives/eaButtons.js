@@ -125,6 +125,72 @@
         };
     }])
 
+    .directive('archiveButton', function(seriesFactory, AuthenticationService, alertService, $location) {
+        var directive = { restrict: 'E', replace: true, transclude: true };
+        directive.template = 
+            '<button' + 
+            ' alt="Toggle archived status of series"' +
+            ' class="ea-btn ea-btn--archive"' +
+            ' ng-click="toggleArchive(series)"' +
+            ' ng-show="series.following"' +
+            ' ng-mouseover="mouseOver(series)"' +
+            ' ng-mouseout="mouseOut(series)"' +
+            '>{{ buttonLabel }}' +
+            '</button>';
+
+        directive.scope = {
+            series: '='
+        };
+
+        directive.link = function (scope, element, attrs) {
+            scope.$watch('series', function(series) {
+                if (series) {
+                    scope.buttonLabel = series.archive ? 'Archived' : 'Archive';
+                }
+            }, true);
+
+            scope.mouseOver = function(series) {
+                scope.buttonLabel = series.archive ? 'Restore' : 'Archive';
+            };
+
+            scope.mouseOut = function (series) {
+                scope.buttonLabel = series.archive ? 'Archived' : 'Archive';
+            };
+
+            scope.toggleArchive = function (series) {
+                if (series.archive) {
+                    restoreSeries(series);
+                } else {
+                    archiveSeries(series);
+                }
+            };
+
+        };
+
+        function archiveSeries(series) {
+            seriesFactory.archiveSeries(series.id)
+                .success(
+                    function (response) {
+                        alertService.add('Archived ' + series.name, { type : 'success', location: 'toast', time : 5000 });
+                        series.archive = 1;
+                    }
+                );
+        };
+
+        function restoreSeries(series) {
+            seriesFactory.restoreSeries(series.id)
+                .success(
+                    function (response) {
+                        alertService.add('Restored ' + series.name, { type : 'success', location: 'toast', time : 5000 });
+                        series.archive = 0;
+                    }
+                );
+        };
+
+
+        return directive;
+    })
+
     .directive('followButton', function(seriesFactory, AuthenticationService, FollowingQueue, alertService, $location) {
         var directive = { restrict: 'E', replace: true, transclude: true };
         directive.template =
