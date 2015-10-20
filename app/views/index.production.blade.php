@@ -56,7 +56,7 @@
                         <div class="input-group">
                             <input ng-controller="SearchBoxCtrl" type="text" class="form-control form-control-search" placeholder="Search" ng-model="mainPageQuery" ng-model-options="{ debounce: 300 }" />
                             <span class="input-group-btn">
-                                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                                <button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button>
                             </span>
                         </div>
                     </form>

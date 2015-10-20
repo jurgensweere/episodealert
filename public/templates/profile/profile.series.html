@@ -1,31 +1,26 @@
 	<div class="row profile-filters">
 		<span class="hidden-xs">Filters </span>
 		<button class="ea-filter" ng-class="{'ea-filter--active': seen}" ng-click="toggleUnseen()">
-			<span ng-show="seen == true" class="glyphicon glyphicon-ok" />
-			<span ng-show="seen == false" class="glyphicon glyphicon-plus" />
+			<span ng-show="seen == true" class="fa fa-check" />
+			<span ng-show="seen == false" class="fa fa-plus" />
 			unseen
 		</button>
 		<button class="ea-filter" ng-class="{'ea-filter--active': !ended}" ng-click="toggleEnded()">
-			<span ng-show="ended == true" class="glyphicon glyphicon-plus" />
-			<span ng-show="ended == false" class="glyphicon glyphicon-ok" />
+			<span ng-show="ended == true" class="fa fa-plus" />
+			<span ng-show="ended == false" class="fa fa-check" />
 			continuing
 		</button>
 		<button class="ea-filter" ng-class="{'ea-filter--active': archive}" ng-click="toggleArchiveSetting()">
-			<span ng-show="archive == true" class="glyphicon glyphicon-ok" />
-			<span ng-show="archive == false" class="glyphicon glyphicon-plus" />
+			<span ng-show="archive == true" class="fa fa-check" />
+			<span ng-show="archive == false" class="fa fa-plus" />
 			archived
 		</button>
 
         <button class="hidden-xs btn btn-profile--toggle" ng-class="smallview" ng-click="toggleSmallView()">
-            <span ng-show="smallview == true" class="glyphicon glyphicon-th-large" />
-            <span ng-show="smallview == false" class="glyphicon glyphicon-th" />
+            <span ng-show="smallview == true" class="fa fa-th-large" />
+            <span ng-show="smallview == false" class="fa fa-th" />
         </button>
 
-		<!-- Dunno how to implement these filters:
-		<button class="btn btn--profile-filter"><span class="glyphicon glyphicon-plus" />favorite</button>
-		<button class="btn btn--profile-filter"><span class="glyphicon glyphicon-plus" />2014</button>
-		<button class="btn btn--profile-filter"><span class="glyphicon glyphicon-plus" />nudity</button>
-		-->
 	</div>
 	<div class="row profile-series">
 		<ul class="series-profile" as-sortable="{{touchdevice && '' || 'dragControlListeners' }}" ng-model="profileSeries">

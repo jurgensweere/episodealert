@@ -61,7 +61,7 @@
                         <div class="input-group" ng-controller="SearchBoxCtrl" >
                             <input type="text" class="form-control form-control-search" placeholder="Search" ng-model="mainPageQuery" ng-model-options="{ debounce: 300 }" />
                             <span class="input-group-btn">
-                                <button type="submit" class="btn btn-default" ng-click="clickSearchButton()" ><span class="glyphicon glyphicon-search"></span></button>
+                                <button type="submit" class="btn btn-default" ng-click="clickSearchButton()" ><span class="fa fa-search"></span></button>
                             </span>
                         </div>
                     </form>
@@ -179,7 +179,6 @@
 <% HTML::script(asset('js/directives/eaButtons.js')) %>
 <% HTML::script(asset('js/directives/calendarCarousel/calendarCarousel.js')) %>
 <% HTML::script(asset('js/directives/episodeGuide/episodeGuide.js')) %>
-<% HTML::script(asset('js/directives/ng-sortable.js')) %>
 <!-- endbuild -->
 
     <script>
