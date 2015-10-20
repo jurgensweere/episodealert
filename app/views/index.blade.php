@@ -30,6 +30,7 @@
     <!-- build:libs -->
     <% HTML::script('/js/vendor/_bower.min.js') %>
     <% HTML::script('/js/vendor/ui-bootstrap-0.12.0.js') %>
+    <% HTML::script('/js/vendor/ng-sortable.js') %>
     <!-- endbuild -->
 
 </head>
