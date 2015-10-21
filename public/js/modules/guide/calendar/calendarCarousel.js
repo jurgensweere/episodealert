@@ -1,13 +1,13 @@
 (function () {
 
-    angular.module('eaApp')
+    angular.module('eaApp.guide.calendar', [])
 
     .directive('calendarCarousel', [function () {
         return {
             scope: {},
             controller: calendarController,
             controllerAs: 'calendar',
-            templateUrl: '/js/directives/calendarCarousel/calendarCarousel.tpl.html',
+            templateUrl: '/js/modules/guide/calendar/guide.calendar.tpl.html',
         };
     }]);
 

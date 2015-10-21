@@ -1,6 +1,6 @@
 /*jshint loopfunc: true */
 (function () {
-    var app = angular.module('eaApp', ['ngTouch', 'ngAnimate', 'ui.bootstrap', 'infinite-scroll', 'ui.sortable', 'ui.router']);
+    var app = angular.module('eaApp', ['eaApp.guide', 'ngTouch', 'ngAnimate', 'ui.bootstrap', 'infinite-scroll', 'ui.sortable', 'ui.router']);
 
 
     // Init

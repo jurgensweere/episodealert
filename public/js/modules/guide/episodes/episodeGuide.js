@@ -1,13 +1,13 @@
 (function () {
 
-    angular.module('eaApp')
+    angular.module('eaApp.guide.episodes', [])
 
         .directive('episodeGuide', [function () {
             return {
                 scope: {},
                 controller: episodeGuide,
                 controllerAs: 'guide',
-                templateUrl: '/js/directives/episodeGuide/episodeGuide.tpl.html',
+                templateUrl: '/js/modules/guide/episodes/guide.episodes.tpl.html',
             };
         }]);
 

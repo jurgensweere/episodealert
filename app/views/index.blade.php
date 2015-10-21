@@ -160,7 +160,6 @@
 <% HTML::script(asset('js/controllers/seriesSearchController.js')) %>
 <% HTML::script(asset('js/controllers/profileController.js')) %>
 <% HTML::script(asset('js/controllers/followingController.js')) %>
-<% HTML::script(asset('js/controllers/guideController.js')) %>
 <% HTML::script(asset('js/controllers/calendarController.js')) %>
 <% HTML::script(asset('js/controllers/profileHeaderController.js')) %>
 <% HTML::script(asset('js/controllers/profileSettingsController.js')) %>
@@ -177,9 +176,13 @@
 
 <% HTML::script(asset('js/directives/eaTab.js')) %>
 <% HTML::script(asset('js/directives/eaButtons.js')) %>
-<% HTML::script(asset('js/directives/calendarCarousel/calendarCarousel.js')) %>
-<% HTML::script(asset('js/directives/episodeGuide/episodeGuide.js')) %>
-<% HTML::script(asset('js/directives/ng-sortable.js')) %>
+
+/* module guide */
+<% HTML::script(asset('js/modules/guide/guide.js')) %>
+<% HTML::script(asset('js/modules/guide/calendar/calendarCarousel.js')) %>
+<% HTML::script(asset('js/modules/guide/episodes/episodeGuide.js')) %>
+/* module guide end */
+
 <!-- endbuild -->
 
     <script>
