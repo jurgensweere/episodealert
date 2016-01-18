@@ -111,6 +111,13 @@ var bowerConcatTask = function(env) {
         }))
         .pipe(gulp.dest(basepath[env] + '/js/vendor'))
 
+    gulp.src('./js/vendor/ng-sortable.js')
+        .pipe(uglify())
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest(basepath[env] + '/js/vendor'))
+
     gulp.src(mainBowerFiles())
         // Concat all js files
         .pipe(jsFilter)
@@ -150,7 +157,7 @@ var buildHtmlTask = function (env) {
             'js' : '/dist/' + env + '/js/ea.min.js',
             'libs' : ['/dist/' + env + '/js/vendor/_bower.min.js',
                      '/dist/' + env + '/js/vendor/ui-bootstrap-0.12.0.min.js',
-                     '/dist/' + env + '/js/vendor/ng-sortable.js']
+                     '/dist/' + env + '/js/vendor/ng-sortable.min.js']
         }))
         .pipe(gulp.dest(path[env]));
     
