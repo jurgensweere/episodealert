@@ -15,7 +15,7 @@ var karma = require('karma').server;
 
 
 var paths = {
-  js: ['./js/**/*.js', '!./js/vendor/**/*.js', '!./js/**/*.min.js'],
+  js: ['./js/**/*.js', '!./js/vendor/**/*.js', '!./js/**/*.min.js', '!./js/**/admin', '!./js/admin-app.js', '!./js/admin-app.routes.js'],
   scss: './scss/global.scss',
   css: ['./css/*.css', '!./css/*.min.css'],
   html: ['../app/views/index.blade.php']
