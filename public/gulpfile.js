@@ -15,7 +15,7 @@ var karma = require('karma').server;
 
 
 var paths = {
-  js: ['./js/**/*.js', '!./js/vendor/**/*.js', '!./js/**/*.min.js', '!./js/**/admin', '!./js/admin-app.js', '!./js/admin-app.routes.js'],
+  js: ['./js/**/*.js', '!./js/vendor/**/*.js', '!./js/**/*.min.js'],
   scss: './scss/global.scss',
   css: ['./css/*.css', '!./css/*.min.css'],
   html: ['../app/views/index.blade.php']
@@ -149,7 +149,8 @@ var buildHtmlTask = function (env) {
         .pipe(htmlreplace({
             'js' : '/dist/' + env + '/js/ea.min.js',
             'libs' : ['/dist/' + env + '/js/vendor/_bower.min.js',
-                     '/dist/' + env + '/js/vendor/ui-bootstrap-0.12.0.min.js']
+                     '/dist/' + env + '/js/vendor/ui-bootstrap-0.12.0.min.js',
+                     '/dist/' + env + '/js/vendor/ng-sortable.js']
         }))
         .pipe(gulp.dest(path[env]));
     
